@@ -112,7 +112,8 @@ export WINELOADER=$HOME/leagueoflegends/wine/bin/wine
 export WINEFSYNC=1
 export WINEDEBUG=-all
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
-wine $HOME/leagueoflegends/wine/prefix/drive_c/Riot\ Games/Riot\ Client/RiotClientServices.exe' > $leaguelauncherfile
+cd $HOME/leagueoflegends/wine/prefix/drive_c/Riot\ Games/Riot\ Client/
+exec wine "RiotClientServices.exe"  --launch-product=league_of_legends --launch-patchline=live' > $leaguelauncherfile
 
 log_message "Launch.sh file created in $leagueoflegends_dir"
 
