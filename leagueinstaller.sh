@@ -127,10 +127,17 @@ Name=League of Legends Kassin Launcher
 Comment=Launch League of Legends with the Kassin Launcher
 Exec=/bin/bash -c "$HOME/leagueoflegends/Launch.sh"
 Terminal=false
+Icon=leagueicon.png
 Type=Application
-Categories=Games;' > LeagueofLegendsKassinlauncher.desktop
+Categories=Game;' > LeagueofLegendsKassinlauncher.desktop
 
 log_message "System menu shortcut created"
+
+# Download leaguepng icon from github
+wget -O ~/leagueoflegendsicon.png https://github.com/kassindornelles/lol-for-linux-bash-installer/raw/main/leagueoflegendsicon.png
+mkdir -p ~/.local/share/icons/hicolor/256x256/
+cp ~/leagueoflegendsicon.png ~/.local/share/icons/hicolor/256x256/apps/
+log_message "Created league icon in local share icons"
 
 # Launch the Launch.sh script
 
