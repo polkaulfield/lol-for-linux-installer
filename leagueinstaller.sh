@@ -175,17 +175,17 @@ qdbus $dbusRef setLabelText "Creating system menu shortcut for the Launch.sh scr
 log_message "Creating system menu shortcut for the Launch.sh script."
 
 cd ~/.local/share/applications
-touch "LeagueofLegendsKassinlauncher.desktop"
-chmod +x "LeagueofLegendsKassinlauncher.desktop"
+touch "LeagueofLegendsLauncher.desktop"
+chmod +x "LeagueofLegendsLauncher.desktop"
 
 echo '[Desktop Entry]
-Name=League of Legends Kablitz Launcher
-Comment=Launch League of Legends with the Kablitz Launcher
-Exec=${XDG_DATA_HOME}/leagueoflegends/Launch.sh
+Name=League of Legends
+Comment=Play League of Legends on Linux
+Exec=/home/$USER/.local/share/leagueoflegends/Launch.sh
 Terminal=false
 Icon=leagueicon.png
 Type=Application
-Categories=Game;' > LeagueofLegendsKablitzLauncher.desktop
+Categories=Game;' > LeagueofLegendsLauncher.desktop
 
 log_message "System menu shortcut created"
 qdbus $dbusRef Set "" value 8
