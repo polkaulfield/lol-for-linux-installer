@@ -16,7 +16,7 @@ Might be necessary to run chmod +x ./leagueinstaller.sh
 
 ## My goals
 - Finish up the bash script and make it as perfect and safe as possible
-- Move to QTCreator and Python (or C++)
-- Make a nice GUI installer
-- Polish it as much as possible 
+- Maybe move to QTCreator and Python (or C++)
+- Make a nice GUI installer (We use Kdialog now so we kinda have... a nice GUI installer?)
+- Polish it as much as possible
 - Flatpak it for easy use by new Linux users
