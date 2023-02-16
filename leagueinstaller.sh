@@ -134,18 +134,15 @@ Categories=Game;' > LeagueofLegendsKassinlauncher.desktop
 log_message "System menu shortcut created"
 
 # Move the .png file to the icons path
-
 filename="leagueoflegendsicon.png"
 destination_dir="$HOME/.local/share/icons/hicolor/256x256/apps"
 
-# Check if destination directory exists, if not create it
 if [ ! -d "$destination_dir" ]; then
   mkdir -p "$destination_dir"
 fi
 
-# Check if file exists, if so move it to the destination directory
 if [ -e "$filename" ]; then
-  mv "$filename" "$destination_dir"
+  cp "$filename" "$destination_dir"
 else
   echo "File not found."
 fi
