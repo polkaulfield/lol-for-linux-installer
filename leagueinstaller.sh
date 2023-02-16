@@ -183,7 +183,7 @@ Name=League of Legends
 Comment=Play League of Legends on Linux
 Exec=/home/$USER/.local/share/leagueoflegends/Launch.sh
 Terminal=false
-Icon=leagueicon.png
+Icon=leagueoflol.png
 Type=Application
 Categories=Game;' > LeagueofLegendsLauncher.desktop
 
@@ -193,23 +193,28 @@ qdbus $dbusRef setLabelText "System menu shortcut created."
 sleep 1
 
 # Move the .png file to the icons path
-qdbus $dbusRef setLabelText "Creating system icon."
+qdbus $dbusRef setLabelText "Installing system icons."
 
-filename="leagueoflegendsicon.png"
-destination_dir="${XDG_DATA_HOME}/icons/hicolor/256x256/apps"
+# Download the image files to the league of legends data directory
+wget -P "$leagueoflegends_dir" https://github.com/kassindornelles/lol-for-linux-bash-installer/raw/main/icons/league16.png
+wget -P "$leagueoflegends_dir" https://github.com/kassindornelles/lol-for-linux-bash-installer/raw/main/icons/league32.png
+wget -P "$leagueoflegends_dir" https://github.com/kassindornelles/lol-for-linux-bash-installer/raw/main/icons/league48.png
+wget -P "$leagueoflegends_dir" https://github.com/kassindornelles/lol-for-linux-bash-installer/raw/main/icons/league64.png
+wget -P "$leagueoflegends_dir" https://github.com/kassindornelles/lol-for-linux-bash-installer/raw/main/icons/league128.png
+wget -P "$leagueoflegends_dir" https://github.com/kassindornelles/lol-for-linux-bash-installer/raw/main/icons/league256.png
 
-if [ ! -d "$destination_dir" ]; then
-  mkdir -p "$destination_dir"
-fi
+# Move the image files to the appropriate folders
+for size in 16 32 48 64 128 256; do
+    if [ -d "${XDG_DATA_HOME}/icons/hicolor/${size}x${size}/apps/" ]; then
+        cp "$leagueoflegends_dir/league${size}.png" "${XDG_DATA_HOME}/icons/hicolor/${size}x${size}/apps/leagueoflol.png"
+    fi
+done
 
-if [ -e "$filename" ]; then
-  cp "$filename" "$destination_dir"
-else
-  echo "File not found."
-fi
-log_message "Created league icon in local share icons."
+rm "$leagueoflegends_dir/league"*.png
+
+log_message "System icons installed."
 qdbus $dbusRef Set "" value 10
-qdbus $dbusRef setLabelText "Created LoL icon."
+qdbus $dbusRef setLabelText "System icons are installed."
 sleep 1
 qdbus $dbusRef close
 
