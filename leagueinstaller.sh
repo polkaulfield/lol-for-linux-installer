@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# XDG stuff
+[ ! -d "${XDG_DATA_HOME}" ] && XDG_DATA_HOME=~/.local/share
+
 # Function for logging messages to file
 function log_message() {
   message="$1"
@@ -17,7 +20,7 @@ if [ $? -eq 0 ]; then
 
   dbusRef=`kdialog --title "Installing LoL" --progressbar "Initializing" 15`
 
-leagueoflegends_dir="$HOME/leagueoflegends"
+leagueoflegends_dir="${XDG_DATA_HOME}/leagueoflegends"
 if [ ! -d "$leagueoflegends_dir" ]; then
   mkdir "$leagueoflegends_dir"
   log_message "Created directory $leagueoflegends_dir"
@@ -101,25 +104,28 @@ sleep 1
 log_message "Creating first-boot script"
 qdbus $dbusRef setLabelText "Creating first-boot script."
 
-cd $leagueoflegends_dir
+cd "$leagueoflegends_dir"
 leaguefirstboot="Firstboot.sh"
 touch $leaguefirstboot
-chmod +x $leaguefirstboot
 
 echo '#!/usr/bin/env bash
-export PATH=$HOME/leagueoflegends/wine/bin:$PATH
-export WINEPREFIX=$HOME/leagueoflegends/wine/prefix
+
+# XDG stuff
+[ ! -d "${XDG_DATA_HOME}" ] && XDG_DATA_HOME=~/.local/share
+
+export PATH="${XDG_DATA_HOME}/leagueoflegends/wine/bin:$PATH"
+export WINEPREFIX="${XDG_DATA_HOME}/leagueoflegends/wine/prefix"
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
-export WINELOADER=$HOME/leagueoflegends/wine/bin/wine
+export WINELOADER="${XDG_DATA_HOME}/leagueoflegends/wine/bin/wine"
 export WINEFSYNC=1
 export WINEDEBUG=-all
 winetricks dxvk &
 wait
-wine $HOME/leagueoflegends/Downloads/leagueinstaller.exe
+wine "${XDG_DATA_HOME}/leagueoflegends/Downloads/leagueinstaller.exe"
 wineserver -w &
 wait
 exit 0' > $leaguefirstboot
-
+chmod +x $leaguefirstboot
 wait
 
 qdbus $dbusRef Set "" value 6
@@ -131,7 +137,7 @@ kdialog --title "League of Legends installer" --passivepopup \
 "Manual action required in the LoL installer" 10
 kdialog --msgbox "Launching the First-boot script now \n Manual action is required now: \n 1 - We will install DXVK automatically so be patient \n 2 - Once the installer opens please press the install button and wait \n 3 - Once it opens the login screen please close it so we can continue."
 log_message "Launching the First-boot script now \n Manual action is required now: \n 1 - We will install DXVK automatically so be patient \n 2 - Once the installer opens please press the install button and wait \n 3 - Once it opens the login screen please close it so we can continue."
-bash $leagueoflegends_dir/Firstboot.sh &
+./Firstboot.sh &
 wait
 log_message "Finished first boot"
 
@@ -139,21 +145,25 @@ log_message "Finished first boot"
 # Create Launch game .sh script
 qdbus $dbusRef setLabelText "Creating Launch.sh script"
 log_message "Creating Launch.sh script"
-cd $leagueoflegends_dir
 
+cd $leagueoflegends_dir
 leaguelauncherfile="Launch.sh"
 touch $leaguelauncherfile
-chmod +x $leaguelauncherfile
 
 echo '##!/usr/bin/env bash
-export PATH=$HOME/leagueoflegends/wine/bin:$PATH
-export WINEPREFIX=$HOME/leagueoflegends/wine/prefix
-export WINELOADER=$HOME/leagueoflegends/wine/bin/wine
+# XDG stuff
+[ ! -d "${XDG_DATA_HOME}" ] && XDG_DATA_HOME=~/.local/share
+LEAGUEPATH="${XDG_DATA_HOME}/leagueoflegends/wine/prefix/drive_c/Riot Games/Riot Client"
+export PATH="${XDG_DATA_HOME}/leagueoflegends/wine/bin:$PATH"
+export WINEPREFIX="${XDG_DATA_HOME}/leagueoflegends/wine/prefix"
+export WINELOADER="${XDG_DATA_HOME}/leagueoflegends/wine/bin/wine"
 export WINEFSYNC=1
 export WINEDEBUG=-all
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
-cd $HOME/leagueoflegends/wine/prefix/drive_c/Riot\ Games/Riot\ Client/
-wine "RiotClientServices.exe"  --launch-product=league_of_legends --launch-patchline=live' > $leaguelauncherfile
+cd "$LEAGUEPATH"
+wine "RiotClientServices.exe" ---launch-product=league_of_legends --launch-patchline=live' > $leaguelauncherfile
+
+chmod +x $leaguelauncherfile
 
 log_message "Launch.sh file created in $leagueoflegends_dir"
 qdbus $dbusRef Set "" value 7
@@ -164,18 +174,18 @@ sleep 1
 qdbus $dbusRef setLabelText "Creating system menu shortcut for the Launch.sh script."
 log_message "Creating system menu shortcut for the Launch.sh script."
 
-cd $HOME/.local/share/applications
+cd ~/.local/share/applications
 touch "LeagueofLegendsKassinlauncher.desktop"
 chmod +x "LeagueofLegendsKassinlauncher.desktop"
 
 echo '[Desktop Entry]
-Name=League of Legends Kassin Launcher
-Comment=Launch League of Legends with the Kassin Launcher
-Exec=$HOME/leagueoflegends/Launch.sh
+Name=League of Legends Kablitz Launcher
+Comment=Launch League of Legends with the Kablitz Launcher
+Exec=${XDG_DATA_HOME}/leagueoflegends/Launch.sh
 Terminal=false
 Icon=leagueicon.png
 Type=Application
-Categories=Game;' > LeagueofLegendsKassinlauncher.desktop
+Categories=Game;' > LeagueofLegendsKablitzLauncher.desktop
 
 log_message "System menu shortcut created"
 qdbus $dbusRef Set "" value 8
@@ -186,7 +196,7 @@ sleep 1
 qdbus $dbusRef setLabelText "Creating system icon."
 
 filename="leagueoflegendsicon.png"
-destination_dir="$HOME/.local/share/icons/hicolor/256x256/apps"
+destination_dir="${XDG_DATA_HOME}/icons/hicolor/256x256/apps"
 
 if [ ! -d "$destination_dir" ]; then
   mkdir -p "$destination_dir"
@@ -211,8 +221,9 @@ kdialog --title "Installation finished" --yesno "Do you want to launch LoL now?"
 # Check the exit status of the dialog
 if [ $? -eq 0 ]; then
   # If Install was clicked, create the lol folder in the user's home directory
-  bash $leagueoflegends_dir/Launch.sh
-log_message "All finished! have fun :)"
+  cd "$leagueoflegends_dir"
+  ./Launch.sh
+  log_message "All finished! have fun :)"
 else
   # If Cancel was clicked, exit the script
   exit 0
