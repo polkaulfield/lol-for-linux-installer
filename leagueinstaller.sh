@@ -134,9 +134,28 @@ Categories=Game;' > LeagueofLegendsKassinlauncher.desktop
 log_message "System menu shortcut created"
 
 # Download leaguepng icon from github
-wget -O ~/leagueoflegendsicon.png https://github.com/kassindornelles/lol-for-linux-bash-installer/raw/main/leagueoflegendsicon.png
-mkdir -p ~/.local/share/icons/hicolor/256x256/
-cp ~/leagueoflegendsicon.png ~/.local/share/icons/hicolor/256x256/apps/
+# set the URL of the file to download
+file_url="https://raw.githubusercontent.com/kassindornelles/lol-for-linux-bash-installer/main/leagueoflegendsicon.png"
+
+# set the path where the file should be downloaded to
+download_path="$HOME/.local/share/icons/hicolor/256x256/apps"
+
+# set the name of the file to download
+file_name="leagueoflegendsicon.png"
+
+# check if the download directory exists, and create it if it doesn't
+if [ ! -d "$download_path" ]; then
+  mkdir -p "$download_path"
+fi
+
+# check if the file already exists, and exit if it does
+if [ -f "$download_path/$file_name" ]; then
+  echo "File already exists, exiting."
+  exit 1
+fi
+
+# download the file using wget
+wget -O "$download_path/$file_name" "$file_url"
 log_message "Created league icon in local share icons"
 
 # Launch the Launch.sh script
