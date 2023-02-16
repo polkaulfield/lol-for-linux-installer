@@ -80,7 +80,7 @@ winetricks dxvk &
 wait
 wineserver -k &
 wait
-export PATH=$PWD:$HOME/leagueoflegends/wine/bin
+export PATH=$HOME/leagueoflegends/wine/bin:$PATH
 export WINELOADER=$HOME/leagueoflegends/wine/bin/wine
 export WINEFSYNC=1
 export WINEDEBUG=-all
@@ -106,7 +106,7 @@ touch $leaguelauncherfile
 chmod +x $leaguelauncherfile
 
 echo '#!/bin/bash
-export PATH=$PWD:$HOME/leagueoflegends/wine/bin
+export PATH=$HOME/leagueoflegends/wine/bin:$PATH
 export WINEPREFIX=$HOME/leagueoflegends/wine/prefix
 export WINELOADER=$HOME/leagueoflegends/wine/bin/wine
 export WINEFSYNC=1
