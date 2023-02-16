@@ -74,16 +74,14 @@ touch $leaguefirstboot
 chmod +x $leaguefirstboot
 
 echo '#!/bin/bash
+export PATH=$HOME/leagueoflegends/wine/bin:$PATH
 export WINEPREFIX=$HOME/leagueoflegends/wine/prefix
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
-winetricks dxvk &
-wait
-wineserver -k &
-wait
-export PATH=$HOME/leagueoflegends/wine/bin:$PATH
 export WINELOADER=$HOME/leagueoflegends/wine/bin/wine
 export WINEFSYNC=1
 export WINEDEBUG=-all
+winetricks dxvk &
+wait
 wine $HOME/leagueoflegends/Downloads/leagueinstaller.exe
 sleep 120
 exit 0' > $leaguefirstboot
