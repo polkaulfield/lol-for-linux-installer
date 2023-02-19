@@ -180,7 +180,13 @@ sleep 1
 qdbus $dbusRef setLabelText "Creating system menu shortcut for the Launch.sh script"
 log_message "Creating system menu shortcut for the Launch.sh script"
 
-cd ~/.local/share/applications
+# Create user applications folder if it doesnt exist
+if [ ! -d "$user_applications_folder" ]; then
+    mkdir -p "$user_applications_folder"
+    echo "Created $user_applications_folder directory"
+fi
+
+cd "$user_applications_folder"
 touch "LeagueofLegendsLauncher.desktop"
 chmod +x "LeagueofLegendsLauncher.desktop"
 
