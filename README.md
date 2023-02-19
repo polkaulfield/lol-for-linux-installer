@@ -8,10 +8,11 @@ A bash (.sh) script that installs league of legends automagically!
 
 Might be necessary to run chmod +x ./leagueinstaller.sh
 
-## Dependencies:
+## Dependencies, install those packages system-wide first:
 - winetricks
 - xdg-user-dirs
 - wget
+- wine (both 32-bit and 64-bit support)
 - tar
 - kdialog 
 - And the rest of the dependency hell that comes with [WINE](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
