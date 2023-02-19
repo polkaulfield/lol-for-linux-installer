@@ -4,9 +4,8 @@ A bash (.sh) script that installs league of legends automagically!
 ## How to use this script:
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
 - Extract the files
-- Run the `leagueinstaller.sh` file (./leagueinstaller.sh or just double click) and follow the instructions
-
-Might be necessary to run chmod +x ./leagueinstaller.sh
+- Run the `leagueinstaller.sh` file (`./leagueinstaller.sh` in a terminal or just double click and follow the instructions, might be necessary to run chmod +x ./leagueinstaller.sh first.)
+- DON'T RUN THIS SCRIPT AS SUDO
 
 ## Dependencies, install those packages system-wide first:
 - winetricks
