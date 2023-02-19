@@ -12,6 +12,7 @@ league_installer_name="leagueinstaller.exe"  # LoL client name we will use
 wine_lol_lutris_dir="$wine_dir/wine-lol-lutris"   # Wine build path name
 leaguefirstboot="Firstboot.sh"    # First boot script name
 leaguelauncherfile="Launch.sh"    # League of Legends launcher script name
+user_applications_folder="${XDG_DATA_HOME}/applications"
 
 # Function for logging messages to file
 function log_message() {
@@ -46,6 +47,12 @@ log_message "Created directory $downloads_dir"
 qdbus $dbusRef Set "" value 1
 qdbus $dbusRef setLabelText "Directory created"
 sleep 1
+
+# Create user share applications folder if it doesnt exist
+if [ ! -d "$user_applications_folder" ]; then
+    mkdir -p "$user_applications_folder"
+    echo "Created $user_applications_folder directory"
+fi
 
 # Download League installer file and the wine translation layer for League
 
@@ -179,12 +186,6 @@ sleep 1
 # Create system menu shortcut
 qdbus $dbusRef setLabelText "Creating system menu shortcut for the Launch.sh script"
 log_message "Creating system menu shortcut for the Launch.sh script"
-
-# Create user applications folder if it doesnt exist
-if [ ! -d "$user_applications_folder" ]; then
-    mkdir -p "$user_applications_folder"
-    echo "Created $user_applications_folder directory"
-fi
 
 cd "$user_applications_folder"
 touch "LeagueofLegendsLauncher.desktop"
