@@ -61,16 +61,23 @@ if [ ! -d "$user_icons_folder" ]; then   # Create icons folder and subfolders
     echo "Created $user_icons_folder directory"
 fi
 
+hicolor_folder="$user_icons_folder/hicolor"
+if [ ! -d "$hicolor_folder" ]; then   # Create hicolor folder
+    mkdir -p "$hicolor_folder"
+    echo "Created $hicolor_folder directory"
+fi
+
+apps_folder="$hicolor_folder/apps"
+if [ ! -d "$apps_folder" ]; then   # Create apps folder inside hicolor folder
+    mkdir -p "$apps_folder"
+    echo "Created $apps_folder directory"
+fi
+
 for size in "${icon_sizes[@]}"; do
-    size_folder="$user_icons_folder/$size"
+    size_folder="$apps_folder/$size"
     if [ ! -d "$size_folder" ]; then
         mkdir -p "$size_folder"
         echo "Created $size_folder directory"
-    fi
-    apps_folder="$size_folder/apps"
-    if [ ! -d "$apps_folder" ]; then
-        mkdir -p "$apps_folder"
-        echo "Created $apps_folder directory"
     fi
 done
 
