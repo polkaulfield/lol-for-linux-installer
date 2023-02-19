@@ -13,6 +13,9 @@ wine_lol_lutris_dir="$wine_dir/wine-lol-lutris"   # Wine build path name
 leaguefirstboot="Firstboot.sh"    # First boot script name
 leaguelauncherfile="Launch.sh"    # League of Legends launcher script name
 user_applications_folder="${XDG_DATA_HOME}/applications"
+user_icons_folder="${XDG_DATA_HOME}/icons"
+user_icons_folder="${XDG_DATA_HOME}/icons"
+icon_sizes=("16x16" "32x32" "48x48" "128x128" "256x256")
 
 # Function for logging messages to file
 function log_message() {
@@ -35,9 +38,9 @@ if [ ! -d "$leagueoflegends_dir" ]; then
   log_message "Created directory $leagueoflegends_dir"
 fi
 
-# Create Downloads directory in leagueoflegends directory
+# Create directories
 
-if [ -d "$downloads_dir" ]; then
+if [ -d "$downloads_dir" ]; then # Create Downloads directory in leagueoflegends directory
   rm -rf "$downloads_dir"
   log_message "Removed directory $downloads_dir"
 fi
@@ -48,11 +51,23 @@ qdbus $dbusRef Set "" value 1
 qdbus $dbusRef setLabelText "Directory created"
 sleep 1
 
-# Create user share applications folder if it doesnt exist
-if [ ! -d "$user_applications_folder" ]; then
+if [ ! -d "$user_applications_folder" ]; then   # Create user share applications folder if it doesnt exist
     mkdir -p "$user_applications_folder"
     echo "Created $user_applications_folder directory"
 fi
+
+if [ ! -d "$user_icons_folder" ]; then   # Create icons folder and subfolders
+    mkdir -p "$user_icons_folder"
+    echo "Created $user_icons_folder directory"
+fi
+
+for size in "${icon_sizes[@]}"; do
+    size_folder="$user_icons_folder/$size"
+    if [ ! -d "$size_folder" ]; then
+        mkdir -p "$size_folder"
+        echo "Created $size_folder directory"
+    fi
+done
 
 # Download League installer file and the wine translation layer for League
 
@@ -218,7 +233,7 @@ wget -P "$leagueoflegends_dir" https://github.com/kassindornelles/lol-for-linux-
 
 # Move the image files to the appropriate folders
 for size in 16 32 48 64 128 256; do
-    if [ -d "${XDG_DATA_HOME}/icons/hicolor/${size}x${size}/apps/" ]; then
+    if [ -d "$user_icons_folder/hicolor/${size}x${size}/apps/" ]; then
         cp "$leagueoflegends_dir/league${size}.png" "${XDG_DATA_HOME}/icons/hicolor/${size}x${size}/apps/leagueoflol.png"
     fi
 done
