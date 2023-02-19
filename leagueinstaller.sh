@@ -14,7 +14,6 @@ leaguefirstboot="Firstboot.sh"    # First boot script name
 leaguelauncherfile="Launch.sh"    # League of Legends launcher script name
 user_applications_folder="${XDG_DATA_HOME}/applications"
 user_icons_folder="${XDG_DATA_HOME}/icons"
-user_icons_folder="${XDG_DATA_HOME}/icons"
 icon_sizes=("16x16" "32x32" "48x48" "128x128" "256x256")
 
 # Function for logging messages to file
@@ -56,6 +55,7 @@ if [ ! -d "$user_applications_folder" ]; then   # Create user share applications
     echo "Created $user_applications_folder directory"
 fi
 
+
 if [ ! -d "$user_icons_folder" ]; then   # Create icons folder and subfolders
     mkdir -p "$user_icons_folder"
     echo "Created $user_icons_folder directory"
@@ -66,6 +66,11 @@ for size in "${icon_sizes[@]}"; do
     if [ ! -d "$size_folder" ]; then
         mkdir -p "$size_folder"
         echo "Created $size_folder directory"
+    fi
+    apps_folder="$size_folder/apps"
+    if [ ! -d "$apps_folder" ]; then
+        mkdir -p "$apps_folder"
+        echo "Created $apps_folder directory"
     fi
 done
 
