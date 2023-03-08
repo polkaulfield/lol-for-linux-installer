@@ -1,5 +1,5 @@
 # lol-for-linux-bash-installer
-A bash (.sh) script that installs league of legends automagically!
+Bash and Python scripts that installs league of legends automagically!
 
 Warning: DON'T RUN THIS SCRIPT AS SUDO USER
 
