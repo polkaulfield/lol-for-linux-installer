@@ -16,9 +16,5 @@ A bash (.sh) script that installs league of legends automagically!
 - kdialog 
 - And the rest of the dependency hell that comes with [WINE](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
-## My goals
-- Finish up the bash script and make it as perfect and safe as possible
-- Maybe move to QTCreator and Python (or C++)
-- Make a nice GUI installer (We use Kdialog now so we kinda have... a nice GUI installer?)
-- Polish it as much as possible
-- Flatpak it for easy use by new Linux users
+## Remaining tasks:
+- Flatpak it
