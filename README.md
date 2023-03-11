@@ -30,7 +30,7 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
 - wine (both 32-bit and 64-bit support)
 - tar
 - kdialog (for the Bash version of the script)
-- qt5-base (for the Python version of the script if you use the UI installer)
+- qt5-base and pyqt5 (for the Python version of the script if you use the UI installer)
 - And the rest of the dependency hell that comes with [WINE](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
 
