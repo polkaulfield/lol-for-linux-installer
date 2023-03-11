@@ -12,7 +12,7 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
    
    Type `./leagueinstaller.sh` and press enter, might be necessary to run ```chmod +x ./leagueinstaller.sh``` first.
 
-## How to install it (Python version)
+## How to install it (Python version - EXPERIMENTAL)
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
 - Extract the files
 - Run the "ui_installer.py" script in a terminal/console:
