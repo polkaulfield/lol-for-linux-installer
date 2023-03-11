@@ -194,7 +194,7 @@ export WINEFSYNC=1
 export WINEDEBUG=-all
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
 cd "$LEAGUEPATH"
-wine "RiotClientServices.exe" ---launch-product=league_of_legends --launch-patchline=live' > $leaguelauncherfile
+wine "RiotClientServices.exe" --launch-product=league_of_legends --launch-patchline=live' > $leaguelauncherfile
 
 chmod +x $leaguelauncherfile
 
