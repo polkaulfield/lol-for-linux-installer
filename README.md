@@ -35,7 +35,8 @@ Also important: the Python script is not near as functional as the Bash one and 
 - qt5-base and pyqt5 (for the Python version of the script if you use the UI installer)
 - And the rest of the dependency hell that comes with [WINE](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
-
-
 ## Remaining tasks:
 - Flatpak it
+
+## Buy me a coffe
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=9D3JQM8NAYS98)
