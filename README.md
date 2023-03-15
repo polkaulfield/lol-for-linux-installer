@@ -38,5 +38,5 @@ Also important: the Python script is not near as functional as the Bash one and 
 ## Remaining tasks:
 - Flatpak it
 
-## Buy me a coffe
+## Buy me a coffee
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=9D3JQM8NAYS98)
