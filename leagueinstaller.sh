@@ -216,7 +216,7 @@ Name=League of Legends
 Comment=Play League of Legends on Linux
 Exec='${leagueoflegends_dir}'/Launch.sh
 Terminal=false
-Icon=leagueoflol.png
+Icon=leagueoflol
 Type=Application
 Categories=Game;' > LeagueofLegendsLauncher.desktop
 
