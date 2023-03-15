@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
+# kdialog select folder to install the game
+leagueoflegends_dir=$(kdialog --getexistingdirectory "$HOME" )
+
+echo "Selected folder: $folder"
+
 # Variables
 [ ! -d "${XDG_DATA_HOME}" ] && XDG_DATA_HOME=~/.local/share     # Setup XDG stuff
-leagueoflegends_dir="${XDG_DATA_HOME}/leagueoflegends"    # League of legends path
 downloads_dir="$leagueoflegends_dir/Downloads"    # Download path
 league_installer_url="https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.na.exe"   # league client installer URL
 wine_lutris_ge_lol_url="https://github.com/GloriousEggroll/wine-ge-custom/releases/download/7.0-GE-5-LoL/wine-lutris-ge-lol-7.0-5-x86_64.tar.xz"  # Wine build URL
@@ -144,22 +148,20 @@ cd "$leagueoflegends_dir"
 touch $leaguefirstboot
 echo '#!/usr/bin/env bash
 
-# XDG stuff
-[ ! -d "${XDG_DATA_HOME}" ] && XDG_DATA_HOME=~/.local/share
-
-export PATH="${XDG_DATA_HOME}/leagueoflegends/wine/bin:$PATH"
-export WINEPREFIX="${XDG_DATA_HOME}/leagueoflegends/wine/prefix"
+export PATH="'${leagueoflegends_dir}'/wine/bin:$PATH"
+export WINEPREFIX="'${leagueoflegends_dir}'/wine/prefix"
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
-export WINELOADER="${XDG_DATA_HOME}/leagueoflegends/wine/bin/wine"
+export WINELOADER="'${leagueoflegends_dir}'/wine/bin/wine"
 export WINEFSYNC=1
 export WINEDEBUG=-all
 winetricks dxvk &
 wait
-wine "${XDG_DATA_HOME}/leagueoflegends/Downloads/leagueinstaller.exe"
+wine "'${leagueoflegends_dir}'/Downloads/leagueinstaller.exe"
 wineserver -w &
 wait
-exit 0' > $leaguefirstboot
-chmod +x $leaguefirstboot
+exit 0' > "$leaguefirstboot"
+
+chmod +x "$leaguefirstboot"
 wait
 
 qdbus $dbusRef Set "" value 6
@@ -184,12 +186,10 @@ cd $leagueoflegends_dir
 touch $leaguelauncherfile
 
 echo '#!/usr/bin/env bash
-# XDG stuff
-[ ! -d "${XDG_DATA_HOME}" ] && XDG_DATA_HOME=~/.local/share
-LEAGUEPATH="${XDG_DATA_HOME}/leagueoflegends/wine/prefix/drive_c/Riot Games/Riot Client"
-export PATH="${XDG_DATA_HOME}/leagueoflegends/wine/bin:$PATH"
-export WINEPREFIX="${XDG_DATA_HOME}/leagueoflegends/wine/prefix"
-export WINELOADER="${XDG_DATA_HOME}/leagueoflegends/wine/bin/wine"
+LEAGUEPATH="'${leagueoflegends_dir}'/wine/prefix/drive_c/Riot Games/Riot Client"
+export PATH="'${leagueoflegends_dir}'/wine/bin:$PATH"
+export WINEPREFIX="'${leagueoflegends_dir}'/wine/prefix"
+export WINELOADER="'${leagueoflegends_dir}'/leagueoflegends/wine/bin/wine"
 export WINEFSYNC=1
 export WINEDEBUG=-all
 export WINEDLLOVERRIDES=winemenubuilder.exe=d
@@ -214,7 +214,7 @@ chmod +x "LeagueofLegendsLauncher.desktop"
 echo '[Desktop Entry]
 Name=League of Legends
 Comment=Play League of Legends on Linux
-Exec=/home/$USER/.local/share/leagueoflegends/Launch.sh
+Exec='${leagueoflegends_dir}'/Launch.sh
 Terminal=false
 Icon=leagueoflol.png
 Type=Application
