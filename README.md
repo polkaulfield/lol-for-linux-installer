@@ -22,8 +22,6 @@ Also important: the Python script is not near as functional as the Bash one and 
   Open a console/terminal in the script main directory (where the files are)
   
   Type `python ui_installer.py` and press enter.
-  
-  If you want to run the installation process without a UI run the "leagueinstaller.py" script instead.
 
 ## Dependencies, install those packages system-wide first:
 - winetricks
@@ -32,7 +30,7 @@ Also important: the Python script is not near as functional as the Bash one and 
 - wine (both 32-bit and 64-bit support)
 - tar
 - kdialog (for the Bash version of the script)
-- qt5-base and pyqt5 (for the Python version of the script if you use the UI installer)
+- qt5-base and pyqt5 (for the Python version of the script)
 - And the rest of the dependency hell that comes with [WINE](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
 ## Remaining tasks:
