@@ -4,7 +4,6 @@ import os
 import sys
 import subprocess
 import dbus
-import wget
 import tarfile
 import lzma
 from pathlib import Path
@@ -22,7 +21,7 @@ github_icons_url = "https://github.com/kassindornelles/lol-for-linux-bash-instal
 sizes = ["16", "32", "48", "64", "128", "256"]
 exe_file_name = "live.na.exe"
 home_dir = os.path.expanduser("~")
-game_main_dir = os.path.join(home_dir, 'leagueoflegends')
+game_main_dir = os.path.join(sys.argv[1])
 game_downloads_dir = os.path.join(game_main_dir, 'downloads')
 game_winetricks_cache_dir = os.path.join(game_downloads_dir, "winetricks-cache")
 game_main_wine_dir = os.path.join(game_main_dir, 'wine')
@@ -86,7 +85,7 @@ import subprocess
 
 # Expose variables
 home_dir = os.path.expanduser("~")
-game_main_dir = os.path.join(home_dir, 'leagueoflegends')
+game_main_dir = "{}"
 game_main_wine_dir = os.path.join(game_main_dir, 'wine')
 game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')
 game_exe_path = os.path.join(game_prefix_dir, "drive_c", "Riot Games", "Riot Client")
@@ -106,7 +105,7 @@ start_game_vars = { **os.environ,
 # Start the game
 wine_process = ["wine", os.path.join(game_exe_path, game_exe_file_name), "--launch-product=league_of_legends", "--launch-patchline=live"]
 subprocess.run(wine_process, env=start_game_vars, check=True)
-"""
+""".format(game_main_dir)
 
 # Create the file and write the content
 with open(game_launch_file_path, "w") as f:
@@ -123,7 +122,7 @@ with open(desktop_file_path, "w") as file:
     file.write("Comment=Play League of Legends on Linux\n")
     file.write(f"Exec=python {game_launch_file_path}\n")
     file.write("Terminal=false\n")
-    file.write("Icon=leagueoflol.png\n")
+    file.write("Icon=leagueoflol\n")
     file.write("Type=Application\n")
     file.write("Categories=Game;\n")
 
