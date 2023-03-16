@@ -1,5 +1,7 @@
 import sys
 import os
+import signal
+import psutil
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, pyqtSignal, QObject, Qt
@@ -16,12 +18,22 @@ class Installer(QMainWindow):
         self.setWindowTitle('League of Legends installer')
         self.install_button.clicked.connect(self.start_installation)
         self.selectFolder.clicked.connect(self.select_folder_path)
+        self.cancelButton.clicked.connect(self.cancel_installation)
+        self.install_button.setEnabled(False)
+        self.cancelButton.hide()
 
     def select_folder_path(self):
-        self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Select Folder')
+        self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
+        if self.game_main_dir:
+            self.install_button.setEnabled(True)
+        else:
+            # Handle case where user pressed cancel
+            print("User pressed cancel")
 
     def start_installation(self):
         self.selectFolder.hide()
+        self.cancelButton.show()
+        self.cancelButton.setEnabled(True)
         self.welcomelabel.setText("This may take a while based on your internet and system speed...")
         self.install_button.hide()  # hide the button
         self.adviselabel.setText("Installing, please be patient. \n This window will close itself when the install process is done \n Launch the game using the shortcut in the system menu")
@@ -38,6 +50,20 @@ class Installer(QMainWindow):
         self.welcomelabel.setText("Installation finishing, leaving installer...")
         self.adviselabel.hide()
         sys.exit(app.exec_())
+
+    def cancel_installation(self):
+        # Get the PID of the current process
+        pid = os.getpid()
+
+        # Get a list of all child processes
+        children = psutil.Process(pid).children(recursive=True)
+
+        # Terminate all child processes
+        for child in children:
+            child.send_signal(signal.SIGTERM)
+
+        # Terminate the main application process
+        os.kill(pid, signal.SIGTERM)
 
 class LeagueInstaller(QObject):
     finished = pyqtSignal()

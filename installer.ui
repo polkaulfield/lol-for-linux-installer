@@ -127,7 +127,7 @@
      </spacer>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0">
+     <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0">
       <property name="spacing">
        <number>0</number>
       </property>
@@ -147,6 +147,16 @@
        <number>0</number>
       </property>
       <item>
+       <widget class="QPushButton" name="cancelButton">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="text">
+         <string>Cancel installation</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <spacer name="horizontalSpacer_3">
         <property name="orientation">
          <enum>Qt::Horizontal</enum>
@@ -163,15 +173,19 @@
        <widget class="QPushButton" name="selectFolder">
         <property name="maximumSize">
          <size>
-          <width>30</width>
+          <width>130</width>
           <height>16777215</height>
          </size>
         </property>
+        <property name="cursor">
+         <cursorShape>ArrowCursor</cursorShape>
+        </property>
         <property name="text">
-         <string/>
+         <string>Select folder</string>
         </property>
         <property name="icon">
-         <iconset theme="folder-open"/>
+         <iconset theme="folder-open">
+          <normaloff>.</normaloff>.</iconset>
         </property>
        </widget>
       </item>
