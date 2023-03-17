@@ -21,7 +21,7 @@ github_icons_url = "https://github.com/kassindornelles/lol-for-linux-bash-instal
 sizes = ["16", "32", "48", "64", "128", "256"]
 exe_file_name = "live.na.exe"
 home_dir = os.path.expanduser("~")
-game_main_dir = os.path.join(sys.argv[1])
+game_main_dir = sys.argv[1]
 game_downloads_dir = os.path.join(game_main_dir, 'downloads')
 game_winetricks_cache_dir = os.path.join(game_downloads_dir, "winetricks-cache")
 game_main_wine_dir = os.path.join(game_main_dir, 'wine')
@@ -78,38 +78,26 @@ subprocess.run(["winetricks", "dxvk"], env=first_boot_envs, check=True)
 wine_process = ["wine", league_installer_file]
 subprocess.run(wine_process, env=first_boot_envs, check=True)
 
-# Create launch-league-of-legends.py script
-file_content = """import os
-import sys
-import subprocess
-
-# Expose variables
-home_dir = os.path.expanduser("~")
-game_main_dir = "{}"
-game_main_wine_dir = os.path.join(game_main_dir, 'wine')
-game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')
-game_exe_path = os.path.join(game_prefix_dir, "drive_c", "Riot Games", "Riot Client")
-game_exe_file_name = "RiotClientServices.exe"
-
-
-start_game_vars = { **os.environ,
-        "PATH": f"{game_main_wine_dir}/lutris-ge-lol-7.0-5-x86_64/bin:{os.environ['PATH']}",
-        "WINEARCH": "win64",
-        "WINEPREFIX": game_prefix_dir,
-        "WINELOADER": f"{game_main_wine_dir}/lutris-ge-lol-7.0-5-x86_64/bin/wine",
-        "WINEFSYNC": "1",
-        "WINEDEBUG": "-all",
-        "WINEDLLOVERRIDES": "winemenubuilder.exe=d",
-    }
-
-# Start the game
-wine_process = ["wine", os.path.join(game_exe_path, game_exe_file_name), "--launch-product=league_of_legends", "--launch-patchline=live"]
-subprocess.run(wine_process, env=start_game_vars, check=True)
-""".format(game_main_dir)
-
-# Create the file and write the content
-with open(game_launch_file_path, "w") as f:
-    f.write(file_content)
+# create py script
+with open(game_launch_file_path, "w") as file:
+    file.write("import os\nimport subprocess\n")
+    file.write(f"home_dir = os.path.expanduser('{home_dir}')\n")
+    file.write(f"game_main_dir = os.path.join('{game_main_dir}')\n")
+    file.write(f"game_main_wine_dir = os.path.join(game_main_dir, 'wine')\n")
+    file.write(f"game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')\n")
+    file.write(f"game_exe_path = os.path.join(game_prefix_dir, 'drive_c', 'Riot Games', 'Riot Client')\n")
+    file.write(f"game_exe_file_name = 'RiotClientServices.exe'\n")
+    file.write('start_game_vars = dict(os.environ,\n')
+    file.write(f"        PATH='{game_main_wine_dir}/lutris-ge-lol-7.0-5-x86_64/bin',\n")
+    file.write('        WINEARCH="win64",\n')
+    file.write('        WINEPREFIX=game_prefix_dir,\n')
+    file.write(f'        WINELOADER="{game_main_wine_dir}/lutris-ge-lol-7.0-5-x86_64/bin/wine",\n')
+    file.write('        WINEFSYNC="1",\n')
+    file.write('        WINEDEBUG="-all",\n')
+    file.write('        WINEDLLOVERRIDES="winemenubuilder.exe=d",\n')
+    file.write('    )\n')
+    file.write('wine_process = ["wine", os.path.join(game_exe_path, game_exe_file_name), "--launch-product=league_of_legends", "--launch-patchline=live"]\n')
+    file.write('subprocess.run(wine_process, env=start_game_vars, check=True)\n')
 
 # Create .desktop file
 if os.path.exists(desktop_file_path):
