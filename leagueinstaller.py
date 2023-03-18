@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-import os, sys, subprocess, dbus, tarfile, lzma, getpass, shutil, requests
+import os, sys, subprocess, tarfile, lzma, shutil, requests
 from pathlib import Path
 
 # Expose variables
