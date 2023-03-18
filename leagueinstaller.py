@@ -133,6 +133,3 @@ for size in sizes:
 
 
 sys.exit()
-
-# TODO:
-# messages/window UI (kdialog again?)
