@@ -24,11 +24,12 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
 ## Dependencies, install those packages system-wide first:
 - winetricks
 - xdg-user-dirs
-- wget
+- wget (Bash script)
+- kdialog (Bash script)
 - wine (both 32-bit and 64-bit support)
 - tar
-- kdialog (for the Bash version of the script)
-- qt5-base and pyqt5 (for the Python version of the script)
+- python and python-requests (Python script)
+- qt5-base and pyqt5 (Python script)
 - And the rest of the dependency hell that comes with [WINE](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
 ## Remaining tasks:

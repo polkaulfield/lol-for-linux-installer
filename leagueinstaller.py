@@ -1,47 +1,26 @@
 #!/usr/bin/env python3
 
-import os
-import sys
-import subprocess
-import dbus
-import tarfile
-import lzma
+import os, sys, subprocess, dbus, tarfile, lzma, getpass, shutil, requests
 from pathlib import Path
-import getpass
-import locale
-import shutil
-import requests
 
 # Expose variables
-user_locale = locale.getdefaultlocale()
 print("Setting all variables") # Cheap logging
-
-
-
-
-
 home_dir = os.path.expanduser("~")
 game_main_dir = sys.argv[1]
 game_downloads_dir = os.path.join(game_main_dir, 'downloads')
 game_winetricks_cache_dir = os.path.join(game_downloads_dir, "winetricks-cache")
 game_main_wine_dir = os.path.join(game_main_dir, 'wine')
 game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')
-
 launch_file_path = os.path.join(game_main_dir, "Launch.py")
 user_local_share = os.path.join(home_dir, ".local/share")
 user_icons_folder = os.path.join(home_dir, user_local_share, "icons")
 user_hicolor_folder = os.path.join(user_icons_folder, "hicolor")
 user_applications_folder = os.path.join(home_dir, user_local_share, "applications")
-folder_paths = [game_main_dir, game_downloads_dir, game_main_wine_dir, game_prefix_dir, game_winetricks_cache_dir, user_icons_folder, user_hicolor_folder, os.path.join(user_hicolor_folder, "16x16"), os.path.join(user_hicolor_folder, "32x32"), os.path.join(user_hicolor_folder, "48x48"), os.path.join(user_hicolor_folder, "64x64"), os.path.join(user_hicolor_folder, "128x128"), os.path.join(user_hicolor_folder, "256x256"), user_applications_folder]
 desktop_file_path = os.path.join(os.path.expanduser("~"), ".local", "share", "applications", "LeagueLauncherPython.desktop")
 game_launch_file_path = os.path.join(game_main_dir, "launch-league-of-legends.py")
 
-
-
-# Set locale
-locale.setlocale(locale.LC_ALL, user_locale)
-
 # Create all folders that we are going to use
+folder_paths = [game_main_dir, game_downloads_dir, game_main_wine_dir, game_prefix_dir, game_winetricks_cache_dir, user_icons_folder, user_hicolor_folder, os.path.join(user_hicolor_folder, "16x16"), os.path.join(user_hicolor_folder, "32x32"), os.path.join(user_hicolor_folder, "48x48"), os.path.join(user_hicolor_folder, "64x64"), os.path.join(user_hicolor_folder, "128x128"), os.path.join(user_hicolor_folder, "256x256"), user_applications_folder]
 print("Creating folders for our League install") # Cheap logging
 for folder_path in folder_paths:
     if not os.path.exists(folder_path):
@@ -49,7 +28,6 @@ for folder_path in folder_paths:
         os.chmod(folder_path, 0o700)
 
 # Download necessary files
-
 print("Downloading wine-lutris-lol build") # Cheap logging
 wine_lutris_build_url = "https://github.com/GloriousEggroll/wine-ge-custom/releases/download/7.0-GE-5-LoL/wine-lutris-ge-lol-7.0-5-x86_64.tar.xz"
 tar_file_name = "wine-lutris-ge-lol-7.0-5-x86_64.tar.xz"
@@ -129,7 +107,6 @@ with open(desktop_file_path, "w") as file:
 os.chmod(desktop_file_path, 0o755)
 
 # create icons for the desktop file
-
 github_icons_url = "https://github.com/kassindornelles/lol-for-linux-bash-installer/raw/main/icons/league{}.png"
 sizes = ["16", "32", "48", "64", "128", "256"]
 github_icons_download_path = os.path.join(game_downloads_dir, "league-icons")
