@@ -177,7 +177,6 @@ log_message "Launching the First-boot script now \n Manual action is required no
 wait
 log_message "Finished first boot"
 
-
 # Create Launch game .sh script
 qdbus $dbusRef setLabelText "Creating Launch.sh script"
 log_message "Creating Launch.sh script"
@@ -252,8 +251,6 @@ sleep 1
 qdbus $dbusRef close
 
 # Launch the Launch.sh script
-
-# Show a dialog with an Install and a Cancel button
 kdialog --title "Installation finished" --yesno "Do you want to launch LoL now?"
 
 # Check the exit status of the dialog
