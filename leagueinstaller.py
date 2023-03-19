@@ -128,6 +128,8 @@ def league_install_code(game_main_dir):
             os.makedirs(dest_folder)
         shutil.move(os.path.join(github_icons_download_path, filename), dest_path)
 
+    print("Icons created")
+
     # create json file
     # Create a dictionary to hold the data
     data = {
@@ -141,7 +143,15 @@ def league_install_code(game_main_dir):
     with open(os.path.join(user_local_share, "league_install_path.json"), "w") as outfile:
         json.dump(data, outfile)
 
-    print("Icons created")
+    print("json file created")
+
+    # Delete downloads folder
+    try:
+        shutil.rmtree(game_downloads_dir)
+    except FileNotFoundError:
+        print(f"Directory {game_downloads_dir} does not exist")
+    print("Downloads folder deletion")
 
     # Copy uninstaller
     shutil.copy("uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
+    print("Created uninstall.py file in game dir")
