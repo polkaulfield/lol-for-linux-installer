@@ -36,5 +36,10 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
 ## Remaining tasks:
 - Flatpak it
 
+## Can i uninstall the game?
+- You can with the Python script, it will generate a uninstall.py file in the directory you installed the game.
+
+- The bash script does not have a uninstaller script, but you can remove it manually by deleting the leagueoflegends desktop file from /.local/share/applications and also deleting the game folder.
+
 ## Buy me a coffee
 [![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/donate/?hosted_button_id=9D3JQM8NAYS98)
