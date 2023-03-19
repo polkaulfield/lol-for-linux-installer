@@ -1,4 +1,4 @@
-import os, sys, shutil, requests, tarfile, lzma, subprocess, signal
+import os, sys, shutil, requests, tarfile, lzma, subprocess, signal, json
 from PyQt5.QtCore import pyqtSignal
 
 def league_install_code(game_main_dir):
@@ -128,4 +128,20 @@ def league_install_code(game_main_dir):
             os.makedirs(dest_folder)
         shutil.move(os.path.join(github_icons_download_path, filename), dest_path)
 
+    # create json file
+    # Create a dictionary to hold the data
+    data = {
+        "game_main_dir": game_main_dir
+    }
+
+    # Create the directory if it doesn't exist
+    os.makedirs(user_local_share, exist_ok=True)
+
+    # Write the dictionary to a JSON file in the user_local_share directory
+    with open(os.path.join(user_local_share, "league_install_path.json"), "w") as outfile:
+        json.dump(data, outfile)
+
     print("Icons created")
+
+    # Copy uninstaller
+    shutil.copy("uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
