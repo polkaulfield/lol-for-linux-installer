@@ -1,14 +1,12 @@
-import sys
-import os
-import signal
-import psutil
+import sys, os, signal, psutil, subprocess, subprocess, tarfile, lzma, shutil, requests
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, pyqtSignal, QObject, Qt
 from subprocess import Popen
 from queue import Queue
 from PyQt5.QtGui import QIcon
-
+from pathlib import Path
+import leagueinstaller
 
 class Installer(QMainWindow):
     def __init__(self):
@@ -16,7 +14,7 @@ class Installer(QMainWindow):
         loadUi("installer.ui", self)  # load the UI from the .ui file
         self.setFixedSize(self.size())
         self.setWindowTitle('League of Legends installer')
-        self.install_button.clicked.connect(self.start_installation)
+        self.install_button.clicked.connect(self.installer_code)
         self.selectFolder.clicked.connect(self.select_folder_path)
         self.cancelButton.clicked.connect(self.cancel_installation)
         self.install_button.setEnabled(False)
@@ -29,27 +27,6 @@ class Installer(QMainWindow):
         else:
             # Handle case where user pressed cancel
             print("User pressed cancel")
-
-    def start_installation(self):
-        self.selectFolder.hide()
-        self.cancelButton.show()
-        self.cancelButton.setEnabled(True)
-        self.welcomelabel.setText("This may take a while based on your internet and system speed...")
-        self.install_button.hide()  # hide the button
-        self.adviselabel.setText("Installing, please be patient. \n This window will close itself when the install process is done \n Launch the game using the shortcut in the system menu")
-
-        # Create a new thread to run the installation process
-        self.thread = QThread()
-        self.installer = LeagueInstaller(self.game_main_dir)
-        self.installer.moveToThread(self.thread)
-        self.installer.finished.connect(self.installation_finished)
-        self.thread.started.connect(self.installer.run)
-        self.thread.start()
-
-    def installation_finished(self):
-        self.welcomelabel.setText("Installation finishing, leaving installer...")
-        self.adviselabel.hide()
-        sys.exit(app.exec_())
 
     def cancel_installation(self):
         # Get the PID of the current process
@@ -65,20 +42,34 @@ class Installer(QMainWindow):
         # Terminate the main application process
         os.kill(pid, signal.SIGTERM)
 
-class LeagueInstaller(QObject):
-    finished = pyqtSignal()
+    def installer_code(self):
+        self.selectFolder.hide()
+        self.cancelButton.show()
+        self.cancelButton.setEnabled(True)
+        self.welcomelabel.setText("This may take a while based on your internet and system speed...")
+        self.install_button.hide()  # hide the button
+        self.adviselabel.setText("Installing, please be patient. \n This window will close itself when the install process is done \n Launch the game using the shortcut in the system menu")
+        self.thread = QThread()
+        self.worker = Worker(self.game_main_dir)
+        self.worker.moveToThread(self.thread)
+        self.thread.started.connect(self.worker.run)
+        self.thread.finished.connect(self.finish_installation)
+        self.thread.start()
+        self.thread.quit()
 
+    def finish_installation(self):
+
+        QApplication.quit()
+
+
+class Worker(QObject):
     def __init__(self, game_main_dir):
         super().__init__()
-        self.game_main_dir = game_main_dir  # store the game_main_dir variable as an instance attribute
+        self.game_main_dir = game_main_dir
 
     def run(self):
-        # We run the 'leagueinstaller.py' script here
-        import subprocess
-        import os
-        subprocess.call(['python', 'leagueinstaller.py', self.game_main_dir])
-
-        self.finished.emit()
+        leagueinstaller.league_install_code(self.game_main_dir)
+        QApplication.quit()
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
