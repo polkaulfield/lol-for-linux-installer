@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 import sys, os, signal, psutil, subprocess, subprocess, tarfile, lzma, shutil, requests
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget
 from PyQt5.uic import loadUi
