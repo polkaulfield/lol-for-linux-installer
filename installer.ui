@@ -203,6 +203,9 @@
            <property name="text">
             <string>Install League of Legends</string>
            </property>
+           <property name="icon">
+            <iconset theme="install"/>
+           </property>
            <property name="default">
             <bool>false</bool>
            </property>
@@ -218,6 +221,9 @@
            </property>
            <property name="text">
             <string>Cancel installation</string>
+           </property>
+           <property name="icon">
+            <iconset theme="cancel"/>
            </property>
           </widget>
          </item>
