@@ -12,7 +12,7 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
 
   Type `python ui_installer.py` and press enter.
   
-- Alternatively you can go to the ui_installer.py file properties and set is as executable and then double-click to open it
+- Alternatively you can go to the ui_installer.py file properties and set it as executable and then double-click to open it
 
 ## How to install it (Bash version - Simpler and safer version)
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
