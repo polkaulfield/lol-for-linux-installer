@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
-import sys, os, signal, psutil, subprocess, subprocess, tarfile, lzma, shutil, requests
+import sys, os, signal, psutil, shutil, requests
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, pyqtSignal, QObject, Qt
-from subprocess import Popen
-from queue import Queue
-from PyQt5.QtGui import QIcon
-from pathlib import Path
 import leagueinstaller
+
 
 class Installer(QMainWindow):
     def __init__(self):
@@ -49,7 +46,8 @@ class Installer(QMainWindow):
         self.cancelButton.setEnabled(True)
         self.welcomelabel.setText("This may take a while based on your internet and system speed...")
         self.install_button.hide()  # hide the button
-        self.adviselabel.setText("Installing, please be patient. \n This window will close itself when the install process is done \n Launch the game using the shortcut in the system menu")
+        self.adviselabel.setText(
+            "Installing, please be patient. \n This window will close itself when the install process is done \n Launch the game using the shortcut in the system menu")
         self.thread = QThread()
         self.worker = Worker(self.game_main_dir)
         self.worker.moveToThread(self.thread)
@@ -71,6 +69,7 @@ class Worker(QObject):
     def run(self):
         leagueinstaller.league_install_code(self.game_main_dir)
         QApplication.quit()
+
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
