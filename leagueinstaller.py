@@ -11,7 +11,6 @@ def league_install_code(game_main_dir):
     game_winetricks_cache_dir = os.path.join(game_downloads_dir, "winetricks-cache")
     game_main_wine_dir = os.path.join(game_main_dir, 'wine')
     game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')
-    launch_file_path = os.path.join(game_main_dir, "Launch.py")
     user_local_share = os.path.join(home_dir, ".local/share")
     user_icons_folder = os.path.join(home_dir, user_local_share, "icons")
     user_hicolor_folder = os.path.join(user_icons_folder, "hicolor")
