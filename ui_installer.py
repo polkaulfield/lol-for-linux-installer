@@ -24,8 +24,8 @@ class Installer(QMainWindow):
             # If the user selected their home directory, display an error message
             msg_box = QMessageBox(self)
             msg_box.setIcon(QMessageBox.Critical)
-            msg_box.setText("Cannot install the game in the home directory.")
-            msg_box.setInformativeText("Please select a different directory.")
+            msg_box.setText("Cannot install the game directly in the home directory.")
+            msg_box.setInformativeText("Please create a folder in your home directory instead so we can use it")
             msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
             msg_box.setDefaultButton(QMessageBox.Ok)
             if msg_box.exec_() == QMessageBox.Ok:
