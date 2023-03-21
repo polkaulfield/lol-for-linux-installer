@@ -7,7 +7,6 @@ user_local_share = os.path.join(home_dir, ".local/share")
 desktop_file_path = os.path.join(os.path.expanduser("~"), ".local", "share", "applications", "LeagueLauncherPython.desktop")
 json_file_path = os.path.join(user_local_share, "league_install_path.json")
 
-# Read the JSON file and get the game_main_dir value
 try:
     # Read the JSON file and get the game_main_dir value
     with open(json_file_path, "r") as infile:
