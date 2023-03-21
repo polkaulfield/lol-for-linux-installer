@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import sys, os, signal, psutil, shutil, requests
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QWidget, QMessageBox
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, pyqtSignal, QObject, Qt
 import leagueinstaller
@@ -20,6 +20,21 @@ class Installer(QMainWindow):
 
     def select_folder_path(self):
         self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
+        while self.game_main_dir and os.path.abspath(self.game_main_dir) == os.path.expanduser("~"):
+            # If the user selected their home directory, display an error message
+            msg_box = QMessageBox(self)
+            msg_box.setIcon(QMessageBox.Critical)
+            msg_box.setText("Cannot install the game in the home directory.")
+            msg_box.setInformativeText("Please select a different directory.")
+            msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
+            msg_box.setDefaultButton(QMessageBox.Ok)
+            if msg_box.exec_() == QMessageBox.Ok:
+                # If the user clicks "Ok", allow them to select a different directory
+                self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
+            else:
+                # If the user clicks "Cancel", exit the loop and do not set the directory
+                self.game_main_dir = None
+
         if self.game_main_dir:
             self.install_button.setEnabled(True)
         else:
