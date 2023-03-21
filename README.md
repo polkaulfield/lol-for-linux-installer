@@ -11,6 +11,8 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
   Open a console/terminal in the script main directory (where the files are)
 
   Type `python ui_installer.py` and press enter.
+  
+- Alternatively you can go to the ui_installer.py file properties and set it as executable and then double-click to open it
 
 ## How to install it (Bash version - Simpler and safer version)
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
