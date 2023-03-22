@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>538</width>
-    <height>229</height>
+    <width>769</width>
+    <height>551</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -53,7 +53,7 @@
          </font>
         </property>
         <property name="text">
-         <string>Welcome to the League of Legends installer for Linux based systems!</string>
+         <string>Welcome to the League of Legends installer for Linux</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignCenter</set>
@@ -159,6 +159,12 @@
          </property>
          <item>
           <widget class="QPushButton" name="selectFolder">
+           <property name="minimumSize">
+            <size>
+             <width>150</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>130</width>
@@ -194,6 +200,12 @@
              <verstretch>0</verstretch>
             </sizepolicy>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>310</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="maximumSize">
             <size>
              <width>190</width>
@@ -204,7 +216,8 @@
             <string>Install League of Legends</string>
            </property>
            <property name="icon">
-            <iconset theme="install"/>
+            <iconset theme="install">
+             <normaloff>.</normaloff>.</iconset>
            </property>
            <property name="default">
             <bool>false</bool>
@@ -219,11 +232,18 @@
            <property name="enabled">
             <bool>true</bool>
            </property>
+           <property name="minimumSize">
+            <size>
+             <width>300</width>
+             <height>0</height>
+            </size>
+           </property>
            <property name="text">
             <string>Cancel installation</string>
            </property>
            <property name="icon">
-            <iconset theme="cancel"/>
+            <iconset theme="cancel">
+             <normaloff>.</normaloff>.</iconset>
            </property>
           </widget>
          </item>
