@@ -24,6 +24,8 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
    Type and run ```chmod +x ./leagueinstaller.sh``` first
    
    Type and run `./leagueinstaller.sh` to install the game
+   
+   Experimental: Double click in the Install League of Legends.bin and it should start the installer!
 
 
 ## Dependencies, install those packages system-wide first:
