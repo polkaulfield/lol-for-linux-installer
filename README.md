@@ -10,20 +10,20 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
 
   Open a console/terminal in the script main directory (where the files are)
 
-  Type `python ui_installer.py` and press enter.
+  Type `python 'Install League of Legends (Python).py'` and press enter.
   
-- Alternatively you can go to the ui_installer.py file properties and set it as executable and then double-click to open it
+- Alternatively you can go to the 'Install League of Legends (Python).py' file properties, set it as executable and then double-click to open it
 
 ## How to install it (Bash version - Simpler and safer version)
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
 - Extract the files
-- Run the "leagueinstaller.sh" script in a terminal/console:
+- Run the "Install League of Legends (Bash).sh" script in a terminal/console:
 
    Open a console/terminal in the script main directory (where the files are)
 
-   Type and run ```chmod +x ./leagueinstaller.sh``` first
+   Type and run ```chmod +x ./'Install League of Legends (Bash).sh'``` first
    
-   Type and run `./leagueinstaller.sh` to install the game
+   Type and run `./'Install League of Legends (Bash).sh'` to install the game
 
 
 ## Dependencies, install those packages system-wide first:
