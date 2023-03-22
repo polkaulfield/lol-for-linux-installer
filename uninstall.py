@@ -5,7 +5,8 @@ import os, json, shutil
 home_dir = os.path.expanduser("~")
 user_local_share = os.path.join(home_dir, ".local/share")
 desktop_file_path = os.path.join(os.path.expanduser("~"), ".local", "share", "applications", "LeagueLauncherPython.desktop")
-json_file_path = os.path.join(user_local_share, "league_install_path.json")
+user_config_folder= os.path.join(home_dir, ".config")
+json_file_path = os.path.join(user_config_folder, "league_install_path.json")
 
 try:
     # Read the JSON file and get the game_main_dir value

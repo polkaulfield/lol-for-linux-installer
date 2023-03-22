@@ -12,15 +12,17 @@ def league_install_code(game_main_dir):
     game_main_wine_dir = os.path.join(game_main_dir, 'wine')
     game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')
     user_local_share = os.path.join(home_dir, ".local/share")
+
     user_icons_folder = os.path.join(home_dir, user_local_share, "icons")
     user_hicolor_folder = os.path.join(user_icons_folder, "hicolor")
     user_applications_folder = os.path.join(home_dir, user_local_share, "applications")
     desktop_file_path = os.path.join(os.path.expanduser("~"), ".local", "share", "applications",
                                      "LeagueLauncherPython.desktop")
     game_launch_file_path = os.path.join(game_main_dir, "launch-league-of-legends.py")
+    user_config_folder= os.path.join(home_dir, ".config")
 
     # Create all folders that we are going to use
-    folder_paths = [game_main_dir, game_downloads_dir, game_main_wine_dir, game_prefix_dir, game_winetricks_cache_dir,
+    folder_paths = [game_main_dir, game_downloads_dir, game_main_wine_dir, game_prefix_dir, user_config_folder, game_winetricks_cache_dir,
                     user_icons_folder, user_hicolor_folder, os.path.join(user_hicolor_folder, "16x16"),
                     os.path.join(user_hicolor_folder, "32x32"), os.path.join(user_hicolor_folder, "48x48"),
                     os.path.join(user_hicolor_folder, "64x64"), os.path.join(user_hicolor_folder, "128x128"),
@@ -144,10 +146,10 @@ def league_install_code(game_main_dir):
     }
 
     # Create the directory if it doesn't exist
-    os.makedirs(user_local_share, exist_ok=True)
+    os.makedirs(user_config_folder, exist_ok=True)
 
-    # Write the dictionary to a JSON file in the user_local_share directory
-    with open(os.path.join(user_local_share, "league_install_path.json"), "w") as outfile:
+    # Write the dictionary to a JSON file in the user_config_folder directory
+    with open(os.path.join(user_config_folder, "league_install_path.json"), "w") as outfile:
         json.dump(data, outfile)
 
     print("json file created")
