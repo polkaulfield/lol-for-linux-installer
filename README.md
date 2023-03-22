@@ -12,8 +12,6 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
 
   Type `python ui_installer.py` and press enter.
   
-  Experimental: Double click in the Install League of Legends.bin and it should start the installer!
-  
 - Alternatively you can go to the ui_installer.py file properties and set it as executable and then double-click to open it
 
 ## How to install it (Bash version - Simpler and safer version)
