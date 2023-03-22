@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-import os, sys, shutil, requests, tarfile, lzma, subprocess, signal, json
+import os, sys, shutil, requests, tarfile, lzma, subprocess, signal, json, threading
 from PyQt5.QtCore import pyqtSignal
 
 
 def league_install_code(game_main_dir):
+
     # Expose variables
     print("Setting all variables")  # Cheap logging
     home_dir = os.path.expanduser("~")
@@ -165,3 +166,7 @@ def league_install_code(game_main_dir):
     shutil.copy("uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
     os.chmod(os.path.join(game_main_dir), "uninstall.py", 0o777)
     print("Created uninstall.py file in game dir")
+
+if __name__ == '__main__':
+    t = threading.Thread(target=run_installation, args=(game_main_dir,))
+    t.start()
