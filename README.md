@@ -5,6 +5,7 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
 
 ## How to install it (Python version - Recommended)
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
+- The file should be named "lol-installer-for-linux-release.tar.gz"
 - Extract the files
 - Run the "ui_installer.py" script in a terminal/console:
 
