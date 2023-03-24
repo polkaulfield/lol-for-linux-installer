@@ -59,10 +59,10 @@ class Installer(QMainWindow):
         self.selectFolder.hide()
         self.cancelButton.show()
         self.cancelButton.setEnabled(True)
-        self.welcomelabel.setText("This may take a while based on your internet and system speed...")
+        self.welcomelabel.setText("We are setting up a few things for you...")
         self.install_button.hide()  # hide the button
         self.adviselabel.setText(
-            "Installing, please be patient. \n This window will close itself when the install process is done \n Launch the game using the shortcut in the system menu")
+            "Please be patient. \n This window will close itself when the install process is done \n Launch the game using the shortcut in the system menu")
         self.thread = QThread()
         self.worker = Worker(self.game_main_dir)
         self.worker.moveToThread(self.thread)

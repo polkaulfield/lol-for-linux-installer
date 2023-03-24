@@ -35,8 +35,8 @@ def league_install_code(game_main_dir):
 
     # Download necessary files
     print("Downloading wine-lutris-lol build")  # Cheap logging
-    wine_lutris_build_url = "https://github.com/GloriousEggroll/wine-ge-custom/releases/download/7.0-GE-5-LoL/wine-lutris-ge-lol-7.0-5-x86_64.tar.xz"
-    tar_file_name = "wine-lutris-ge-lol-7.0-5-x86_64.tar.xz"
+    wine_lutris_build_url = "https://winebuilds.nobaraproject.org/LoL/wine-lutris-ge-lol-7.0-6-x86_64.tar.xz"
+    tar_file_name = "wine-lutris-ge-lol-7.0-6-x86_64.tar.xz"
     wine_lutris_build_file = os.path.join(game_downloads_dir, tar_file_name)
     response = requests.get(wine_lutris_build_url)
     with open(wine_lutris_build_file, "wb") as f:
@@ -60,10 +60,10 @@ def league_install_code(game_main_dir):
 
     # Start the first-boot script to setup DXVK and the prefix
     first_boot_envs = {**os.environ,
-                       "PATH": f"{game_main_wine_dir}/lutris-ge-lol-7.0-5-x86_64/bin:{os.environ['PATH']}",
+                       "PATH": f"{game_main_wine_dir}/lutris-ge-lol-7.0-6-x86_64/bin:{os.environ['PATH']}",
                        "WINEARCH": "win64",
                        "WINEPREFIX": game_prefix_dir,
-                       "WINELOADER": f"{game_main_wine_dir}/lutris-ge-lol-7.0-5-x86_64/bin/wine",
+                       "WINELOADER": f"{game_main_wine_dir}/lutris-ge-lol-7.0-6-x86_64/bin/wine",
                        "WINEFSYNC": "1",
                        "WINEDEBUG": "-all",
                        "WINEDLLOVERRIDES": "winemenubuilder.exe=d",
@@ -84,10 +84,10 @@ def league_install_code(game_main_dir):
         file.write(f"game_exe_path = os.path.join(game_prefix_dir, 'drive_c', 'Riot Games', 'Riot Client')\n")
         file.write(f"game_exe_file_name = 'RiotClientServices.exe'\n")
         file.write('start_game_vars = dict(os.environ,\n')
-        file.write(f"        PATH='{game_main_wine_dir}/lutris-ge-lol-7.0-5-x86_64/bin',\n")
+        file.write(f"        PATH='{game_main_wine_dir}/lutris-ge-lol-7.0-6-x86_64/bin',\n")
         file.write('        WINEARCH="win64",\n')
         file.write('        WINEPREFIX=game_prefix_dir,\n')
-        file.write(f'        WINELOADER="{game_main_wine_dir}/lutris-ge-lol-7.0-5-x86_64/bin/wine",\n')
+        file.write(f'        WINELOADER="{game_main_wine_dir}/lutris-ge-lol-7.0-6-x86_64/bin/wine",\n')
         file.write('        WINEFSYNC="1",\n')
         file.write('        WINEDEBUG="-all",\n')
         file.write('        WINEDLLOVERRIDES="winemenubuilder.exe=d",\n')
