@@ -233,10 +233,16 @@
             <enum>QFrame::Plain</enum>
            </property>
            <property name="text">
-            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;This software is not verified, affiliated with, or supported by Riot Games.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Many thanks to &lt;a href=&quot;https://github.com/GloriousEggroll&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1d99f3;&quot;&gt;GloriousEggroll &lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'inherit'; font-weight:504; color:#ffffff;&quot;&gt;for providing the Wine builds!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;This software is not verified, affiliated with, or supported by Riot Games.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Many thanks to &lt;a href=&quot;https://github.com/gloriouseggroll&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1d99f3;&quot;&gt;GloriousEggroll&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'inherit'; font-weight:504; color:#ffffff;&quot;&gt; for providing the Wine builds!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           </property>
+           <property name="textFormat">
+            <enum>Qt::RichText</enum>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
+           </property>
+           <property name="openExternalLinks">
+            <bool>true</bool>
            </property>
           </widget>
          </item>
