@@ -17,7 +17,8 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
 
 ### Python Script features:
 - You can choose where to install the game
-- It installs wine-ge-lol with Fsync support enabled by default
+- It installs wine-ge-lol with FSYNC/FUTEX2 support enabled by default
+- Installs latest and greatest DXVK version to translate DirectX 9 and 11 to Vulkan for ultra performance!!!
 - It creates a desktop file in the system menu (with icons!)
 - Creates a uninstaller if you want to nuke the game after rage quitting a match that your team-mates did everything they could to make you lose
 ![Screenshot_20230326_022905](https://user-images.githubusercontent.com/40970965/227757193-b5aa534a-2039-419a-9673-fb52162c7305.png)
