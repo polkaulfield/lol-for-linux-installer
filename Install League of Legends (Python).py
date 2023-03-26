@@ -4,13 +4,13 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl
 from PyQt5.QtGui import QDesktopServices
-import leagueinstaller
+from python_src.src import leagueinstaller
 
 
 class Installer(QMainWindow):
     def __init__(self):
         super(Installer, self).__init__()
-        loadUi("installer.ui", self)  # load the UI from the .ui file
+        loadUi("python_src/ui/installer.ui", self)  # load the UI from the .ui file
         self.setFixedSize(self.size())
         self.setWindowTitle('League of Legends Installer')
         self.install_button.clicked.connect(self.installer_code)

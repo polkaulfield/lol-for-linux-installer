@@ -162,6 +162,6 @@ def league_install_code(game_main_dir):
     print("Downloads folder deletion")
 
     # Copy uninstaller
-    shutil.copy("uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
-    os.chmod(os.path.join(game_main_dir), "uninstall.py", 0o777)
+    shutil.copy("python_src/src/uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
+    os.chmod(os.path.join(game_main_dir, "uninstall.py"), 0o777)
     print("Created uninstall.py file in game dir")
