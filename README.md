@@ -10,13 +10,7 @@ This software is not affiliated with nor supported by Riot Games.
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
 - The file should be named `lol-installer-for-linux-release.tar.gz`
 - Extract the files
-- Run the `ui_installer.py` script in a terminal/console:
-
-  Open a console/terminal in the script main directory (where the files are)
-
-  Type `python 'Install League of Legends (Python).py'` and press enter.
-
-- Alternatively you can go to the `Install League of Legends (Python).py` file properties, set it as executable, and then double-click to open it
+- Double-click 'Install League of Legends (Python).py' and install the game.
 
 ### Python Script features:
 - You can choose where to install the game
