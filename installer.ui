@@ -344,10 +344,10 @@
                  </size>
                 </property>
                 <property name="text">
-                 <string>Report bugs</string>
+                 <string>Report Bug...</string>
                 </property>
                 <property name="icon">
-                 <iconset theme="dialog-warning">
+                 <iconset theme="tools-report-bug">
                   <normaloff>.</normaloff>.</iconset>
                 </property>
                 <property name="checkable">
