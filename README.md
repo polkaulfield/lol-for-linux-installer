@@ -1,7 +1,9 @@
 # lol-for-linux-installer
-Bash and Python scripts that installs league of legends automagically!
+League of Legends unofficial installer for linux
 
-Warning: DON'T RUN THIS SCRIPT AS SUDO USER
+This software is not verified, affiliated with, or supported by Riot Games.
+
+![Screenshot_20230326_042247](https://user-images.githubusercontent.com/40970965/227761459-316840e1-591b-485b-837d-676b6195be64.png)
 
 ## How to install it (Python version - Recommended)
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
@@ -12,17 +14,15 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
   Open a console/terminal in the script main directory (where the files are)
 
   Type `python 'Install League of Legends (Python).py'` and press enter.
-  
+
 - Alternatively you can go to the 'Install League of Legends (Python).py' file properties, set it as executable and then double-click to open it
 
 ### Python Script features:
 - You can choose where to install the game
 - It installs wine-ge-lol with FSYNC/FUTEX2 support enabled by default
-- Installs latest and greatest DXVK version to translate DirectX 9 and 11 to Vulkan for ultra performance!!!
-- It creates a desktop file in the system menu (with icons!)
-- Creates a uninstaller if you want to nuke the game after rage quitting a match that your team-mates did everything they could to make you lose
-![Screenshot_20230326_022905](https://user-images.githubusercontent.com/40970965/227757193-b5aa534a-2039-419a-9673-fb52162c7305.png)
-
+- Installs the latest DXVK version to translate DirectX 9 and 11 to Vulkan for ultra performance!
+- It creates a desktop file in the system menu (with icons for the game!)
+- Creates an uninstaller in case you want to nuke the game after you rage quit a match that your team-mates did everything they could to make you lose
 
 ## How to install it (Bash version - Simpler and safer version)
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
@@ -32,7 +32,7 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
    Open a console/terminal in the script main directory (where the files are)
 
    Type and run ```chmod +x ./'Install League of Legends (Bash).sh'``` first
-   
+
    Type and run `./'Install League of Legends (Bash).sh'` to install the game
 
 

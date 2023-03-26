@@ -2,7 +2,8 @@
 import sys, os, signal, psutil
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
 from PyQt5.uic import loadUi
-from PyQt5.QtCore import QThread, QObject
+from PyQt5.QtCore import QThread, QObject, QUrl
+from PyQt5.QtGui import QDesktopServices
 import leagueinstaller
 
 
@@ -11,14 +12,32 @@ class Installer(QMainWindow):
         super(Installer, self).__init__()
         loadUi("installer.ui", self)  # load the UI from the .ui file
         self.setFixedSize(self.size())
-        self.setWindowTitle('League of Legends installer')
+        self.setWindowTitle('League of Legends Installer')
         self.install_button.clicked.connect(self.installer_code)
-        self.selectFolder.clicked.connect(self.select_folder_path)
         self.cancelButton.clicked.connect(self.cancel_installation)
-        self.install_button.setEnabled(False)
+        self.install_button.setEnabled(True)
+        self.githubButton.clicked.connect(self.open_github)
         self.cancelButton.hide()
 
-    def select_folder_path(self):
+    def open_github(self):
+        url = "https://github.com/kassindornelles/lol-for-linux-installer/issues"
+        QDesktopServices.openUrl(QUrl(url))
+
+    def cancel_installation(self):
+        # Get the PID of the current process
+        pid = os.getpid()
+
+        # Get a list of all child processes
+        children = psutil.Process(pid).children(recursive=True)
+
+        # Terminate all child processes
+        for child in children:
+            child.send_signal(signal.SIGTERM)
+
+        # Terminate the main application process
+        os.kill(pid, signal.SIGTERM)
+
+    def installer_code(self):
         self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
         while self.game_main_dir and os.path.abspath(self.game_main_dir) == os.path.expanduser("~"):
             # If the user selected their home directory, display an error message
@@ -36,40 +55,22 @@ class Installer(QMainWindow):
                 self.game_main_dir = None
 
         if self.game_main_dir:
-            self.install_button.setEnabled(True)
+            self.cancelButton.show()
+            self.cancelButton.setEnabled(True)
+            self.welcomelabel.setText("We are installing the game for you...")
+            self.install_button.hide()  # hide the button
+            self.adviselabel.setText(
+                "Please be patient. \n This window will close itself when the install process is complete \n Launch the game using the shortcut in the system menu")
+            self.thread = QThread()
+            self.worker = Worker(self.game_main_dir)
+            self.worker.moveToThread(self.thread)
+            self.thread.started.connect(self.worker.run)
+            self.thread.finished.connect(self.finish_installation)
+            self.thread.start()
+            self.thread.quit()
         else:
             # Handle case where user pressed cancel
             print("User pressed cancel")
-
-    def cancel_installation(self):
-        # Get the PID of the current process
-        pid = os.getpid()
-
-        # Get a list of all child processes
-        children = psutil.Process(pid).children(recursive=True)
-
-        # Terminate all child processes
-        for child in children:
-            child.send_signal(signal.SIGTERM)
-
-        # Terminate the main application process
-        os.kill(pid, signal.SIGTERM)
-
-    def installer_code(self):
-        self.selectFolder.hide()
-        self.cancelButton.show()
-        self.cancelButton.setEnabled(True)
-        self.welcomelabel.setText("We are setting up a few things for you...")
-        self.install_button.hide()  # hide the button
-        self.adviselabel.setText(
-            "Please be patient. \n This window will close itself when the install process is complete \n Launch the game using the shortcut in the system menu")
-        self.thread = QThread()
-        self.worker = Worker(self.game_main_dir)
-        self.worker.moveToThread(self.thread)
-        self.thread.started.connect(self.worker.run)
-        self.thread.finished.connect(self.finish_installation)
-        self.thread.start()
-        self.thread.quit()
 
     def finish_installation(self):
 
