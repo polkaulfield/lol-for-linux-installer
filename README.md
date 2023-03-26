@@ -15,6 +15,14 @@ Warning: DON'T RUN THIS SCRIPT AS SUDO USER
   
 - Alternatively you can go to the 'Install League of Legends (Python).py' file properties, set it as executable and then double-click to open it
 
+### Python Script features:
+- You can choose where to install the game
+- It installs wine-ge-lol with Fsync support enabled by default
+- It creates a desktop file in the system menu (with icons!)
+- Creates a uninstaller if you want to nuke the game after rage quitting a match that your team-mates did everything they could to make you lose
+![Screenshot_20230326_022905](https://user-images.githubusercontent.com/40970965/227757193-b5aa534a-2039-419a-9673-fb52162c7305.png)
+
+
 ## How to install it (Bash version - Simpler and safer version)
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
 - Extract the files
