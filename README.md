@@ -42,6 +42,7 @@ This software is not affiliated with nor supported by Riot Games.
 
 ## Remaining tasks:
 - Flatpak it
+- Create a language selector for the python script so we download the game directly from the correct region servers
 
 ## Can i uninstall the game?
 - You can with the Python script, as it will generate an `uninstall.py` file in the directory you installed the game.
