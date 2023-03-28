@@ -12,9 +12,9 @@ This software is not affiliated with nor supported by Riot Games.
 - Double-click 'Install League of Legends (Python).py' and install the game.
 
 ### Python Script features:
-- You can choose where to install the game
-- It installs wine-ge-lol with FSYNC/FUTEX2 support enabled by default
-- Installs the latest DXVK version to translate DirectX 9 and 11 to Vulkan for ultra performance!
+- You can choose where to install the game and also the region you are going to play
+- It installs wine-ge-lol with FSYNC/FUTEX2 support enabled by default for better CPU performance
+- Installs the latest DXVK version to translate DirectX 9 and 11 to Vulkan for better performance
 - It creates a desktop file in the system menu (with icons for the game)
 - Creates an uninstaller in case you want to nuke the game, after you rage quit a match that your teammates did everything they could to make you lose
 
