@@ -14,7 +14,7 @@ echo "Selected folder: $folder"
 [ ! -d "${XDG_DATA_HOME}" ] && XDG_DATA_HOME=~/.local/share     # Setup XDG stuff
 downloads_dir="$leagueoflegends_dir/Downloads"    # Download path
 league_installer_url="https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.na.exe"   # league client installer URL
-wine_lutris_ge_lol_url="https://github.com/GloriousEggroll/wine-ge-custom/releases/download/7.0-GE-5-LoL/wine-lutris-ge-lol-7.0-5-x86_64.tar.xz"  # Wine build URL
+wine_lutris_ge_lol_url="https://winebuilds.nobaraproject.org/LoL/wine-lutris-ge-lol-7.0-6-x86_64.tar.xz"  # Wine build URL
 wine_dir="$leagueoflegends_dir/wine"  # Wine main directory
 league_installer_file="$downloads_dir/live.na.exe"  # Original LoL client name
 league_installer_name="leagueinstaller.exe"  # LoL client name we will use
@@ -107,7 +107,7 @@ if [ -d "$wine_dir" ]; then
 fi
 mkdir "$wine_dir"
 log_message "Created directory $wine_dir"
-tar -xf "$downloads_dir/wine-lutris-ge-lol-7.0-5-x86_64.tar.xz" -C "$wine_dir" --strip-components=1
+tar -xf "$downloads_dir/wine-lutris-ge-lol-7.0-6-x86_64.tar.xz" -C "$wine_dir" --strip-components=1
 
 qdbus $dbusRef Set "" value 3
 qdbus $dbusRef setLabelText "Extracted wine-lutris-lol"
