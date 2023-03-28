@@ -2,7 +2,7 @@
 import os, shutil, requests, tarfile, subprocess, json
 
 
-def league_install_code(game_main_dir):
+def league_install_code(game_main_dir, game_region_link):
 
     # Expose variables
     print("Setting all variables")  # Cheap logging
@@ -42,11 +42,10 @@ def league_install_code(game_main_dir):
     with open(wine_lutris_build_file, "wb") as f:
         f.write(response.content)
 
-    print("Downloading League of Legends installer from Riot NA Servers")  # Cheap logging
-    exe_file_name = "live.na.exe"
-    league_installer_url = "https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.na.exe"
+    print("Downloading League of Legends installer from", game_region_link)  # Cheap logging
+    exe_file_name = "lolinstaller.exe"
     league_installer_file = os.path.join(game_downloads_dir, exe_file_name)
-    response = requests.get(league_installer_url)
+    response = requests.get(game_region_link)
     with open(league_installer_file, "wb") as f:
         f.write(response.content)
 

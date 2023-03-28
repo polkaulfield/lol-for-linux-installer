@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import sys, os, signal, psutil
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl
 from PyQt5.QtGui import QDesktopServices
@@ -18,6 +18,7 @@ class Installer(QMainWindow):
         self.install_button.setEnabled(True)
         self.githubButton.clicked.connect(self.open_github)
         self.cancelButton.hide()
+
 
     def open_github(self):
         url = "https://github.com/kassindornelles/lol-for-linux-installer/issues"
@@ -59,10 +60,48 @@ class Installer(QMainWindow):
             self.cancelButton.setEnabled(True)
             self.welcomelabel.setText("We are installing the game for you...")
             self.install_button.hide()  # hide the button
-            self.adviselabel.setText(
-                "Please be patient. \n This window will close itself when the install process is complete \n Launch the game using the shortcut in the system menu")
+            self.languageComboBox.hide()
+            self.regionLabel.hide()
+
+            # Get the game download link and apply region based on text from .ui file
+            selected_lang = self.languageComboBox.currentText()
+            game_link = "https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.{}.exe"
+            if selected_lang == "BR (BR1) - Brazil":
+                region = "br"
+                game_region_link = game_link.format(region)
+            elif selected_lang == "LAN (LA1) - Latin America North":
+                region = "la1"
+                game_region_link = game_link.format(region)
+            elif selected_lang == "LAS (LA2) - Latin America South":
+                region = "la2"
+                game_region_link = game_link.format(region)
+            elif selected_lang == "NA (NA1) - North America":
+                region = "na"
+                game_region_link = game_link.format(region)
+            elif selected_lang == "OCE (OCE/OC1) - Oceania":
+                region = "oc1"
+                game_region_link = game_link.format(region)
+            elif selected_lang == "RU (RU1) - Russia":
+                region = "ru"
+                game_region_link = game_link.format(region)
+            elif selected_lang == "EUW (EUW1) - Europe West":
+                region = "euw"
+                game_region_link = game_link.format(region)
+            elif selected_lang == "EUNE (EUN1) - Europe Nordic & East":
+                region = "eune"
+                game_region_link = game_link.format(region)
+            elif selected_lang == "TR (TR1) - Turkey":
+                region = "tr"
+                game_region_link = game_link.format(region)
+            elif selected_lang == "JP (JP1) - Japan":
+                region = "jp"
+                game_region_link = game_link.format(region)
+            else:
+                region = "na" # Handle any other cases as needed
+                game_region_link = game_link.format(region)
+
             self.thread = QThread()
-            self.worker = Worker(self.game_main_dir)
+            self.worker = Worker(self.game_main_dir, game_region_link)
             self.worker.moveToThread(self.thread)
             self.thread.started.connect(self.worker.run)
             self.thread.finished.connect(self.finish_installation)
@@ -78,12 +117,13 @@ class Installer(QMainWindow):
 
 
 class Worker(QObject):
-    def __init__(self, game_main_dir):
+    def __init__(self, game_main_dir, game_region_link):
         super().__init__()
         self.game_main_dir = game_main_dir
+        self.game_region_link = game_region_link
 
     def run(self):
-        leagueinstaller.league_install_code(self.game_main_dir)
+        leagueinstaller.league_install_code(self.game_main_dir, self.game_region_link)
         QApplication.quit()
 
 
