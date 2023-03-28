@@ -64,41 +64,24 @@ class Installer(QMainWindow):
             self.regionLabel.hide()
 
             # Get the game download link and apply region based on text from .ui file
+            region_map = {
+                "BR (BR1) - Brazil": "br",
+                "LAN (LA1) - Latin America North": "la1",
+                "LAS (LA2) - Latin America South": "la2",
+                "NA (NA1) - North America": "na",
+                "OCE (OCE/OC1) - Oceania": "oc1",
+                "RU (RU1) - Russia": "ru",
+                "EUW (EUW1) - Europe West": "euw",
+                "EUNE (EUN1) - Europe Nordic & East": "eune",
+                "TR (TR1) - Turkey": "tr",
+                "JP (JP1) - Japan": "jp",
+            }
+
             selected_lang = self.languageComboBox.currentText()
             game_link = "https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.{}.exe"
-            if selected_lang == "BR (BR1) - Brazil":
-                region = "br"
-                game_region_link = game_link.format(region)
-            elif selected_lang == "LAN (LA1) - Latin America North":
-                region = "la1"
-                game_region_link = game_link.format(region)
-            elif selected_lang == "LAS (LA2) - Latin America South":
-                region = "la2"
-                game_region_link = game_link.format(region)
-            elif selected_lang == "NA (NA1) - North America":
-                region = "na"
-                game_region_link = game_link.format(region)
-            elif selected_lang == "OCE (OCE/OC1) - Oceania":
-                region = "oc1"
-                game_region_link = game_link.format(region)
-            elif selected_lang == "RU (RU1) - Russia":
-                region = "ru"
-                game_region_link = game_link.format(region)
-            elif selected_lang == "EUW (EUW1) - Europe West":
-                region = "euw"
-                game_region_link = game_link.format(region)
-            elif selected_lang == "EUNE (EUN1) - Europe Nordic & East":
-                region = "eune"
-                game_region_link = game_link.format(region)
-            elif selected_lang == "TR (TR1) - Turkey":
-                region = "tr"
-                game_region_link = game_link.format(region)
-            elif selected_lang == "JP (JP1) - Japan":
-                region = "jp"
-                game_region_link = game_link.format(region)
-            else:
-                region = "na" # Handle any other cases as needed
-                game_region_link = game_link.format(region)
+
+            region = region_map.get(selected_lang, "na")
+            game_region_link = game_link.format(region)
 
             self.thread = QThread()
             self.worker = Worker(self.game_main_dir, game_region_link)

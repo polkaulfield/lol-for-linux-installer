@@ -351,52 +351,52 @@
                </property>
                <item>
                 <property name="text">
-                 <string>BR (BR1) - Brazil</string>
+                 <string extracomment="br">BR (BR1) - Brazil</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>LAN (LA1) - Latin America North</string>
+                 <string extracomment="la1">LAN (LA1) - Latin America North</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>LAS (LA2) - Latin America South</string>
+                 <string extracomment="la2">LAS (LA2) - Latin America South</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>NA (NA1) - North America</string>
+                 <string extracomment="na">NA (NA1) - North America</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>OCE (OCE/OC1) - Oceania</string>
+                 <string extracomment="oc1">OCE (OCE/OC1) - Oceania</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>RU (RU1) - Russia</string>
+                 <string extracomment="ru">RU (RU1) - Russia</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>EUW (EUW1) - Europe West</string>
+                 <string extracomment="euw">EUW (EUW1) - Europe West</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>EUNE (EUN1) - Europe Nordic &amp; East</string>
+                 <string extracomment="eune">EUNE (EUN1) - Europe Nordic &amp; East</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>TR (TR1) - Turkey</string>
+                 <string extracomment="tr">TR (TR1) - Turkey</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>JP (JP1) - Japan</string>
+                 <string extracomment="jp">JP (JP1) - Japan</string>
                 </property>
                </item>
               </widget>
