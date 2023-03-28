@@ -3,8 +3,7 @@ League of Legends unofficial installer for linux
 
 This software is not affiliated with nor supported by Riot Games.
 
-![Screenshot_20230326_045210](https://user-images.githubusercontent.com/40970965/227762602-818ca8f5-8382-45ed-b090-2f2c2d57e466.png)
-
+![Screenshot_20230328_083602](https://user-images.githubusercontent.com/40970965/228223955-a903408a-3766-4368-8843-a8439137d65f.png)
 
 ## How to install it (Python version - Recommended)
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
