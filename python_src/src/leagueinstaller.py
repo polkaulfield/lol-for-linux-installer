@@ -75,6 +75,7 @@ def league_install_code(game_main_dir, game_region_link):
 
     # create py script
     with open(game_launch_file_path, "w") as file:
+        file.write("#!/usr/bin/env python3\n")
         file.write("import os\nimport subprocess\n")
         file.write(f"home_dir = os.path.expanduser('{home_dir}')\n")
         file.write(f"game_main_dir = os.path.join('{game_main_dir}')\n")
