@@ -6,7 +6,7 @@ def league_install_code(game_main_dir, game_region_link):
 
     # Expose variables
     print("Setting all variables")  # Cheap logging
-    home_dir = os.path.expanduser("~")
+    home_dir = os.environ.get('XDG_CONFIG_HOME') or os.path.expanduser('~/')
     game_downloads_dir = os.path.join(game_main_dir, 'downloads')
     game_winetricks_cache_dir = os.path.join(game_downloads_dir, "winetricks-cache")
     game_main_wine_dir = os.path.join(game_main_dir, 'wine')
