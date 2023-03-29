@@ -35,7 +35,7 @@ This software is not affiliated with nor supported by Riot Games.
 - `wget` (Bash script)
 - `kdialog` (Bash script)
 - `tar`
-- `python` and `python-requests` (Python script)
+- `python`, `python-requests` and `python-psutil` (Python script)
 - `qt5-base` and `pyqt5` (Python script)
 - WINE 32-64 bits and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
