@@ -356,6 +356,16 @@
                </item>
                <item>
                 <property name="text">
+                 <string extracomment="euw">EUW (EUW1) - Europe West</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string extracomment="eune">EUNE (EUN1) - Europe Nordic &amp; East</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
                  <string extracomment="la1">LAN (LA1) - Latin America North</string>
                 </property>
                </item>
@@ -381,22 +391,17 @@
                </item>
                <item>
                 <property name="text">
-                 <string extracomment="euw">EUW (EUW1) - Europe West</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string extracomment="eune">EUNE (EUN1) - Europe Nordic &amp; East</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
                  <string extracomment="tr">TR (TR1) - Turkey</string>
                 </property>
                </item>
                <item>
                 <property name="text">
                  <string extracomment="jp">JP (JP1) - Japan</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string extracomment="kr">KR (KR) - Republic of Korea</string>
                 </property>
                </item>
               </widget>

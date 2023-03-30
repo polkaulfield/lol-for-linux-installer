@@ -75,6 +75,7 @@ class Installer(QMainWindow):
                 "EUNE (EUN1) - Europe Nordic & East": "eune",
                 "TR (TR1) - Turkey": "tr",
                 "JP (JP1) - Japan": "jp",
+                "KR (KR) - Republic of Korea": "kr",
             }
 
             selected_lang = self.languageComboBox.currentText()
