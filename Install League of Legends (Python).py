@@ -58,6 +58,7 @@ class Installer(QMainWindow):
         if self.game_main_dir:
             self.cancelButton.show()
             self.cancelButton.setEnabled(True)
+            self.checkShortcut.hide()
             self.welcomelabel.setText("We are installing the game for you...")
             self.install_button.hide()  # hide the button
             self.languageComboBox.hide()
