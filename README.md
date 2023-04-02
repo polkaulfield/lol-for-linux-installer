@@ -3,12 +3,11 @@ League of Legends unofficial installer for linux
 
 This software is not affiliated with nor supported by Riot Games.
 
-![Screenshot_20230331_120707](https://user-images.githubusercontent.com/40970965/229158510-3320382d-1973-49bc-8df4-65a4cf117d3d.png)
-
+![Screenshot_20230402_085233](https://user-images.githubusercontent.com/40970965/229351096-e30b9efe-fa78-4bb7-980d-a23496cf8b09.png)
 
 ## How to install it (Python version - Recommended)
+- Check if you have all required [dependencies](#dependencies) installed first
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
-- The file should be named `lol-installer-for-linux-release.tar.gz`
 - Extract the files
 - Double-click 'Install League of Legends (Python).py' and install the game.
 
@@ -18,8 +17,10 @@ This software is not affiliated with nor supported by Riot Games.
 - Installs the latest DXVK version to translate DirectX 9 and 11 to Vulkan for better performance
 - It creates a desktop file in the system menu (with icons for the game)
 - Creates an uninstaller in case you want to nuke the game, after you rage quit a match that your teammates did everything they could to make you lose
+- Users of hybrid graphics can choose at install time if they want to use the dGPU or not
 
-## How to install it (Bash version - Limited functionality, more like a backup)
+## How to install it (Bash version - Limited functionality, more like a backup
+- Check if you have all required [dependencies](#dependencies) installed first
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
 - Extract the files
 - Run the `Install League of Legends (Bash).sh` script in a terminal/console:
@@ -31,7 +32,7 @@ This software is not affiliated with nor supported by Riot Games.
    Type and run `./'Install League of Legends (Bash).sh'` to install the game
 
 
-## Dependencies (install those packages system-wide first):
+## <a name="dependencies"></a> Dependencies (install those packages system-wide first):
 - `winetricks`
 - `wget` (Bash script)
 - `kdialog` (Bash script)
