@@ -14,7 +14,7 @@ This software is not affiliated with nor supported by Riot Games.
 
 ## How to install it (Python version - Recommended)
 - Check if you have all required [dependencies](#dependencies) installed first
-- Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
+- Download the latest release from [Here](https://github.com/polkaulfield/lol-for-linux-installer/archive/refs/heads/main.zip)
 - Extract the files
 - Double-click 'Install League of Legends (Python).py' and install the game.
 
