@@ -4,6 +4,8 @@ import os, shutil, requests, tarfile, subprocess, json
 
 def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bool):
 
+    wine_version = "wine-lol-kyechou-7.0-6-x86_64"
+
     # Expose variables
     print("Setting all variables")  # Cheap logging
     home_dir = os.environ.get('XDG_CONFIG_HOME') or os.path.expanduser('~/')
@@ -34,9 +36,9 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
             os.chmod(folder_path, 0o700)
 
     # Download necessary files
-    print("Downloading wine-lutris-lol build")  # Cheap logging
-    wine_lutris_build_url = "https://winebuilds.nobaraproject.org/LoL/wine-lutris-ge-lol-7.0-6-x86_64.tar.xz"
-    tar_file_name = "wine-lutris-ge-lol-7.0-6-x86_64.tar.xz"
+    print("Downloading https://github.com/polkaulfield/lol-for-linux-installer/releases/download/wine/wine-lol-kyechou-7.0-6-x86_64.tar.xz")  # Cheap logging
+    wine_lutris_build_url = "https://github.com/polkaulfield/lol-for-linux-installer/releases/download/wine/wine-lol-kyechou-7.0-6-x86_64.tar.xz"
+    tar_file_name = wine_version + ".tar.xz"
     wine_lutris_build_file = os.path.join(game_downloads_dir, tar_file_name)
     response = requests.get(wine_lutris_build_url)
     with open(wine_lutris_build_file, "wb") as f:
@@ -52,10 +54,10 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
     print("All files Downloaded")  # Cheap logging
 
     # Extract tar file
-    print("Extracting the wine-lutris-lol build file")  # Cheap logging
+    print("Extracting the " + wine_version + " build file")  # Cheap logging
     with tarfile.open(os.path.join(game_downloads_dir, tar_file_name)) as file:
         file.extractall(os.path.join(game_main_wine_dir))
-    print("Extraction on the wine-lutris-lol build file completed")  # Cheap logging
+    print("Extraction on the " + wine_version + " build file completed")  # Cheap logging
 
     # check prime
     if prime_bool:
@@ -69,13 +71,14 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
     # Start the first-boot script to setup DXVK and the prefix
 
     first_boot_envs = {**os.environ,
-                       "PATH": f"{game_main_wine_dir}/lutris-ge-lol-7.0-6-x86_64/bin:{os.environ['PATH']}",
+                       "PATH": f"{game_main_wine_dir}/{wine_version}/bin:{os.environ['PATH']}",
                        "DRI_PRIME": f"{prime_value}",
                        "WINEARCH": "win64",
                        "WINEPREFIX": game_prefix_dir,
-                       "WINELOADER": f"{game_main_wine_dir}/lutris-ge-lol-7.0-6-x86_64/bin/wine",
+                       "WINELOADER": f"{game_main_wine_dir}/{wine_version}/bin/wine",
                        "WINEFSYNC": "1",
-                       "WINEDEBUG": "-all",
+                       # Seh debug temporary fix
+                       "WINEDEBUG": "fixme-all,trace+seh",
                        "WINEDLLOVERRIDES": "winemenubuilder.exe=d",
                        "WINETRICKS_CACHE": f"{game_winetricks_cache_dir}",
                        }
@@ -95,13 +98,14 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
         file.write(f"game_exe_path = os.path.join(game_prefix_dir, 'drive_c', 'Riot Games', 'Riot Client')\n")
         file.write(f"game_exe_file_name = 'RiotClientServices.exe'\n")
         file.write('start_game_vars = dict(os.environ,\n')
-        file.write(f"        PATH='{game_main_wine_dir}/lutris-ge-lol-7.0-6-x86_64/bin',\n")
+        file.write(f"        PATH='{game_main_wine_dir}/{wine_version}/bin',\n")
         file.write(f'        DRI_PRIME="{prime_value}",\n')
         file.write('        WINEARCH="win64",\n')
         file.write('        WINEPREFIX=game_prefix_dir,\n')
-        file.write(f'        WINELOADER="{game_main_wine_dir}/lutris-ge-lol-7.0-6-x86_64/bin/wine",\n')
+        file.write(f'        WINELOADER="{game_main_wine_dir}/{wine_version}/bin/wine",\n')
         file.write('        WINEFSYNC="1",\n')
-        file.write('        WINEDEBUG="-all",\n')
+        # Seh debug temporary fix
+        file.write('        WINEDEBUG="fixme-all,trace+seh",\n')
         file.write('        WINEDLLOVERRIDES="winemenubuilder.exe=d",\n')
         file.write('    )\n')
         file.write(

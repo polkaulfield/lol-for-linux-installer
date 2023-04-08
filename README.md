@@ -3,7 +3,7 @@
 
 
 
-WARNING: DON'T USE THIS SOFTWARE FOR NOW, LEAGUE IS UNIVERSALLY BROKEN ON WINE AGAIN AND WE NEED TO WAIT FOR A SOLUTION/PATCH FOR WINE!
+WARNING: THIS IS A FORK USING AN EXPERIMENTAL BUILD OF PROTON AND DEBUG FLAGS TO GET THE GAME RUNNING AT LEAST
 
 
 League of Legends unofficial installer for linux
@@ -26,19 +26,6 @@ This software is not affiliated with nor supported by Riot Games.
 - Creates an uninstaller in case you want to nuke the game, after you rage quit a match that your teammates did everything they could to make you lose
 - Users of hybrid graphics can choose at install time if they want to use the dGPU or not
 
-## How to install it (Bash version - Limited functionality, more like a backup
-- Check if you have all required [dependencies](#dependencies) installed first
-- Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
-- Extract the files
-- Run the `Install League of Legends (Bash).sh` script in a terminal/console:
-
-   Open a console/terminal in the script main directory (where the files are)
-
-   Type and run ```chmod +x ./'Install League of Legends (Bash).sh'``` first
-
-   Type and run `./'Install League of Legends (Bash).sh'` to install the game
-
-
 ## <a name="dependencies"></a> Dependencies (install those packages system-wide first):
 - `winetricks`
 - `wget` (Bash script)
@@ -53,8 +40,6 @@ This software is not affiliated with nor supported by Riot Games.
 
 ## Can i uninstall the game?
 - You can with the Python script, as it will generate an `uninstall.py` file in the directory you installed the game.
-
-- The bash script does not have a uninstaller script, but you can remove it manually by deleting the leagueoflegends desktop file from `/.local/share/applications` and deleting the game folder.
 
 ## Buy me a coffee
 
