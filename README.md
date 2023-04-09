@@ -28,8 +28,6 @@ This software is not affiliated with nor supported by Riot Games.
 
 ## <a name="dependencies"></a> Dependencies (install those packages system-wide first):
 - `winetricks`
-- `wget` (Bash script)
-- `kdialog` (Bash script)
 - `tar`
 - `python`, `python-requests` and `python-psutil` (Python script)
 - `qt5-base` and `pyqt5` (Python script)
