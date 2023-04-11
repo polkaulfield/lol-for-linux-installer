@@ -1,11 +1,5 @@
 # lol-for-linux-installer
 
-
-
-
-WARNING: DON'T USE THIS SOFTWARE FOR NOW, LEAGUE IS UNIVERSALLY BROKEN ON WINE AGAIN AND WE NEED TO WAIT FOR A SOLUTION/PATCH FOR WINE!
-
-
 League of Legends unofficial installer for linux
 
 This software is not affiliated with nor supported by Riot Games.
