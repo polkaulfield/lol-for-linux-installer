@@ -35,8 +35,8 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
 
     # Download necessary files
     print("Downloading wine-lutris-lol build")  # Cheap logging
-    wine_lutris_build_url = "https://winebuilds.nobaraproject.org/LoL/wine-lutris-ge-lol-7.0-6-x86_64.tar.xz"
-    tar_file_name = "wine-lutris-ge-lol-7.0-6-x86_64.tar.xz"
+    wine_lutris_build_url = "https://github.com/GloriousEggroll/wine-ge-custom/releases/download/7.0-GE-8-LoL/wine-lutris-ge-lol-7.0.8-x86_64.tar.xz"
+    tar_file_name = "wine-lutris-ge-lol-7.0.8-x86_64.tar.xz"
     wine_lutris_build_file = os.path.join(game_downloads_dir, tar_file_name)
     response = requests.get(wine_lutris_build_url)
     with open(wine_lutris_build_file, "wb") as f:
@@ -69,11 +69,11 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
     # Start the first-boot script to setup DXVK and the prefix
 
     first_boot_envs = {**os.environ,
-                       "PATH": f"{game_main_wine_dir}/lutris-ge-lol-7.0-6-x86_64/bin:{os.environ['PATH']}",
+                       "PATH": f"{game_main_wine_dir}/wine-lutris-ge-lol-7.0.8-x86_64/bin:{os.environ['PATH']}",
                        "DRI_PRIME": f"{prime_value}",
                        "WINEARCH": "win64",
                        "WINEPREFIX": game_prefix_dir,
-                       "WINELOADER": f"{game_main_wine_dir}/lutris-ge-lol-7.0-6-x86_64/bin/wine",
+                       "WINELOADER": f"{game_main_wine_dir}/wine-lutris-ge-lol-7.0.8-x86_64/bin/wine",
                        "WINEFSYNC": "1",
                        "WINEDEBUG": "-all",
                        "WINEDLLOVERRIDES": "winemenubuilder.exe=d",
