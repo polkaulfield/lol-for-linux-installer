@@ -6,7 +6,7 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
 
     # Expose variables
     print("Setting all variables")  # Cheap logging
-    wine_version = "wine-lutris-ge-lol-7.0.8-x86_64"
+    wine_version = "lutris-ge-lol-7.0.8-x86_64"
     home_dir = os.environ.get('XDG_CONFIG_HOME') or os.path.expanduser('~/')
     game_downloads_dir = os.path.join(game_main_dir, 'downloads')
     game_winetricks_cache_dir = os.path.join(game_downloads_dir, "winetricks-cache")
