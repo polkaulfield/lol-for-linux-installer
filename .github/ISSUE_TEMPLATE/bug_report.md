@@ -10,6 +10,10 @@ assignees: ''
 **Describe the bug**
 A clear and concise description of what the bug is.
 
+**Are you sure you installed ALL the dependencies listed in the readme?**
+- [ ] Yes
+- [ ] Not sure
+
 **To Reproduce**
 Steps to reproduce the behavior:
 1 - 
