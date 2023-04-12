@@ -181,6 +181,10 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
     print("Downloads folder deletion")
 
     # Copy uninstaller
-    shutil.copy("python_src/src/uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
+    try:
+        shutil.copy("python_src/src/uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
+    # Fallback for AppImage
+    except:
+        shutil.copy("/usr/share/lolforlinux/uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
     os.chmod(os.path.join(game_main_dir, "uninstall.py"), 0o777)
     print("Created uninstall.py file in game dir")
