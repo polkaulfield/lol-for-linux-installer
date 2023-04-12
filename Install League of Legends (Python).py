@@ -10,7 +10,11 @@ from python_src.src import leagueinstaller
 class Installer(QMainWindow):
     def __init__(self):
         super(Installer, self).__init__()
-        loadUi("python_src/ui/installer.ui", self)
+        # Hacky workaround so the AppImage works
+        try:
+            loadUi("python_src/ui/installer.ui", self)
+        except:
+            loadUi("/usr/share/lolforlinux/ui/installer.ui", self)
         self.setFixedSize(self.size())
         self.setWindowTitle('League of Legends Installer')
         self.install_button.clicked.connect(self.installer_code)
