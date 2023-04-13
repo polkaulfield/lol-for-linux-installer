@@ -68,6 +68,7 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
                             "DRI_PRIME": "1",
                             "WINEPREFIX": game_prefix_dir,
                             "WINELOADER": f"{game_main_wine_dir}/{wine_version}/bin/wine",
+                            "WINEESYNC": "1",
                             "WINEFSYNC": "1",
                             "WINEDEBUG": "-all",
                             "WINEDLLOVERRIDES": "winemenubuilder.exe=d",
@@ -92,8 +93,8 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
                 file.write(f'       DRI_PRIME="1",\n')
                 file.write('        WINEPREFIX=game_prefix_dir,\n')
                 file.write(f'       WINELOADER="{game_main_wine_dir}/{wine_version}/bin/wine",\n')
-                file.write('        WINEFSYNC="1",\n')
                 file.write('        WINEESYNC="1",\n')
+                file.write('        WINEFSYNC="1",\n')
                 file.write('        WINEDEBUG="-all",\n')
                 file.write('        WINEDLLOVERRIDES="winemenubuilder.exe=d",\n')
                 file.write('    )\n')
