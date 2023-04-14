@@ -161,9 +161,8 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
     else:
         logging.info("Skipping desktop icons")
 
-    # create json file
-    # Create a dictionary to hold the data
-    data = {
+    # Create a dictionary to hold the install dir data
+    data_folder = {
         "game_main_dir": game_main_dir
     }
 
@@ -172,9 +171,19 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
 
     # Write the dictionary to a JSON file in the user_config_folder directory
     with open(os.path.join(user_config_folder, "league_install_path.json"), "w") as outfile:
-        json.dump(data, outfile)
+        json.dump(data_folder, outfile)
 
     logging.info("json file created")
+
+    # Wine build version json
+    lol_build_current = {
+        "current_build_name": wine_lutris_build_url
+    }
+
+    with open(os.path.join(game_main_dir, "buildversion.json"), "w") as outfile:
+        json.dump(lol_build_current, outfile)
+
+    logging.info("LoL installed build json file created")
 
     # Delete downloads folder
     try:
@@ -191,3 +200,12 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
         shutil.copy("/usr/share/lolforlinux/uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
     os.chmod(os.path.join(game_main_dir, "uninstall.py"), 0o777)
     logging.info("Created uninstall.py file in game dir")
+
+    # Copy update.py
+    try:
+        shutil.copy("python_src/src/update.py", os.path.join(game_main_dir, "update.py"))
+    # Fallback for AppImage
+    except:
+        shutil.copy("/usr/share/lolforlinux/update.py", os.path.join(game_main_dir, "update.py"))
+    os.chmod(os.path.join(game_main_dir, "update.py"), 0o777)
+    logging.info("Created update.py file in game dir")
