@@ -92,6 +92,7 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
                         "PATH": f"{game_main_wine_dir}/{wine_version}/bin:{os.environ['PATH']}",
                         "WINEPREFIX": game_prefix_dir,
                         "WINELOADER": f"{game_main_wine_dir}/{wine_version}/bin/wine",
+                        "WINEESYNC": "1",
                         "WINEFSYNC": "1",
                         "WINEDEBUG": "-all",
                         "WINEDLLOVERRIDES": "winemenubuilder.exe=d",
