@@ -4,7 +4,8 @@ League of Legends unofficial installer for linux
 
 This software is not affiliated with nor supported by Riot Games.
 
-![Screenshot_20230402_085233](https://user-images.githubusercontent.com/40970965/229351096-e30b9efe-fa78-4bb7-980d-a23496cf8b09.png)
+![Screenshot_20230414_115113](https://user-images.githubusercontent.com/40970965/232078379-673646b8-009b-4746-8c81-a6f63af03380.png)
+
 
 ## How to install it (Python version - Recommended)
 - Check if you have all required [dependencies](#dependencies) installed first
@@ -47,7 +48,8 @@ This software is not affiliated with nor supported by Riot Games.
 - `qt5-base` and `pyqt5` (Python script)
 - WINE 32-64 bits and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
-## Remaining tasks:
+## Remaining tasks and known problems:
+- NVIDIA Hybrid Graphics users can't boot the game with the dedicated GPU
 - Flatpak it
 
 ## Can i uninstall the game?
