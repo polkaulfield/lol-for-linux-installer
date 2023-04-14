@@ -10,7 +10,6 @@ game_exe_path = os.path.join(game_prefix_dir, 'drive_c', 'Riot Games', 'Riot Cli
 game_exe_file_name = 'RiotClientServices.exe'
 wine_loader_path = os.path.join(game_main_wine_dir, 'wine-build', 'bin', 'wine')
 
-# Set up the environment variables
 start_game_vars = dict(os.environ,
        PATH=os.path.join(game_main_wine_dir, 'wine-build', 'bin'),
        WINEPREFIX=game_prefix_dir,
