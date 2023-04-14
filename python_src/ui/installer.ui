@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>602</width>
-    <height>594</height>
+    <height>519</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -179,10 +179,13 @@
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
              <width>20</width>
-             <height>40</height>
+             <height>10</height>
             </size>
            </property>
           </spacer>
@@ -213,7 +216,7 @@
            <property name="sizeHint" stdset="0">
             <size>
              <width>10</width>
-             <height>20</height>
+             <height>10</height>
             </size>
            </property>
           </spacer>
@@ -257,10 +260,13 @@
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>20</width>
-             <height>40</height>
+             <width>10</width>
+             <height>10</height>
             </size>
            </property>
           </spacer>
@@ -283,10 +289,13 @@
            <property name="orientation">
             <enum>Qt::Vertical</enum>
            </property>
+           <property name="sizeType">
+            <enum>QSizePolicy::Fixed</enum>
+           </property>
            <property name="sizeHint" stdset="0">
             <size>
-             <width>20</width>
-             <height>40</height>
+             <width>10</width>
+             <height>10</height>
             </size>
            </property>
           </spacer>
