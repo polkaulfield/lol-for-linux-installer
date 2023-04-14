@@ -6,7 +6,7 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
 
     # Expose variables
     logging.info("Setting all variables")  # Cheap logging
-    wine_version = "lutris-ge-lol-7.0.8-x86_64"
+    wine_version = "wine-build"
     home_dir = os.environ.get('XDG_CONFIG_HOME') or os.path.expanduser('~/')
     game_downloads_dir = os.path.join(game_main_dir, 'downloads')
     game_winetricks_cache_dir = os.path.join(game_downloads_dir, "winetricks-cache")
@@ -53,10 +53,12 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
     logging.info("All files Downloaded")  # Cheap logging
 
     # Extract tar file
-    logging.info("Extracting the wine-lutris-lol build file")  # Cheap logging
+    logging.info("Extracting the wine-lutris-lol build file")
     with tarfile.open(os.path.join(game_downloads_dir, tar_file_name)) as file:
-        file.extractall(os.path.join(game_main_wine_dir))
-    logging.info("Extraction on the wine-lutris-lol build file completed")  # Cheap logging
+        file.extractall(path=game_main_wine_dir)
+        extracted_folder_name = file.getnames()[0]
+    os.rename(os.path.join(game_main_wine_dir, extracted_folder_name), os.path.join(game_main_wine_dir, "wine-build"))
+    logging.info("Extraction of the wine-lutris-lol build file completed")
 
     # check prime
     if prime_bool:
@@ -78,29 +80,8 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
             subprocess.run(["winetricks", "dxvk"], env=first_boot_envs, check=True)
             subprocess.run(["wine", league_installer_file], env=first_boot_envs, check=True)
 
-            # create py script
-            with open(game_launch_file_path, "w") as file:
-                file.write("#!/usr/bin/env python3\n")
-                file.write("import os\nimport subprocess\n")
-                file.write(f"home_dir = os.path.expanduser('{home_dir}')\n")
-                file.write(f"game_main_dir = os.path.join('{game_main_dir}')\n")
-                file.write(f"game_main_wine_dir = os.path.join(game_main_dir, 'wine')\n")
-                file.write(f"game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')\n")
-                file.write(f"game_exe_path = os.path.join(game_prefix_dir, 'drive_c', 'Riot Games', 'Riot Client')\n")
-                file.write(f"game_exe_file_name = 'RiotClientServices.exe'\n")
-                file.write('start_game_vars = dict(os.environ,\n')
-                file.write(f"       PATH='{game_main_wine_dir}/{wine_version}/bin',\n")
-                file.write(f'       DRI_PRIME="1",\n')
-                file.write('        WINEPREFIX=game_prefix_dir,\n')
-                file.write(f'       WINELOADER="{game_main_wine_dir}/{wine_version}/bin/wine",\n')
-                file.write('        WINEESYNC="1",\n')
-                file.write('        WINEFSYNC="1",\n')
-                file.write('        WINEDEBUG="-all",\n')
-                file.write('        WINEDLLOVERRIDES="winemenubuilder.exe=d",\n')
-                file.write('    )\n')
-                file.write(
-                    'wine_process = ["wine", os.path.join(game_exe_path, game_exe_file_name), "--launch-product=league_of_legends", "--launch-patchline=live"]\n')
-                file.write('subprocess.run(wine_process, env=start_game_vars, check=True)\n')
+            # Copy .py script
+            shutil.copy("python_src/src/launch-league-of-legends-prime.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
 
         except:
             logging.warning("Couldn't set PRIME")
@@ -121,27 +102,7 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
         subprocess.run(["wine", league_installer_file], env=first_boot_envs, check=True)
 
         # create py script
-        with open(game_launch_file_path, "w") as file:
-            file.write("#!/usr/bin/env python3\n")
-            file.write("import os\nimport subprocess\n")
-            file.write(f"home_dir = os.path.expanduser('{home_dir}')\n")
-            file.write(f"game_main_dir = os.path.join('{game_main_dir}')\n")
-            file.write(f"game_main_wine_dir = os.path.join(game_main_dir, 'wine')\n")
-            file.write(f"game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')\n")
-            file.write(f"game_exe_path = os.path.join(game_prefix_dir, 'drive_c', 'Riot Games', 'Riot Client')\n")
-            file.write(f"game_exe_file_name = 'RiotClientServices.exe'\n")
-            file.write('start_game_vars = dict(os.environ,\n')
-            file.write(f"       PATH='{game_main_wine_dir}/{wine_version}/bin',\n")
-            file.write('        WINEPREFIX=game_prefix_dir,\n')
-            file.write(f'       WINELOADER="{game_main_wine_dir}/{wine_version}/bin/wine",\n')
-            file.write('        WINEFSYNC="1",\n')
-            file.write('        WINEDEBUG="-all",\n')
-            file.write('        WINEDLLOVERRIDES="winemenubuilder.exe=d",\n')
-            file.write('    )\n')
-            file.write(
-                'wine_process = ["wine", os.path.join(game_exe_path, game_exe_file_name), "--launch-product=league_of_legends", "--launch-patchline=live"]\n')
-            file.write('subprocess.run(wine_process, env=start_game_vars, check=True)\n')
-
+        shutil.copy("python_src/src/launch-league-of-legends.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
 
     # Create .desktop file
     if shortcut_bool:
