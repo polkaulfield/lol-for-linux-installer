@@ -98,6 +98,18 @@ class Installer(QMainWindow):
                 # If the user clicks "Cancel", exit the loop and do not set the directory
                 self.game_main_dir = None
 
+        # Check if the selected directory is inside the user's home directory
+        if not os.path.abspath(self.game_main_dir).startswith(os.path.expanduser("~")):
+            # If not, display an error message and prompt the user to select a different directory
+            msg_box = QMessageBox(self)
+            msg_box.setIcon(QMessageBox.Critical)
+            msg_box.setText("Invalid directory selected.")
+            msg_box.setInformativeText("Please select a directory within your home directory.")
+            msg_box.setStandardButtons(QMessageBox.Ok)
+            msg_box.setDefaultButton(QMessageBox.Ok)
+            msg_box.exec_()
+            self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
+
         if self.game_main_dir:
             self.cancelButton.show()
             self.cancelButton.setEnabled(True)
