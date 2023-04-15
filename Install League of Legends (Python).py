@@ -45,6 +45,16 @@ class Installer(QMainWindow):
         self.install_button.setEnabled(True)
         self.githubButton.clicked.connect(self.open_github)
         self.cancelButton.setEnabled(False)
+        self.stackedWidget.setCurrentWidget(self.welcome)
+
+        self.nextWelcome.clicked.connect(self.regionWidget)
+        self.nextRegion.clicked.connect(self.optionsWidget)
+
+    def regionWidget(self):
+        self.stackedWidget.setCurrentWidget(self.region)
+
+    def optionsWidget(self):
+        self.stackedWidget.setCurrentWidget(self.options)
 
     def open_github(self):
         url = "https://github.com/kassindornelles/lol-for-linux-installer/issues"
@@ -109,6 +119,8 @@ class Installer(QMainWindow):
             msg_box.setDefaultButton(QMessageBox.Ok)
             msg_box.exec_()
             self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
+
+        self.stackedWidget.setCurrentWidget(self.installing)
 
         if self.game_main_dir:
             self.cancelButton.show()
