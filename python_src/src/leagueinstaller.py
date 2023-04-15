@@ -123,9 +123,11 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
                 file.write("[Desktop Entry]\n")
                 file.write("Name=League of Legends (Python Launcher)\n")
                 file.write("Comment=Play League of Legends on Linux\n")
-                file.write(f'Exec=python3 "{game_launch_file_path}"\n')
+                file.write(f'Exec=python3 launch-league-of-legends.py\n')
+                file.write(f'Path={game_main_dir}\n')
                 file.write("Terminal=false\n")
                 file.write("Icon=leagueoflol\n")
+                file.write("Terminal=false\n")
                 file.write("Type=Application\n")
                 file.write("Categories=Game;\n")
 
