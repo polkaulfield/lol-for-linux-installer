@@ -97,7 +97,7 @@ class Installer(QMainWindow):
         self.checkWineupdates.setEnabled(False)
         self.checkWineupdates.setText("Updating...")
         self.uninstallLeaguebutton.setEnabled(False)
-        self.launchLeague.setEnabled(False)
+        self.launchLeagueinstalled.setEnabled(False)
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
 
         with open(json_file_path, "r") as json_file:
@@ -151,14 +151,14 @@ class Installer(QMainWindow):
             self.checkWineupdates.setEnabled(True)
             self.checkWineupdates.setText("Game is up-to-date!")
             self.uninstallLeaguebutton.setEnabled(True)
-            self.launchLeague.setEnabled(True)
+            self.launchLeagueinstalled.setEnabled(True)
 
         else:
             print("No need to update")
             self.checkWineupdates.setEnabled(False)
             self.checkWineupdates.setText("Game is up-to-date!")
             self.uninstallLeaguebutton.setEnabled(True)
-            self.launchLeague.setEnabled(True)
+            self.launchLeagueinstalled.setEnabled(True)
 
 
     def uninstall_game(self):
