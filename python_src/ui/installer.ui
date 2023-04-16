@@ -192,7 +192,7 @@
            <item>
             <widget class="QStackedWidget" name="stackedWidget">
              <property name="currentIndex">
-              <number>3</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="welcome">
               <widget class="QLabel" name="adviselabel">
@@ -318,44 +318,12 @@
               </widget>
              </widget>
              <widget class="QWidget" name="gamemanager">
-              <widget class="QCheckBox" name="radioOlddxvk">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="geometry">
-                <rect>
-                 <x>10</x>
-                 <y>110</y>
-                 <width>421</width>
-                 <height>41</height>
-                </rect>
-               </property>
-               <property name="text">
-                <string>Use DXVK 1.10 (Better compat for old GPU's and GPU drivers)</string>
-               </property>
-              </widget>
-              <widget class="QCheckBox" name="Usenewdxvk">
-               <property name="enabled">
-                <bool>false</bool>
-               </property>
-               <property name="geometry">
-                <rect>
-                 <x>10</x>
-                 <y>150</y>
-                 <width>361</width>
-                 <height>22</height>
-                </rect>
-               </property>
-               <property name="text">
-                <string>Use latest DXVK (Better performance in modern GPU's)</string>
-               </property>
-              </widget>
               <widget class="QWidget" name="horizontalLayoutWidget_5">
                <property name="geometry">
                 <rect>
                  <x>0</x>
                  <y>220</y>
-                 <width>601</width>
+                 <width>608</width>
                  <height>41</height>
                 </rect>
                </property>
@@ -367,7 +335,7 @@
                  <number>1</number>
                 </property>
                 <property name="rightMargin">
-                 <number>5</number>
+                 <number>9</number>
                 </property>
                 <property name="bottomMargin">
                  <number>5</number>
@@ -828,22 +796,19 @@
                  </widget>
                 </item>
                 <item>
-                 <spacer name="horizontalSpacer_5">
-                  <property name="orientation">
-                   <enum>Qt::Horizontal</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>40</width>
-                    <height>20</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
                  <widget class="QPushButton" name="checkWineupdates">
                   <property name="text">
                    <string>Check for WINE updates</string>
+                  </property>
+                 </widget>
+                </item>
+                <item>
+                 <widget class="QPushButton" name="applyButton">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <property name="text">
+                   <string>Apply Changes</string>
                   </property>
                  </widget>
                 </item>
@@ -863,7 +828,7 @@
                <property name="geometry">
                 <rect>
                  <x>10</x>
-                 <y>180</y>
+                 <y>140</y>
                  <width>571</width>
                  <height>22</height>
                 </rect>
@@ -874,12 +839,12 @@
               </widget>
               <widget class="QCheckBox" name="Usenvidiahybrid">
                <property name="enabled">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
                <property name="geometry">
                 <rect>
                  <x>10</x>
-                 <y>80</y>
+                 <y>40</y>
                  <width>421</width>
                  <height>41</height>
                 </rect>
@@ -890,18 +855,51 @@
               </widget>
               <widget class="QCheckBox" name="Usedriprime">
                <property name="enabled">
-                <bool>false</bool>
+                <bool>true</bool>
                </property>
                <property name="geometry">
                 <rect>
                  <x>10</x>
-                 <y>50</y>
+                 <y>10</y>
                  <width>421</width>
                  <height>41</height>
                 </rect>
                </property>
                <property name="text">
                 <string>Use dedicated GPU (DRI_PRIME=1)</string>
+               </property>
+              </widget>
+              <widget class="QComboBox" name="comboBox">
+               <property name="geometry">
+                <rect>
+                 <x>80</x>
+                 <y>90</y>
+                 <width>131</width>
+                 <height>41</height>
+                </rect>
+               </property>
+               <item>
+                <property name="text">
+                 <string>Latest Release</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>1.10.3</string>
+                </property>
+               </item>
+              </widget>
+              <widget class="QLabel" name="dxvkCombobox">
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>100</y>
+                 <width>61</width>
+                 <height>18</height>
+                </rect>
+               </property>
+               <property name="text">
+                <string>Use DXVK:</string>
                </property>
               </widget>
              </widget>

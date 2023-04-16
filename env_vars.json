@@ -1,0 +1,9 @@
+{
+    "PATH": "os.path.join(game_main_wine_dir, 'wine-build', 'bin')",
+    "WINEPREFIX": "game_prefix_dir",
+    "WINELOADER": "wine_loader_path",
+    "WINEESYNC": "1",
+    "WINEFSYNC": "1",
+    "WINEDEBUG": "-all",
+    "WINEDLLOVERRIDES": "winemenubuilder.exe=d"
+}

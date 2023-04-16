@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 import sys, os, signal, psutil, logging, json, urllib.request, shutil, tarfile, subprocess, time
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox, QCheckBox, QProgressBar
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox, QCheckBox
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal, QTimer
 from PyQt5.QtGui import QDesktopServices
@@ -47,6 +47,10 @@ class Installer(QMainWindow):
         self.cancelButton.setEnabled(False)
         self.uninstallLeaguebutton.clicked.connect(self.uninstall_game)
         self.checkWineupdates.clicked.connect(self.update_wine_build)
+        self.applyButton.setEnabled(False)
+        self.applyButton.clicked.connect(self.applynewsettings)
+        self.Usedriprime.stateChanged.connect(self.toggleapplybutton)
+        self.Usenvidiahybrid.stateChanged.connect(self.toggleapplybutton)
 
         try:
             json_file_path = os.path.expanduser("~/.config/league_install_path.json")
@@ -57,12 +61,107 @@ class Installer(QMainWindow):
             game_installed_folder = data["game_main_dir"]
             self.stackedWidget.setCurrentWidget(self.gamemanager)
 
+            # Check NVIDIA HYBRID
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
+
+            # Check if the environment variables exist in the file
+            if all(key in env_vars for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
+                self.Usenvidiahybrid.setChecked(True)
+            else:
+                self.Usenvidiahybrid.setChecked(False)
+
+            # Check DRI_PRIME
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
+
+            # Check if the environment variables exist in the file
+            if all(key in env_vars for key in ['DRI_PRIME']):
+                self.Usedriprime.setChecked(True)
+            else:
+                self.Usedriprime.setChecked(False)
+
+            # dxvk combobox
+            # todo
+
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
 
         self.nextWelcome.clicked.connect(self.regionWidget)
         self.nextRegion.clicked.connect(self.optionsWidget)
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
+
+    def toggleapplybutton(self):
+        self.applyButton.setEnabled(True)
+
+    def applynewsettings(self):
+        if self.Usedriprime.isChecked():
+                # Load the environment variables from the JSON file
+                with open('env_vars.json', 'r') as f:
+                    env_vars = json.load(f)
+
+                # Add the DRI_PRIME key to the dictionary if it doesn't already exist
+                if 'DRI_PRIME' not in env_vars:
+                    env_vars['DRI_PRIME'] = '1'
+
+                # Write the updated dictionary back to the JSON file with indentation
+                with open('env_vars.json', 'w') as f:
+                    json.dump(env_vars, f, indent=4)
+        else:
+                # Load the environment variables from the JSON file
+                with open('env_vars.json', 'r') as f:
+                    env_vars = json.load(f)
+
+                # Remove the DRI_PRIME key from the dictionary if it exists
+                if 'DRI_PRIME' in env_vars:
+                    del env_vars['DRI_PRIME']
+
+                # Write the updated dictionary back to the JSON file with indentation
+                with open('env_vars.json', 'w') as f:
+                    json.dump(env_vars, f, indent=4)
+
+        if self.Usenvidiahybrid.isChecked():
+            # Load the environment variables from the JSON file
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
+
+            # Define a dictionary of environment variables to add
+            new_vars = {
+                'NV_PRIME_RENDER_OFFLOAD': '1',
+                '__GLX_VENDOR_LIBRARY_NAME': 'nvidia',
+                'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/nvidia_icd.json',
+                'VK_LAYER_NV_optimus': 'NVIDIA_only'
+            }
+
+            # Add the new variables to the dictionary if they don't already exist
+            for var_name, var_value in new_vars.items():
+                if var_name not in env_vars:
+                    env_vars[var_name] = var_value
+
+            # Write the updated dictionary back to the JSON file with indentation
+            with open('env_vars.json', 'w') as f:
+                json.dump(env_vars, f, indent=4)
+        else:
+            # Load the environment variables from the JSON file
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
+
+            # Define a list of environment variables to remove
+            vars_to_remove = [
+                'NV_PRIME_RENDER_OFFLOAD',
+                '__GLX_VENDOR_LIBRARY_NAME',
+                'VK_ICD_FILENAMES',
+                'VK_LAYER_NV_optimus'
+            ]
+
+            # Remove the variables from the dictionary if they exist
+            for var_name in vars_to_remove:
+                if var_name in env_vars:
+                    del env_vars[var_name]
+
+            # Write the updated dictionary back to the JSON file with indentation
+            with open('env_vars.json', 'w') as f:
+                json.dump(env_vars, f, indent=4)
 
     def launchleague(self):
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
@@ -290,8 +389,34 @@ class Installer(QMainWindow):
             scrollbar = self.textOutput.verticalScrollBar()
             scrollbar.setValue(scrollbar.maximum())
 
+            if self.checkPrime.isChecked():
+                # Load the environment variables from the JSON file
+                with open('env_vars.json', 'r') as f:
+                    env_vars = json.load(f)
+
+                # Add the DRI_PRIME key to the dictionary if it doesn't already exist
+                if 'DRI_PRIME' not in env_vars:
+                    env_vars['DRI_PRIME'] = '1'
+
+                # Write the updated dictionary back to the JSON file with indentation
+                with open('env_vars.json', 'w') as f:
+                    json.dump(env_vars, f, indent=4)
+            else:
+                # Load the environment variables from the JSON file
+                with open('env_vars.json', 'r') as f:
+                    env_vars = json.load(f)
+
+                # Remove the DRI_PRIME key from the dictionary if it exists
+                if 'DRI_PRIME' in env_vars:
+                    del env_vars['DRI_PRIME']
+
+                # Write the updated dictionary back to the JSON file with indentation
+                with open('env_vars.json', 'w') as f:
+                    json.dump(env_vars, f, indent=4)
+
+
             self.thread = QThread()
-            self.worker = Worker(self.game_main_dir, game_region_link, self.checkShortcut.isChecked(), self.checkPrime.isChecked())
+            self.worker = Worker(self.game_main_dir, game_region_link, self.checkShortcut.isChecked())
             self.worker.moveToThread(self.thread)
             self.thread.started.connect(self.worker.run)
             self.thread.finished.connect(self.finish_installation)
@@ -307,15 +432,14 @@ class Installer(QMainWindow):
 
 
 class Worker(QObject):
-    def __init__(self, game_main_dir, game_region_link, create_shortcut, enable_prime):
+    def __init__(self, game_main_dir, game_region_link, create_shortcut):
         super().__init__()
         self.game_main_dir = game_main_dir
         self.game_region_link = game_region_link
         self.create_shortcut = create_shortcut
-        self.enable_prime = enable_prime
 
     def run(self):
-        leagueinstaller_code.league_install_code(self.game_main_dir, self.game_region_link, self.create_shortcut, self.enable_prime)
+        leagueinstaller_code.league_install_code(self.game_main_dir, self.game_region_link, self.create_shortcut)
         QApplication.quit()
 
 class QTextEditLogger(logging.Handler, QObject):

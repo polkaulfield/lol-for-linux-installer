@@ -2,7 +2,7 @@
 import os, shutil, requests, tarfile, subprocess, json, logging
 from PyQt5.QtCore import pyqtSignal, QObject
 
-def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bool):
+def league_install_code(game_main_dir, game_region_link, shortcut_bool):
 
     # Expose variables
     logging.info("Setting all variables")  # Cheap logging
@@ -22,6 +22,7 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
     game_launch_file_path = os.path.join(game_main_dir, "launch-league-of-legends.py")
     user_config_folder= os.path.join(home_dir, ".config")
     ui_dir = os.path.join(game_main_dir, "python_src", "ui")
+    wine_loader_path = os.path.join(game_main_wine_dir, 'wine-build', 'bin', 'wine')
 
     # Create all folders that we are going to use
     folder_paths = [game_main_dir, game_downloads_dir, game_main_wine_dir, game_prefix_dir, user_config_folder, game_winetricks_cache_dir,
@@ -61,57 +62,24 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
     os.rename(os.path.join(game_main_wine_dir, extracted_folder_name), os.path.join(game_main_wine_dir, "wine-build"))
     logging.info("Extraction of the wine-lutris-lol build file completed")
 
-    # check prime
-    if prime_bool:
-        try:
-            # Start the first-boot script to setup DXVK and the prefix
+    # Start the first-boot script to setup DXVK and the prefix
+    with open('env_vars.json', 'r') as f:
+        env_vars = json.load(f)
 
-            first_boot_envs = {**os.environ,
-                            "PATH": f"{game_main_wine_dir}/{wine_version}/bin:{os.environ['PATH']}",
-                            "DRI_PRIME": "1",
-                            "WINEPREFIX": game_prefix_dir,
-                            "WINELOADER": f"{game_main_wine_dir}/{wine_version}/bin/wine",
-                            "WINEESYNC": "1",
-                            "WINEFSYNC": "1",
-                            "WINEDEBUG": "-all",
-                            "WINEDLLOVERRIDES": "winemenubuilder.exe=d",
-                            "WINETRICKS_CACHE": f"{game_winetricks_cache_dir}",
-                            }
+    # Replace placeholders with actual values
+    env_vars['PATH'] = os.path.join(game_main_wine_dir, 'wine-build', 'bin', ":{os.environ['PATH']}")
+    env_vars['WINEPREFIX'] = game_prefix_dir
+    env_vars['WINELOADER'] = wine_loader_path
 
-            subprocess.run(["winetricks", "dxvk"], env=first_boot_envs, check=True)
-            subprocess.run(["wine", league_installer_file], env=first_boot_envs, check=True)
+    first_boot_envs = dict(os.environ, **env_vars)
+    subprocess.run(["wine", league_installer_file], env=first_boot_envs, check=True)
 
-            # Copy .py script
-            try:
-                shutil.copy("python_src/src/launch-script-prime.py", os.path.join(game_main_dir, "launch-script.py"))
-            except:
-                shutil.copy("/usr/share/lolforlinux/launch-script-prime.py", os.path.join(game_main_dir, "launch-script.py"))
-
-        except:
-            logging.warning("Couldn't set PRIME")
-    else:
-        # Start the first-boot script to setup DXVK and the prefix
-
-        first_boot_envs = {**os.environ,
-                        "PATH": f"{game_main_wine_dir}/{wine_version}/bin:{os.environ['PATH']}",
-                        "WINEPREFIX": game_prefix_dir,
-                        "WINELOADER": f"{game_main_wine_dir}/{wine_version}/bin/wine",
-                        "WINEESYNC": "1",
-                        "WINEFSYNC": "1",
-                        "WINEDEBUG": "-all",
-                        "WINEDLLOVERRIDES": "winemenubuilder.exe=d",
-                        "WINETRICKS_CACHE": f"{game_winetricks_cache_dir}",
-                        }
-
-        subprocess.run(["winetricks", "dxvk"], env=first_boot_envs, check=True)
-        subprocess.run(["wine", league_installer_file], env=first_boot_envs, check=True)
-
-        # create py script
-        try:
-            shutil.copy("python_src/src/launch-script.py", os.path.join(game_main_dir, "launch-script.py"))
-        # Fallback for appimage
-        except:
-            shutil.copy("/usr/share/lolforlinux/launch-script.py", os.path.join(game_main_dir, "launch-script.py"))
+    # create py script
+    try:
+        shutil.copy("python_src/src/launch-script.py", os.path.join(game_main_dir, "launch-script.py"))
+    # Fallback for appimage
+    except:
+        shutil.copy("/usr/share/lolforlinux/launch-script.py", os.path.join(game_main_dir, "launch-script.py"))
 
     # Create .desktop file
     if shortcut_bool:
@@ -201,7 +169,7 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
         shutil.copy("python_src/ui/installer.ui", os.path.join(game_main_dir, "python_src", "ui", "installer.ui"))
         shutil.copy("python_src/ui/lolbanner.jpeg", os.path.join(game_main_dir, "python_src", "ui", "lolbanner.jpeg"))
         shutil.copy("leagueinstaller_code.py", os.path.join(game_main_dir, "leagueinstaller_code.py"))
-        shutil.copy("python_src/src/launch-script-nvidia-hybrid.py", os.path.join(game_main_dir, "launch-script-nvidia-hybrid.py"))
+        shutil.copy("env_vars.json", os.path.join(game_main_dir, "env_vars.json"))
     # Fallback for AppImage
     except:
         shutil.copy("/usr/share/lolforlinux/launch-league-of-legends.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
