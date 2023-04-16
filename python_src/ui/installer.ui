@@ -192,7 +192,7 @@
            <item>
             <widget class="QStackedWidget" name="stackedWidget">
              <property name="currentIndex">
-              <number>1</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="welcome">
               <widget class="QLabel" name="adviselabel">
@@ -1075,9 +1075,9 @@
               <widget class="QCheckBox" name="checkShortcut">
                <property name="geometry">
                 <rect>
-                 <x>10</x>
-                 <y>150</y>
-                 <width>541</width>
+                 <x>190</x>
+                 <y>80</y>
+                 <width>181</width>
                  <height>22</height>
                 </rect>
                </property>
@@ -1094,9 +1094,9 @@
                </property>
                <property name="geometry">
                 <rect>
-                 <x>10</x>
-                 <y>180</y>
-                 <width>541</width>
+                 <x>190</x>
+                 <y>110</y>
+                 <width>251</width>
                  <height>22</height>
                 </rect>
                </property>

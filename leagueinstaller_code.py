@@ -62,11 +62,9 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool):
     os.rename(os.path.join(game_main_wine_dir, extracted_folder_name), os.path.join(game_main_wine_dir, "wine-build"))
     logging.info("Extraction of the wine-lutris-lol build file completed")
 
-    # Start the first-boot script to setup DXVK and the prefix
     with open('env_vars.json', 'r') as f:
         env_vars = json.load(f)
 
-    # Replace placeholders with actual values
     env_vars['PATH'] = os.path.join(game_main_wine_dir, 'wine-build', 'bin', ":{os.environ['PATH']}")
     env_vars['WINEPREFIX'] = game_prefix_dir
     env_vars['WINELOADER'] = wine_loader_path
