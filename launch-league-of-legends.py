@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-import sys, os, signal, psutil, logging
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox, QCheckBox
+import sys, os, signal, psutil, logging, json, urllib.request, shutil, tarfile, subprocess, time
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox, QCheckBox, QProgressBar
 from PyQt5.uic import loadUi
-from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal
+from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal, QTimer
 from PyQt5.QtGui import QDesktopServices
-from python_src.src import leagueinstaller
+import leagueinstaller_code
 
 class GuiLogHandler(QObject, logging.Handler):
     new_record = pyqtSignal(object)
@@ -39,16 +39,49 @@ class Installer(QMainWindow):
         except:
             loadUi("/usr/share/lolforlinux/ui/installer.ui", self)
         self.setFixedSize(self.size())
-        self.setWindowTitle('League of Legends Installer')
+        self.setWindowTitle('League of Legends Manager')
         self.install_button.clicked.connect(self.installer_code)
         self.cancelButton.clicked.connect(self.cancel_installation)
         self.install_button.setEnabled(True)
         self.githubButton.clicked.connect(self.open_github)
         self.cancelButton.setEnabled(False)
-        self.stackedWidget.setCurrentWidget(self.welcome)
+        self.uninstallLeaguebutton.clicked.connect(self.uninstall_game)
+        self.checkWineupdates.clicked.connect(self.update_wine_build)
+
+        try:
+            json_file_path = os.path.expanduser("~/.config/league_install_path.json")
+
+            with open(json_file_path, "r") as json_file:
+                data = json.load(json_file)
+
+            game_installed_folder = data["game_main_dir"]
+            self.stackedWidget.setCurrentWidget(self.gamemanager)
+
+        except FileNotFoundError:
+            self.stackedWidget.setCurrentWidget(self.welcome)
 
         self.nextWelcome.clicked.connect(self.regionWidget)
         self.nextRegion.clicked.connect(self.optionsWidget)
+        self.launchLeagueinstalled.clicked.connect(self.launchleague)
+
+    def launchleague(self):
+        json_file_path = os.path.expanduser("~/.config/league_install_path.json")
+
+        with open(json_file_path, "r") as json_file:
+            data = json.load(json_file)
+
+        game_installed_folder = data["game_main_dir"]
+        self.stackedWidget.setCurrentWidget(self.gamemanager)
+        os.chdir(game_installed_folder)
+        process = subprocess.Popen(['python3', 'launch-script.py'])
+        self.hide()
+
+        while True:
+            retcode = process.poll()
+            if retcode is not None:
+                self.show()
+                break
+            time.sleep(0.5)
 
     def regionWidget(self):
         self.stackedWidget.setCurrentWidget(self.region)
@@ -59,6 +92,107 @@ class Installer(QMainWindow):
     def open_github(self):
         url = "https://github.com/kassindornelles/lol-for-linux-installer/issues"
         QDesktopServices.openUrl(QUrl(url))
+
+    def update_wine_build(self):
+        self.checkWineupdates.setEnabled(False)
+        self.checkWineupdates.setText("Updating...")
+        self.uninstallLeaguebutton.setEnabled(False)
+        self.launchLeague.setEnabled(False)
+        json_file_path = os.path.expanduser("~/.config/league_install_path.json")
+
+        with open(json_file_path, "r") as json_file:
+            data = json.load(json_file)
+
+        game_installed_folder = data["game_main_dir"]
+        json_url = "https://raw.githubusercontent.com/kassindornelles/lol-for-linux-installer/main/wine_build.json"
+        filename = os.path.join(game_installed_folder) + "wine_build.json"
+        os.chdir(game_installed_folder)
+        urllib.request.urlretrieve(json_url, filename)
+
+
+        with open(filename, "r") as f:
+            data = json.load(f)
+
+        with open("buildversion.json", "r") as f:
+            existing_data = json.load(f)
+
+        print("Value of wine_build.json:", data["current_build_name"])
+        print("Value of buildversion.json:", existing_data["current_build_name"])
+
+        if data["current_build_name"].split("/")[-1] > existing_data["current_build_name"].split("/")[-1]:
+            print("Update needed")
+
+            build_url = data["current_build_name"]
+            build_filename = build_url.split("/")[-1]
+            urllib.request.urlretrieve(build_url, build_filename)
+
+            temp_dir = "tmp"
+            os.makedirs(temp_dir, exist_ok=True)
+            with tarfile.open(build_filename, "r:xz") as tar:
+                tar.extractall(path=temp_dir)
+
+            wine_build_dir = "wine/wine-build"
+            if os.path.exists(wine_build_dir):
+                shutil.rmtree(wine_build_dir)
+
+            extract_path = os.path.join(temp_dir, os.listdir(temp_dir)[0])
+            shutil.move(extract_path, wine_build_dir)
+
+            existing_data["current_build_name"] = data["current_build_name"]
+            with open("buildversion.json", "w") as f:
+                json.dump(existing_data, f)
+
+            os.remove(filename)
+            if os.path.exists(build_filename):
+                os.remove(build_filename)
+            if os.path.exists(temp_dir):
+                shutil.rmtree(temp_dir)
+
+            self.checkWineupdates.setEnabled(True)
+            self.checkWineupdates.setText("Game is up-to-date!")
+            self.uninstallLeaguebutton.setEnabled(True)
+            self.launchLeague.setEnabled(True)
+
+        else:
+            print("No need to update")
+            self.checkWineupdates.setEnabled(False)
+            self.checkWineupdates.setText("Game is up-to-date!")
+            self.uninstallLeaguebutton.setEnabled(True)
+            self.launchLeague.setEnabled(True)
+
+
+    def uninstall_game(self):
+        home_dir = os.path.expanduser("~")
+        user_local_share = os.path.join(home_dir, ".local/share")
+        desktop_file_path = os.path.join(os.path.expanduser("~"), ".local", "share", "applications", "LeagueLauncherPython.desktop")
+        user_config_folder= os.path.join(home_dir, ".config")
+        json_file_path = os.path.join(user_config_folder, "league_install_path.json")
+
+        try:
+            # Read the JSON file and get the game_main_dir value
+            with open(json_file_path, "r") as infile:
+                data = json.load(infile)
+                game_main_dir = data["game_main_dir"]
+        except (FileNotFoundError, json.JSONDecodeError) as e:
+            # Handle the exception by printing an error message
+            print(f"Failed to read JSON file: {e}")
+
+        try:
+            shutil.rmtree(game_main_dir)
+        except FileNotFoundError:
+            print(f"Directory {self.game_installed_folder} does not exist")
+
+        try:
+            os.remove(desktop_file_path)
+        except FileNotFoundError:
+            print(f"File {desktop_file_path} does not exist")
+
+        try:
+            os.remove(json_file_path)
+        except FileNotFoundError:
+            print(f"File {json_file_path} does not exist")
+
+        QApplication.quit()
 
     def cancel_installation(self):
         # Get the PID of the current process
@@ -120,8 +254,6 @@ class Installer(QMainWindow):
             msg_box.exec_()
             self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
 
-        self.stackedWidget.setCurrentWidget(self.installing)
-
         if self.game_main_dir:
             self.cancelButton.show()
             self.cancelButton.setEnabled(True)
@@ -131,6 +263,7 @@ class Installer(QMainWindow):
             self.languageComboBox.setEnabled(False)
             self.regionLabel.setEnabled(False)
             self.checkPrime.setEnabled(False)
+            self.stackedWidget.setCurrentWidget(self.installing)
 
             # Get the game download link and apply region based on text from .ui file
             region_map = {
@@ -182,7 +315,7 @@ class Worker(QObject):
         self.enable_prime = enable_prime
 
     def run(self):
-        leagueinstaller.league_install_code(self.game_main_dir, self.game_region_link, self.create_shortcut, self.enable_prime)
+        leagueinstaller_code.league_install_code(self.game_main_dir, self.game_region_link, self.create_shortcut, self.enable_prime)
         QApplication.quit()
 
 class QTextEditLogger(logging.Handler, QObject):

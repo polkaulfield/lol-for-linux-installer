@@ -21,13 +21,14 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
                                      "LeagueLauncherPython.desktop")
     game_launch_file_path = os.path.join(game_main_dir, "launch-league-of-legends.py")
     user_config_folder= os.path.join(home_dir, ".config")
+    ui_dir = os.path.join(game_main_dir, "python_src", "ui")
 
     # Create all folders that we are going to use
     folder_paths = [game_main_dir, game_downloads_dir, game_main_wine_dir, game_prefix_dir, user_config_folder, game_winetricks_cache_dir,
                     user_icons_folder, user_hicolor_folder, os.path.join(user_hicolor_folder, "16x16"),
                     os.path.join(user_hicolor_folder, "32x32"), os.path.join(user_hicolor_folder, "48x48"),
                     os.path.join(user_hicolor_folder, "64x64"), os.path.join(user_hicolor_folder, "128x128"),
-                    os.path.join(user_hicolor_folder, "256x256"), user_applications_folder]
+                    os.path.join(user_hicolor_folder, "256x256"), user_applications_folder, ui_dir]
     logging.info("Creating folders for our League install")  # Cheap logging
     for folder_path in folder_paths:
         if not os.path.exists(folder_path):
@@ -82,9 +83,9 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
 
             # Copy .py script
             try:
-                shutil.copy("python_src/src/launch-league-of-legends-prime.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
+                shutil.copy("python_src/src/launch-script-prime.py", os.path.join(game_main_dir, "launch-script.py"))
             except:
-                shutil.copy("/usr/share/lolforlinux/launch-league-of-legends-prime.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
+                shutil.copy("/usr/share/lolforlinux/launch-script-prime.py", os.path.join(game_main_dir, "launch-script.py"))
 
         except:
             logging.warning("Couldn't set PRIME")
@@ -107,10 +108,10 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
 
         # create py script
         try:
-            shutil.copy("python_src/src/launch-league-of-legends.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
+            shutil.copy("python_src/src/launch-script.py", os.path.join(game_main_dir, "launch-script.py"))
         # Fallback for appimage
         except:
-            shutil.copy("/usr/share/lolforlinux/launch-league-of-legends.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
+            shutil.copy("/usr/share/lolforlinux/launch-script.py", os.path.join(game_main_dir, "launch-script.py"))
 
     # Create .desktop file
     if shortcut_bool:
@@ -194,20 +195,16 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool, prime_bo
         logging.warning(f"Directory {game_downloads_dir} does not exist")
     logging.info("Downloads folder deletion")
 
-    # Copy uninstaller
+    # Copy launcher
     try:
-        shutil.copy("python_src/src/uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
+        shutil.copy("launch-league-of-legends.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
+        shutil.copy("python_src/ui/installer.ui", os.path.join(game_main_dir, "python_src", "ui", "installer.ui"))
+        shutil.copy("python_src/ui/lolbanner.jpeg", os.path.join(game_main_dir, "python_src", "ui", "lolbanner.jpeg"))
+        shutil.copy("leagueinstaller_code.py", os.path.join(game_main_dir, "leagueinstaller_code.py"))
+        shutil.copy("python_src/src/launch-script-nvidia-hybrid.py", os.path.join(game_main_dir, "launch-script-nvidia-hybrid.py"))
     # Fallback for AppImage
     except:
-        shutil.copy("/usr/share/lolforlinux/uninstall.py", os.path.join(game_main_dir, "uninstall.py"))
-    os.chmod(os.path.join(game_main_dir, "uninstall.py"), 0o777)
-    logging.info("Created uninstall.py file in game dir")
+        shutil.copy("/usr/share/lolforlinux/launch-league-of-legends.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
+    os.chmod(os.path.join(game_main_dir, "launch-league-of-legends.py"), 0o777)
+    logging.info("Copied launcher")
 
-    # Copy update.py
-    try:
-        shutil.copy("python_src/src/update.py", os.path.join(game_main_dir, "update.py"))
-    # Fallback for AppImage
-    except:
-        shutil.copy("/usr/share/lolforlinux/update.py", os.path.join(game_main_dir, "update.py"))
-    os.chmod(os.path.join(game_main_dir, "update.py"), 0o777)
-    logging.info("Created update.py file in game dir")
