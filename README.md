@@ -11,7 +11,7 @@ This software is not affiliated with nor supported by Riot Games.
 - Check if you have all required [dependencies](#dependencies) installed first
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
 - Extract the files
-- Double-click 'Install League of Legends (Python).py' and install the game.
+- Double-click 'launch-league-of-legends.py' and install the game or manage your already existent install.
 
 ### Python Script features:
 - You can choose where to install the game and also the region you are going to play
