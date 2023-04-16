@@ -204,10 +204,9 @@ class Installer(QMainWindow):
 
         game_installed_folder = data["game_main_dir"]
         json_url = "https://raw.githubusercontent.com/kassindornelles/lol-for-linux-installer/main/wine_build.json"
-        filename = os.path.join(game_installed_folder) + "wine_build.json"
+        filename = "wine_build.json"
         os.chdir(game_installed_folder)
         urllib.request.urlretrieve(json_url, filename)
-
 
         with open(filename, "r") as f:
             data = json.load(f)
