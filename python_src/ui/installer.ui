@@ -192,7 +192,7 @@
            <item>
             <widget class="QStackedWidget" name="stackedWidget">
              <property name="currentIndex">
-              <number>4</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="welcome">
               <widget class="QLabel" name="adviselabel">
@@ -334,7 +334,7 @@
                 <string>Use DXVK 1.10 (Better compat for old GPU's and GPU drivers)</string>
                </property>
               </widget>
-              <widget class="QCheckBox" name="radioUsenewdxvk">
+              <widget class="QCheckBox" name="Usenewdxvk">
                <property name="enabled">
                 <bool>false</bool>
                </property>
@@ -870,6 +870,38 @@
                </property>
                <property name="text">
                 <string>Use WINED3D OpenGL as renderer (Better compat for super old GPU's and GPU drivers)</string>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="Usenvidiahybrid">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>80</y>
+                 <width>421</width>
+                 <height>41</height>
+                </rect>
+               </property>
+               <property name="text">
+                <string>NVIDIA Hybrid Graphics support</string>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="Usedriprime">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
+               <property name="geometry">
+                <rect>
+                 <x>10</x>
+                 <y>50</y>
+                 <width>421</width>
+                 <height>41</height>
+                </rect>
+               </property>
+               <property name="text">
+                <string>Use dedicated GPU (DRI_PRIME=1)</string>
                </property>
               </widget>
              </widget>
