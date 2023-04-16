@@ -52,7 +52,7 @@ This software is not affiliated with nor supported by Riot Games.
 ## Remaining tasks and known problems:
 - NVIDIA Hybrid Graphics users can't boot the game with the dedicated GPU
 
-   Workaround for nvidia hybrid graphics: Copy the content of this file: https://github.com/kassindornelles/lol-for-linux-installer/raw/main/python_src/src/launch-league-of-legends-nvidia-hybrid-graphics.py and replace the content of your "launch-league-of-legends.py" file with it.
+   Workaround for nvidia hybrid graphics: Copy the content of this file: https://github.com/kassindornelles/lol-for-linux-installer/raw/main/python_src/src/launch-script-nvidia-hybrid.py and replace the content of your "launch-script.py" file with it.
    
 - Flatpak it
 
