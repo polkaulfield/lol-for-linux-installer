@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import os, subprocess, json
 
-
 cwd = os.getcwd()
 game_main_dir = os.path.join(cwd)
 game_main_wine_dir = os.path.join(game_main_dir, 'wine')
