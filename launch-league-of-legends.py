@@ -381,7 +381,6 @@ class Installer(QMainWindow):
 
             selected_lang = self.languageComboBox.currentText()
             game_link = "https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.{}.exe"
-
             region = region_map.get(selected_lang, "na")
             game_region_link = game_link.format(region)
 
