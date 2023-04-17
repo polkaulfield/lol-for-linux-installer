@@ -23,7 +23,7 @@ This software is not affiliated with nor supported by Riot Games.
 - It creates a desktop file in the system menu (with icons for the game)
 - Creates an uninstaller in case you want to nuke the game, after you rage quit a match that your teammates did everything they could to make you lose
 - Users of hybrid graphics can choose at install time if they want to use the dGPU or not
-- Update script gets copied after install to game folder, with it you can check if theres a new WINE build for LoL, run "python update.py" to check for updates.
+- Update system for WINE builds, DXVK version selection and more
 
 ## How to install it (Bash version - Limited functionality, more like a backup
 - Check if you have all required [dependencies](#dependencies) installed first
