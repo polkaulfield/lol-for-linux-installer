@@ -194,6 +194,8 @@ class Installer(QMainWindow):
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
 
+        self.applyButton.setEnabled(False)
+
     def launchleague(self):
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
 
