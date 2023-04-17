@@ -51,6 +51,7 @@ class Installer(QMainWindow):
         self.applyButton.clicked.connect(self.applynewsettings)
         self.Usedriprime.stateChanged.connect(self.toggleapplybutton)
         self.Usenvidiahybrid.stateChanged.connect(self.toggleapplybutton)
+        self.rendererCombobox.currentIndexChanged.connect(self.toggleapplybutton)
 
         try:
             json_file_path = os.path.expanduser("~/.config/league_install_path.json")
@@ -81,9 +82,6 @@ class Installer(QMainWindow):
             else:
                 self.Usedriprime.setChecked(False)
 
-            # dxvk combobox
-            # todo
-
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
 
@@ -95,6 +93,61 @@ class Installer(QMainWindow):
         self.applyButton.setEnabled(True)
 
     def applynewsettings(self):
+        json_file_path = os.path.expanduser("~/.config/league_install_path.json")
+        with open(json_file_path, "r") as json_file:
+            data = json.load(json_file)
+
+        game_installed_folder = data["game_main_dir"]
+        os.chdir(game_installed_folder)
+        current_renderer = self.rendererCombobox.currentText()
+
+        if current_renderer == 'DXVK 2.1':
+            dst_path = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows', 'system32')
+            url = 'https://github.com/doitsujin/dxvk/releases/download/v2.1/dxvk-2.1.tar.gz'
+            filename = os.path.basename(url)
+            urllib.request.urlretrieve(url, filename)
+
+            with tarfile.open(filename, 'r:gz') as tar:
+                    tar.extractall('dxvk-tmp')
+
+            # Copy the x64 bit files to the destination directory
+            src_path = os.path.join('dxvk-tmp', 'dxvk-2.1', 'x64')
+            if not os.path.exists(dst_path):
+                os.makedirs(dst_path)
+            for file_name in os.listdir(src_path):
+                if file_name.endswith('.dll') or file_name.endswith('.so'):
+                    src_file = os.path.join(src_path, file_name)
+                    dst_file = os.path.join(dst_path, file_name)
+                    shutil.copy2(src_file, dst_file)
+
+            # Clean up temporary files
+            os.remove(filename)
+            shutil.rmtree('dxvk-tmp')
+
+        elif current_renderer == 'DXVK 1.10.3':
+            dst_path = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows', 'system32')
+            url = 'https://github.com/doitsujin/dxvk/releases/download/v1.10.3/dxvk-1.10.3.tar.gz'
+            filename = os.path.basename(url)
+            urllib.request.urlretrieve(url, filename)
+
+            with tarfile.open(filename, 'r:gz') as tar:
+                    tar.extractall('dxvk-tmp')
+
+            # Copy the x64 bit files to the destination directory
+            src_path = os.path.join('dxvk-tmp', 'dxvk-1.10.3', 'x64')
+            if not os.path.exists(dst_path):
+                os.makedirs(dst_path)
+            for file_name in os.listdir(src_path):
+                if file_name.endswith('.dll') or file_name.endswith('.so'):
+                    src_file = os.path.join(src_path, file_name)
+                    dst_file = os.path.join(dst_path, file_name)
+                    shutil.copy2(src_file, dst_file)
+
+            # Clean up temporary files
+            os.remove(filename)
+            shutil.rmtree('dxvk-tmp')
+
+
         if self.Usedriprime.isChecked():
                 # Load the environment variables from the JSON file
                 with open('env_vars.json', 'r') as f:
