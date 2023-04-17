@@ -62,21 +62,17 @@ class Installer(QMainWindow):
             game_installed_folder = data["game_main_dir"]
             self.stackedWidget.setCurrentWidget(self.gamemanager)
 
-            # Check NVIDIA HYBRID
             with open('env_vars.json', 'r') as f:
                 env_vars = json.load(f)
 
-            # Check if the environment variables exist in the file
             if all(key in env_vars for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
                 self.Usenvidiahybrid.setChecked(True)
             else:
                 self.Usenvidiahybrid.setChecked(False)
 
-            # Check DRI_PRIME
             with open('env_vars.json', 'r') as f:
                 env_vars = json.load(f)
 
-            # Check if the environment variables exist in the file
             if all(key in env_vars for key in ['DRI_PRIME']):
                 self.Usedriprime.setChecked(True)
             else:
@@ -110,7 +106,6 @@ class Installer(QMainWindow):
             with tarfile.open(filename, 'r:gz') as tar:
                     tar.extractall('dxvk-tmp')
 
-            # Copy the x64 bit files to the destination directory
             src_path = os.path.join('dxvk-tmp', 'dxvk-2.1', 'x64')
             if not os.path.exists(dst_path):
                 os.makedirs(dst_path)
@@ -120,7 +115,6 @@ class Installer(QMainWindow):
                     dst_file = os.path.join(dst_path, file_name)
                     shutil.copy2(src_file, dst_file)
 
-            # Clean up temporary files
             os.remove(filename)
             shutil.rmtree('dxvk-tmp')
 
@@ -133,7 +127,6 @@ class Installer(QMainWindow):
             with tarfile.open(filename, 'r:gz') as tar:
                     tar.extractall('dxvk-tmp')
 
-            # Copy the x64 bit files to the destination directory
             src_path = os.path.join('dxvk-tmp', 'dxvk-1.10.3', 'x64')
             if not os.path.exists(dst_path):
                 os.makedirs(dst_path)
@@ -143,42 +136,33 @@ class Installer(QMainWindow):
                     dst_file = os.path.join(dst_path, file_name)
                     shutil.copy2(src_file, dst_file)
 
-            # Clean up temporary files
             os.remove(filename)
             shutil.rmtree('dxvk-tmp')
 
 
         if self.Usedriprime.isChecked():
-                # Load the environment variables from the JSON file
                 with open('env_vars.json', 'r') as f:
                     env_vars = json.load(f)
 
-                # Add the DRI_PRIME key to the dictionary if it doesn't already exist
                 if 'DRI_PRIME' not in env_vars:
                     env_vars['DRI_PRIME'] = '1'
 
-                # Write the updated dictionary back to the JSON file with indentation
                 with open('env_vars.json', 'w') as f:
                     json.dump(env_vars, f, indent=4)
         else:
-                # Load the environment variables from the JSON file
                 with open('env_vars.json', 'r') as f:
                     env_vars = json.load(f)
 
-                # Remove the DRI_PRIME key from the dictionary if it exists
                 if 'DRI_PRIME' in env_vars:
                     del env_vars['DRI_PRIME']
 
-                # Write the updated dictionary back to the JSON file with indentation
                 with open('env_vars.json', 'w') as f:
                     json.dump(env_vars, f, indent=4)
 
         if self.Usenvidiahybrid.isChecked():
-            # Load the environment variables from the JSON file
             with open('env_vars.json', 'r') as f:
                 env_vars = json.load(f)
 
-            # Define a dictionary of environment variables to add
             new_vars = {
                 'NV_PRIME_RENDER_OFFLOAD': '1',
                 '__GLX_VENDOR_LIBRARY_NAME': 'nvidia',
@@ -186,20 +170,16 @@ class Installer(QMainWindow):
                 'VK_LAYER_NV_optimus': 'NVIDIA_only'
             }
 
-            # Add the new variables to the dictionary if they don't already exist
             for var_name, var_value in new_vars.items():
                 if var_name not in env_vars:
                     env_vars[var_name] = var_value
 
-            # Write the updated dictionary back to the JSON file with indentation
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
         else:
-            # Load the environment variables from the JSON file
             with open('env_vars.json', 'r') as f:
                 env_vars = json.load(f)
 
-            # Define a list of environment variables to remove
             vars_to_remove = [
                 'NV_PRIME_RENDER_OFFLOAD',
                 '__GLX_VENDOR_LIBRARY_NAME',
@@ -207,12 +187,10 @@ class Installer(QMainWindow):
                 'VK_LAYER_NV_optimus'
             ]
 
-            # Remove the variables from the dictionary if they exist
             for var_name in vars_to_remove:
                 if var_name in env_vars:
                     del env_vars[var_name]
 
-            # Write the updated dictionary back to the JSON file with indentation
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
 
