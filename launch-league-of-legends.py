@@ -278,14 +278,14 @@ class Installer(QMainWindow):
                 shutil.rmtree(temp_dir)
 
             self.checkWineupdates.setEnabled(True)
-            self.checkWineupdates.setText("Game is up-to-date!")
+            self.checkWineupdates.setText("Update completed!")
             self.uninstallLeaguebutton.setEnabled(True)
             self.launchLeagueinstalled.setEnabled(True)
 
         else:
             print("No need to update")
             self.checkWineupdates.setEnabled(False)
-            self.checkWineupdates.setText("Game is up-to-date!")
+            self.checkWineupdates.setText("Game was up-to-date!")
             self.uninstallLeaguebutton.setEnabled(True)
             self.launchLeagueinstalled.setEnabled(True)
 
