@@ -49,17 +49,8 @@ This software is not affiliated with nor supported by Riot Games.
 - `qt5-base` and `pyqt5` (Python script)
 - WINE 32-64 bits and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
-## Remaining tasks and known problems:
-- NVIDIA Hybrid Graphics users can't boot the game with the dedicated GPU
-
-   Workaround for nvidia hybrid graphics: Copy the content of this file: https://github.com/kassindornelles/lol-for-linux-installer/raw/main/python_src/src/launch-script-nvidia-hybrid.py and replace the content of your "launch-script.py" file with it.
-   
-- Flatpak it
-
-## Can i uninstall the game?
-- You can with the Python script, as it will generate an `uninstall.py` file in the directory you installed the game.
-
-- The bash script does not have a uninstaller script, but you can remove it manually by deleting the leagueoflegends desktop file from `/.local/share/applications` and deleting the game folder.
+## Remaining tasks:
+- Flatpak package
 
 ## Buy me a coffee
 
