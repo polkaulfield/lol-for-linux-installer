@@ -22,7 +22,7 @@ This software is not affiliated with nor supported by Riot Games.
 - Update system for WINE builds, DXVK version selection and more (DXVK installation via our launcher)
 
 ## <a name="dependencies"></a> Dependencies (install those packages system-wide first):
-- `tar`, `python`, `python-requests`, `python-psutil`, `qt5-base` and `pyqt5` (Python script)
+- `tar`, `python`, `python-requests`, `python-psutil`, `qt5-base` and `pyqt5`
 
    On ubuntu-based distributions the python packages are called "python3-psutil, python3-requests and python3-pyqt5"
    
