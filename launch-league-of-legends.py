@@ -49,9 +49,7 @@ class Installer(QMainWindow):
         self.checkWineupdates.clicked.connect(self.update_wine_build)
         self.applyButton.setEnabled(False)
         self.applyButton.clicked.connect(self.applynewsettings)
-        self.Usedriprime.stateChanged.connect(self.toggleapplybutton)
-        self.Usenvidiahybrid.stateChanged.connect(self.toggleapplybutton)
-        self.rendererCombobox.currentIndexChanged.connect(self.toggleapplybutton)
+
 
         try:
             json_file_path = os.path.expanduser("~/.config/league_install_path.json")
@@ -78,9 +76,18 @@ class Installer(QMainWindow):
             else:
                 self.Usedriprime.setChecked(False)
 
+            if all(key in env_vars for key in ['MANGOHUD']):
+                self.Usemangohud.setChecked(True)
+            else:
+                self.Usemangohud.setChecked(False)
+
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
 
+        self.Usedriprime.stateChanged.connect(self.toggleapplybutton)
+        self.Usenvidiahybrid.stateChanged.connect(self.toggleapplybutton)
+        self.Usemangohud.stateChanged.connect(self.toggleapplybutton)
+        self.rendererCombobox.currentIndexChanged.connect(self.toggleapplybutton)
         self.nextWelcome.clicked.connect(self.regionWidget)
         self.nextRegion.clicked.connect(self.optionsWidget)
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
@@ -193,6 +200,27 @@ class Installer(QMainWindow):
 
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
+
+
+        if self.Usemangohud.isChecked():
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
+
+            if 'MANGOHUD' not in env_vars:
+                env_vars['MANGOHUD'] = '1'
+
+            with open('env_vars.json', 'w') as f:
+                json.dump(env_vars, f, indent=4)
+        else:
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
+
+            if 'MANGOHUD' in env_vars:
+                del env_vars['MANGOHUD']
+
+            with open('env_vars.json', 'w') as f:
+                json.dump(env_vars, f, indent=4)
+
 
         self.applyButton.setEnabled(False)
 

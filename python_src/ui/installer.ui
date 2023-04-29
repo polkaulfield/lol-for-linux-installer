@@ -1269,7 +1269,7 @@
                </property>
                <property name="geometry">
                 <rect>
-                 <x>170</x>
+                 <x>50</x>
                  <y>80</y>
                  <width>231</width>
                  <height>41</height>
@@ -1291,8 +1291,8 @@
                </property>
                <property name="geometry">
                 <rect>
-                 <x>170</x>
-                 <y>40</y>
+                 <x>50</x>
+                 <y>30</y>
                  <width>241</width>
                  <height>41</height>
                 </rect>
@@ -1346,6 +1346,28 @@
                </property>
                <property name="text">
                 <string>Renderer:</string>
+               </property>
+              </widget>
+              <widget class="QCheckBox" name="Usemangohud">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="geometry">
+                <rect>
+                 <x>320</x>
+                 <y>30</y>
+                 <width>231</width>
+                 <height>41</height>
+                </rect>
+               </property>
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>Enable Mangohud</string>
                </property>
               </widget>
              </widget>
