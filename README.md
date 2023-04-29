@@ -7,7 +7,7 @@ This software is not affiliated with nor supported by Riot Games.
 ![Screenshot_20230415_205958](https://user-images.githubusercontent.com/40970965/232259098-0e51d868-cfb8-4312-aab4-6e84728c5f24.png)
 
 
-## How to install it (Python version - Recommended)
+## How to install it
 - Check if you have all required [dependencies](#dependencies) installed first
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
 - Extract the files
