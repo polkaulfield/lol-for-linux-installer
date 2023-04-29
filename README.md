@@ -1,6 +1,6 @@
 # lol-for-linux-installer
 
-League of Legends unofficial installer for linux
+League of Legends unofficial installer/manager for linux
 
 This software is not affiliated with nor supported by Riot Games.
 
@@ -16,14 +16,10 @@ This software is not affiliated with nor supported by Riot Games.
 ### Python Script features:
 - You can choose where to install the game and also the region you are going to play
 - It installs wine-ge-lol with FSYNC/FUTEX2 support enabled by default for better CPU performance
-- Installs the latest DXVK version to translate DirectX 9 and 11 to Vulkan for better performance
-
-   Check if your GPU driver can run recent DXVK versions before opening a issue, [Check it here](https://github.com/doitsujin/dxvk/wiki/Driver-support)
-   
 - It creates a desktop file in the system menu (with icons for the game)
-- Creates an uninstaller in case you want to nuke the game, after you rage quit a match that your teammates did everything they could to make you lose
+- Option to uninstall the game
 - Users of hybrid graphics can choose at install time if they want to use the dGPU or not
-- Update system for WINE builds, DXVK version selection and more
+- Update system for WINE builds, DXVK version selection and more (DXVK installation via our launcher)
 
 ## How to install it (Bash version - Limited functionality, more like a backup
 - Check if you have all required [dependencies](#dependencies) installed first
@@ -40,13 +36,14 @@ This software is not affiliated with nor supported by Riot Games.
 
 ## <a name="dependencies"></a> Dependencies (install those packages system-wide first):
 - `fuse` (AppImage)
-- `winetricks`
+- `winetricks` (Bash script)
 - `wget` (Bash script)
 - `kdialog` (Bash script)
 - `tar`
-- `python`, `python-requests` and `python-psutil` (Python script)
+- `python`, `python-requests`, `python-psutil`, `qt5-base` and `pyqt5` (Python script)
 
-- `qt5-base` and `pyqt5` (Python script)
+   On ubuntu-based distributions the python packages are called "python3-psutil, python3-requests and python3-pyqt5"
+   
 - WINE 32-64 bits and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
 ## Remaining tasks:
