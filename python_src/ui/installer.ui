@@ -1321,7 +1321,7 @@
                </property>
                <item>
                 <property name="text">
-                 <string>Select one option to install</string>
+                 <string>Select one option to (re)install</string>
                 </property>
                </item>
                <item>
