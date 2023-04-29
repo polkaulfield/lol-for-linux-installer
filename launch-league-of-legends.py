@@ -105,6 +105,8 @@ class Installer(QMainWindow):
         current_renderer = self.rendererCombobox.currentText()
 
         if current_renderer == 'DXVK 2.1':
+
+            # 64 bit dlls
             dst_path = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows', 'system32')
             url = 'https://github.com/doitsujin/dxvk/releases/download/v2.1/dxvk-2.1.tar.gz'
             filename = os.path.basename(url)
@@ -122,10 +124,24 @@ class Installer(QMainWindow):
                     dst_file = os.path.join(dst_path, file_name)
                     shutil.copy2(src_file, dst_file)
 
+            # 32 bit dlls
+            dst_path32 = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows', 'syswow64')
+
+            src_path32 = os.path.join('dxvk-tmp', 'dxvk-2.1', 'x32')
+            if not os.path.exists(dst_path32):
+                os.makedirs(dst_path32)
+            for file_name in os.listdir(src_path32):
+                if file_name.endswith('.dll') or file_name.endswith('.so'):
+                    src_file32 = os.path.join(src_path32, file_name)
+                    dst_file32 = os.path.join(dst_path32, file_name)
+                    shutil.copy2(src_file32, dst_file32)
+
             os.remove(filename)
             shutil.rmtree('dxvk-tmp')
 
         elif current_renderer == 'DXVK 1.10.3':
+
+            # 64 bit dlls
             dst_path = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows', 'system32')
             url = 'https://github.com/doitsujin/dxvk/releases/download/v1.10.3/dxvk-1.10.3.tar.gz'
             filename = os.path.basename(url)
@@ -143,9 +159,20 @@ class Installer(QMainWindow):
                     dst_file = os.path.join(dst_path, file_name)
                     shutil.copy2(src_file, dst_file)
 
+            # 32 bit dlls
+            dst_path32 = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows', 'syswow64')
+
+            src_path32 = os.path.join('dxvk-tmp', 'dxvk-1.10.3', 'x32')
+            if not os.path.exists(dst_path32):
+                os.makedirs(dst_path32)
+            for file_name in os.listdir(src_path32):
+                if file_name.endswith('.dll') or file_name.endswith('.so'):
+                    src_file32 = os.path.join(src_path32, file_name)
+                    dst_file32 = os.path.join(dst_path32, file_name)
+                    shutil.copy2(src_file32, dst_file32)
+
             os.remove(filename)
             shutil.rmtree('dxvk-tmp')
-
 
         if self.Usedriprime.isChecked():
                 with open('env_vars.json', 'r') as f:
@@ -223,6 +250,7 @@ class Installer(QMainWindow):
 
 
         self.applyButton.setEnabled(False)
+        self.rendererCombobox.setText("DXVK installed!")
 
     def launchleague(self):
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
