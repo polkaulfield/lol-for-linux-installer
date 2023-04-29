@@ -250,7 +250,7 @@ class Installer(QMainWindow):
 
 
         self.applyButton.setEnabled(False)
-        self.rendererCombobox.setText("DXVK installed!")
+        self.rendererCombobox.setEnabled(False)
 
     def launchleague(self):
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
