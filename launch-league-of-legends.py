@@ -138,6 +138,7 @@ class Installer(QMainWindow):
 
             os.remove(filename)
             shutil.rmtree('dxvk-tmp')
+            self.rendererCombobox.setEnabled(False)
 
         elif current_renderer == 'DXVK 1.10.3':
 
@@ -173,6 +174,7 @@ class Installer(QMainWindow):
 
             os.remove(filename)
             shutil.rmtree('dxvk-tmp')
+            self.rendererCombobox.setEnabled(False)
 
         if self.Usedriprime.isChecked():
                 with open('env_vars.json', 'r') as f:
@@ -250,7 +252,6 @@ class Installer(QMainWindow):
 
 
         self.applyButton.setEnabled(False)
-        self.rendererCombobox.setEnabled(False)
 
     def launchleague(self):
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
