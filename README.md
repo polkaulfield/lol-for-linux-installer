@@ -21,24 +21,8 @@ This software is not affiliated with nor supported by Riot Games.
 - Users of hybrid graphics can choose at install time if they want to use the dGPU or not
 - Update system for WINE builds, DXVK version selection and more (DXVK installation via our launcher)
 
-## How to install it (Bash version - Limited functionality, more like a backup
-- Check if you have all required [dependencies](#dependencies) installed first
-- Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
-- Extract the files
-- Run the `Install League of Legends (Bash).sh` script in a terminal/console:
-
-   Open a console/terminal in the script main directory (where the files are)
-
-   Type and run ```chmod +x ./'Install League of Legends (Bash).sh'``` first
-
-   Type and run `./'Install League of Legends (Bash).sh'` to install the game
-
-
 ## <a name="dependencies"></a> Dependencies (install those packages system-wide first):
 - `fuse` (AppImage)
-- `winetricks` (Bash script)
-- `wget` (Bash script)
-- `kdialog` (Bash script)
 - `tar`
 - `python`, `python-requests`, `python-psutil`, `qt5-base` and `pyqt5` (Python script)
 
