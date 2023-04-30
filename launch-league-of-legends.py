@@ -552,7 +552,8 @@ class Installer(QMainWindow):
 
     def finish_installation(self):
 
-        QApplication.quit()
+        self.stackedWidget.setCurrentWidget(self.gamemanager)
+        os.chdir(game_installed_folder)
 
 
 class Worker(QObject):
@@ -564,7 +565,8 @@ class Worker(QObject):
 
     def run(self):
         leagueinstaller_code.league_install_code(self.game_main_dir, self.game_region_link, self.create_shortcut)
-        QApplication.quit()
+        self.stackedWidget.setCurrentWidget(self.gamemanager)
+        os.chdir(game_installed_folder)
 
 class QTextEditLogger(logging.Handler, QObject):
     appendPlainText = pyqtSignal(str)
