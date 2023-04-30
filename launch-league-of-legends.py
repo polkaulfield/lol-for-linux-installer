@@ -253,6 +253,8 @@ class Installer(QMainWindow):
         self.applyButton.setEnabled(False)
 
     def launchleague(self):
+        self.launchLeagueinstalled.setEnabled(False)
+        self.uninstallLeaguebutton.setEnabled(False)
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
 
         with open(json_file_path, "r") as json_file:
@@ -263,11 +265,12 @@ class Installer(QMainWindow):
         os.chdir(game_installed_folder)
         process = subprocess.Popen(['python3', 'launch-script.py'])
         self.hide()
-
         while True:
             retcode = process.poll()
             if retcode is not None:
                 self.show()
+                self.launchLeagueinstalled.setEnabled(True)
+                self.uninstallLeaguebutton.setEnabled(True)
                 break
             time.sleep(0.5)
 
