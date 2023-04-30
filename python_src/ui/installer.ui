@@ -192,7 +192,7 @@
            <item>
             <widget class="QStackedWidget" name="stackedWidget">
              <property name="currentIndex">
-              <number>1</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="welcome">
               <widget class="QLabel" name="adviselabel">
@@ -1160,12 +1160,16 @@
                 <rect>
                  <x>190</x>
                  <y>110</y>
-                 <width>251</width>
+                 <width>311</width>
                  <height>22</height>
                 </rect>
                </property>
                <property name="text">
                 <string>Use dedicated GPU (DRI_PRIME=1)</string>
+               </property>
+               <property name="icon">
+                <iconset theme="video-display">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
               <widget class="QWidget" name="horizontalLayoutWidget_3">
@@ -1242,6 +1246,32 @@
                  </widget>
                 </item>
                </layout>
+              </widget>
+              <widget class="QCheckBox" name="Checknvidiahybrid">
+               <property name="enabled">
+                <bool>true</bool>
+               </property>
+               <property name="geometry">
+                <rect>
+                 <x>190</x>
+                 <y>140</y>
+                 <width>321</width>
+                 <height>21</height>
+                </rect>
+               </property>
+               <property name="layoutDirection">
+                <enum>Qt::LeftToRight</enum>
+               </property>
+               <property name="autoFillBackground">
+                <bool>false</bool>
+               </property>
+               <property name="text">
+                <string>NVIDIA Hybrid Graphics support</string>
+               </property>
+               <property name="icon">
+                <iconset theme="video-display">
+                 <normaloff>.</normaloff>.</iconset>
+               </property>
               </widget>
              </widget>
              <widget class="QWidget" name="installing">

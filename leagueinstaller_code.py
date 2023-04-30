@@ -173,4 +173,3 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool):
         shutil.copy("/usr/share/lolforlinux/launch-league-of-legends.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
     os.chmod(os.path.join(game_main_dir, "launch-league-of-legends.py"), 0o777)
     logging.info("Copied launcher")
-

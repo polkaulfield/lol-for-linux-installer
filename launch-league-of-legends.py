@@ -503,6 +503,42 @@ class Installer(QMainWindow):
                     json.dump(env_vars, f, indent=4)
 
 
+            if self.Checknvidiahybrid.isChecked():
+                with open('env_vars.json', 'r') as f:
+                    env_vars = json.load(f)
+
+                new_vars = {
+                    'NV_PRIME_RENDER_OFFLOAD': '1',
+                    '__GLX_VENDOR_LIBRARY_NAME': 'nvidia',
+                    'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/nvidia_icd.json',
+                    'VK_LAYER_NV_optimus': 'NVIDIA_only'
+                }
+
+                for var_name, var_value in new_vars.items():
+                    if var_name not in env_vars:
+                        env_vars[var_name] = var_value
+
+                with open('env_vars.json', 'w') as f:
+                    json.dump(env_vars, f, indent=4)
+            else:
+                with open('env_vars.json', 'r') as f:
+                    env_vars = json.load(f)
+
+                vars_to_remove = [
+                    'NV_PRIME_RENDER_OFFLOAD',
+                    '__GLX_VENDOR_LIBRARY_NAME',
+                    'VK_ICD_FILENAMES',
+                    'VK_LAYER_NV_optimus'
+                ]
+
+                for var_name in vars_to_remove:
+                    if var_name in env_vars:
+                        del env_vars[var_name]
+
+                with open('env_vars.json', 'w') as f:
+                    json.dump(env_vars, f, indent=4)
+
+
             self.thread = QThread()
             self.worker = Worker(self.game_main_dir, game_region_link, self.checkShortcut.isChecked())
             self.worker.moveToThread(self.thread)
