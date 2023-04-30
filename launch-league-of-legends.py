@@ -50,7 +50,6 @@ class Installer(QMainWindow):
         self.applyButton.setEnabled(False)
         self.applyButton.clicked.connect(self.applynewsettings)
 
-
         try:
             json_file_path = os.path.expanduser("~/.config/league_install_path.json")
 
