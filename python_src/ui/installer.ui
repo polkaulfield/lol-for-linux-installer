@@ -833,7 +833,8 @@
                 <string>NVIDIA Hybrid Graphics support</string>
                </property>
                <property name="icon">
-                <iconset theme="video-display"/>
+                <iconset theme="video-display">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
               <widget class="QCheckBox" name="Usedriprime">
@@ -858,7 +859,8 @@
                 <string>Use dedicated GPU (DRI_PRIME=1)</string>
                </property>
                <property name="icon">
-                <iconset theme="video-display"/>
+                <iconset theme="video-display">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
               <widget class="QComboBox" name="rendererCombobox">
@@ -921,10 +923,11 @@
                 <bool>false</bool>
                </property>
                <property name="text">
-                <string>Enable Mangohud</string>
+                <string>Enable MangoHud</string>
                </property>
                <property name="icon">
-                <iconset theme="video-display"/>
+                <iconset theme="video-display">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
               <widget class="QPushButton" name="uninstallLeaguebutton">
@@ -960,10 +963,11 @@
                 </rect>
                </property>
                <property name="text">
-                <string>Check for WINE updates</string>
+                <string>Check WINE updates</string>
                </property>
                <property name="icon">
-                <iconset theme="view-refresh"/>
+                <iconset theme="view-refresh">
+                 <normaloff>.</normaloff>.</iconset>
                </property>
               </widget>
              </widget>
