@@ -444,6 +444,10 @@ class Installer(QMainWindow):
             msg_box.exec_()
             self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
 
+        # Create the "league-of-legends" directory at the selected location
+        self.game_main_dir = os.path.join(self.game_main_dir, "league-of-legends")
+        os.makedirs(self.game_main_dir)
+
         if self.game_main_dir:
             self.cancelButton.show()
             self.cancelButton.setEnabled(True)
