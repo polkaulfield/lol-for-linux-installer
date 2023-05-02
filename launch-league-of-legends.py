@@ -49,6 +49,7 @@ class Installer(QMainWindow):
         self.checkWineupdates.clicked.connect(self.update_wine_build)
         self.applyButton.setEnabled(False)
         self.applyButton.clicked.connect(self.applynewsettings)
+        self.tabWidget.setCurrentIndex(0)
 
         try:
             json_file_path = os.path.expanduser("~/.config/league_install_path.json")
