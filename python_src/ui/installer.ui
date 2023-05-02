@@ -1000,7 +1000,7 @@
                </widget>
                <widget class="QWidget" name="tab_2">
                 <attribute name="title">
-                 <string>Gamescope</string>
+                 <string>gamescope</string>
                 </attribute>
                 <widget class="QCheckBox" name="Usegamescope">
                  <property name="enabled">
@@ -1118,7 +1118,7 @@
                   </rect>
                  </property>
                  <property name="text">
-                  <string>Use Fidelity FX Super Resolution 1.0</string>
+                  <string>Use FidelityFX™ Super Resolution 1.0</string>
                  </property>
                 </widget>
                </widget>
