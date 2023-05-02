@@ -263,7 +263,11 @@ class Installer(QMainWindow):
         game_installed_folder = data["game_main_dir"]
         self.stackedWidget.setCurrentWidget(self.gamemanager)
         os.chdir(game_installed_folder)
-        process = subprocess.Popen(['python3', 'launch-script.py'])
+
+        if self.Usegamescope.isChecked():
+            process = subprocess.Popen(['gamescope', '-b', 'python3', 'launch-script.py'])
+        else:
+            process = subprocess.Popen(['python3', 'launch-script.py'])
         self.hide()
         while True:
             retcode = process.poll()
