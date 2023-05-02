@@ -1030,7 +1030,7 @@
                 </widget>
                 <widget class="QComboBox" name="resolutioncombobox">
                  <property name="enabled">
-                  <bool>false</bool>
+                  <bool>true</bool>
                  </property>
                  <property name="geometry">
                   <rect>
@@ -1040,11 +1040,26 @@
                    <height>41</height>
                   </rect>
                  </property>
+                 <item>
+                  <property name="text">
+                   <string>1920x1080</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>1280x720</string>
+                  </property>
+                 </item>
+                 <item>
+                  <property name="text">
+                   <string>800x450</string>
+                  </property>
+                 </item>
                 </widget>
                 <widget class="QLabel" name="resolutionlabel">
                  <property name="geometry">
                   <rect>
-                   <x>340</x>
+                   <x>330</x>
                    <y>90</y>
                    <width>201</width>
                    <height>21</height>
@@ -1092,11 +1107,11 @@
                 </widget>
                 <widget class="QCheckBox" name="Usefsrcheckbox">
                  <property name="enabled">
-                  <bool>false</bool>
+                  <bool>true</bool>
                  </property>
                  <property name="geometry">
                   <rect>
-                   <x>50</x>
+                   <x>60</x>
                    <y>60</y>
                    <width>261</width>
                    <height>24</height>

@@ -168,6 +168,7 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool):
         shutil.copy("python_src/ui/lolbanner.jpeg", os.path.join(game_main_dir, "python_src", "ui", "lolbanner.jpeg"))
         shutil.copy("leagueinstaller_code.py", os.path.join(game_main_dir, "leagueinstaller_code.py"))
         shutil.copy("env_vars.json", os.path.join(game_main_dir, "env_vars.json"))
+        shutil.copy("app_settings.json", os.path.join(game_main_dir, "app_settings.json"))
     # Fallback for AppImage
     except:
         shutil.copy("/usr/share/lolforlinux/launch-league-of-legends.py", os.path.join(game_main_dir, "launch-league-of-legends.py"))
