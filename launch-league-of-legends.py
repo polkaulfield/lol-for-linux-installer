@@ -53,6 +53,19 @@ class Installer(QMainWindow):
 
         self.tabWidget.setCurrentIndex(0)
 
+        json_file_path = os.path.expanduser("~/.config/league_install_path.json")
+        with open(json_file_path, "r") as json_file:
+            data = json.load(json_file)
+
+        game_installed_folder = data["game_main_dir"]
+        os.chdir(game_installed_folder)
+
+        with open('app_settings.json', 'r') as f:
+            app_settings = json.load(f)
+
+        current_version = app_settings['Version']
+        self.setWindowTitle('League of Legends Manager ' + current_version)
+
         # Get the current display
         current_display = os.environ.get('DISPLAY')
 
