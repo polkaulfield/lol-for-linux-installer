@@ -160,7 +160,17 @@ class Installer(QMainWindow):
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
         self.Usefsrcheckbox.clicked.connect(self.toggleapplybutton)
         self.Usegamescope.clicked.connect(self.toggleapplybutton)
+        self.Usegamescope.clicked.connect(self.usegamescopecommands)
+        self.usegamescopecommands()
         self.resolutioncombobox.currentIndexChanged.connect(self.toggleapplybutton)
+
+    def usegamescopecommands(self):
+        if self.Usegamescope.isChecked():
+            self.Usefsrcheckbox.setEnabled(True)
+            self.resolutioncombobox.setEnabled(True)
+        else:
+            self.Usefsrcheckbox.setEnabled(False)
+            self.resolutioncombobox.setEnabled(False)
 
     def checkforupdates(self):
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
