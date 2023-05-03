@@ -1008,8 +1008,8 @@
                  </property>
                  <property name="geometry">
                   <rect>
-                   <x>220</x>
-                   <y>10</y>
+                   <x>60</x>
+                   <y>20</y>
                    <width>161</width>
                    <height>41</height>
                   </rect>
@@ -1035,7 +1035,7 @@
                  <property name="geometry">
                   <rect>
                    <x>330</x>
-                   <y>110</y>
+                   <y>120</y>
                    <width>211</width>
                    <height>41</height>
                   </rect>
@@ -1060,7 +1060,7 @@
                  <property name="geometry">
                   <rect>
                    <x>330</x>
-                   <y>90</y>
+                   <y>100</y>
                    <width>201</width>
                    <height>21</height>
                   </rect>
@@ -1073,7 +1073,7 @@
                  <property name="geometry">
                   <rect>
                    <x>60</x>
-                   <y>90</y>
+                   <y>100</y>
                    <width>81</width>
                    <height>21</height>
                   </rect>
@@ -1089,7 +1089,7 @@
                  <property name="geometry">
                   <rect>
                    <x>60</x>
-                   <y>110</y>
+                   <y>120</y>
                    <width>211</width>
                    <height>41</height>
                   </rect>
@@ -1112,13 +1112,26 @@
                  <property name="geometry">
                   <rect>
                    <x>60</x>
-                   <y>60</y>
+                   <y>70</y>
                    <width>261</width>
                    <height>24</height>
                   </rect>
                  </property>
                  <property name="text">
                   <string>Use FidelityFX™ Super Resolution 1.0</string>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label_2">
+                 <property name="geometry">
+                  <rect>
+                   <x>230</x>
+                   <y>10</y>
+                   <width>331</width>
+                   <height>51</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#cb4d1b;&quot;&gt;Currently broken because of a bug upstream,&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#cb4d1b;&quot;&gt;mouse and keyboard input are not captured in-game&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                 </widget>
                </widget>
