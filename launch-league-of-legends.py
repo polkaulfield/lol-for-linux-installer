@@ -313,6 +313,22 @@ class Installer(QMainWindow):
             with open('app_settings.json', 'w') as f:
                 json.dump(app_settings, f, indent=4)
 
+        if self.Usefsrcheckbox.isChecked():
+            os.chdir(game_installed_folder)
+            with open('app_settings.json', 'r') as f:
+                app_settings = json.load(f)
+
+            app_settings['FSR'] = '1'
+            with open('app_settings.json', 'w') as f:
+                json.dump(app_settings, f, indent=4)
+        else:
+            os.chdir(game_installed_folder)
+            with open('app_settings.json', 'r') as f:
+                app_settings = json.load(f)
+            app_settings['FSR'] = '0'
+            with open('app_settings.json', 'w') as f:
+                json.dump(app_settings, f, indent=4)
+
 
 
         self.applyButton.setEnabled(False)
