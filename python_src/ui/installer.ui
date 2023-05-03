@@ -941,6 +941,9 @@
                  </property>
                 </widget>
                 <widget class="QPushButton" name="Checkupdates">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
                  <property name="geometry">
                   <rect>
                    <x>360</x>
@@ -1017,7 +1020,7 @@
                </widget>
                <widget class="QWidget" name="tab_2">
                 <attribute name="title">
-                 <string>gamescope</string>
+                 <string>gamescope (Experimental)</string>
                 </attribute>
                 <widget class="QCheckBox" name="Usegamescope">
                  <property name="enabled">
@@ -1148,7 +1151,7 @@
                   </rect>
                  </property>
                  <property name="text">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#cb4d1b;&quot;&gt;Currently broken because of a bug upstream,&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#cb4d1b;&quot;&gt;mouse and keyboard input are not captured in-game&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#cb4d1b;&quot;&gt;Currently broken-ish because of a upstream bug,&lt;/span&gt;&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-size:8pt; color:#cb4d1b;&quot;&gt;mouse and keyboard input are not captured in-game&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                 </widget>
                </widget>
