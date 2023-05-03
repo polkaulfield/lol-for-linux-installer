@@ -49,7 +49,6 @@ class Installer(QMainWindow):
         self.checkWineupdates.clicked.connect(self.update_wine_build)
         self.applyButton.setEnabled(False)
         self.applyButton.clicked.connect(self.applynewsettings)
-        self.Checkupdates.clicked.connect(self.checkforupdates)
 
         self.tabWidget.setCurrentIndex(0)
 
@@ -171,58 +170,6 @@ class Installer(QMainWindow):
         else:
             self.Usefsrcheckbox.setEnabled(False)
             self.resolutioncombobox.setEnabled(False)
-
-    def checkforupdates(self):
-        json_file_path = os.path.expanduser("~/.config/league_install_path.json")
-        with open(json_file_path, "r") as json_file:
-            data = json.load(json_file)
-
-        game_installed_folder = data["game_main_dir"]
-        os.chdir(game_installed_folder)
-
-        with open('app_settings.json', 'r') as f:
-            app_settings = json.load(f)
-
-        current_version = app_settings['Version']
-        current_version = current_version[1:]
-        current_version_parts = current_version.split('.')
-        current_version_major = int(current_version_parts[0])
-        current_version_minor = int(current_version_parts[1])
-        current_version_patch = int(current_version_parts[2])
-        response = requests.get('https://api.github.com/repos/kassindornelles/lol-for-linux-installer/releases/latest')
-        latest_version = response.json()['tag_name']
-        latest_version = latest_version[1:]
-        latest_version_parts = latest_version.split('.')
-        latest_version_major = int(latest_version_parts[0])
-        latest_version_minor = int(latest_version_parts[1])
-        latest_version_patch = int(latest_version_parts[2])
-
-        if latest_version_major > current_version_major:
-            install_update(game_installed_folder, latest_version)
-        elif latest_version_major == current_version_major and latest_version_minor > current_version_minor:
-            install_update(game_installed_folder, latest_version)
-        elif latest_version_major == current_version_major and latest_version_minor == current_version_minor and latest_version_patch > current_version_patch:
-            install_update(game_installed_folder, latest_version)
-        else:
-            print("Up-to-date!")
-
-    def install_update(self, game_installed_folder, latest_version):
-        url = "https://github.com/kassindornelles/lol-for-linux-installer/archive/refs/tags/{}.tar.gz".format(latest_version)
-        response = requests.get(url)
-        if response.status_code == 200:
-            with tempfile.NamedTemporaryFile(delete=False) as temp_file:
-                temp_file.write(response.content)
-
-            with tarfile.open(temp_file.name, "r:gz") as archive:
-                for member in archive.getmembers():
-                    if member.name.endswith("lol-for-linux-installer.tar.gz"):
-                        archive.extract(member, game_installed_folder)
-
-            os.remove(temp_file.name)
-
-            print("Update successful!")
-        else:
-            print("Error downloading latest release from GitHub")
 
     def toggleapplybutton(self):
         self.applyButton.setEnabled(True)
@@ -522,7 +469,7 @@ class Installer(QMainWindow):
         else:
             print("No need to update")
             self.checkWineupdates.setEnabled(False)
-            self.checkWineupdates.setText("Game was up-to-date!")
+            self.checkWineupdates.setText("WINE is up-to-date!")
             self.uninstallLeaguebutton.setEnabled(True)
             self.launchLeagueinstalled.setEnabled(True)
 

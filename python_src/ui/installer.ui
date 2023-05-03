@@ -827,7 +827,7 @@
                 <enum>QTabWidget::Rounded</enum>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="title">
@@ -888,7 +888,7 @@
                   </rect>
                  </property>
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You dont need to reinstall DXVK every time&lt;/p&gt;&lt;p&gt;Do it once with the selected version, reinstallation is only necessary when a wine update is done.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;You dont need to reinstall DXVK every time&lt;/p&gt;&lt;p&gt;Do it once with the selected version, reinstallation is only necessary when a wine update is done.&lt;/p&gt;&lt;p&gt;Recommended DXVK version for old GPU's is &lt;span style=&quot; font-weight:700;&quot;&gt;1.10.3&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Your GPU needs to support Vulkan!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <item>
                   <property name="text">
@@ -910,7 +910,7 @@
                  <property name="geometry">
                   <rect>
                    <x>530</x>
-                   <y>50</y>
+                   <y>100</y>
                    <width>41</width>
                    <height>41</height>
                   </rect>
@@ -936,33 +936,13 @@
                  <property name="geometry">
                   <rect>
                    <x>320</x>
-                   <y>50</y>
+                   <y>100</y>
                    <width>201</width>
                    <height>41</height>
                   </rect>
                  </property>
                  <property name="text">
                   <string>Check WINE updates</string>
-                 </property>
-                 <property name="icon">
-                  <iconset theme="view-refresh">
-                   <normaloff>.</normaloff>.</iconset>
-                 </property>
-                </widget>
-                <widget class="QPushButton" name="Checkupdates">
-                 <property name="enabled">
-                  <bool>false</bool>
-                 </property>
-                 <property name="geometry">
-                  <rect>
-                   <x>320</x>
-                   <y>100</y>
-                   <width>251</width>
-                   <height>41</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>Check for updates</string>
                  </property>
                  <property name="icon">
                   <iconset theme="view-refresh">
