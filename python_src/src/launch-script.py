@@ -28,10 +28,14 @@ if app_settings['Gamescope'] == '1':
     start_game_vars = dict(os.environ, **env_vars)
     wine_process = ["wine", os.path.join(game_exe_path, game_exe_file_name)]
     gamescope_path = subprocess.run(["which", "gamescope"], capture_output=True, text=True).stdout.strip()
-    gamescope_process = [gamescope_path] + gamescope_envs + ["--"] + wine_process + ["--launch-product=league_of_legends", "--launch-patchline=live"]
+    width = app_settings['Resolution'].split('x')[0]
+    height = app_settings['Resolution'].split('x')[1]
+    resolution_args = [f"-W {width}", f"-H {height}"]
+    gamescope_process = [gamescope_path] + gamescope_envs + resolution_args + ["--"] + wine_process + ["--launch-product=league_of_legends", "--launch-patchline=live"]
     subprocess.run(gamescope_process, env=start_game_vars, check=True)
 else:
     start_game_vars = dict(os.environ, **env_vars)
     wine_process = ["wine", os.path.join(game_exe_path, game_exe_file_name), "--launch-product=league_of_legends", "--launch-patchline=live"]
     subprocess.run(wine_process, env=start_game_vars, check=True)
+
 

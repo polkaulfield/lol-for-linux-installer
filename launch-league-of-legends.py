@@ -138,6 +138,7 @@ class Installer(QMainWindow):
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
         self.Usefsrcheckbox.clicked.connect(self.toggleapplybutton)
         self.Usegamescope.clicked.connect(self.toggleapplybutton)
+        self.resolutioncombobox.currentIndexChanged.connect(self.toggleapplybutton)
 
     def toggleapplybutton(self):
         self.applyButton.setEnabled(True)
@@ -329,7 +330,13 @@ class Installer(QMainWindow):
             with open('app_settings.json', 'w') as f:
                 json.dump(app_settings, f, indent=4)
 
+        os.chdir(game_installed_folder)
+        with open('app_settings.json', 'r') as f:
+            app_settings = json.load(f)
 
+        app_settings['Resolution'] = self.resolutioncombobox.currentText()
+        with open('app_settings.json', 'w') as f:
+            json.dump(app_settings, f, indent=4)
 
         self.applyButton.setEnabled(False)
 
