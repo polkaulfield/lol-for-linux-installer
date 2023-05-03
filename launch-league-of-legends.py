@@ -53,34 +53,42 @@ class Installer(QMainWindow):
 
         self.tabWidget.setCurrentIndex(0)
 
-        json_file_path = os.path.expanduser("~/.config/league_install_path.json")
-        with open(json_file_path, "r") as json_file:
-            data = json.load(json_file)
+        try:
 
-        game_installed_folder = data["game_main_dir"]
-        os.chdir(game_installed_folder)
+            json_file_path = os.path.expanduser("~/.config/league_install_path.json")
+            with open(json_file_path, "r") as json_file:
+                data = json.load(json_file)
+                game_installed_folder = data["game_main_dir"]
+                os.chdir(game_installed_folder)
+        except:
+            self.stackedWidget.setCurrentWidget(self.welcome)
 
-        with open('app_settings.json', 'r') as f:
-            app_settings = json.load(f)
 
-        current_version = app_settings['Version']
-        self.setWindowTitle('League of Legends Manager ' + current_version)
+        try:
+            with open('app_settings.json', 'r') as f:
+                app_settings = json.load(f)
 
-        # Get the current display
-        current_display = os.environ.get('DISPLAY')
+            current_version = app_settings['Version']
+            self.setWindowTitle('League of Legends Manager ' + current_version)
 
-        # Get the current desktop resolution for the current display using xrandr
-        resolutions_output = subprocess.check_output(['xrandr', '-q', '-d', current_display]).decode('utf-8')
-        current_resolution = ""
-        for line in resolutions_output.splitlines():
-            if '*' in line:
-                # Extract the resolution from the line
-                current_resolution = line.split()[0]
+            # Get the current display
+            current_display = os.environ.get('DISPLAY')
 
-        # Check if the current resolution is already in the combobox
-        if current_resolution not in ['1920x1080', '1280x720', '800x450']:
-            # Add the current resolution to the top of the combobox
-            self.resolutioncombobox.insertItem(0, current_resolution)
+            # Get the current desktop resolution for the current display using xrandr
+            resolutions_output = subprocess.check_output(['xrandr', '-q', '-d', current_display]).decode('utf-8')
+            current_resolution = ""
+            for line in resolutions_output.splitlines():
+                if '*' in line:
+                    # Extract the resolution from the line
+                    current_resolution = line.split()[0]
+
+            # Check if the current resolution is already in the combobox
+            if current_resolution not in ['1920x1080', '1280x720', '800x450']:
+                # Add the current resolution to the top of the combobox
+                self.resolutioncombobox.insertItem(0, current_resolution)
+
+        except:
+            self.stackedWidget.setCurrentWidget(self.welcome)
 
         try:
             json_file_path = os.path.expanduser("~/.config/league_install_path.json")
