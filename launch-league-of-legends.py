@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys, os, signal, psutil, logging, json, urllib.request, shutil, tarfile, subprocess, time, requests, tempfile
+import sys, os, signal, psutil, logging, json, urllib.request, shutil, tarfile, subprocess, time
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox, QCheckBox
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal, QTimer
@@ -50,45 +50,6 @@ class Installer(QMainWindow):
         self.applyButton.setEnabled(False)
         self.applyButton.clicked.connect(self.applynewsettings)
 
-        self.tabWidget.setCurrentIndex(0)
-
-        try:
-
-            json_file_path = os.path.expanduser("~/.config/league_install_path.json")
-            with open(json_file_path, "r") as json_file:
-                data = json.load(json_file)
-                game_installed_folder = data["game_main_dir"]
-                os.chdir(game_installed_folder)
-        except:
-            self.stackedWidget.setCurrentWidget(self.welcome)
-
-
-        try:
-            with open('app_settings.json', 'r') as f:
-                app_settings = json.load(f)
-
-            current_version = app_settings['Version']
-            self.setWindowTitle('League of Legends Manager ' + current_version)
-
-            # Get the current display
-            current_display = os.environ.get('DISPLAY')
-
-            # Get the current desktop resolution for the current display using xrandr
-            resolutions_output = subprocess.check_output(['xrandr', '-q', '-d', current_display]).decode('utf-8')
-            current_resolution = ""
-            for line in resolutions_output.splitlines():
-                if '*' in line:
-                    # Extract the resolution from the line
-                    current_resolution = line.split()[0]
-
-            # Check if the current resolution is already in the combobox
-            if current_resolution not in ['1920x1080', '1280x720', '800x450']:
-                # Add the current resolution to the top of the combobox
-                self.resolutioncombobox.insertItem(0, current_resolution)
-
-        except:
-            self.stackedWidget.setCurrentWidget(self.welcome)
-
         try:
             json_file_path = os.path.expanduser("~/.config/league_install_path.json")
 
@@ -97,7 +58,7 @@ class Installer(QMainWindow):
 
             game_installed_folder = data["game_main_dir"]
             self.stackedWidget.setCurrentWidget(self.gamemanager)
-            os.chdir(game_installed_folder)
+
             with open('env_vars.json', 'r') as f:
                 env_vars = json.load(f)
 
@@ -122,34 +83,6 @@ class Installer(QMainWindow):
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
 
-        try:
-            json_file_path = os.path.expanduser("~/.config/league_install_path.json")
-            with open(json_file_path, "r") as json_file:
-                data = json.load(json_file)
-            game_installed_folder = data["game_main_dir"]
-            self.stackedWidget.setCurrentWidget(self.gamemanager)
-            os.chdir(game_installed_folder)
-
-            with open('app_settings.json', 'r') as f:
-                app_settings = json.load(f)
-
-            if app_settings['FSR'] == '1':
-                self.Usefsrcheckbox.setChecked(True)
-            else:
-                self.Usefsrcheckbox.setChecked(False)
-            if app_settings['Gamescope'] == "1":
-                self.Usegamescope.setChecked(True)
-            else:
-                self.Usegamescope.setChecked(False)
-
-            resolution = app_settings['Resolution']
-            if resolution not in [self.resolutioncombobox.itemText(i) for i in range(self.resolutioncombobox.count())]:
-                self.resolutioncombobox.addItem(resolution)
-            self.resolutioncombobox.setCurrentText(resolution)
-
-        except FileNotFoundError:
-            self.stackedWidget.setCurrentWidget(self.welcome)
-
         self.Usedriprime.stateChanged.connect(self.toggleapplybutton)
         self.Usenvidiahybrid.stateChanged.connect(self.toggleapplybutton)
         self.Usemangohud.stateChanged.connect(self.toggleapplybutton)
@@ -157,19 +90,6 @@ class Installer(QMainWindow):
         self.nextWelcome.clicked.connect(self.regionWidget)
         self.nextRegion.clicked.connect(self.optionsWidget)
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
-        self.Usefsrcheckbox.clicked.connect(self.toggleapplybutton)
-        self.Usegamescope.clicked.connect(self.toggleapplybutton)
-        self.Usegamescope.clicked.connect(self.usegamescopecommands)
-        self.usegamescopecommands()
-        self.resolutioncombobox.currentIndexChanged.connect(self.toggleapplybutton)
-
-    def usegamescopecommands(self):
-        if self.Usegamescope.isChecked():
-            self.Usefsrcheckbox.setEnabled(True)
-            self.resolutioncombobox.setEnabled(True)
-        else:
-            self.Usefsrcheckbox.setEnabled(False)
-            self.resolutioncombobox.setEnabled(False)
 
     def toggleapplybutton(self):
         self.applyButton.setEnabled(True)
@@ -329,45 +249,6 @@ class Installer(QMainWindow):
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
 
-        if self.Usegamescope.isChecked():
-            os.chdir(game_installed_folder)
-            with open('app_settings.json', 'r') as f:
-                app_settings = json.load(f)
-
-            app_settings['Gamescope'] = '1'
-            with open('app_settings.json', 'w') as f:
-                json.dump(app_settings, f, indent=4)
-        else:
-            os.chdir(game_installed_folder)
-            with open('app_settings.json', 'r') as f:
-                app_settings = json.load(f)
-            app_settings['Gamescope'] = '0'
-            with open('app_settings.json', 'w') as f:
-                json.dump(app_settings, f, indent=4)
-
-        if self.Usefsrcheckbox.isChecked():
-            os.chdir(game_installed_folder)
-            with open('app_settings.json', 'r') as f:
-                app_settings = json.load(f)
-
-            app_settings['FSR'] = '1'
-            with open('app_settings.json', 'w') as f:
-                json.dump(app_settings, f, indent=4)
-        else:
-            os.chdir(game_installed_folder)
-            with open('app_settings.json', 'r') as f:
-                app_settings = json.load(f)
-            app_settings['FSR'] = '0'
-            with open('app_settings.json', 'w') as f:
-                json.dump(app_settings, f, indent=4)
-
-        os.chdir(game_installed_folder)
-        with open('app_settings.json', 'r') as f:
-            app_settings = json.load(f)
-
-        app_settings['Resolution'] = self.resolutioncombobox.currentText()
-        with open('app_settings.json', 'w') as f:
-            json.dump(app_settings, f, indent=4)
 
         self.applyButton.setEnabled(False)
 
@@ -382,11 +263,7 @@ class Installer(QMainWindow):
         game_installed_folder = data["game_main_dir"]
         self.stackedWidget.setCurrentWidget(self.gamemanager)
         os.chdir(game_installed_folder)
-
-        if self.Usegamescope.isChecked():
-            process = subprocess.Popen(['gamescope', '-b', 'python3', 'launch-script.py'])
-        else:
-            process = subprocess.Popen(['python3', 'launch-script.py'])
+        process = subprocess.Popen(['python3', 'launch-script.py'])
         self.hide()
         while True:
             retcode = process.poll()
@@ -469,7 +346,7 @@ class Installer(QMainWindow):
         else:
             print("No need to update")
             self.checkWineupdates.setEnabled(False)
-            self.checkWineupdates.setText("WINE is up-to-date!")
+            self.checkWineupdates.setText("Game was up-to-date!")
             self.uninstallLeaguebutton.setEnabled(True)
             self.launchLeagueinstalled.setEnabled(True)
 
