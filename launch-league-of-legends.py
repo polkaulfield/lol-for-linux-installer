@@ -49,6 +49,7 @@ class Installer(QMainWindow):
         self.checkWineupdates.clicked.connect(self.update_wine_build)
         self.applyButton.setEnabled(False)
         self.applyButton.clicked.connect(self.applynewsettings)
+        self.tabWidget.setCurrentIndex(0)
 
         try:
             json_file_path = os.path.expanduser("~/.config/league_install_path.json")
@@ -58,6 +59,8 @@ class Installer(QMainWindow):
 
             game_installed_folder = data["game_main_dir"]
             self.stackedWidget.setCurrentWidget(self.gamemanager)
+
+            os.chdir(game_installed_folder)
 
             with open('env_vars.json', 'r') as f:
                 env_vars = json.load(f)
@@ -80,12 +83,21 @@ class Installer(QMainWindow):
             else:
                 self.Usemangohud.setChecked(False)
 
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
+
+            if all(key in env_vars for key in ['OBS_VKCAPTURE']):
+                self.obsvkcapturecheck.setChecked(True)
+            else:
+                self.obsvkcapturecheck.setChecked(False)
+
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
 
         self.Usedriprime.stateChanged.connect(self.toggleapplybutton)
         self.Usenvidiahybrid.stateChanged.connect(self.toggleapplybutton)
         self.Usemangohud.stateChanged.connect(self.toggleapplybutton)
+        self.obsvkcapturecheck.stateChanged.connect(self.toggleapplybutton)
         self.rendererCombobox.currentIndexChanged.connect(self.toggleapplybutton)
         self.nextWelcome.clicked.connect(self.regionWidget)
         self.nextRegion.clicked.connect(self.optionsWidget)
@@ -245,6 +257,28 @@ class Installer(QMainWindow):
 
             if 'MANGOHUD' in env_vars:
                 del env_vars['MANGOHUD']
+
+            with open('env_vars.json', 'w') as f:
+                json.dump(env_vars, f, indent=4)
+
+
+        #obsvkcapturecheck
+
+        if self.obsvkcapturecheck.isChecked():
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
+
+            if 'OBS_VKCAPTURE' not in env_vars:
+                env_vars['OBS_VKCAPTURE'] = '1'
+
+            with open('env_vars.json', 'w') as f:
+                json.dump(env_vars, f, indent=4)
+        else:
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
+
+            if 'OBS_VKCAPTURE' in env_vars:
+                del env_vars['OBS_VKCAPTURE']
 
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
