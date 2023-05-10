@@ -298,15 +298,20 @@ class Installer(QMainWindow):
         self.stackedWidget.setCurrentWidget(self.gamemanager)
         os.chdir(game_installed_folder)
         process = subprocess.Popen(['python3', 'launch-script.py'])
-        self.hide()
-        while True:
-            retcode = process.poll()
-            if retcode is not None:
-                self.show()
-                self.launchLeagueinstalled.setEnabled(True)
-                self.uninstallLeaguebutton.setEnabled(True)
-                break
-            time.sleep(0.5)
+        installer.hide()
+        process.wait()
+
+        if not self.is_process_running("RiotClientServi"):
+            self.launchLeagueinstalled.setEnabled(True)
+            self.uninstallLeaguebutton.setEnabled(True)
+            installer.show()
+            pass
+
+    def is_process_running(self, process_name):
+        for proc in psutil.process_iter(['name']):
+            if proc.info['name'] == process_name:
+                return True
+        return False
 
     def regionWidget(self):
         self.stackedWidget.setCurrentWidget(self.region)
