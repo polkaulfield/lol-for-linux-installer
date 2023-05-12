@@ -5,7 +5,8 @@ League of Legends unofficial installer/manager for linux
 This software is not affiliated with nor supported by Riot Games.
 
 ![Screenshot_20230415_205958](https://user-images.githubusercontent.com/40970965/232259098-0e51d868-cfb8-4312-aab4-6e84728c5f24.png)
-![Screenshot_20230509_051905](https://user-images.githubusercontent.com/40970965/237037465-413172af-d0ce-4da3-a107-f67121df0e02.png)
+![Screenshot_20230512_171533](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/0d6362ef-9a1f-4ee5-ad3c-114ee0648021)
+
 
 ## How to install it
 - Check if you have all required [dependencies](#dependencies) installed first
