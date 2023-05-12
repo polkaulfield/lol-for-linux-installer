@@ -192,7 +192,7 @@
            <item>
             <widget class="QStackedWidget" name="stackedWidget">
              <property name="currentIndex">
-              <number>1</number>
+              <number>3</number>
              </property>
              <widget class="QWidget" name="welcome">
               <widget class="QLabel" name="adviselabel">
@@ -846,7 +846,7 @@
                   <bool>false</bool>
                  </property>
                  <property name="text">
-                  <string>Use dedicated GPU (DRI_PRIME=1)</string>
+                  <string>Use secondary GPU (DRI_PRIME=1)</string>
                  </property>
                  <property name="icon">
                   <iconset theme="video-display">
@@ -1231,7 +1231,7 @@
                 </rect>
                </property>
                <property name="text">
-                <string>Use dedicated GPU (DRI_PRIME=1)</string>
+                <string>Use secondary GPU (DRI_PRIME=1)</string>
                </property>
                <property name="icon">
                 <iconset theme="video-display">
