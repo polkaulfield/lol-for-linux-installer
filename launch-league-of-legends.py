@@ -213,38 +213,30 @@ class Installer(QMainWindow):
         self.applyButton.setEnabled(False)
 
     def install_dxvk_code(self, dxvk_version, game_installed_folder):
-        # 64 bit dlls
-        dst_path = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows', 'system32')
+        dst_path = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows')
+        tmp_path = 'dxvk-tmp'
         url = 'https://github.com/doitsujin/dxvk/releases/download/v{0}/dxvk-{0}.tar.gz'.format(dxvk_version)
         filename = os.path.basename(url)
         urllib.request.urlretrieve(url, filename)
 
         with tarfile.open(filename, 'r:gz') as tar:
-                tar.extractall('dxvk-tmp')
+            tar.extractall(tmp_path)
 
-        src_path = os.path.join('dxvk-tmp', 'dxvk-{0}'.format(dxvk_version), 'x64')
-        if not os.path.exists(dst_path):
-            os.makedirs(dst_path)
-        for file_name in os.listdir(src_path):
-            if file_name.endswith('.dll'):
-                src_file = os.path.join(src_path, file_name)
-                dst_file = os.path.join(dst_path, file_name)
-                shutil.copy2(src_file, dst_file)
+        for arch in ['x64', 'x32']:
+            src_path = os.path.join(tmp_path, 'dxvk-{0}'.format(dxvk_version), arch)
+            dst_path_arch = os.path.join(dst_path, 'system32' if arch == 'x64' else 'syswow64')
 
-        # 32 bit dlls
-        dst_path32 = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows', 'syswow64')
+            if not os.path.exists(dst_path_arch):
+                os.makedirs(dst_path_arch)
 
-        src_path32 = os.path.join('dxvk-tmp', 'dxvk-{0}'.format(dxvk_version), 'x32')
-        if not os.path.exists(dst_path32):
-            os.makedirs(dst_path32)
-        for file_name in os.listdir(src_path32):
-            if file_name.endswith('.dll'):
-                src_file32 = os.path.join(src_path32, file_name)
-                dst_file32 = os.path.join(dst_path32, file_name)
-                shutil.copy2(src_file32, dst_file32)
+            for file_name in os.listdir(src_path):
+                if file_name.endswith('.dll'):
+                    src_file = os.path.join(src_path, file_name)
+                    dst_file = os.path.join(dst_path_arch, file_name)
+                    shutil.copy2(src_file, dst_file)
 
         os.remove(filename)
-        shutil.rmtree('dxvk-tmp')
+        shutil.rmtree(tmp_path)
         self.rendererCombobox.setEnabled(False)
 
     def launchleague(self):
