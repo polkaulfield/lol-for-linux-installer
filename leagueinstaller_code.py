@@ -38,7 +38,7 @@ def league_install_code(game_main_dir, game_region_link, shortcut_bool):
 
     # Download necessary files
     logging.info("Downloading wine-lutris-lol build")  # Cheap logging
-    wine_lutris_build_url = "https://github.com/GloriousEggroll/wine-ge-custom/releases/download/7.0-GE-8-LoL/wine-lutris-ge-lol-7.0.8-x86_64.tar.xz"
+    wine_lutris_build_url = "https://winebuilds.nobaraproject.org/wine-lutris-ge-lol-8.7-1-x86_64.tar.xz"
     tar_file_name = wine_version + ".tar.xz"
     wine_lutris_build_file = os.path.join(game_downloads_dir, tar_file_name)
     response = requests.get(wine_lutris_build_url)

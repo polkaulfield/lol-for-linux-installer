@@ -38,6 +38,7 @@ class Installer(QMainWindow):
             loadUi("python_src/ui/installer.ui", self)
         except:
             loadUi("/usr/share/lolforlinux/ui/installer.ui", self)
+        self.game_installed_folder = None
         self.setFixedSize(self.size())
         self.setWindowTitle('League of Legends Manager')
         self.install_button.clicked.connect(self.installer_code)
@@ -50,44 +51,6 @@ class Installer(QMainWindow):
         self.applyButton.setEnabled(False)
         self.applyButton.clicked.connect(self.applynewsettings)
         self.tabWidget.setCurrentIndex(0)
-
-        try:
-            json_file_path = os.path.expanduser("~/.config/league_install_path.json")
-
-            with open(json_file_path, "r") as json_file:
-                data = json.load(json_file)
-
-            game_installed_folder = data["game_main_dir"]
-            self.stackedWidget.setCurrentWidget(self.gamemanager)
-
-            os.chdir(game_installed_folder)
-
-            with open('env_vars.json', 'r') as f:
-                env_vars = json.load(f)
-
-            if all(key in env_vars for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
-                self.Usenvidiahybrid.setChecked(True)
-            else:
-                self.Usenvidiahybrid.setChecked(False)
-
-            if all(key in env_vars for key in ['DRI_PRIME']):
-                self.Usedriprime.setChecked(True)
-            else:
-                self.Usedriprime.setChecked(False)
-
-            if all(key in env_vars for key in ['MANGOHUD']):
-                self.Usemangohud.setChecked(True)
-            else:
-                self.Usemangohud.setChecked(False)
-
-            if all(key in env_vars for key in ['OBS_VKCAPTURE']):
-                self.obsvkcapturecheck.setChecked(True)
-            else:
-                self.obsvkcapturecheck.setChecked(False)
-
-        except FileNotFoundError:
-            self.stackedWidget.setCurrentWidget(self.welcome)
-
         self.Usedriprime.stateChanged.connect(self.toggleapplybutton)
         self.Usenvidiahybrid.stateChanged.connect(self.toggleapplybutton)
         self.Usemangohud.stateChanged.connect(self.toggleapplybutton)
@@ -97,34 +60,72 @@ class Installer(QMainWindow):
         self.nextRegion.clicked.connect(self.optionsWidget)
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
 
+        # Check json file and initialize
+        self.read_installed_folder()
+
+    def read_installed_folder(self):
+        json_file_path = os.path.expanduser("~/.config/league_install_path.json")
+
+        try:
+            with open(json_file_path, "r") as json_file:
+                data = json.load(json_file)
+
+                self.game_installed_folder = data["game_main_dir"]
+                os.chdir(self.game_installed_folder)
+
+                with open('env_vars.json', 'r') as f:
+                    env_vars = json.load(f)
+
+                # Call the method to load and check env_vars.json
+                self.load_env_vars(env_vars)
+
+        except FileNotFoundError:
+            self.stackedWidget.setCurrentWidget(self.welcome)
+
+    def load_env_vars(self, env_vars):
+        if all(key in env_vars for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
+            self.Usenvidiahybrid.setChecked(True)
+        else:
+            self.Usenvidiahybrid.setChecked(False)
+
+        if all(key in env_vars for key in ['DRI_PRIME']):
+            self.Usedriprime.setChecked(True)
+        else:
+            self.Usedriprime.setChecked(False)
+
+        if all(key in env_vars for key in ['MANGOHUD']):
+            self.Usemangohud.setChecked(True)
+        else:
+            self.Usemangohud.setChecked(False)
+
+        if all(key in env_vars for key in ['OBS_VKCAPTURE']):
+            self.obsvkcapturecheck.setChecked(True)
+        else:
+            self.obsvkcapturecheck.setChecked(False)
+
+        self.stackedWidget.setCurrentWidget(self.gamemanager)
+
     def toggleapplybutton(self):
         self.applyButton.setEnabled(True)
 
     def applynewsettings(self):
-        json_file_path = os.path.expanduser("~/.config/league_install_path.json")
-        with open(json_file_path, "r") as json_file:
-            data = json.load(json_file)
-
-        game_installed_folder = data["game_main_dir"]
-        os.chdir(game_installed_folder)
+        os.chdir(self.game_installed_folder)
         current_renderer = self.rendererCombobox.currentText()
 
         if 'DXVK' in current_renderer:
             dxvk_version = current_renderer.replace('DXVK ', '')
-            self.install_dxvk_code(dxvk_version, game_installed_folder)
+            self.install_dxvk_code(dxvk_version, self.game_installed_folder)
+
+        with open('env_vars.json', 'r') as f:
+            env_vars = json.load(f)
 
         if self.Usedriprime.isChecked():
-                with open('env_vars.json', 'r') as f:
-                    env_vars = json.load(f)
-
                 if 'DRI_PRIME' not in env_vars:
                     env_vars['DRI_PRIME'] = '1'
 
                 with open('env_vars.json', 'w') as f:
                     json.dump(env_vars, f, indent=4)
         else:
-                with open('env_vars.json', 'r') as f:
-                    env_vars = json.load(f)
 
                 if 'DRI_PRIME' in env_vars:
                     del env_vars['DRI_PRIME']
@@ -133,9 +134,6 @@ class Installer(QMainWindow):
                     json.dump(env_vars, f, indent=4)
 
         if self.Usenvidiahybrid.isChecked():
-            with open('env_vars.json', 'r') as f:
-                env_vars = json.load(f)
-
             new_vars = {
                 'NV_PRIME_RENDER_OFFLOAD': '1',
                 '__GLX_VENDOR_LIBRARY_NAME': 'nvidia',
@@ -150,9 +148,6 @@ class Installer(QMainWindow):
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
         else:
-            with open('env_vars.json', 'r') as f:
-                env_vars = json.load(f)
-
             vars_to_remove = [
                 'NV_PRIME_RENDER_OFFLOAD',
                 '__GLX_VENDOR_LIBRARY_NAME',
@@ -167,48 +162,31 @@ class Installer(QMainWindow):
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
 
-
         if self.Usemangohud.isChecked():
-            with open('env_vars.json', 'r') as f:
-                env_vars = json.load(f)
-
             if 'MANGOHUD' not in env_vars:
                 env_vars['MANGOHUD'] = '1'
 
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
         else:
-            with open('env_vars.json', 'r') as f:
-                env_vars = json.load(f)
-
             if 'MANGOHUD' in env_vars:
                 del env_vars['MANGOHUD']
 
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
 
-
-        #obsvkcapturecheck
-
         if self.obsvkcapturecheck.isChecked():
-            with open('env_vars.json', 'r') as f:
-                env_vars = json.load(f)
-
             if 'OBS_VKCAPTURE' not in env_vars:
                 env_vars['OBS_VKCAPTURE'] = '1'
 
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
         else:
-            with open('env_vars.json', 'r') as f:
-                env_vars = json.load(f)
-
             if 'OBS_VKCAPTURE' in env_vars:
                 del env_vars['OBS_VKCAPTURE']
 
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
-
 
         self.applyButton.setEnabled(False)
 
@@ -242,14 +220,8 @@ class Installer(QMainWindow):
     def launchleague(self):
         self.launchLeagueinstalled.setEnabled(False)
         self.uninstallLeaguebutton.setEnabled(False)
-        json_file_path = os.path.expanduser("~/.config/league_install_path.json")
-
-        with open(json_file_path, "r") as json_file:
-            data = json.load(json_file)
-
-        game_installed_folder = data["game_main_dir"]
         self.stackedWidget.setCurrentWidget(self.gamemanager)
-        os.chdir(game_installed_folder)
+        os.chdir(self.game_installed_folder)
         process = subprocess.Popen(['python3', 'launch-script.py'])
         installer.hide()
         process.wait()
@@ -281,15 +253,9 @@ class Installer(QMainWindow):
         self.checkWineupdates.setText("Updating...")
         self.uninstallLeaguebutton.setEnabled(False)
         self.launchLeagueinstalled.setEnabled(False)
-        json_file_path = os.path.expanduser("~/.config/league_install_path.json")
-
-        with open(json_file_path, "r") as json_file:
-            data = json.load(json_file)
-
-        game_installed_folder = data["game_main_dir"]
         json_url = "https://raw.githubusercontent.com/kassindornelles/lol-for-linux-installer/main/wine_build.json"
         filename = "wine_build.json"
-        os.chdir(game_installed_folder)
+        os.chdir(self.game_installed_folder)
         urllib.request.urlretrieve(json_url, filename)
 
         with open(filename, "r") as f:
@@ -475,36 +441,22 @@ class Installer(QMainWindow):
             scrollbar = self.textOutput.verticalScrollBar()
             scrollbar.setValue(scrollbar.maximum())
 
-            if self.checkPrime.isChecked():
-                # Load the environment variables from the JSON file
-                with open('env_vars.json', 'r') as f:
-                    env_vars = json.load(f)
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
 
-                # Add the DRI_PRIME key to the dictionary if it doesn't already exist
+            if self.checkPrime.isChecked():
                 if 'DRI_PRIME' not in env_vars:
                     env_vars['DRI_PRIME'] = '1'
-
-                # Write the updated dictionary back to the JSON file with indentation
                 with open('env_vars.json', 'w') as f:
                     json.dump(env_vars, f, indent=4)
             else:
-                # Load the environment variables from the JSON file
-                with open('env_vars.json', 'r') as f:
-                    env_vars = json.load(f)
-
-                # Remove the DRI_PRIME key from the dictionary if it exists
                 if 'DRI_PRIME' in env_vars:
                     del env_vars['DRI_PRIME']
-
-                # Write the updated dictionary back to the JSON file with indentation
                 with open('env_vars.json', 'w') as f:
                     json.dump(env_vars, f, indent=4)
 
 
             if self.Checknvidiahybrid.isChecked():
-                with open('env_vars.json', 'r') as f:
-                    env_vars = json.load(f)
-
                 new_vars = {
                     'NV_PRIME_RENDER_OFFLOAD': '1',
                     '__GLX_VENDOR_LIBRARY_NAME': 'nvidia',
@@ -519,9 +471,6 @@ class Installer(QMainWindow):
                 with open('env_vars.json', 'w') as f:
                     json.dump(env_vars, f, indent=4)
             else:
-                with open('env_vars.json', 'r') as f:
-                    env_vars = json.load(f)
-
                 vars_to_remove = [
                     'NV_PRIME_RENDER_OFFLOAD',
                     '__GLX_VENDOR_LIBRARY_NAME',
@@ -532,10 +481,8 @@ class Installer(QMainWindow):
                 for var_name in vars_to_remove:
                     if var_name in env_vars:
                         del env_vars[var_name]
-
                 with open('env_vars.json', 'w') as f:
                     json.dump(env_vars, f, indent=4)
-
 
             self.thread = QThread()
             self.worker = Worker(self.game_main_dir, game_region_link, self.checkShortcut.isChecked())
@@ -549,10 +496,8 @@ class Installer(QMainWindow):
             print("User pressed cancel")
 
     def finish_installation(self):
-
+        self.read_installed_folder()
         self.stackedWidget.setCurrentWidget(self.gamemanager)
-        os.chdir(game_installed_folder)
-
 
 class Worker(QObject):
     def __init__(self, game_main_dir, game_region_link, create_shortcut):
@@ -560,11 +505,8 @@ class Worker(QObject):
         self.game_main_dir = game_main_dir
         self.game_region_link = game_region_link
         self.create_shortcut = create_shortcut
-
     def run(self):
         leagueinstaller_code.league_install_code(self.game_main_dir, self.game_region_link, self.create_shortcut)
-        self.stackedWidget.setCurrentWidget(self.gamemanager)
-        os.chdir(game_installed_folder)
 
 class QTextEditLogger(logging.Handler, QObject):
     appendPlainText = pyqtSignal(str)
