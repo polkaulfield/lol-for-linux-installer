@@ -187,6 +187,42 @@ class Installer(QMainWindow):
             shutil.rmtree('dxvk-tmp')
             self.rendererCombobox.setEnabled(False)
 
+        elif current_renderer == 'DXVK 2.2':
+
+            # 64 bit dlls
+            dst_path = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows', 'system32')
+            url = 'https://github.com/doitsujin/dxvk/releases/download/v2.2/dxvk-2.2.tar.gz'
+            filename = os.path.basename(url)
+            urllib.request.urlretrieve(url, filename)
+
+            with tarfile.open(filename, 'r:gz') as tar:
+                    tar.extractall('dxvk-tmp')
+
+            src_path = os.path.join('dxvk-tmp', 'dxvk-2.2', 'x64')
+            if not os.path.exists(dst_path):
+                os.makedirs(dst_path)
+            for file_name in os.listdir(src_path):
+                if file_name.endswith('.dll') or file_name.endswith('.so'):
+                    src_file = os.path.join(src_path, file_name)
+                    dst_file = os.path.join(dst_path, file_name)
+                    shutil.copy2(src_file, dst_file)
+
+            # 32 bit dlls
+            dst_path32 = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows', 'syswow64')
+
+            src_path32 = os.path.join('dxvk-tmp', 'dxvk-2.2', 'x32')
+            if not os.path.exists(dst_path32):
+                os.makedirs(dst_path32)
+            for file_name in os.listdir(src_path32):
+                if file_name.endswith('.dll') or file_name.endswith('.so'):
+                    src_file32 = os.path.join(src_path32, file_name)
+                    dst_file32 = os.path.join(dst_path32, file_name)
+                    shutil.copy2(src_file32, dst_file32)
+
+            os.remove(filename)
+            shutil.rmtree('dxvk-tmp')
+            self.rendererCombobox.setEnabled(False)
+
         if self.Usedriprime.isChecked():
                 with open('env_vars.json', 'r') as f:
                     env_vars = json.load(f)
