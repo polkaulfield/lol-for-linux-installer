@@ -82,6 +82,16 @@ class Installer(QMainWindow):
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
 
+        if shutil.which('gamemoderun') is not None:
+            try:
+                self.gamemodelabel.setText("<html><b><span style='color: green;'>Gamemode is installed and will be used.</span></b></html>")
+            except:
+                print("Error while getting Gamemode info.")
+                # Handle the error here
+        else:
+            self.gamemodelabel.setText("<html><b><span style='color: red;'>Gamemode is not installed.</span></b></html>")
+            # Handle the case where GameMode is not installed
+
     def load_env_vars(self, env_vars):
         if all(key in env_vars for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
             self.Usenvidiahybrid.setChecked(True)
@@ -222,7 +232,15 @@ class Installer(QMainWindow):
         self.uninstallLeaguebutton.setEnabled(False)
         self.stackedWidget.setCurrentWidget(self.gamemanager)
         os.chdir(self.game_installed_folder)
-        process = subprocess.Popen(['python3', 'launch-script.py'])
+        if shutil.which('gamemoderun') is not None:
+            try:
+                process = subprocess.Popen(['gamemoderun', 'python3', 'launch-script.py'])
+            except subprocess.CalledProcessError as e:
+                print("Error running the command with GameMode:", e)
+        else:
+            print("GameMode is not installed or not available.")
+            process = subprocess.Popen(['python3', 'launch-script.py'])
+
         installer.hide()
         process.wait()
 
