@@ -5,8 +5,7 @@ League of Legends unofficial installer/manager for linux
 This software is not affiliated with nor supported by Riot Games.
 
 ![Screenshot_20230415_205958](https://user-images.githubusercontent.com/40970965/232259098-0e51d868-cfb8-4312-aab4-6e84728c5f24.png)
-![Screenshot_20230512_171533](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/0d6362ef-9a1f-4ee5-ad3c-114ee0648021)
-
+![Screenshot_20230512_212003](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/1fdd188a-8af5-4401-8b0c-f66a8ff82ff0)
 
 ## How to install it
 - Check if you have all required [dependencies](#dependencies) installed first
@@ -22,6 +21,7 @@ This software is not affiliated with nor supported by Riot Games.
 - Users of hybrid graphics can choose at install time if they want to use the dGPU or not
 - obs-gamecapture support.
 - Update system for WINE builds, DXVK version selection and more (DXVK installation via our launcher)
+- Gamemode support, if installed system wide it will be used automatically.
 
 ## <a name="dependencies"></a> Dependencies (install those packages system-wide first):
 - `tar`, `python`, `python-requests`, `python-psutil`, `qt5-base` and `pyqt5`
