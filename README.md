@@ -13,6 +13,9 @@ This software is not affiliated with nor supported by Riot Games.
 - Extract the files
 - Double-click 'lol-for-linux-installer.py' and install the game or manage your already existent install.
 
+## Arch Linux based distributions installation:
+- In the folder where the `PKGBUILD`file is located run `makepkg -si` in a terminal.
+
 ### Python Script features:
 - You can choose where to install the game and also the region you are going to play
 - It installs wine-ge-lol with FSYNC/FUTEX2 support enabled by default for better CPU performance
