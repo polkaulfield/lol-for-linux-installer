@@ -10,18 +10,12 @@ source=("https://github.com/kassindornelles/lol-for-linux-installer/archive/refs
 sha512sums=('01f9fbd1f61d132432ebe457e257bae7664b8f4caa3334a1dda29c86e5ae9a40704a6822eaa3a3f7fadf536ea12ca9b9aeccd5b1cab99144cba9b675092286ea')
 
 package() {
-  cd "$srcdir"
-
-  # Copy launch-league-of-legends.py
+  cd "$srcdir/lol-for-linux-installer-v.$pkgver/src"
   install -Dm755 lol-for-linux-installer.py "$pkgdir/usr/bin/lol-for-linux-installer"
-
-  # Copy other necessary files and directories
   install -Dm644 env_vars.json "$pkgdir/usr/share/lol-for-linux-installer/env_vars.json"
   install -Dm644 lol-for-linux-installer.png "$pkgdir/usr/share/lol-for-linux-installer/lol-for-linux-installer.png"
   install -Dm644 leagueinstaller_code.py "$pkgdir/usr/share/lol-for-linux-installer/leagueinstaller_code.py"
-  # Install the desktop file
-  install -Dm644 "$srcdir/lol-for-linux-installer.desktop" "$pkgdir/usr/share/applications/lol-for-linux-installer.desktop"
-
-  # Copy python_src directory
+  install -Dm644 lol-for-linux-installer.desktop "$pkgdir/usr/share/applications/lol-for-linux-installer.desktop"
   cp -R python_src "$pkgdir/usr/share/lol-for-linux-installer/"
 }
+
