@@ -7,6 +7,11 @@ This software is not affiliated with nor supported by Riot Games.
 ![Screenshot_20230415_205958](https://user-images.githubusercontent.com/40970965/232259098-0e51d868-cfb8-4312-aab4-6e84728c5f24.png)
 ![Screenshot_20230512_212003](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/1fdd188a-8af5-4401-8b0c-f66a8ff82ff0)
 
+## Installing using PKGBUILD (for Arch Linux based distributions)
+- Get the PKGBUILD file in [this repo](https://github.com/kassindornelles/lol-for-linux-installer-pkgbuild/)
+- Open a terminal/console and run "makepkg -si" and install the package
+- A shortcut will be created in the system menu for League of Legends.
+
 ## How to use it (without installing)
 - Check if you have all required [dependencies](#dependencies) installed first
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
