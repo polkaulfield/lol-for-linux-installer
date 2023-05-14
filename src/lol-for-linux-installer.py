@@ -4,6 +4,12 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox,
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal, QTimer
 from PyQt5.QtGui import QDesktopServices
+
+module_folder = "/usr/share/lol-for-linux-installer"
+
+# Add the module's folder to the Python path
+sys.path.append(module_folder)
+
 import leagueinstaller_code
 
 class GuiLogHandler(QObject, logging.Handler):
@@ -37,7 +43,7 @@ class Installer(QMainWindow):
         try:
             loadUi("python_src/ui/installer.ui", self)
         except:
-            loadUi("/usr/share/lolforlinux/ui/installer.ui", self)
+            loadUi("/usr/share/lol-for-linux-installer/python_src/ui/installer.ui", self)
         self.game_installed_folder = None
         self.setFixedSize(self.size())
         self.setWindowTitle('League of Legends Manager')
@@ -234,17 +240,17 @@ class Installer(QMainWindow):
         os.chdir(self.game_installed_folder)
         if shutil.which('gamemoderun') is not None:
             try:
-                process = subprocess.Popen(['gamemoderun', 'python3', 'launch-script.py'])
+                process = subprocess.Popen(['gamemoderun', 'python3', '/usr/share/lol-for-linux-installer/python_src/src/launch-script.py'])
             except subprocess.CalledProcessError as e:
                 print("Error running the command with GameMode:", e)
         else:
             print("GameMode is not installed or not available.")
-            process = subprocess.Popen(['python3', 'launch-script.py'])
+            process = subprocess.Popen(['python3', '/usr/share/lol-for-linux-installer/python_src/src/launch-script.py'])
 
         installer.hide()
         process.wait()
 
-        if not self.is_process_running("RiotClientServi"):
+        if not self.is_process_running("RiotClientServices.exe"):
             self.launchLeagueinstalled.setEnabled(True)
             self.uninstallLeaguebutton.setEnabled(True)
             installer.show()
@@ -427,7 +433,6 @@ class Installer(QMainWindow):
         if self.game_main_dir:
             self.cancelButton.show()
             self.cancelButton.setEnabled(True)
-            self.checkShortcut.setEnabled(False)
             self.welcomelabel.setText("We are installing the game for you...")
             self.install_button.setEnabled(False)
             self.languageComboBox.setEnabled(False)
@@ -458,6 +463,13 @@ class Installer(QMainWindow):
             self.setup_logger()
             scrollbar = self.textOutput.verticalScrollBar()
             scrollbar.setValue(scrollbar.maximum())
+
+            try:
+                shutil.copy("env_vars.json", os.path.join(self.game_main_dir, "env_vars.json"))
+                os.chdir(self.game_main_dir)
+            except:
+                shutil.copy("/usr/share/lol-for-linux-installer/env_vars.json", os.path.join(self.game_main_dir, "env_vars.json"))
+                os.chdir(self.game_main_dir)
 
             with open('env_vars.json', 'r') as f:
                 env_vars = json.load(f)
@@ -503,7 +515,7 @@ class Installer(QMainWindow):
                     json.dump(env_vars, f, indent=4)
 
             self.thread = QThread()
-            self.worker = Worker(self.game_main_dir, game_region_link, self.checkShortcut.isChecked())
+            self.worker = Worker(self.game_main_dir, game_region_link)
             self.worker.moveToThread(self.thread)
             self.thread.started.connect(self.worker.run)
             self.thread.finished.connect(self.finish_installation)
@@ -518,13 +530,12 @@ class Installer(QMainWindow):
         self.stackedWidget.setCurrentWidget(self.gamemanager)
 
 class Worker(QObject):
-    def __init__(self, game_main_dir, game_region_link, create_shortcut):
+    def __init__(self, game_main_dir, game_region_link):
         super().__init__()
         self.game_main_dir = game_main_dir
         self.game_region_link = game_region_link
-        self.create_shortcut = create_shortcut
     def run(self):
-        leagueinstaller_code.league_install_code(self.game_main_dir, self.game_region_link, self.create_shortcut)
+        leagueinstaller_code.league_install_code(self.game_main_dir, self.game_region_link)
 
 class QTextEditLogger(logging.Handler, QObject):
     appendPlainText = pyqtSignal(str)
