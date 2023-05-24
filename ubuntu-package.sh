@@ -9,7 +9,7 @@ url="https://github.com/kassindornelles/lol-for-linux-installer"
 license="GPL-3.0"
 arch="amd64"
 
-dependencies=$(dpkg-query -W -f='${Depends}' python3 python3-psutil python3-pyqt5 wine python3-requests qt5-default libgnutls30 libldap-2.4-2 libpng16-16 libgphoto2-6 libpulse0 libqt5gui5 | sed 's/,/ /g')
+dependencies=$(dpkg-query -W -f='${Depends}' python3 python3-psutil python3-pyqt5 wine64 python3-requests qt5-default libgnutls30 libldap-2.4-2 libpng16-16 libgphoto2-6 libpulse0 libqt5gui5 | sed 's/,/ /g')
 
 pkgdir="$pkgname-$pkgver"
 mkdir -p "$pkgdir/DEBIAN"
