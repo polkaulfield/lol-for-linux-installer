@@ -40,11 +40,16 @@ create_deb_package() {
     echo "Package: ${pkgname}" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
     echo "Version: ${pkgver}-${pkgrel}" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
     echo "Architecture: ${arch}" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
-    echo "Maintainer: Kassin Dornelles <kassin.dornelles@gmail.com>" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
+    echo "Maintainer: Your Name <yourname@example.com>" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
     echo "Description: ${pkgdesc}" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
     echo "Homepage: ${url}" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
     dpkg-deb --build "${pkgname}-${pkgver}-${pkgrel}"
+    mv "${pkgname}-${pkgver}-${pkgrel}.deb" "$(dirname "$0")/${pkgname}-${pkgver}-${pkgrel}.deb"
     echo "Package built successfully: ${pkgname}-${pkgver}-${pkgrel}.deb"
+
+    # Remove the source folder
+    cd "$(dirname "$0")"
+    rm -rf "lol-for-linux-installer-v.${pkgver}"
 }
 
 # Main function
