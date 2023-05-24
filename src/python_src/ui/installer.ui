@@ -192,7 +192,7 @@
            <item>
             <widget class="QStackedWidget" name="stackedWidget">
              <property name="currentIndex">
-              <number>3</number>
+              <number>1</number>
              </property>
              <widget class="QWidget" name="welcome">
               <widget class="QLabel" name="adviselabel">
@@ -229,7 +229,7 @@
                 <enum>QFrame::Plain</enum>
                </property>
                <property name="text">
-                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;This software is not verified, affiliated with, or supported by Riot Games.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;Thanks &lt;a href=&quot;https://github.com/gloriouseggroll&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#1d99f3;&quot;&gt;GloriousEggroll&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'inherit'; color:#ffffff;&quot;&gt; for providing the WINE builds!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;This software is not verified, affiliated with, or supported by Riot Games.&lt;/p&gt;&lt;p align=&quot;center&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Thanks &lt;/span&gt;&lt;a href=&quot;https://github.com/gloriouseggroll&quot;&gt;&lt;span style=&quot; font-weight:700; text-decoration: underline; color:#1d99f3;&quot;&gt;GloriousEggroll&lt;/span&gt;&lt;/a&gt;&lt;span style=&quot; font-family:'inherit'; font-weight:700; color:#ffffff;&quot;&gt; for providing the WINE builds!&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                </property>
                <property name="textFormat">
                 <enum>Qt::AutoText</enum>
@@ -933,7 +933,7 @@
                   <rect>
                    <x>10</x>
                    <y>150</y>
-                   <width>261</width>
+                   <width>561</width>
                    <height>31</height>
                   </rect>
                  </property>
