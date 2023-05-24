@@ -40,7 +40,7 @@ create_deb_package() {
     echo "Package: ${pkgname}" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
     echo "Version: ${pkgver}-${pkgrel}" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
     echo "Architecture: ${arch}" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
-    echo "Maintainer: Your Name <yourname@example.com>" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
+    echo "Maintainer: Kassin Dornelles <kassin.dornelles@gmail.com>" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
     echo "Description: ${pkgdesc}" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
     echo "Homepage: ${url}" >> "${pkgname}-${pkgver}-${pkgrel}/DEBIAN/control"
     dpkg-deb --build "${pkgname}-${pkgver}-${pkgrel}"
