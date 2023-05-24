@@ -8,7 +8,7 @@ url="https://github.com/kassindornelles/lol-for-linux-installer"
 license=('GPL-3.0')
 depends=("python3" "python3-psutil" "python3-pyqt5" "wine" "python3-requests" "python3-pyqt5.qtwebkit" "tar" "libgnutls30" "libgnutls30:i386" "libldap-2.5-0" "libldap-2.5-0:i386" "libpng16-16" "libpng16-16:i386" "libgl1-mesa-glx" "libgl1-mesa-glx:i386" "gphoto2" "libpulse0" "libpulse0:i386")
 source=("https://github.com/kassindornelles/lol-for-linux-installer/archive/refs/tags/v.$pkgver.tar.gz")
-sha512sums=('04b8f5a0f81493ccb8f8ae6892090679dcd491c4440e8b565133eb331758eb8d4414ed262b6d657db88ed98b9422df2ac7cfe735ad4b567094648c5d91e01cfd')
+sha512sums=('e20560594420f66bd031ad1c084e83793120623e270e03e7012a74ebef156e335be520b7117e68a05610eb5c8fd226e3aaf2351527f4a82dc302fde23d0ec238')
 
 package() {
   cd "$srcdir/lol-for-linux-installer-v.$pkgver/src"
