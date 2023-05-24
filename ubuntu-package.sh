@@ -8,7 +8,8 @@ maintainer="Kassin Dornelles <kassin.dornelles@gmail.com>"
 url="https://github.com/kassindornelles/lol-for-linux-installer"
 license="GPL-3.0"
 arch="amd64"
-dependencies="python3 python3-psutil python3-pyqt5 wine python3-requests qtbase5-dev libgnutls30 libldap-2.4-2 libpng16-16 libgphoto2-6 libpulse0 libqt5gui5"
+
+dependencies=$(dpkg-query -W -f='${Depends}' python3 python3-psutil python3-pyqt5 wine python3-requests qt5-default libgnutls30 libldap-2.4-2 libpng16-16 libgphoto2-6 libpulse0 libqt5gui5 | sed 's/,/ /g')
 
 pkgdir="$pkgname-$pkgver"
 mkdir -p "$pkgdir/DEBIAN"
@@ -23,6 +24,7 @@ cp src/leagueinstaller_code.py "$pkgdir/usr/share/lol-for-linux-installer/league
 cp src/lol-for-linux-installer.desktop "$pkgdir/usr/share/applications/lol-for-linux-installer.desktop"
 cp -R src/python_src "$pkgdir/usr/share/lol-for-linux-installer/"
 
+# Create control file
 cat > "$pkgdir/DEBIAN/control" << EOL
 Package: $pkgname
 Version: $pkgver-$pkgrel
