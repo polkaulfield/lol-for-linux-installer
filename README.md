@@ -10,7 +10,11 @@ This software is not affiliated with nor supported by Riot Games.
 ## Easy installation
 - We provide .deb packages now since v.2.3, so if you are in a ubuntu based distro go ahead and use it
 
-- For arch users we have a PKGBUILD, just run "makepkg -si" in a terminal
+ Most known Ubuntu based distributions: Linux Mint, Pop_OS!, ElementaryOS and many others.
+
+- For Arch Linux users we have a PKGBUILD, just run "makepkg -si" in a terminal
+
+ Should work fine on EndeavourOS, Manjaro and others
 
 ## How to use it (without installing)
 - Check if you have all required [dependencies](#dependencies) installed first
