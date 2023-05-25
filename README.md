@@ -8,7 +8,7 @@ This software is not affiliated with nor supported by Riot Games.
 ![Screenshot_20230512_212003](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/1fdd188a-8af5-4401-8b0c-f66a8ff82ff0)
 
 ## Easy installation
-- We provide .deb packages now since v.2.3, so if you are in a ubuntu based distro go ahead and use it
+- We provide .deb packages now (PKGBUILD + makedeb) since v.2.3, so if you are in a ubuntu based distro go ahead and use it
 
  Most known Ubuntu based distributions: Linux Mint, Pop_OS!, ElementaryOS and many others.
 
@@ -21,9 +21,6 @@ This software is not affiliated with nor supported by Riot Games.
 - Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
 - Extract the files
 - Double-click 'lol-for-linux-installer.py' and install the game or manage your already existent install.
-
-## Arch Linux based distributions installation:
-- In the folder where the `PKGBUILD`file is located run `makepkg -si` in a terminal.
 
 ### Python Script features:
 - You can choose where to install the game and also the region you are going to play
