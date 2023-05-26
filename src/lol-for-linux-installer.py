@@ -179,9 +179,11 @@ class Installer(QMainWindow):
             env_vars['game_launcher_options'].pop('OBS_VKCAPTURE', None)
 
         env_vars['game_settings'] = {'Gamemode': '1' if self.Usegamemode.isChecked() else '0'}
+        self.gamemode_value = int(env_vars['game_settings']['Gamemode'])
 
         with open('env_vars.json', 'w') as f:
             json.dump(env_vars, f, indent=4)
+
 
         self.applyButton.setEnabled(False)
 
@@ -212,20 +214,24 @@ class Installer(QMainWindow):
         shutil.rmtree(tmp_path)
         self.rendererCombobox.setEnabled(False)
 
-    def launchleague(self, gamemode_value):
+    def launchleague(self):
         self.launchLeagueinstalled.setEnabled(False)
         self.uninstallLeaguebutton.setEnabled(False)
         self.stackedWidget.setCurrentWidget(self.gamemanager)
         os.chdir(self.game_installed_folder)
 
-        if self.gamemode_value == "1":
-            try:
-                process = subprocess.Popen(['gamemoderun', 'python3', '/usr/share/lol-for-linux-installer/python_src/src/launch-script.py'], env=os.environ.copy())
-            except subprocess.CalledProcessError as e:
-                print("Error running the command with GameMode:", e)
+        env_vars_file_path = os.path.join(self.game_installed_folder, 'env_vars.json')
+        with open(env_vars_file_path, 'r') as env_vars_file:
+            env_vars = json.load(env_vars_file)
+            game_settings = env_vars.get('game_settings', {})
+            gamemode_value = int(game_settings.get('Gamemode', '0'))
+
+        if gamemode_value == 1:
+            process = subprocess.Popen(['gamemoderun', 'python3', '/usr/share/lol-for-linux-installer/launch-script.py'])
+            print("Using gamemode.")
         else:
-            print("GameMode is not installed or not available.")
-            process = subprocess.Popen(['python3', '/usr/share/lol-for-linux-installer/python_src/src/launch-script.py'], env=os.environ.copy())
+            process = subprocess.Popen(['python3', '/usr/share/lol-for-linux-installer/launch-script.py'])
+            print("Not using gamemode.")
 
         installer.hide()
         process.wait()
