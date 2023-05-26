@@ -93,10 +93,12 @@ class Installer(QMainWindow):
         if shutil.which('gamemoderun') is not None:
             try:
                 self.gamemodelabel.setText("<html><b><span style='color: green;'>Gamemode is detected</span></b></html>")
+                self.Usegamemode.setEnabled()
             except:
                 print("Error while getting Gamemode info.")
         else:
             self.gamemodelabel.setText("<html><b><span style='color: red;'>Gamemode is not installed</span></b></html>")
+            self.Usegamemode.setEnabled(False)
 
     def load_env_vars(self, env_vars):
         game_launcher_options = env_vars.get("game_launcher_options", {})
@@ -121,8 +123,8 @@ class Installer(QMainWindow):
         else:
             self.obsvkcapturecheck.setChecked(False)
 
-
-        if env_vars.get("Gamemode") == "1":
+        game_settings = env_vars.get("game_settings", {})
+        if game_settings.get("Gamemode") == "1":
             self.Usegamemode.setChecked(True)
         else:
             self.Usegamemode.setChecked(False)
