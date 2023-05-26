@@ -28,15 +28,17 @@ This software is not affiliated with nor supported by Riot Games.
 - Update system for WINE builds, DXVK version selection and more (DXVK installation via our launcher)
 - Gamemode support, if installed system wide it will be used automatically.
 
-## <a name="dependencies"></a> Dependencies (install those packages system-wide first):
+## <a name="dependencies"></a> Dependencies:
 - `tar`, `python`, `python-requests`, `python-psutil`, `qt5-base` and `pyqt5`
 
    On ubuntu-based distributions the python packages are called "python3-psutil, python3-requests and python3-pyqt5"
    
 - WINE 32-64 bits and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
-## Remaining tasks:
+## Contributions needed for:
 - Flatpak package
+- Arch Linux AUR inclusion
+- Fedora packaging
 
 ## Buy me a coffee
 
