@@ -45,6 +45,7 @@ class Installer(QMainWindow):
         except:
             loadUi("/usr/share/lol-for-linux-installer/python_src/ui/installer.ui", self)
         self.game_installed_folder = None
+        self.gamemode_value = None
         self.setFixedSize(self.size())
         self.setWindowTitle('League of Legends Manager')
         self.install_button.clicked.connect(self.installer_code)
@@ -62,6 +63,7 @@ class Installer(QMainWindow):
         self.Usemangohud.stateChanged.connect(self.toggleapplybutton)
         self.obsvkcapturecheck.stateChanged.connect(self.toggleapplybutton)
         self.rendererCombobox.currentIndexChanged.connect(self.toggleapplybutton)
+        self.Usegamemode.clicked.connect(self.toggleapplybutton)
         self.nextWelcome.clicked.connect(self.regionWidget)
         self.nextRegion.clicked.connect(self.optionsWidget)
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
@@ -90,13 +92,11 @@ class Installer(QMainWindow):
 
         if shutil.which('gamemoderun') is not None:
             try:
-                self.gamemodelabel.setText("<html><b><span style='color: green;'>Gamemode is installed and will be used.</span></b></html>")
+                self.gamemodelabel.setText("<html><b><span style='color: green;'>Gamemode is detected</span></b></html>")
             except:
                 print("Error while getting Gamemode info.")
-                # Handle the error here
         else:
-            self.gamemodelabel.setText("<html><b><span style='color: red;'>Gamemode is not installed.</span></b></html>")
-            # Handle the case where GameMode is not installed
+            self.gamemodelabel.setText("<html><b><span style='color: red;'>Gamemode is not installed</span></b></html>")
 
     def load_env_vars(self, env_vars):
         if all(key in env_vars for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
@@ -118,6 +118,14 @@ class Installer(QMainWindow):
             self.obsvkcapturecheck.setChecked(True)
         else:
             self.obsvkcapturecheck.setChecked(False)
+
+        game_settings = env_vars.get("game_settings")
+        if game_settings and game_settings.get("Gamemode") == "1":
+            self.Usegamemode.setChecked(True)
+            self.gamemode_value = "1"
+        else:
+            self.gamemode_value = "0"
+            self.Usegamemode.setChecked(False)
 
         self.stackedWidget.setCurrentWidget(self.gamemanager)
 
@@ -204,6 +212,21 @@ class Installer(QMainWindow):
             with open('env_vars.json', 'w') as f:
                 json.dump(env_vars, f, indent=4)
 
+            if self.Usegamemode.isChecked():
+                self.gamemode_value = "1"
+            else:
+                self.gamemode_value = "0"
+
+            with open('env_vars.json', 'r') as f:
+                env_vars = json.load(f)
+
+            game_settings = env_vars.get("game_settings")
+            if game_settings:
+                game_settings["Gamemode"] = self.gamemode_value
+
+            with open('env_vars.json', 'w') as f:
+                json.dump(env_vars, f, indent=4)
+
         self.applyButton.setEnabled(False)
 
     def install_dxvk_code(self, dxvk_version, game_installed_folder):
@@ -238,7 +261,8 @@ class Installer(QMainWindow):
         self.uninstallLeaguebutton.setEnabled(False)
         self.stackedWidget.setCurrentWidget(self.gamemanager)
         os.chdir(self.game_installed_folder)
-        if shutil.which('gamemoderun') is not None:
+
+        if self.gamemode_value == "1":
             try:
                 process = subprocess.Popen(['gamemoderun', 'python3', '/usr/share/lol-for-linux-installer/python_src/src/launch-script.py'])
             except subprocess.CalledProcessError as e:
