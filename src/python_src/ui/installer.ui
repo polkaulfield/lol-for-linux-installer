@@ -899,7 +899,7 @@
                   </rect>
                  </property>
                  <property name="text">
-                  <string>Renderer:</string>
+                  <string>Renderer (DXVK):</string>
                  </property>
                 </widget>
                 <widget class="QCheckBox" name="Usenvidiahybrid">
