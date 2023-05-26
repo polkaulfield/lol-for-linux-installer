@@ -16,13 +16,7 @@ This software is not affiliated with nor supported by Riot Games.
 
  Should work fine on EndeavourOS, Manjaro and others
  
- - <b>Ir order for the game client to launch you NEED to install DXVK using our UI! (the "Renderer" option). </b>
-
-## How to use it (without installing)
-- Check if you have all required [dependencies](#dependencies) installed first
-- Download the latest release from the [Releases page](https://github.com/kassindornelles/lol-for-linux-bash-installer/releases)
-- Extract the files
-- Double-click 'lol-for-linux-installer.py' and install the game or manage your already existent install.
+ ## In order for the game client to launch you NEED to install DXVK using our UI! (the "Renderer" option).
 
 ### Python Script features:
 - You can choose where to install the game and also the region you are going to play
