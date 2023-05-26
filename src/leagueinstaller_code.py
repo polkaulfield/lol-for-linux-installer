@@ -50,14 +50,16 @@ def league_install_code(game_main_dir, game_region_link):
     os.rename(os.path.join(game_main_wine_dir, extracted_folder_name), os.path.join(game_main_wine_dir, "wine-build"))
     logging.info("Extraction of the wine-lutris-lol build file completed")
 
-    with open('env_vars.json', 'r') as f:
-        env_vars = json.load(f)
+    with open('env_vars.json', 'r') as env_vars_file:
+        env_vars = json.load(env_vars_file)
+        game_launcher_options = env_vars.get("game_launcher_options", {})
 
-    env_vars['PATH'] = os.path.join(game_main_wine_dir, 'wine-build', 'bin', ":{os.environ['PATH']}")
-    env_vars['WINEPREFIX'] = game_prefix_dir
-    env_vars['WINELOADER'] = wine_loader_path
+    # Replace placeholders in game launcher options with actual values
+    game_launcher_options['PATH'] = os.path.join(game_main_wine_dir, 'wine-build', 'bin')
+    game_launcher_options['WINEPREFIX'] = game_prefix_dir
+    game_launcher_options['WINELOADER'] = wine_loader_path
 
-    first_boot_envs = dict(os.environ, **env_vars)
+    first_boot_envs = dict(os.environ, **game_launcher_options)
     subprocess.run(["wine", league_installer_file], env=first_boot_envs, check=True)
 
     # create py script
@@ -72,14 +74,14 @@ def league_install_code(game_main_dir, game_region_link):
         "game_main_dir": game_main_dir
     }
 
-    # Create the directory if it doesn't exist
-    os.makedirs(user_config_folder, exist_ok=True)
-
     # Write the dictionary to a JSON file in the user_config_folder directory
     with open(os.path.join(user_config_folder, "league_install_path.json"), "w") as outfile:
         json.dump(data_folder, outfile)
 
     logging.info("json file created")
+
+    # Create the directory if it doesn't exist
+    os.makedirs(user_config_folder, exist_ok=True)
 
     # Wine build version json
     lol_build_current = {
