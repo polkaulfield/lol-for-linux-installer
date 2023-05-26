@@ -15,6 +15,8 @@ This software is not affiliated with nor supported by Riot Games.
 - For Arch Linux users we have a PKGBUILD, just run "makepkg -si" in a terminal
 
  Should work fine on EndeavourOS, Manjaro and others
+ 
+ - <b>Ir order for the game client to launch you NEED to install DXVK using our UI! (the "Renderer" option). </b>
 
 ## How to use it (without installing)
 - Check if you have all required [dependencies](#dependencies) installed first
