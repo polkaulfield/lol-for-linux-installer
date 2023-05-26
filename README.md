@@ -3,9 +3,9 @@
 League of Legends unofficial installer/manager for linux
 
 This software is not affiliated with nor supported by Riot Games.
+![Screenshot_20230526_122858](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/b77e576b-5044-4447-bea2-06cb80da3a3c)
+![Screenshot_20230526_122553](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/519e3787-41eb-4f1e-8cdb-dabf62e6d126)
 
-![Screenshot_20230415_205958](https://user-images.githubusercontent.com/40970965/232259098-0e51d868-cfb8-4312-aab4-6e84728c5f24.png)
-![Screenshot_20230512_212003](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/1fdd188a-8af5-4401-8b0c-f66a8ff82ff0)
 
 ## Easy installation
 - We provide .deb packages now (PKGBUILD + makedeb) since v.2.3, so if you are in a ubuntu based distro go ahead and use it
