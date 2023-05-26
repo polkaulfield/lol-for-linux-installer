@@ -1,6 +1,6 @@
 # Maintainer: Kassin Dornelles <kassin.dornelles@gmail.com>
 pkgname=lol-for-linux-installer
-pkgver=2.3.2
+pkgver=2.3.3
 pkgrel=1
 pkgdesc="League of Legends installer and manager for Linux"
 arch=('x86_64')
@@ -13,6 +13,7 @@ sha512sums=('a01068d846420e6e02e8177f79d067dc20e5026faa33256c5bce356d397c814f192
 package() {
   cd "$srcdir/lol-for-linux-installer-v.$pkgver/src"
   install -Dm755 lol-for-linux-installer.py "$pkgdir/usr/bin/lol-for-linux-installer"
+  install -Dm755 launch-script.py "$pkgdir/usr/share/lol-for-linux-installer/launch-script.py"
   install -Dm644 env_vars.json "$pkgdir/usr/share/lol-for-linux-installer/env_vars.json"
   install -Dm644 lol-for-linux-installer.png "$pkgdir/usr/share/lol-for-linux-installer/lol-for-linux-installer.png"
   install -Dm644 leagueinstaller_code.py "$pkgdir/usr/share/lol-for-linux-installer/leagueinstaller_code.py"
