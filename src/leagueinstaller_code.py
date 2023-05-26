@@ -62,13 +62,6 @@ def league_install_code(game_main_dir, game_region_link):
     first_boot_envs = dict(os.environ, **game_launcher_options)
     subprocess.run(["wine", league_installer_file], env=first_boot_envs, check=True)
 
-    # create py script
-    try:
-        shutil.copy("python_src/src/launch-script.py", os.path.join(game_main_dir, "launch-script.py"))
-    # Fallback for appimage
-    except:
-        shutil.copy("/usr/share/lol-for-linux-installer/python_src/src/launch-script.py", os.path.join(game_main_dir, "launch-script.py"))
-
     # Create a dictionary to hold the install dir data
     data_folder = {
         "game_main_dir": game_main_dir
