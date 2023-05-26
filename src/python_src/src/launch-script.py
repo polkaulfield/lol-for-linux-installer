@@ -30,7 +30,13 @@ game_launcher_options['WINELOADER'] = wine_loader_path
 
 start_game_vars = dict(os.environ, **game_launcher_options)
 
-wine_process = ["wine", os.path.join(game_exe_path, game_exe_file_name), "--launch-product=league_of_legends", "--launch-patchline=live"]
+wine_process = [
+    "wine",
+    os.path.join(game_exe_path, game_exe_file_name),
+    "--launch-product=league_of_legends",
+    "--launch-patchline=live"
+]
+
 subprocess.run(wine_process, env=start_game_vars, check=True)
 
 

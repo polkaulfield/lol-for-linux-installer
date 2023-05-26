@@ -99,32 +99,32 @@ class Installer(QMainWindow):
             self.gamemodelabel.setText("<html><b><span style='color: red;'>Gamemode is not installed</span></b></html>")
 
     def load_env_vars(self, env_vars):
-        if all(key in env_vars for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
+        game_launcher_options = env_vars.get("game_launcher_options", {})
+
+        if all(key in game_launcher_options for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
             self.Usenvidiahybrid.setChecked(True)
         else:
             self.Usenvidiahybrid.setChecked(False)
 
-        if all(key in env_vars for key in ['DRI_PRIME']):
+        if all(key in game_launcher_options for key in ['DRI_PRIME']):
             self.Usedriprime.setChecked(True)
         else:
             self.Usedriprime.setChecked(False)
 
-        if all(key in env_vars for key in ['MANGOHUD']):
+        if all(key in game_launcher_options for key in ['MANGOHUD']):
             self.Usemangohud.setChecked(True)
         else:
             self.Usemangohud.setChecked(False)
 
-        if all(key in env_vars for key in ['OBS_VKCAPTURE']):
+        if all(key in game_launcher_options for key in ['OBS_VKCAPTURE']):
             self.obsvkcapturecheck.setChecked(True)
         else:
             self.obsvkcapturecheck.setChecked(False)
 
-        game_settings = env_vars.get("game_settings")
-        if game_settings and game_settings.get("Gamemode") == "1":
+
+        if env_vars.get("Gamemode") == "1":
             self.Usegamemode.setChecked(True)
-            self.gamemode_value = "1"
         else:
-            self.gamemode_value = "0"
             self.Usegamemode.setChecked(False)
 
         self.stackedWidget.setCurrentWidget(self.gamemanager)
@@ -144,18 +144,9 @@ class Installer(QMainWindow):
             env_vars = json.load(f)
 
         if self.Usedriprime.isChecked():
-                if 'DRI_PRIME' not in env_vars:
-                    env_vars['DRI_PRIME'] = '1'
-
-                with open('env_vars.json', 'w') as f:
-                    json.dump(env_vars, f, indent=4)
+            env_vars['game_launcher_options']['DRI_PRIME'] = '1'
         else:
-
-                if 'DRI_PRIME' in env_vars:
-                    del env_vars['DRI_PRIME']
-
-                with open('env_vars.json', 'w') as f:
-                    json.dump(env_vars, f, indent=4)
+            env_vars['game_launcher_options'].pop('DRI_PRIME', None)
 
         if self.Usenvidiahybrid.isChecked():
             new_vars = {
@@ -164,13 +155,7 @@ class Installer(QMainWindow):
                 'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/nvidia_icd.json',
                 'VK_LAYER_NV_optimus': 'NVIDIA_only'
             }
-
-            for var_name, var_value in new_vars.items():
-                if var_name not in env_vars:
-                    env_vars[var_name] = var_value
-
-            with open('env_vars.json', 'w') as f:
-                json.dump(env_vars, f, indent=4)
+            env_vars['game_launcher_options'].update(new_vars)
         else:
             vars_to_remove = [
                 'NV_PRIME_RENDER_OFFLOAD',
@@ -178,54 +163,23 @@ class Installer(QMainWindow):
                 'VK_ICD_FILENAMES',
                 'VK_LAYER_NV_optimus'
             ]
-
             for var_name in vars_to_remove:
-                if var_name in env_vars:
-                    del env_vars[var_name]
-
-            with open('env_vars.json', 'w') as f:
-                json.dump(env_vars, f, indent=4)
+                env_vars['game_launcher_options'].pop(var_name, None)
 
         if self.Usemangohud.isChecked():
-            if 'MANGOHUD' not in env_vars:
-                env_vars['MANGOHUD'] = '1'
-
-            with open('env_vars.json', 'w') as f:
-                json.dump(env_vars, f, indent=4)
+            env_vars['game_launcher_options']['MANGOHUD'] = '1'
         else:
-            if 'MANGOHUD' in env_vars:
-                del env_vars['MANGOHUD']
-
-            with open('env_vars.json', 'w') as f:
-                json.dump(env_vars, f, indent=4)
+            env_vars['game_launcher_options'].pop('MANGOHUD', None)
 
         if self.obsvkcapturecheck.isChecked():
-            if 'OBS_VKCAPTURE' not in env_vars:
-                env_vars['OBS_VKCAPTURE'] = '1'
-
-            with open('env_vars.json', 'w') as f:
-                json.dump(env_vars, f, indent=4)
+            env_vars['game_launcher_options']['OBS_VKCAPTURE'] = '1'
         else:
-            if 'OBS_VKCAPTURE' in env_vars:
-                del env_vars['OBS_VKCAPTURE']
+            env_vars['game_launcher_options'].pop('OBS_VKCAPTURE', None)
 
-            with open('env_vars.json', 'w') as f:
-                json.dump(env_vars, f, indent=4)
+        env_vars['game_settings'] = {'Gamemode': '1' if self.Usegamemode.isChecked() else '0'}
 
-            if self.Usegamemode.isChecked():
-                self.gamemode_value = "1"
-            else:
-                self.gamemode_value = "0"
-
-            with open('env_vars.json', 'r') as f:
-                env_vars = json.load(f)
-
-            game_settings = env_vars.get("game_settings")
-            if game_settings:
-                game_settings["Gamemode"] = self.gamemode_value
-
-            with open('env_vars.json', 'w') as f:
-                json.dump(env_vars, f, indent=4)
+        with open('env_vars.json', 'w') as f:
+            json.dump(env_vars, f, indent=4)
 
         self.applyButton.setEnabled(False)
 
@@ -256,7 +210,7 @@ class Installer(QMainWindow):
         shutil.rmtree(tmp_path)
         self.rendererCombobox.setEnabled(False)
 
-    def launchleague(self):
+    def launchleague(self, gamemode_value):
         self.launchLeagueinstalled.setEnabled(False)
         self.uninstallLeaguebutton.setEnabled(False)
         self.stackedWidget.setCurrentWidget(self.gamemanager)
@@ -264,12 +218,12 @@ class Installer(QMainWindow):
 
         if self.gamemode_value == "1":
             try:
-                process = subprocess.Popen(['gamemoderun', 'python3', '/usr/share/lol-for-linux-installer/python_src/src/launch-script.py'])
+                process = subprocess.Popen(['gamemoderun', 'python3', '/usr/share/lol-for-linux-installer/python_src/src/launch-script.py'], env=os.environ.copy())
             except subprocess.CalledProcessError as e:
                 print("Error running the command with GameMode:", e)
         else:
             print("GameMode is not installed or not available.")
-            process = subprocess.Popen(['python3', '/usr/share/lol-for-linux-installer/python_src/src/launch-script.py'])
+            process = subprocess.Popen(['python3', '/usr/share/lol-for-linux-installer/python_src/src/launch-script.py'], env=os.environ.copy())
 
         installer.hide()
         process.wait()
