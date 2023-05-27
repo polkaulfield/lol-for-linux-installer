@@ -821,7 +821,7 @@
                 </rect>
                </property>
                <property name="currentIndex">
-                <number>1</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="title">
@@ -1106,6 +1106,130 @@
                  <property name="openExternalLinks">
                   <bool>true</bool>
                  </property>
+                </widget>
+               </widget>
+               <widget class="QWidget" name="tab_3">
+                <attribute name="title">
+                 <string>VkBasalt</string>
+                </attribute>
+                <widget class="QSlider" name="vkbasaltslider">
+                 <property name="enabled">
+                  <bool>false</bool>
+                 </property>
+                 <property name="geometry">
+                  <rect>
+                   <x>50</x>
+                   <y>120</y>
+                   <width>491</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="mouseTracking">
+                  <bool>false</bool>
+                 </property>
+                 <property name="minimum">
+                  <number>1</number>
+                 </property>
+                 <property name="maximum">
+                  <number>10</number>
+                 </property>
+                 <property name="singleStep">
+                  <number>1</number>
+                 </property>
+                 <property name="value">
+                  <number>1</number>
+                 </property>
+                 <property name="tracking">
+                  <bool>true</bool>
+                 </property>
+                 <property name="orientation">
+                  <enum>Qt::Horizontal</enum>
+                 </property>
+                 <property name="invertedAppearance">
+                  <bool>false</bool>
+                 </property>
+                 <property name="invertedControls">
+                  <bool>false</bool>
+                 </property>
+                 <property name="tickPosition">
+                  <enum>QSlider::TicksBelow</enum>
+                 </property>
+                 <property name="tickInterval">
+                  <number>1</number>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="vkbasaltcheckbox">
+                 <property name="geometry">
+                  <rect>
+                   <x>170</x>
+                   <y>40</y>
+                   <width>271</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Enable VkBasalt Image Sharpening</string>
+                 </property>
+                </widget>
+                <widget class="QWidget" name="horizontalLayoutWidget_6">
+                 <property name="geometry">
+                  <rect>
+                   <x>150</x>
+                   <y>79</y>
+                   <width>291</width>
+                   <height>41</height>
+                  </rect>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,0,0,0">
+                  <property name="spacing">
+                   <number>5</number>
+                  </property>
+                  <property name="sizeConstraint">
+                   <enum>QLayout::SetNoConstraint</enum>
+                  </property>
+                  <property name="leftMargin">
+                   <number>10</number>
+                  </property>
+                  <property name="rightMargin">
+                   <number>10</number>
+                  </property>
+                  <item>
+                   <spacer name="horizontalSpacer_5">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="vkbasaltlabel">
+                    <property name="text">
+                     <string> Strength:</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QLabel" name="sharpeningtext_level"/>
+                  </item>
+                  <item>
+                   <spacer name="horizontalSpacer_6">
+                    <property name="orientation">
+                     <enum>Qt::Horizontal</enum>
+                    </property>
+                    <property name="sizeHint" stdset="0">
+                     <size>
+                      <width>40</width>
+                      <height>20</height>
+                     </size>
+                    </property>
+                   </spacer>
+                  </item>
+                 </layout>
                 </widget>
                </widget>
               </widget>

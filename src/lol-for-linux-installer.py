@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 import sys, os, signal, psutil, logging, json, urllib.request, shutil, tarfile, subprocess, time
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox, QCheckBox
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox, QCheckBox, QSlider
 from PyQt5.uic import loadUi
-from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal, QTimer
+from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal, QTimer, Qt
 from PyQt5.QtGui import QDesktopServices
 
 module_folder = "/usr/share/lol-for-linux-installer"
@@ -44,8 +44,10 @@ class Installer(QMainWindow):
             loadUi("python_src/ui/installer.ui", self)
         except:
             loadUi("/usr/share/lol-for-linux-installer/python_src/ui/installer.ui", self)
+        self.is_checkbox_state_changed = False
         self.game_installed_folder = None
         self.gamemode_value = None
+        self.vkbasaltslider = self.findChild(QSlider, "vkbasaltslider")  # Find the QSlider object by object name
         self.setFixedSize(self.size())
         self.setWindowTitle('League of Legends Manager')
         self.install_button.clicked.connect(self.installer_code)
@@ -67,6 +69,8 @@ class Installer(QMainWindow):
         self.nextWelcome.clicked.connect(self.regionWidget)
         self.nextRegion.clicked.connect(self.optionsWidget)
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
+        self.vkbasaltcheckbox.clicked.connect(self.enablevkbasaltsettings)
+        self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
 
         # Check json file and initialize
         self.read_installed_folder()
@@ -123,16 +127,59 @@ class Installer(QMainWindow):
         else:
             self.obsvkcapturecheck.setChecked(False)
 
+        if all(key in game_launcher_options for key in ['ENABLE_VKBASALT']):
+            self.enablevkbasaltsettings()
+
+            config_file = game_launcher_options.get('VKBASALT_CONFIG_FILE')
+            casSharpness = self.read_cas_sharpness_from_config(config_file)
+
+            slider_value = self.convert_cas_sharpness_to_slider_value(casSharpness)
+            self.vkbasaltslider.setValue(slider_value)
+
         game_settings = env_vars.get("game_settings", {})
         if game_settings.get("Gamemode") == "1":
             self.Usegamemode.setChecked(True)
         else:
             self.Usegamemode.setChecked(False)
-
         self.stackedWidget.setCurrentWidget(self.gamemanager)
+
+    def read_cas_sharpness_from_config(self, config_file):
+        casSharpness = 0.5  # Default value if the file or key doesn't exist
+
+        try:
+            with open(config_file, 'r') as file:
+                for line in file:
+                    if line.startswith('casSharpness'):
+                        casSharpness = float(line.split('=')[1].strip())
+                        break
+        except (FileNotFoundError, IOError):
+            pass
+
+        return casSharpness
+
+    def convert_cas_sharpness_to_slider_value(self, casSharpness):
+        slider_value = int((casSharpness - 0.1) / 0.9 * 9) + 1
+        return slider_value
 
     def toggleapplybutton(self):
         self.applyButton.setEnabled(True)
+
+    def enablevkbasaltsettings(self):
+        checkbox_state = self.vkbasaltcheckbox.isChecked()
+
+        if checkbox_state:
+            self.vkbasaltslider.setEnabled(True)
+        else:
+            self.vkbasaltslider.setEnabled(False)
+
+        if checkbox_state != self.is_checkbox_state_changed:
+            self.toggleapplybutton()
+
+        self.is_checkbox_state_changed = checkbox_state
+
+    def vkbasaltslidercontrol(self, value):
+        self.sharpeningtext_level.setText("{}".format(value))
+        self.toggleapplybutton()
 
     def applynewsettings(self):
         os.chdir(self.game_installed_folder)
@@ -177,6 +224,21 @@ class Installer(QMainWindow):
             env_vars['game_launcher_options']['OBS_VKCAPTURE'] = '1'
         else:
             env_vars['game_launcher_options'].pop('OBS_VKCAPTURE', None)
+
+        if self.vkbasaltcheckbox.isChecked():
+            env_vars['game_launcher_options']['ENABLE_VKBASALT'] = '1'
+            env_vars['game_launcher_options']['VKBASALT_CONFIG_FILE'] = 'vkBasalt.conf'
+            filename = "vkBasalt.conf"
+            slider_value = self.vkbasaltslider.value()
+            casSharpness = (slider_value - 1) / 9.0 * 0.9 + 0.1
+            filepath = os.path.join(self.game_installed_folder, filename)
+            with open(filename, "w") as file:
+                file.write("effects = cas\n")
+                file.write("casSharpness = {}\n".format(casSharpness))
+            env_vars['game_launcher_options']['VKBASALT_CONFIG_FILE'] = filepath
+        else:
+            env_vars['game_launcher_options'].pop('ENABLE_VKBASALT', None)
+            env_vars['game_launcher_options'].pop('VKBASALT_CONFIG_FILE', None)
 
         env_vars['game_settings'] = {'Gamemode': '1' if self.Usegamemode.isChecked() else '0'}
         self.gamemode_value = int(env_vars['game_settings']['Gamemode'])
