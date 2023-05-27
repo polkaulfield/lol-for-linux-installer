@@ -1168,7 +1168,10 @@
                   </rect>
                  </property>
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;vkBasalt is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;p&gt;In this tab you can configure the &amp;quot;Contrast Adaptive Sharpening&amp;quot; filter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;vkBasalt is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;p&gt;In this tab you can configure the &amp;quot;Contrast Adaptive Sharpening&amp;quot; filter.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;You need vkBasalt installed on your system in order to use this.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="toolTipDuration">
+                  <number>-1</number>
                  </property>
                  <property name="text">
                   <string>Enable VkBasalt</string>
