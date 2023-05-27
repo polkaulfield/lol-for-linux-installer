@@ -44,7 +44,7 @@ class Installer(QMainWindow):
             loadUi("python_src/ui/installer.ui", self)
         except:
             loadUi("/usr/share/lol-for-linux-installer/python_src/ui/installer.ui", self)
-        self.is_checkbox_state_changed = False
+        self.slider_value_changed = False
         self.game_installed_folder = None
         self.gamemode_value = None
         self.vkbasaltslider = self.findChild(QSlider, "vkbasaltslider")  # Find the QSlider object by object name
@@ -70,7 +70,6 @@ class Installer(QMainWindow):
         self.nextRegion.clicked.connect(self.optionsWidget)
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
         self.vkbasaltcheckbox.clicked.connect(self.enablevkbasaltsettings)
-        self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
 
         # Check json file and initialize
         self.read_installed_folder()
@@ -129,12 +128,12 @@ class Installer(QMainWindow):
 
         if all(key in game_launcher_options for key in ['ENABLE_VKBASALT']):
             self.enablevkbasaltsettings()
-
+            self.vkbasaltcheckbox.setChecked(True)
             config_file = game_launcher_options.get('VKBASALT_CONFIG_FILE')
             casSharpness = self.read_cas_sharpness_from_config(config_file)
-
             slider_value = self.convert_cas_sharpness_to_slider_value(casSharpness)
             self.vkbasaltslider.setValue(slider_value)
+            self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
 
         game_settings = env_vars.get("game_settings", {})
         if game_settings.get("Gamemode") == "1":
@@ -159,27 +158,20 @@ class Installer(QMainWindow):
 
     def convert_cas_sharpness_to_slider_value(self, casSharpness):
         slider_value = int((casSharpness - 0.1) / 0.9 * 9) + 1
+        self.sharpeningtext_level.setText(str(slider_value))
         return slider_value
 
     def toggleapplybutton(self):
         self.applyButton.setEnabled(True)
 
     def enablevkbasaltsettings(self):
-        checkbox_state = self.vkbasaltcheckbox.isChecked()
-
-        if checkbox_state:
-            self.vkbasaltslider.setEnabled(True)
-        else:
-            self.vkbasaltslider.setEnabled(False)
-
-        if checkbox_state != self.is_checkbox_state_changed:
-            self.toggleapplybutton()
-
-        self.is_checkbox_state_changed = checkbox_state
+        self.vkbasaltslider.setEnabled(True)
 
     def vkbasaltslidercontrol(self, value):
-        self.sharpeningtext_level.setText("{}".format(value))
-        self.toggleapplybutton()
+        self.sharpeningtext_level.setText(str(value))
+        if not self.slider_value_changed:  # Check if the value has been changed by the user
+            self.toggleapplybutton()
+        self.slider_value_changed = True
 
     def applynewsettings(self):
         os.chdir(self.game_installed_folder)
