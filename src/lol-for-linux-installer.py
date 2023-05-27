@@ -69,9 +69,7 @@ class Installer(QMainWindow):
         self.nextWelcome.clicked.connect(self.regionWidget)
         self.nextRegion.clicked.connect(self.optionsWidget)
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
-        self.vkbasaltcheckbox.clicked.connect(self.enablevkbasaltsettings)
-
-        # Check json file and initialize
+        self.vkbasaltcheckbox.clicked.connect(self.toggleapplybutton)
         self.read_installed_folder()
 
     def read_installed_folder(self):
@@ -165,6 +163,7 @@ class Installer(QMainWindow):
         self.applyButton.setEnabled(True)
 
     def enablevkbasaltsettings(self):
+        self.vkbasaltcheckbox.setChecked(True)
         self.vkbasaltslider.setEnabled(True)
 
     def vkbasaltslidercontrol(self, value):
@@ -372,7 +371,6 @@ class Installer(QMainWindow):
             self.uninstallLeaguebutton.setEnabled(True)
             self.launchLeagueinstalled.setEnabled(True)
 
-
     def uninstall_game(self):
         home_dir = os.path.expanduser("~")
         user_local_share = os.path.join(home_dir, ".local/share")
@@ -407,31 +405,20 @@ class Installer(QMainWindow):
         QApplication.quit()
 
     def cancel_installation(self):
-        # Get the PID of the current process
         pid = os.getpid()
-
-        # Get a list of all child processes
         children = psutil.Process(pid).children(recursive=True)
-
-        # Terminate all child processes
         for child in children:
             child.send_signal(signal.SIGTERM)
-
-        # Terminate the main application process
         os.kill(pid, signal.SIGTERM)
 
     def addPlainText(self, text: str):
         self.textOuput.appendPlainText(text)
 
     def setup_logger(self):
-
-        # Send info logs to textOutput
         handler = GuiLogHandler(self)
         logging.getLogger().addHandler(handler)
         logging.getLogger().setLevel(logging.INFO)
         handler.new_record.connect(self.textOutput.append)
-
-        # Send debug logs to stdout
         stream_handler = logging.StreamHandler()
         stream_handler.setFormatter(Formatter('%(levelname)s: %(message)s\n', '%d/%m/%Y %H:%M:%S'))
         stream_handler.setLevel(logging.DEBUG)
@@ -440,7 +427,6 @@ class Installer(QMainWindow):
     def installer_code(self):
         self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
         while self.game_main_dir and os.path.abspath(self.game_main_dir) == os.path.expanduser("~"):
-            # If the user selected their home directory, display an error message
             msg_box = QMessageBox(self)
             msg_box.setIcon(QMessageBox.Critical)
             msg_box.setText("Cannot install the game directly in the home directory.")
@@ -448,15 +434,11 @@ class Installer(QMainWindow):
             msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
             msg_box.setDefaultButton(QMessageBox.Ok)
             if msg_box.exec_() == QMessageBox.Ok:
-                # If the user clicks "Ok", allow them to select a different directory
                 self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
             else:
-                # If the user clicks "Cancel", exit the loop and do not set the directory
                 self.game_main_dir = None
 
-        # Check if the selected directory is inside the user's home directory
         if not os.path.abspath(self.game_main_dir).startswith(os.path.expanduser("~")):
-            # If not, display an error message and prompt the user to select a different directory
             msg_box = QMessageBox(self)
             msg_box.setIcon(QMessageBox.Critical)
             msg_box.setText("Invalid directory selected.")
@@ -466,7 +448,6 @@ class Installer(QMainWindow):
             msg_box.exec_()
             self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
 
-        # Create the "league-of-legends" directory at the selected location
         self.game_main_dir = os.path.join(self.game_main_dir, "league-of-legends")
         os.makedirs(self.game_main_dir)
 
@@ -480,7 +461,6 @@ class Installer(QMainWindow):
             self.checkPrime.setEnabled(False)
             self.stackedWidget.setCurrentWidget(self.installing)
 
-            # Get the game download link and apply region based on text from .ui file
             region_map = {
                 "BR (BR1) - Brazil": "br",
                 "LAN (LA1) - Latin America North": "la1",
@@ -499,7 +479,6 @@ class Installer(QMainWindow):
             game_link = "https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.{}.exe"
             region = region_map.get(selected_lang, "na")
             game_region_link = game_link.format(region)
-
             self.setup_logger()
             scrollbar = self.textOutput.verticalScrollBar()
             scrollbar.setValue(scrollbar.maximum())
@@ -562,7 +541,6 @@ class Installer(QMainWindow):
             self.thread.start()
             self.thread.quit()
         else:
-            # Handle case where user pressed cancel
             print("User pressed cancel")
 
     def finish_installation(self):
