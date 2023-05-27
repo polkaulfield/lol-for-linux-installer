@@ -821,7 +821,7 @@
                 </rect>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="title">
@@ -1086,6 +1086,25 @@
                  <property name="icon">
                   <iconset theme="view-refresh">
                    <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+                <widget class="QLabel" name="label">
+                 <property name="geometry">
+                  <rect>
+                   <x>360</x>
+                   <y>70</y>
+                   <width>221</width>
+                   <height>31</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://www.paypal.com/donate/?hosted_button_id=UMJWYGDH2RC7E&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;Donate to this project&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="textFormat">
+                  <enum>Qt::RichText</enum>
+                 </property>
+                 <property name="openExternalLinks">
+                  <bool>true</bool>
                  </property>
                 </widget>
                </widget>
