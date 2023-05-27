@@ -1161,23 +1161,26 @@
                 <widget class="QCheckBox" name="vkbasaltcheckbox">
                  <property name="geometry">
                   <rect>
-                   <x>170</x>
-                   <y>40</y>
+                   <x>30</x>
+                   <y>30</y>
                    <width>271</width>
                    <height>31</height>
                   </rect>
                  </property>
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;vkBasalt is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;p&gt;In this tab you can configure the &amp;quot;Contrast Adaptive Sharpening&amp;quot; filter.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
                  <property name="text">
-                  <string>Enable VkBasalt Image Sharpening</string>
+                  <string>Enable VkBasalt</string>
                  </property>
                 </widget>
                 <widget class="QWidget" name="horizontalLayoutWidget_6">
                  <property name="geometry">
                   <rect>
-                   <x>150</x>
-                   <y>79</y>
-                   <width>291</width>
-                   <height>41</height>
+                   <x>37</x>
+                   <y>60</y>
+                   <width>521</width>
+                   <height>53</height>
                   </rect>
                  </property>
                  <layout class="QHBoxLayout" name="horizontalLayout_7" stretch="0,0,0,0">
@@ -1209,7 +1212,7 @@
                   <item>
                    <widget class="QLabel" name="vkbasaltlabel">
                     <property name="text">
-                     <string> Strength:</string>
+                     <string>Contrast Adaptive Sharpening strength:</string>
                     </property>
                    </widget>
                   </item>
