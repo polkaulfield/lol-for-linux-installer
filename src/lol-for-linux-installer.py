@@ -111,6 +111,14 @@ class Installer(QMainWindow):
             self.vkbasaltcheckbox.setEnabled(False)
             self.vkbasaltslider.setEnabled(False)
 
+        if 'VK_LAYER_MANGOHUD_overlay_x86_64' not in vulkan_layers.LAYERS:
+            self.Usemangohud.setChecked(False)
+            self.Usemangohud.setEnabled(False)
+
+        if 'VK_LAYER_OBS_vkcapture_64' not in vulkan_layers.LAYERS:
+            self.obsvkcapturecheck.setChecked(False)
+            self.obsvkcapturecheck.setEnabled(False)
+
     def load_env_vars(self, env_vars, installer, enablevkbasaltsettings):
         game_launcher_options = env_vars.get("game_launcher_options", {})
 
