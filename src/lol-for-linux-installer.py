@@ -321,7 +321,7 @@ class Installer(QMainWindow):
             process = subprocess.Popen(['python3', '/usr/share/lol-for-linux-installer/launch-script.py'])
             print("Not using gamemode.")
 
-        installer.hide()
+        self.hide()
         process.wait()
 
         if not self.is_process_running("RiotClientServices.exe"):
