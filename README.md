@@ -3,20 +3,15 @@
 League of Legends unofficial installer/manager for linux
 
 This software is not affiliated with nor supported by Riot Games.
-![Screenshot_20230526_122858](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/b77e576b-5044-4447-bea2-06cb80da3a3c)
-![Screenshot_20230527_131038](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/d8192248-aa45-46e3-bbd6-ba2bdca660b2)
 
+![Screenshot_20230526_122858](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/b77e576b-5044-4447-bea2-06cb80da3a3c)
+![Screenshot_20230527_231359](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/d4f6c860-a81a-4e7e-a704-a7196061537a)
 
 ## Easy installation
-- We provide .deb packages now (PKGBUILD + makedeb) since v.2.3, so if you are in a ubuntu based distro go ahead and use it
-
- Most known Ubuntu based distributions: Linux Mint, Pop_OS!, ElementaryOS and many others.
-
-- For Arch Linux users we have a PKGBUILD, just run "makepkg -si" in a terminal
-
- Should work fine on EndeavourOS, Manjaro and others
+- For <b>Ubuntu/Mint/Pop_OS!</b> users we provide .deb packages, those are basically double-click and install, they are available in the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases)
+- For <b>Arch Linux/Manjaro/EndeavourOS</b> users we have a PKGBUILD, just run "makepkg -si" in a terminal or get the package from the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases), grab the file that ends with `pkg.tar.zst` and install it using `sudo pacman -U package_name_here.pkg.tar.zst`
  
- ## In order for the game client to launch you NEED to install DXVK using our UI! (the "Renderer" option).
+ ### In order for the game client to launch you NEED to install DXVK using our UI! (the "Renderer" option).
 
 ### Python Script features:
 - You can choose where to install the game and also the region you are going to play
@@ -31,9 +26,9 @@ This software is not affiliated with nor supported by Riot Games.
 ## <a name="dependencies"></a> Dependencies:
 - `tar`, `python`, `python-requests`, `python-psutil`, `qt5-base` and `pyqt5`
 
-   On ubuntu-based distributions the python packages are called "python3-psutil, python3-requests and python3-pyqt5"
+   Different distributions have different names for packages*
    
-- WINE 32-64 bits and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
+- WINE and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 
 ## Contributions needed for:
 - Flatpak package
