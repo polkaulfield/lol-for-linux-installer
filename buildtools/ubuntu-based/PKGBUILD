@@ -1,6 +1,6 @@
 # Maintainer: Kassin Dornelles <kassin.dornelles@gmail.com>
 pkgname=lol-for-linux-installer
-pkgver=2.4
+pkgver=2.4.1
 pkgrel=1
 pkgdesc="League of Legends installer and manager for Linux"
 arch=('amd64')
@@ -8,7 +8,7 @@ url="https://github.com/kassindornelles/lol-for-linux-installer"
 license=('GPL-3.0')
 depends=("python3" "python3-psutil" "python3-pyqt5" "wine" "python3-requests" "python3-pyqt5.qtwebkit" "tar" "libgnutls30" "libgnutls30:i386" "libldap-2.5-0" "libldap-2.5-0:i386" "libpng16-16" "libpng16-16:i386" "gphoto2" "libpulse0" "libpulse0:i386")
 source=("https://github.com/kassindornelles/lol-for-linux-installer/archive/refs/tags/v.$pkgver.tar.gz")
-sha512sums=('77d26b47dddf4bf74766c551d215e36666db7b371a064689c7b2619804ec3d28b6c1ac1734ac0db7ea5731f85c9f05f594bd0b8800467f13f957a059a08c9537')
+sha512sums=('99658be21beaa04db09f49143b9c74854ed90bc711779f7cc8cd9967065da8ee0e5c7847de6472c9027d7a9e607c75da88b98696d5c8ba002d4fa0d68907ea3c')
 
 package() {
   cd "$srcdir/lol-for-linux-installer-v.$pkgver/src"
