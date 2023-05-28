@@ -821,7 +821,7 @@
                 </rect>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="title">
@@ -833,8 +833,8 @@
                  </property>
                  <property name="geometry">
                   <rect>
-                   <x>20</x>
-                   <y>20</y>
+                   <x>30</x>
+                   <y>30</y>
                    <width>321</width>
                    <height>41</height>
                   </rect>
@@ -859,9 +859,9 @@
                  </property>
                  <property name="geometry">
                   <rect>
-                   <x>350</x>
+                   <x>360</x>
                    <y>50</y>
-                   <width>231</width>
+                   <width>221</width>
                    <height>41</height>
                   </rect>
                  </property>
@@ -870,7 +870,7 @@
                  </property>
                  <item>
                   <property name="text">
-                   <string>Select one option to (re)install</string>
+                   <string>Select one option</string>
                   </property>
                  </item>
                  <item>
@@ -892,7 +892,7 @@
                 <widget class="QLabel" name="labelrenderer">
                  <property name="geometry">
                   <rect>
-                   <x>350</x>
+                   <x>360</x>
                    <y>19</y>
                    <width>211</width>
                    <height>31</height>
@@ -908,8 +908,8 @@
                  </property>
                  <property name="geometry">
                   <rect>
-                   <x>20</x>
-                   <y>60</y>
+                   <x>30</x>
+                   <y>70</y>
                    <width>321</width>
                    <height>41</height>
                   </rect>
@@ -928,37 +928,15 @@
                    <normaloff>.</normaloff>.</iconset>
                  </property>
                 </widget>
-                <widget class="QLabel" name="gamemodelabel">
-                 <property name="geometry">
-                  <rect>
-                   <x>20</x>
-                   <y>150</y>
-                   <width>421</width>
-                   <height>21</height>
-                  </rect>
-                 </property>
-                 <property name="layoutDirection">
-                  <enum>Qt::RightToLeft</enum>
-                 </property>
-                 <property name="autoFillBackground">
-                  <bool>false</bool>
-                 </property>
-                 <property name="text">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;Gamemode is supported.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="textFormat">
-                  <enum>Qt::RichText</enum>
-                 </property>
-                </widget>
                 <widget class="QCheckBox" name="Usegamemode">
                  <property name="enabled">
                   <bool>true</bool>
                  </property>
                  <property name="geometry">
                   <rect>
-                   <x>20</x>
-                   <y>100</y>
-                   <width>361</width>
+                   <x>30</x>
+                   <y>110</y>
+                   <width>321</width>
                    <height>41</height>
                   </rect>
                  </property>
@@ -979,6 +957,61 @@
                  </property>
                  <property name="icon">
                   <iconset theme="applications-games">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="githubButton2">
+                 <property name="geometry">
+                  <rect>
+                   <x>360</x>
+                   <y>100</y>
+                   <width>121</width>
+                   <height>41</height>
+                  </rect>
+                 </property>
+                 <property name="sizePolicy">
+                  <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+                   <horstretch>0</horstretch>
+                   <verstretch>0</verstretch>
+                  </sizepolicy>
+                 </property>
+                 <property name="maximumSize">
+                  <size>
+                   <width>16777215</width>
+                   <height>16777215</height>
+                  </size>
+                 </property>
+                 <property name="text">
+                  <string>Report Bug...</string>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="tools-report-bug">
+                   <normaloff>.</normaloff>.</iconset>
+                 </property>
+                 <property name="checkable">
+                  <bool>false</bool>
+                 </property>
+                 <property name="default">
+                  <bool>false</bool>
+                 </property>
+                 <property name="flat">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+                <widget class="QPushButton" name="donatebutton">
+                 <property name="geometry">
+                  <rect>
+                   <x>490</x>
+                   <y>100</y>
+                   <width>91</width>
+                   <height>41</height>
+                  </rect>
+                 </property>
+                 <property name="text">
+                  <string>Donate</string>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="emblem-favorite">
                    <normaloff>.</normaloff>.</iconset>
                  </property>
                 </widget>
@@ -1020,7 +1053,7 @@
                  <property name="geometry">
                   <rect>
                    <x>360</x>
-                   <y>10</y>
+                   <y>40</y>
                    <width>221</width>
                    <height>41</height>
                   </rect>
@@ -1075,7 +1108,7 @@
                  <property name="geometry">
                   <rect>
                    <x>360</x>
-                   <y>120</y>
+                   <y>90</y>
                    <width>221</width>
                    <height>41</height>
                   </rect>
@@ -1086,25 +1119,6 @@
                  <property name="icon">
                   <iconset theme="view-refresh">
                    <normaloff>.</normaloff>.</iconset>
-                 </property>
-                </widget>
-                <widget class="QLabel" name="label">
-                 <property name="geometry">
-                  <rect>
-                   <x>360</x>
-                   <y>70</y>
-                   <width>221</width>
-                   <height>31</height>
-                  </rect>
-                 </property>
-                 <property name="text">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;a href=&quot;https://www.paypal.com/donate/?hosted_button_id=UMJWYGDH2RC7E&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;Donate to this project&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                 </property>
-                 <property name="textFormat">
-                  <enum>Qt::RichText</enum>
-                 </property>
-                 <property name="openExternalLinks">
-                  <bool>true</bool>
                  </property>
                 </widget>
                </widget>
@@ -1168,10 +1182,10 @@
                   </rect>
                  </property>
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;vkBasalt is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;p&gt;In this tab you can configure the &amp;quot;Contrast Adaptive Sharpening&amp;quot; filter.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;You need vkBasalt installed on your system in order to use this.&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;vkBasalt is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;p&gt;In this tab you can configure the &amp;quot;Contrast Adaptive Sharpening&amp;quot; filter.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;You need vkBasalt installed on your system in order to use this.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/DadSchoorse/vkBasalt&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/DadSchoorse/vkBasalt&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="toolTipDuration">
-                  <number>-1</number>
+                  <number>-5</number>
                  </property>
                  <property name="text">
                   <string>Enable VkBasalt</string>
