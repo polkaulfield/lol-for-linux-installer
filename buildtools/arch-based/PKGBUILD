@@ -7,6 +7,9 @@ arch=('x86_64')
 url="https://github.com/kassindornelles/lol-for-linux-installer"
 license=('GPL-3.0')
 depends=('python' 'python-psutil' 'python-pyqt5' 'python-cffi' 'wine' 'python-requests' 'qt5-base' 'tar' 'lib32-gnutls' 'gnutls' 'lib32-libldap' 'libldap' 'libpng' 'lib32-libpng' 'mesa' 'lib32-mesa' 'libgphoto2' 'libpulse' 'lib32-libpulse')
+optdepends=('vkbasalt: Enables additional visual enhancements'
+            'gamemode: Improves game performance'
+            'mangohud: Provides an overlay with game performance metrics')
 source=("https://github.com/kassindornelles/lol-for-linux-installer/archive/refs/tags/v.$pkgver.tar.gz")
 sha512sums=('06fa5515323aecec13f1b7faf663b2dfe4a8970e25cf8f69ed6490dbc8f7e90c5c304cc7e049dc6a685de6e47745996bac335ab8997d7677088edc9222f8d856')
 
@@ -20,5 +23,14 @@ package() {
   install -Dm644 leagueinstaller_code.py "$pkgdir/usr/share/lol-for-linux-installer/leagueinstaller_code.py"
   install -Dm644 lol-for-linux-installer.desktop "$pkgdir/usr/share/applications/lol-for-linux-installer.desktop"
   cp -R python_src "$pkgdir/usr/share/lol-for-linux-installer/"
+
+  # Display optional dependencies message
+  if [[ ${#optdepends[@]} -gt 0 ]]; then
+    echo "Optional dependencies:"
+    for optdep in "${optdepends[@]}"; do
+      echo "  $optdep"
+    done
+    echo
+  fi
 }
 
