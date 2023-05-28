@@ -36,7 +36,15 @@ This software is not affiliated with nor supported by Riot Games.
 - Arch Linux AUR inclusion
 - Fedora packaging
 
+## FAQ:
+- This project <b>DOES NOT manage League of Legends installations that were done via Lutris or any other source</b>, we do the installation ourselves and we handle our own installation and ONLY it.
+
+- This project is both a installer and a launcher, i know, the name of the project is bad but it is what it is.
+
+- <b> Don't demand features in the bug tracker, open a pull request instead and contribute with code</b>, depending of the amount of work i might be able to pull it off but if things get super complex or are super niche i won't be able to do it.
+
 ## Buy me a coffee
+If you believe this software saved you some time or solved issues you had playing LoL on Linux then please consider a donation, the cost of my medications is high and i need your support.
 
 <a href="https://www.paypal.com/donate/?hosted_button_id=UMJWYGDH2RC7E"><img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/grey.svg" alt="Donate with PayPal" width="150" height="40"></a>
 
