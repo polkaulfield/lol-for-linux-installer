@@ -1,6 +1,6 @@
 # Maintainer: Kassin Dornelles <kassin.dornelles@gmail.com>
 pkgname=lol-for-linux-installer
-pkgver=2.4.4
+pkgver=2.5
 pkgrel=1
 pkgdesc="League of Legends installer and manager for Linux"
 arch=('amd64')
@@ -11,7 +11,7 @@ optdepends=('vkbasalt: Enables additional visual enhancements'
             'gamemode: Improves game performance'
             'mangohud: Provides an overlay with game performance metrics')
 source=("https://github.com/kassindornelles/lol-for-linux-installer/archive/refs/tags/v.$pkgver.tar.gz")
-sha512sums=('ff13b51ab2c7f185eecd57ab5a400fd942becb4b7be290b837c72e09b9a91e398b249c4e5f0a5481020c91aa7a61e4e0075fa7778ec2a5e95c1d2b8fdc97a445')
+sha512sums=('279fc32ee2283bf08d217a35f212477ca01f757745b65fb74c93befa93233a4753b543ba5bf87cbb53c10ef421ac7728c42ae164055c46df1c85bfcd821d8b35')
 
 package() {
   cd "$srcdir/lol-for-linux-installer-v.$pkgver/src"
@@ -22,7 +22,7 @@ package() {
   install -Dm644 lol-for-linux-installer.png "$pkgdir/usr/share/lol-for-linux-installer/lol-for-linux-installer.png"
   install -Dm644 leagueinstaller_code.py "$pkgdir/usr/share/lol-for-linux-installer/leagueinstaller_code.py"
   install -Dm644 lol-for-linux-installer.desktop "$pkgdir/usr/share/applications/lol-for-linux-installer.desktop"
-  install -Dm644 installer.ui "$pkgdir/user/share/lol-for-linux-installer/installer.ui"
+  cp installer.ui "$pkgdir/usr/share/lol-for-linux-installer/installer.ui"
 
   # Display optional dependencies message
   if [[ ${#optdepends[@]} -gt 0 ]]; then
