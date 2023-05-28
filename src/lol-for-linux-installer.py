@@ -77,6 +77,7 @@ class Installer(QMainWindow):
         self.read_installed_folder()
 
     def read_installed_folder(self):
+        enablevkbasaltsettings = True
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
 
         try:
@@ -89,7 +90,7 @@ class Installer(QMainWindow):
                 with open('env_vars.json', 'r') as f:
                     env_vars = json.load(f)
 
-                self.load_env_vars(env_vars, self)
+                self.load_env_vars(env_vars, self, enablevkbasaltsettings)
 
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
@@ -103,7 +104,7 @@ class Installer(QMainWindow):
             self.Usegamemode.setChecked(False)
             self.Usegamemode.setEnabled(False)
 
-    def load_env_vars(self, env_vars, installer):
+    def load_env_vars(self, env_vars, installer, enablevkbasaltsettings):
         game_launcher_options = env_vars.get("game_launcher_options", {})
 
         if all(key in game_launcher_options for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
@@ -131,7 +132,7 @@ class Installer(QMainWindow):
             self.vkbasaltcheckbox.setChecked(True)
             config_file = game_launcher_options.get('VKBASALT_CONFIG_FILE')
             casSharpness = self.read_cas_sharpness_from_config(config_file)
-            slider_value = self.convert_cas_sharpness_to_slider_value(casSharpness)
+            slider_value = self.convert_cas_sharpness_to_slider_value(casSharpness, enablevkbasaltsettings)
             self.vkbasaltslider.setValue(slider_value)
             self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
 
@@ -162,13 +163,17 @@ class Installer(QMainWindow):
 
         return casSharpness
 
-    def convert_cas_sharpness_to_slider_value(self, casSharpness):
+    def convert_cas_sharpness_to_slider_value(self, casSharpness, enablevkbasaltsettings):
         slider_value = int((casSharpness - 0.1) / 0.9 * 9) + 1
         self.sharpeningtext_level.setText(str(slider_value))
         return slider_value
 
     def toggleapplybutton(self):
         self.applyButton.setEnabled(True)
+        if self.vkbasaltcheckbox.isChecked():
+            self.enablevkbasaltsettings()
+        else:
+            self.vkbasaltslider.setEnabled(False)
 
     def donatebuttonaction(self):
         urlgit = QUrl("https://www.paypal.com/donate/?hosted_button_id=UMJWYGDH2RC7E")
@@ -177,6 +182,7 @@ class Installer(QMainWindow):
     def enablevkbasaltsettings(self):
         self.vkbasaltcheckbox.setChecked(True)
         self.vkbasaltslider.setEnabled(True)
+        self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
 
     def vkbasaltslidercontrol(self, value):
         self.sharpeningtext_level.setText(str(value))
