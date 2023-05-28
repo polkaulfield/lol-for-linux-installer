@@ -43,6 +43,12 @@ This software is not affiliated with nor supported by Riot Games.
 
 - <b> Don't demand features in the bug tracker, open a pull request instead and contribute with code</b>, depending of the amount of work i might be able to pull it off but if things get super complex or are super niche i won't be able to do it.
 
+### I selected the option to skip the launcher but now i need to open it again, how do i do it?
+
+- Navigate to the folder your game is installed and open the file "env_vars.json" with a text editor
+
+- Change the value of `"Skiplauncher": "1"` from `1` to `0`
+
 ## Buy me a coffee
 If you believe this software saved you some time or solved issues you had playing LoL on Linux then please consider a donation, the cost of my medications is high and i need your support.
 
