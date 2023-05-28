@@ -821,7 +821,7 @@
                 </rect>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>1</number>
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="title">
@@ -1146,7 +1146,7 @@
                   </rect>
                  </property>
                  <property name="text">
-                  <string>Check WINE updates</string>
+                  <string>Check for WINE updates...</string>
                  </property>
                  <property name="icon">
                   <iconset theme="view-refresh">

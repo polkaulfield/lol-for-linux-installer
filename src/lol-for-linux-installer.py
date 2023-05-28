@@ -406,7 +406,7 @@ class Installer(QMainWindow):
         else:
             print("No need to update")
             self.checkWineupdates.setEnabled(False)
-            self.checkWineupdates.setText("Game was up-to-date!")
+            self.checkWineupdates.setText("WINE was up-to-date!")
             self.uninstallLeaguebutton.setEnabled(True)
             self.launchLeagueinstalled.setEnabled(True)
 
