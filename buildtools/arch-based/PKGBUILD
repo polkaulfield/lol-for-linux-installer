@@ -22,7 +22,7 @@ package() {
   install -Dm644 lol-for-linux-installer.png "$pkgdir/usr/share/lol-for-linux-installer/lol-for-linux-installer.png"
   install -Dm644 leagueinstaller_code.py "$pkgdir/usr/share/lol-for-linux-installer/leagueinstaller_code.py"
   install -Dm644 lol-for-linux-installer.desktop "$pkgdir/usr/share/applications/lol-for-linux-installer.desktop"
-  cp -R python_src "$pkgdir/usr/share/lol-for-linux-installer/"
+  install -Dm644 installer.ui "$pkgdir/user/share/lol-for-linux-installer/installer.ui"
 
   # Display optional dependencies message
   if [[ ${#optdepends[@]} -gt 0 ]]; then

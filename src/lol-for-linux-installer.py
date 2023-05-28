@@ -42,15 +42,14 @@ class Installer(QMainWindow):
     def __init__(self):
         super(Installer, self).__init__()
         try:
-            loadUi("python_src/ui/installer.ui", self)
+            loadUi("installer.ui", self)
         except:
-            loadUi("/usr/share/lol-for-linux-installer/python_src/ui/installer.ui", self)
+            loadUi("/usr/share/lol-for-linux-installer/installer.ui", self)
         self.slider_value_changed = False
         self.game_installed_folder = None
         self.gamemode_value = None
         self.skiplauncher_value = None
         self.vkbasaltslider = self.findChild(QSlider, "vkbasaltslider")
-        self.setFixedSize(self.size())
         self.setWindowTitle('League of Legends Manager')
         self.install_button.clicked.connect(self.installer_code)
         self.cancelButton.clicked.connect(self.cancel_installation)
@@ -65,7 +64,6 @@ class Installer(QMainWindow):
         self.tabWidget.setCurrentIndex(0)
         self.Usedriprime.stateChanged.connect(self.toggleapplybutton)
         self.Usenvidiahybrid.stateChanged.connect(self.toggleapplybutton)
-        self.Usemangohud.stateChanged.connect(self.toggleapplybutton)
         self.obsvkcapturecheck.stateChanged.connect(self.toggleapplybutton)
         self.rendererCombobox.currentIndexChanged.connect(self.toggleapplybutton)
         self.Usegamemode.clicked.connect(self.toggleapplybutton)
@@ -111,7 +109,7 @@ class Installer(QMainWindow):
         else:
             self.enablevkbasalt_settings()
 
-        if 'VK_LAYER_MANGOHUD_overlay_x86_64' not in vulkan_layers.LAYERS:
+        if 'VK_LAYER_MANGOHUD_overlay' not in vulkan_layers.LAYERS:
             self.Usemangohud.setChecked(False)
             self.Usemangohud.setEnabled(False)
 
@@ -144,6 +142,8 @@ class Installer(QMainWindow):
             self.Usemangohud.setChecked(True)
         else:
             self.Usemangohud.setChecked(False)
+        self.Usemangohud.stateChanged.connect(self.toggleapplybutton)
+
 
         if all(key in game_launcher_options for key in ['OBS_VKCAPTURE']):
             self.obsvkcapturecheck.setChecked(True)
