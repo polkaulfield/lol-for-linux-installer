@@ -41,7 +41,6 @@ class Formatter(logging.Formatter):
 class Installer(QMainWindow):
     def __init__(self):
         super(Installer, self).__init__()
-        # Hacky workaround so the AppImage works
         try:
             loadUi("python_src/ui/installer.ui", self)
         except:
@@ -79,7 +78,6 @@ class Installer(QMainWindow):
         self.read_installed_folder()
 
     def read_installed_folder(self):
-        enablevkbasaltsettings = True
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
 
         try:
@@ -92,7 +90,7 @@ class Installer(QMainWindow):
                 with open('env_vars.json', 'r') as f:
                     env_vars = json.load(f)
 
-                self.load_env_vars(env_vars, self, enablevkbasaltsettings)
+                self.load_env_vars(env_vars, self)
 
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
@@ -110,6 +108,8 @@ class Installer(QMainWindow):
             self.vkbasaltcheckbox.setChecked(False)
             self.vkbasaltcheckbox.setEnabled(False)
             self.vkbasaltslider.setEnabled(False)
+        else:
+            self.enablevkbasalt_settings()
 
         if 'VK_LAYER_MANGOHUD_overlay_x86_64' not in vulkan_layers.LAYERS:
             self.Usemangohud.setChecked(False)
@@ -119,7 +119,15 @@ class Installer(QMainWindow):
             self.obsvkcapturecheck.setChecked(False)
             self.obsvkcapturecheck.setEnabled(False)
 
-    def load_env_vars(self, env_vars, installer, enablevkbasaltsettings):
+    def enablevkbasalt_settings(self):
+            if self.vkbasaltcheckbox.isChecked():
+                self.vkbasaltslider.setEnabled(True)
+                self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
+            else:
+                self.vkbasaltslider.setEnabled(False)
+                self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
+
+    def load_env_vars(self, env_vars, installer):
         game_launcher_options = env_vars.get("game_launcher_options", {})
 
         if all(key in game_launcher_options for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
@@ -143,13 +151,11 @@ class Installer(QMainWindow):
             self.obsvkcapturecheck.setChecked(False)
 
         if all(key in game_launcher_options for key in ['ENABLE_VKBASALT']):
-            self.enablevkbasaltsettings()
-            self.vkbasaltcheckbox.setChecked(True)
             config_file = game_launcher_options.get('VKBASALT_CONFIG_FILE')
             casSharpness = self.read_cas_sharpness_from_config(config_file)
-            slider_value = self.convert_cas_sharpness_to_slider_value(casSharpness, enablevkbasaltsettings)
+            slider_value = self.convert_cas_sharpness_to_slider_value(casSharpness)
+            self.vkbasaltcheckbox.setChecked(True)
             self.vkbasaltslider.setValue(slider_value)
-            self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
 
         game_settings = env_vars.get("game_settings", {})
         if game_settings.get("Gamemode") == "1":
@@ -178,26 +184,24 @@ class Installer(QMainWindow):
 
         return casSharpness
 
-    def convert_cas_sharpness_to_slider_value(self, casSharpness, enablevkbasaltsettings):
+    def convert_cas_sharpness_to_slider_value(self, casSharpness):
         slider_value = int((casSharpness - 0.1) / 0.9 * 9) + 1
         self.sharpeningtext_level.setText(str(slider_value))
         return slider_value
 
     def toggleapplybutton(self):
+        self.vkbasalt_slider_enablement()
         self.applyButton.setEnabled(True)
+
+    def vkbasalt_slider_enablement(self):
         if self.vkbasaltcheckbox.isChecked():
-            self.enablevkbasaltsettings()
+            self.vkbasaltslider.setEnabled(True)
         else:
             self.vkbasaltslider.setEnabled(False)
 
     def donatebuttonaction(self):
         urlgit = QUrl("https://www.paypal.com/donate/?hosted_button_id=UMJWYGDH2RC7E")
         QDesktopServices.openUrl(urlgit)
-
-    def enablevkbasaltsettings(self):
-        self.vkbasaltcheckbox.setChecked(True)
-        self.vkbasaltslider.setEnabled(True)
-        self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
 
     def vkbasaltslidercontrol(self, value):
         self.sharpeningtext_level.setText(str(value))
