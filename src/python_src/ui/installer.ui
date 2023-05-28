@@ -821,7 +821,7 @@
                 </rect>
                </property>
                <property name="currentIndex">
-                <number>0</number>
+                <number>2</number>
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="title">
@@ -1065,7 +1065,7 @@
                   </rect>
                  </property>
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable support for OBS Studio gamecapture.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Enable support for OBS Studio vkcapture.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/nowrep/obs-vkcapture&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/nowrep/obs-vkcapture&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="layoutDirection">
                   <enum>Qt::LeftToRight</enum>
@@ -1120,7 +1120,7 @@
                   </rect>
                  </property>
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This shows performance stats.&lt;/p&gt;&lt;p&gt;You need MangoHud installed.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;A Vulkan and OpenGL overlay for monitoring FPS, temperatures, CPU/GPU load and more.&amp;quot;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/flightlessmango/MangoHud&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/flightlessmango/MangoHud&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="layoutDirection">
                   <enum>Qt::LeftToRight</enum>
@@ -1214,7 +1214,7 @@
                   </rect>
                  </property>
                  <property name="toolTip">
-                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;vkBasalt is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;p&gt;In this tab you can configure the &amp;quot;Contrast Adaptive Sharpening&amp;quot; filter.&lt;/p&gt;&lt;p&gt;&lt;span style=&quot; font-weight:600;&quot;&gt;You need vkBasalt installed on your system in order to use this.&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/DadSchoorse/vkBasalt&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/DadSchoorse/vkBasalt&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;vkBasalt is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;p&gt;In this tab you can configure the &amp;quot;Contrast Adaptive Sharpening&amp;quot; filter.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/DadSchoorse/vkBasalt&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/DadSchoorse/vkBasalt&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                  </property>
                  <property name="toolTipDuration">
                   <number>-5</number>
