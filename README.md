@@ -16,12 +16,14 @@ This software is not affiliated with nor supported by Riot Games.
 ### Python Script features:
 - You can choose where to install the game and also the region you are going to play
 - It installs wine-ge-lol with FSYNC/FUTEX2 support enabled by default for better CPU performance
-- It creates a desktop file in the system menu (with icons for the game)
-- Option to uninstall the game
+- Desktop file in the system menu (assuming you installed it as a system package like .deb, pkg.tar.zst and etc)
+- Option to uninstall the game to reinstall in case you have problems
 - Users of hybrid graphics can choose at install time if they want to use the dGPU or not
-- obs-gamecapture support.
-- Update system for WINE builds, DXVK version selection and more (DXVK installation via our launcher)
-- Gamemode support, if installed system wide it will be used automatically.
+- obs-gamecapture support
+- vkBasalt CAS support
+- Update system for WINE builds
+- DXVK installation
+- Gamemode support
 
 ## <a name="dependencies"></a> Dependencies:
 - `tar`, `python`, `python-requests`, `python-psutil`, `qt5-base` and `pyqt5`
