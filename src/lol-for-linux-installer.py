@@ -394,8 +394,7 @@ class Installer(QMainWindow):
     def uninstall_game(self):
         home_dir = os.path.expanduser("~")
         user_local_share = os.path.join(home_dir, ".local/share")
-        desktop_file_path = os.path.join(os.path.expanduser("~"), ".local", "share", "applications", "LeagueLauncherPython.desktop")
-        user_config_folder= os.path.join(home_dir, ".config")
+        user_config_folder = os.path.join(home_dir, ".config")
         json_file_path = os.path.join(user_config_folder, "league_install_path.json")
 
         try:
@@ -411,11 +410,6 @@ class Installer(QMainWindow):
             shutil.rmtree(game_main_dir)
         except FileNotFoundError:
             print(f"Directory {self.game_installed_folder} does not exist")
-
-        try:
-            os.remove(desktop_file_path)
-        except FileNotFoundError:
-            print(f"File {desktop_file_path} does not exist")
 
         try:
             os.remove(json_file_path)
@@ -566,6 +560,7 @@ class Installer(QMainWindow):
     def finish_installation(self):
         self.read_installed_folder()
         self.stackedWidget.setCurrentWidget(self.gamemanager)
+        installer.hide()
 
 class Worker(QObject):
     def __init__(self, game_main_dir, game_region_link):

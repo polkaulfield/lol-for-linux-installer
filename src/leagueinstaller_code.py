@@ -1,6 +1,32 @@
 #!/usr/bin/env python3
-import os, shutil, requests, tarfile, subprocess, json, logging
+import os, shutil, requests, tarfile, subprocess, json, logging, urllib.request
 from PyQt5.QtCore import pyqtSignal, QObject
+
+def install_dxvk_code(game_main_dir):
+        dst_path = os.path.join(game_main_dir, 'wine', 'prefix', 'drive_c', 'windows')
+        tmp_path = 'dxvk-tmp'
+        url = 'https://github.com/doitsujin/dxvk/releases/download/v1.10.3/dxvk-1.10.3.tar.gz'
+        filename = os.path.basename(url)
+        urllib.request.urlretrieve(url, filename)
+
+        with tarfile.open(filename, 'r:gz') as tar:
+            tar.extractall(tmp_path)
+
+        for arch in ['x64', 'x32']:
+            src_path = os.path.join(tmp_path, 'dxvk-1.10.3', arch)
+            dst_path_arch = os.path.join(dst_path, 'system32' if arch == 'x64' else 'syswow64')
+
+            if not os.path.exists(dst_path_arch):
+                os.makedirs(dst_path_arch)
+
+            for file_name in os.listdir(src_path):
+                if file_name.endswith('.dll'):
+                    src_file = os.path.join(src_path, file_name)
+                    dst_file = os.path.join(dst_path_arch, file_name)
+                    shutil.copy2(src_file, dst_file)
+
+        os.remove(filename)
+        shutil.rmtree(tmp_path)
 
 def league_install_code(game_main_dir, game_region_link):
 
@@ -103,3 +129,5 @@ def league_install_code(game_main_dir, game_region_link):
     except:
         logging.warning("Not copying any files, packing format is in use")
     logging.info("Copied launcher")
+
+    install_dxvk_code(game_main_dir)
