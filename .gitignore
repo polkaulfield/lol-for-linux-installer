@@ -5,3 +5,4 @@
 .idea/lol-for-linux-installer.iml
 .idea/inspectionProfiles/profiles_settings.xml
 *.pyc
+*.autosave
