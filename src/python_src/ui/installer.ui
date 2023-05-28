@@ -834,7 +834,7 @@
                  <property name="geometry">
                   <rect>
                    <x>30</x>
-                   <y>30</y>
+                   <y>10</y>
                    <width>321</width>
                    <height>41</height>
                   </rect>
@@ -909,7 +909,7 @@
                  <property name="geometry">
                   <rect>
                    <x>30</x>
-                   <y>70</y>
+                   <y>50</y>
                    <width>321</width>
                    <height>41</height>
                   </rect>
@@ -935,7 +935,7 @@
                  <property name="geometry">
                   <rect>
                    <x>30</x>
-                   <y>110</y>
+                   <y>90</y>
                    <width>321</width>
                    <height>41</height>
                   </rect>
@@ -1013,6 +1013,37 @@
                  <property name="icon">
                   <iconset theme="emblem-favorite">
                    <normaloff>.</normaloff>.</iconset>
+                 </property>
+                </widget>
+                <widget class="QCheckBox" name="skiplaunchercheck">
+                 <property name="enabled">
+                  <bool>true</bool>
+                 </property>
+                 <property name="geometry">
+                  <rect>
+                   <x>30</x>
+                   <y>130</y>
+                   <width>321</width>
+                   <height>41</height>
+                  </rect>
+                 </property>
+                 <property name="toolTip">
+                  <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Skip this launcher and start the game directly.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                 </property>
+                 <property name="toolTipDuration">
+                  <number>-1</number>
+                 </property>
+                 <property name="layoutDirection">
+                  <enum>Qt::LeftToRight</enum>
+                 </property>
+                 <property name="autoFillBackground">
+                  <bool>false</bool>
+                 </property>
+                 <property name="text">
+                  <string>Skip launcher</string>
+                 </property>
+                 <property name="icon">
+                  <iconset theme="media-playback-start"/>
                  </property>
                 </widget>
                </widget>

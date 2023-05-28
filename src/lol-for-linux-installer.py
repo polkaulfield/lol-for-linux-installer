@@ -47,7 +47,8 @@ class Installer(QMainWindow):
         self.slider_value_changed = False
         self.game_installed_folder = None
         self.gamemode_value = None
-        self.vkbasaltslider = self.findChild(QSlider, "vkbasaltslider")  # Find the QSlider object by object name
+        self.skiplauncher_value = None
+        self.vkbasaltslider = self.findChild(QSlider, "vkbasaltslider")
         self.setFixedSize(self.size())
         self.setWindowTitle('League of Legends Manager')
         self.install_button.clicked.connect(self.installer_code)
@@ -72,6 +73,7 @@ class Installer(QMainWindow):
         self.launchLeagueinstalled.clicked.connect(self.launchleague)
         self.vkbasaltcheckbox.clicked.connect(self.toggleapplybutton)
         self.donatebutton.clicked.connect(self.donatebuttonaction)
+        self.skiplaunchercheck.clicked.connect(self.toggleapplybutton)
         self.read_installed_folder()
 
     def read_installed_folder(self):
@@ -87,8 +89,7 @@ class Installer(QMainWindow):
                 with open('env_vars.json', 'r') as f:
                     env_vars = json.load(f)
 
-                # Call the method to load and check env_vars.json
-                self.load_env_vars(env_vars)
+                self.load_env_vars(env_vars, self)
 
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
@@ -102,7 +103,7 @@ class Installer(QMainWindow):
             self.Usegamemode.setChecked(False)
             self.Usegamemode.setEnabled(False)
 
-    def load_env_vars(self, env_vars):
+    def load_env_vars(self, env_vars, installer):
         game_launcher_options = env_vars.get("game_launcher_options", {})
 
         if all(key in game_launcher_options for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
@@ -139,7 +140,13 @@ class Installer(QMainWindow):
             self.Usegamemode.setChecked(True)
         else:
             self.Usegamemode.setChecked(False)
-        self.stackedWidget.setCurrentWidget(self.gamemanager)
+
+        if game_settings.get("Skiplauncher") == "0":
+            self.skiplaunchercheck.setChecked(False)
+            self.stackedWidget.setCurrentWidget(self.gamemanager)
+        else:
+            self.skiplaunchercheck.setChecked(False)
+            self.launchleague(installer)
 
     def read_cas_sharpness_from_config(self, config_file):
         casSharpness = 0.5  # Default value if the file or key doesn't exist
@@ -173,7 +180,7 @@ class Installer(QMainWindow):
 
     def vkbasaltslidercontrol(self, value):
         self.sharpeningtext_level.setText(str(value))
-        if not self.slider_value_changed:  # Check if the value has been changed by the user
+        if not self.slider_value_changed:
             self.toggleapplybutton()
         self.slider_value_changed = True
 
@@ -236,12 +243,14 @@ class Installer(QMainWindow):
             env_vars['game_launcher_options'].pop('ENABLE_VKBASALT', None)
             env_vars['game_launcher_options'].pop('VKBASALT_CONFIG_FILE', None)
 
-        env_vars['game_settings'] = {'Gamemode': '1' if self.Usegamemode.isChecked() else '0'}
+        env_vars['game_settings']['Gamemode'] = '1' if self.Usegamemode.isChecked() else '0'
         self.gamemode_value = int(env_vars['game_settings']['Gamemode'])
+
+        env_vars['game_settings']['Skiplauncher'] = '1' if self.skiplaunchercheck.isChecked() else '0'
+        self.skiplauncher_value = int(env_vars['game_settings']['Skiplauncher'])
 
         with open('env_vars.json', 'w') as f:
             json.dump(env_vars, f, indent=4)
-
 
         self.applyButton.setEnabled(False)
 
@@ -272,7 +281,7 @@ class Installer(QMainWindow):
         shutil.rmtree(tmp_path)
         self.rendererCombobox.setEnabled(False)
 
-    def launchleague(self):
+    def launchleague(self, installer):
         self.launchLeagueinstalled.setEnabled(False)
         self.uninstallLeaguebutton.setEnabled(False)
         self.stackedWidget.setCurrentWidget(self.gamemanager)
