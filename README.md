@@ -5,13 +5,12 @@ League of Legends unofficial installer/manager for linux
 This software is not affiliated with nor supported by Riot Games.
 
 ![Screenshot_20230526_122858](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/b77e576b-5044-4447-bea2-06cb80da3a3c)
-![Screenshot_20230527_231359](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/d4f6c860-a81a-4e7e-a704-a7196061537a)
+![Screenshot_20230528_105742](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/b4873226-13e8-4d8f-92e1-428271fa11f6)
+
 
 ## Easy installation
 - For <b>Ubuntu/Mint/Pop_OS!</b> users we provide .deb packages, those are basically double-click and install, they are available in the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases)
 - For <b>Arch Linux/Manjaro/EndeavourOS</b> users we have a PKGBUILD, just run "makepkg -si" in a terminal or get the package from the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases), grab the file that ends with `pkg.tar.zst` and install it using `sudo pacman -U package_name_here.pkg.tar.zst`
- 
- ### In order for the game client to launch you NEED to install DXVK using our UI! (the "Renderer" option).
 
 ### Python Script features:
 - You can choose where to install the game and also the region you are going to play
