@@ -327,7 +327,7 @@ class Installer(QMainWindow):
         if not self.is_process_running("RiotClientServices.exe"):
             self.launchLeagueinstalled.setEnabled(True)
             self.uninstallLeaguebutton.setEnabled(True)
-            installer.show()
+            self.show()
             pass
 
     def is_process_running(self, process_name):
