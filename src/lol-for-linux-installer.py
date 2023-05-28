@@ -94,11 +94,12 @@ class Installer(QMainWindow):
         if shutil.which('gamemoderun') is not None:
             try:
                 self.gamemodelabel.setText("<html><b><span style='color: green;'>Gamemode is detected</span></b></html>")
-                self.Usegamemode.setEnabled()
+                self.Usegamemode.setEnabled(True)
             except:
                 print("Error while getting Gamemode info.")
         else:
             self.gamemodelabel.setText("<html><b><span style='color: red;'>Gamemode is not installed</span></b></html>")
+            self.Usegamemode.setChecked(False)
             self.Usegamemode.setEnabled(False)
 
     def load_env_vars(self, env_vars):

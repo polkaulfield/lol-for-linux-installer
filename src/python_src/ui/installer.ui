@@ -352,7 +352,7 @@
                    </size>
                   </property>
                   <property name="text">
-                   <string>Apply Changes</string>
+                   <string>Apply and Save Settings</string>
                   </property>
                  </widget>
                 </item>
@@ -821,7 +821,7 @@
                 </rect>
                </property>
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="title">
