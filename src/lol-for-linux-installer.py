@@ -1,17 +1,14 @@
 #!/usr/bin/env python3
 import sys, os, signal, psutil, logging, json, urllib.request, shutil, tarfile, subprocess, time
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox, QCheckBox, QSlider
+from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox, QCheckBox, QSlider, QProgressBar
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal, QTimer, Qt
 from PyQt5.QtGui import QDesktopServices
 
 module_folder = "/usr/share/lol-for-linux-installer"
-
-# Add the module's folder to the Python path
 sys.path.append(module_folder)
 
 import leagueinstaller_code
-
 import vulkan_layers
 
 class GuiLogHandler(QObject, logging.Handler):
@@ -406,7 +403,7 @@ class Installer(QMainWindow):
         else:
             print("No need to update")
             self.checkWineupdates.setEnabled(False)
-            self.checkWineupdates.setText("WINE was up-to-date!")
+            self.checkWineupdates.setText("WINE is up-to-date!")
             self.uninstallLeaguebutton.setEnabled(True)
             self.launchLeagueinstalled.setEnabled(True)
 
