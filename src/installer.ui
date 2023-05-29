@@ -281,7 +281,7 @@
              <item>
               <widget class="QTabWidget" name="tabWidget">
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <property name="tabsClosable">
                 <bool>false</bool>
@@ -301,7 +301,23 @@
                  <string>Home</string>
                 </attribute>
                 <layout class="QGridLayout" name="gridLayout_5">
-                 <item row="18" column="2">
+                 <item row="12" column="1">
+                  <spacer name="verticalSpacer">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::MinimumExpanding</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>10</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="16" column="2">
                   <widget class="QPushButton" name="donatebutton">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
@@ -318,6 +334,19 @@
                    </property>
                   </widget>
                  </item>
+                 <item row="10" column="2">
+                  <spacer name="horizontalSpacer_8">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
                  <item row="10" column="0">
                   <spacer name="horizontalSpacer_7">
                    <property name="orientation">
@@ -330,42 +359,6 @@
                     </size>
                    </property>
                   </spacer>
-                 </item>
-                 <item row="14" column="0" colspan="2">
-                  <widget class="QComboBox" name="rendererCombobox">
-                   <property name="enabled">
-                    <bool>true</bool>
-                   </property>
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="toolTip">
-                    <string>You dont need to reinstall every time.</string>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>Select one option</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>DXVK 2.2</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>DXVK 2.1</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>DXVK 1.10.3</string>
-                    </property>
-                   </item>
-                  </widget>
                  </item>
                  <item row="10" column="1">
                   <layout class="QVBoxLayout" name="verticalLayout_8">
@@ -493,46 +486,7 @@
                    </item>
                   </layout>
                  </item>
-                 <item row="0" column="1">
-                  <spacer name="verticalSpacer_3">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="10" column="2">
-                  <spacer name="horizontalSpacer_8">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="13" column="0">
-                  <widget class="QLabel" name="labelrenderer">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>Renderer (DXVK):</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="18" column="0" colspan="2">
+                 <item row="16" column="0" colspan="2">
                   <widget class="QPushButton" name="githubButton2">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
@@ -564,18 +518,15 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="12" column="1">
-                  <spacer name="verticalSpacer">
+                 <item row="0" column="1">
+                  <spacer name="verticalSpacer_3">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
                    </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::MinimumExpanding</enum>
-                   </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>10</width>
-                     <height>20</height>
+                     <width>20</width>
+                     <height>40</height>
                     </size>
                    </property>
                   </spacer>
@@ -591,46 +542,37 @@
                  <string>Management</string>
                 </attribute>
                 <layout class="QGridLayout" name="gridLayout_3">
-                 <item row="2" column="0">
-                  <spacer name="horizontalSpacer_9">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                 <item row="9" column="1" colspan="2">
+                  <widget class="QPushButton" name="checkWineupdates">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
+                   <property name="text">
+                    <string>Check for WINE updates...</string>
                    </property>
-                  </spacer>
+                   <property name="icon">
+                    <iconset theme="view-refresh">
+                     <normaloff>.</normaloff>.</iconset>
+                   </property>
+                  </widget>
                  </item>
-                 <item row="2" column="2">
-                  <spacer name="horizontalSpacer_10">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                 <item row="7" column="0">
+                  <widget class="QLabel" name="labelrenderer">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
+                   <property name="text">
+                    <string>Renderer (DXVK):</string>
                    </property>
-                  </spacer>
+                  </widget>
                  </item>
-                 <item row="1" column="1">
-                  <spacer name="verticalSpacer_4">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="2" column="1">
+                 <item row="3" column="1">
                   <layout class="QVBoxLayout" name="verticalLayout_9">
                    <property name="topMargin">
                     <number>10</number>
@@ -698,23 +640,7 @@
                    </item>
                   </layout>
                  </item>
-                 <item row="3" column="1">
-                  <spacer name="verticalSpacer_2">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::MinimumExpanding</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="4" column="0">
+                 <item row="9" column="0">
                   <widget class="QPushButton" name="uninstallLeaguebutton">
                    <property name="sizePolicy">
                     <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
@@ -740,21 +666,95 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="4" column="1" colspan="2">
-                  <widget class="QPushButton" name="checkWineupdates">
+                 <item row="3" column="2">
+                  <spacer name="horizontalSpacer_10">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="0" column="1">
+                  <spacer name="verticalSpacer_4">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="4" column="1">
+                  <spacer name="verticalSpacer_2">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::MinimumExpanding</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="3" column="0">
+                  <spacer name="horizontalSpacer_9">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="7" column="1" colspan="2">
+                  <widget class="QComboBox" name="rendererCombobox">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
-                   <property name="text">
-                    <string>Check for WINE updates...</string>
+                   <property name="toolTip">
+                    <string>You dont need to reinstall every time.</string>
                    </property>
-                   <property name="icon">
-                    <iconset theme="view-refresh">
-                     <normaloff>.</normaloff>.</iconset>
-                   </property>
+                   <item>
+                    <property name="text">
+                     <string>Select one option</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>DXVK 2.2</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>DXVK 2.1</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>DXVK 1.10.3</string>
+                    </property>
+                   </item>
                   </widget>
                  </item>
                 </layout>
