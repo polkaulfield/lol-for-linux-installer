@@ -11,10 +11,12 @@ This software is not affiliated with nor supported by Riot Games.
 ![Screenshot_20230528_203911](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/0c19955c-a2f6-4109-9c76-be9f6236d71b)
 
 
-
 ## Easy installation
 - For <b>Ubuntu/Mint/Pop_OS!</b> users we provide .deb packages, those are basically double-click and install, they are available in the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases)
 - For <b>Arch Linux/Manjaro/EndeavourOS</b> users we have a PKGBUILD, just run "makepkg -si" in a terminal or get the package from the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases), grab the file that ends with `pkg.tar.zst` and install it using `sudo pacman -U package_name_here.pkg.tar.zst`
+
+## Building yourself
+- You can build it using makepkg on Arch Linux and on Debian/Ubuntu using with `makedeb`, the PKGBUILDS are available [here](https://github.com/kassindornelles/lol-for-linux-installer-pkgbuild)
 
 ### Python Script features:
 - You can choose where to install the game and also the region you are going to play
