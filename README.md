@@ -2,7 +2,7 @@
 
 League of Legends unofficial installer/manager for linux
 
-This software is not affiliated with nor supported by Riot Games.
+<b>This software is not affiliated with nor supported by Riot Games.</b>
 
 ## Installation welcome screen:
 ![Screenshot_20230528_203841](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/dc0d48b9-a1fc-440c-9bbc-28ba47966011)
@@ -33,6 +33,7 @@ This software is not affiliated with nor supported by Riot Games.
    Different distributions have different names for packages*
    
 - WINE and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
+- A GPU that is not 20 years old that is capable of running the Vulkan API.
 
 ## Contributions needed for:
 - Flatpak package
