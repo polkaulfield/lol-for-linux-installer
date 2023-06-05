@@ -18,14 +18,14 @@ This software is not affiliated with nor supported by Riot Games.
 ## Building yourself
 - You can build it using makepkg on Arch Linux and on Debian/Ubuntu using with `makedeb`, the PKGBUILDS are available [here](https://github.com/kassindornelles/lol-for-linux-installer-pkgbuild)
 
-### Python Script features:
+### Features:
 - You can choose where to install the game and also the region you are going to play
-- It installs wine-ge-lol with FSYNC/FUTEX2 support enabled by default for better CPU performance
+- It installs wine-ge-lol with ESYNC/FSYNC/FUTEX2 support enabled by default for better CPU performance
 - Desktop file in the system menu (assuming you installed it as a system package like .deb, pkg.tar.zst and etc)
 - Option to uninstall the game to reinstall in case you have problems
-- Users of hybrid graphics can choose at install time if they want to use the dGPU or not
+- Users of hybrid graphics can choose at install time if they want to use the dGPU or not (you should not needed to toggle any option related to it tho, DXVK is pretty smart about what device to use)
 - obs-gamecapture support
-- vkBasalt CAS support
+- vkBasalt CAS (Sharpening filter) support
 - Update system for WINE builds
 - DXVK installation
 - Gamemode support
@@ -49,14 +49,8 @@ This software is not affiliated with nor supported by Riot Games.
 
 - <b> Don't demand features in the bug tracker, open a pull request instead and contribute with code</b>, depending of the amount of work i might be able to pull it off but if things get super complex or are super niche i won't be able to do it.
 
-### I selected the option to skip the launcher but now i need to open it again, how do i do it?
-
-- Navigate to the folder your game is installed and open the file "env_vars.json" with a text editor
-
-- Change the value of `"Skiplauncher": "1"` from `1` to `0`
-
 ## Buy me a coffee
-If you believe this software saved you some time or solved issues you had playing LoL on Linux then please consider a donation, the cost of my medications is high and i need your support.
+If you believe this software saved you some time or solved issues you had playing LoL on Linux then please consider a donation.
 
 <a href="https://www.paypal.com/donate/?hosted_button_id=UMJWYGDH2RC7E"><img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/grey.svg" alt="Donate with PayPal" width="150" height="40"></a>
 
