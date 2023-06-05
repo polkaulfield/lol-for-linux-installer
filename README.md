@@ -28,9 +28,18 @@ League of Legends unofficial installer/manager for linux
 - Gamemode support
 
 ## <a name="dependencies"></a> Dependencies:
-- `tar`, `python`, `python-requests`, `python-psutil`, `qt5-base` and `pyqt5`
 
-   Different distributions have different names for packages*
+### Necessary Dependencies:
+
+`python` `python-psutil` `python-pyqt5` `python-cffi` `wine` `python-requests` `qt5-base` `tar` `lib32-gnutls` `gnutls` `lib32-libldap` `libldap` `libpng` `lib32-libpng` `mesa` `lib32-mesa` `libgphoto2` `libpulse` `lib32-libpulse`
+
+### Optional dependencies:
+
+- `vkbasalt`: Enables additional visual enhancements, 
+- `gamemode`: Improves game performance', 
+- `mangohud`: Provides an overlay with game performance metrics')
+
+ ** Different distributions have different names for packages*
    
 - WINE and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 - A GPU that is not 20 years old that is capable of running the Vulkan API.
