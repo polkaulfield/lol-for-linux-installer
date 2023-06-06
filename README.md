@@ -10,10 +10,10 @@ League of Legends unofficial installer/manager for linux
 ## After install game management:
 ![Screenshot_20230605_105826](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/3fa04d33-c1a5-490d-987b-00babb179268)
 
-
 ## Easy installation
 - For <b>Ubuntu/Mint/Pop_OS!</b> users we provide .deb packages, those are basically double-click and install, they are available in the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases)
 - For <b>Arch Linux/Manjaro/EndeavourOS</b> users we have a PKGBUILD, just run "makepkg -si" in a terminal or get the package from the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases), grab the file that ends with `pkg.tar.zst` and install it using `sudo pacman -U package_name_here.pkg.tar.zst`
+- "I dont trust your builds for whatever reason, can i build myself?", sure, here is the [PKGBUILD repository](https://github.com/kassindornelles/lol-for-linux-installer-pkgbuild)
 
 ### Features:
 - You can choose where to install the game and also the region you are going to play
@@ -50,6 +50,10 @@ League of Legends unofficial installer/manager for linux
 - Fedora packaging
 
 ## FAQ:
+- Is this project now dead?
+
+<b>No, i'll be doing maintenance when it breaks</b>, newer wine builds, newer packages, but only when stuff breaks, we are feature complete at this point.
+
 - This project <b>DOES NOT manage League of Legends installations that were done via Lutris or any other source</b>, we do the installation ourselves and we handle our own installation and ONLY it.
 
 - This project is both a installer and a launcher, i know, the name of the project is bad but it is what it is.
