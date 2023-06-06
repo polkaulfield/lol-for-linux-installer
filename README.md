@@ -17,14 +17,14 @@ League of Legends unofficial installer/manager for linux
 
 ### Features:
 - You can choose where to install the game and also the region you are going to play
-- It installs wine-ge-lol with ESYNC/FSYNC/FUTEX2 support enabled by default for better CPU performance
+- It installs WINE-GE-LOL with ESYNC/FSYNC/FUTEX2 support enabled by default for better CPU performance
 - Desktop file in the system menu (assuming you installed it as a system package like .deb, pkg.tar.zst and etc)
 - Option to uninstall the game to reinstall in case you have problems
-- Users of hybrid graphics can choose at install time if they want to use the dGPU or not (you should not needed to toggle any option related to it tho, DXVK is pretty smart about what device to use)
+- Options for the use of dGPU/APU (you should not need to toggle any option related to it tho, DXVK is pretty smart about what device to use)
 - obs-gamecapture support
 - vkBasalt CAS (Sharpening filter) support
-- Update system for WINE builds
-- DXVK installation
+- Update system for WINE builds (If lol breaks and we get a new build with a fix you can do it in the app itself)
+- DXVK installation, 1.10.3 is used by default for better compatibility with older GPU's that don't support recent vulkan, 2.1/2.2 are available
 - Gamemode support
 
 ## <a name="dependencies"></a> Dependencies:
@@ -39,7 +39,7 @@ League of Legends unofficial installer/manager for linux
 - `gamemode`: Improves game performance', 
 - `mangohud`: Provides an overlay with game performance metrics')
 
- ** Different distributions have different names for packages*
+ ** Different distributions have different names for packages
    
 - WINE and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
 - A GPU that is not 20 years old that is capable of running the Vulkan API.
