@@ -5,6 +5,9 @@ from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal, Qt
 from PyQt5.QtGui import QDesktopServices
 
+module_folder = "/usr/share/lol-for-linux-installer"
+sys.path.append(module_folder)
+
 import leagueinstaller_code
 import vulkan_layers
 
