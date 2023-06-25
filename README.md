@@ -12,7 +12,11 @@ League of Legends unofficial installer/manager for linux
 
 ## Easy installation
 - For <b>Ubuntu/Mint/Pop_OS!</b> users we provide .deb packages, those are basically double-click and install, they are available in the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases)
+  
 - For <b>Arch Linux/Manjaro/EndeavourOS</b> users we have a PKGBUILD, just run "makepkg -si" in a terminal or get the package from the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases), grab the file that ends with `pkg.tar.zst` and install it using `sudo pacman -U package_name_here.pkg.tar.zst`
+  
+- For <b>Fedora 38</b> download the .rpm file in the release page and double click it.
+
 - "I dont trust your builds for whatever reason, can i build myself?", sure, here is the [PKGBUILD repository](https://github.com/kassindornelles/lol-for-linux-installer-pkgbuild)
 
 ### Features:
