@@ -20,16 +20,16 @@ League of Legends unofficial installer/manager for linux
 - "I dont trust your builds for whatever reason, can i build myself?", sure, here is the [PKGBUILD repository](https://github.com/kassindornelles/lol-for-linux-installer-pkgbuild)
 
 ### Features:
-- You can choose where to install the game and also the region you are going to play
-- It installs WINE-GE-LOL with ESYNC/FSYNC/FUTEX2 support enabled by default for better CPU performance
-- Desktop file in the system menu (assuming you installed it as a system package like .deb, pkg.tar.zst and etc)
-- Option to uninstall the game to reinstall in case you have problems
-- Options for the use of dGPU/APU (you should not need to toggle any option related to it tho, DXVK is pretty smart about what device to use)
+- Choose where to install the game (as long as its not outside the Home directory)
+- wine-ge-lol with ESYNC/FSYNC/FUTEX2 support enabled by default for better CPU performance
+- Desktop file in the system menu
+- Option to uninstall the game to reinstall in case you get problems
+- Options for the use of dGPU/APU/SecondaryGPU
 - obs-gamecapture support
-- vkBasalt CAS (Sharpening filter) support
-- Update system for WINE builds (If lol breaks and we get a new build with a fix you can do it in the app itself)
+- vkBasalt CAS (Sharpening filter) support with a slider for sharpness strength
+- Update system for WINE builds
 - DXVK installation, 1.10.3 is used by default for better compatibility with older GPU's that don't support recent vulkan, 2.1/2.2 are available
-- Gamemode support
+- Feral Gamemode support
 
 ## <a name="dependencies"></a> Dependencies:
 
