@@ -51,7 +51,6 @@ League of Legends unofficial installer/manager for linux
 ## Contributions needed for:
 - Flatpak package
 - Arch Linux AUR inclusion
-- Fedora packaging
 
 ## FAQ:
 - Is this project now dead?
