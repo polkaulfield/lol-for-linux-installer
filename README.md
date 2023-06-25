@@ -17,7 +17,7 @@ League of Legends unofficial installer/manager for linux
   
 - For <b>Fedora 38</b> download the .rpm file in the release page and double click it.
 
-- "I dont trust your builds for whatever reason, can i build myself?", sure, here is the [PKGBUILD repository](https://github.com/kassindornelles/lol-for-linux-installer-pkgbuild)
+- "I dont trust your builds for whatever reason, can i build myself?", sure, here is the [Packaging repository](https://github.com/kassindornelles/lol-for-linux-installer-packages)
 
 ### Features:
 - Choose where to install the game (as long as its not outside the Home directory)
