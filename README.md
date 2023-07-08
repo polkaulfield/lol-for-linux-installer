@@ -4,11 +4,6 @@ League of Legends unofficial installer/manager for linux
 
 <b>This software is not affiliated with nor supported by Riot Games.</b>
 
-## important notice
-- my system broke and was the only computer I had at home, so development will cease, recently i packaged it for fedora 38 and that's my last contribution for now, i have no way to acquire new hardware so anyone wanting to fork the project and maintain it be my guest, i accept donations still so maybe I can acquire a motherboard and a cpu but I doubt anyone would donate that amount of money for that so is more feasible for others to fork it and maintain it, it was a long ride and I'm happy with being able to pull this project out having no experience whatsoever with python and pyqt before starting this, thank you so much for your support.
-
-- if you are forking this project to keep it going be sure to respect it's license, that's all I ask.
-
 ## Installation welcome screen:
 ![Screenshot_20230528_203841](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/dc0d48b9-a1fc-440c-9bbc-28ba47966011)
 
