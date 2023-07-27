@@ -522,22 +522,31 @@
                  <string>Management</string>
                 </attribute>
                 <layout class="QGridLayout" name="gridLayout_3">
-                 <item row="9" column="1" colspan="2">
-                  <widget class="QPushButton" name="checkWineupdates">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
+                 <item row="3" column="2">
+                  <spacer name="horizontalSpacer_10">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
                    </property>
-                   <property name="text">
-                    <string>Check for WINE updates...</string>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>40</width>
+                     <height>20</height>
+                    </size>
                    </property>
-                   <property name="icon">
-                    <iconset theme="view-refresh">
-                     <normaloff>.</normaloff>.</iconset>
+                  </spacer>
+                 </item>
+                 <item row="0" column="1">
+                  <spacer name="verticalSpacer_4">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
                    </property>
-                  </widget>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                  <item row="3" column="1">
                   <layout class="QVBoxLayout" name="verticalLayout_9">
@@ -662,8 +671,8 @@
                    </item>
                   </layout>
                  </item>
-                 <item row="3" column="2">
-                  <spacer name="horizontalSpacer_10">
+                 <item row="3" column="0">
+                  <spacer name="horizontalSpacer_9">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -674,32 +683,6 @@
                     </size>
                    </property>
                   </spacer>
-                 </item>
-                 <item row="9" column="0">
-                  <widget class="QPushButton" name="uninstallLeaguebutton">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="toolTip">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This removes the game completely.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;WARNING:&lt;/p&gt;&lt;p&gt;No window asking for confirmation will appear&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                   <property name="autoFillBackground">
-                    <bool>false</bool>
-                   </property>
-                   <property name="text">
-                    <string>Uninstall the game</string>
-                   </property>
-                   <property name="icon">
-                    <iconset theme="edit-delete">
-                     <normaloff>.</normaloff>.</iconset>
-                   </property>
-                   <property name="checkable">
-                    <bool>false</bool>
-                   </property>
-                  </widget>
                  </item>
                  <item row="4" column="1">
                   <spacer name="verticalSpacer_2">
@@ -717,42 +700,20 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="3" column="0">
-                  <spacer name="horizontalSpacer_9">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="0" column="1">
-                  <spacer name="verticalSpacer_4">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="7" column="0">
-                  <widget class="QLabel" name="labelrenderer">
+                 <item row="9" column="1" colspan="2">
+                  <widget class="QPushButton" name="checkWineupdates">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
                    <property name="text">
-                    <string>Renderer (DXVK):</string>
+                    <string>Check for WINE updates...</string>
+                   </property>
+                   <property name="icon">
+                    <iconset theme="view-refresh">
+                     <normaloff>.</normaloff>.</iconset>
                    </property>
                   </widget>
                  </item>
@@ -790,6 +751,45 @@
                      <string>DXVK 1.10.3</string>
                     </property>
                    </item>
+                  </widget>
+                 </item>
+                 <item row="9" column="0">
+                  <widget class="QPushButton" name="uninstallLeaguebutton">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="toolTip">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This removes the game completely.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;WARNING:&lt;/p&gt;&lt;p&gt;No window asking for confirmation will appear&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="autoFillBackground">
+                    <bool>false</bool>
+                   </property>
+                   <property name="text">
+                    <string>Uninstall the game</string>
+                   </property>
+                   <property name="icon">
+                    <iconset theme="edit-delete">
+                     <normaloff>.</normaloff>.</iconset>
+                   </property>
+                   <property name="checkable">
+                    <bool>false</bool>
+                   </property>
+                  </widget>
+                 </item>
+                 <item row="5" column="1">
+                  <widget class="QLabel" name="labelrenderer">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="text">
+                    <string>Renderer (DXVK):</string>
+                   </property>
                   </widget>
                  </item>
                 </layout>
