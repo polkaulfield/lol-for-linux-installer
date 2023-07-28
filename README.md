@@ -19,6 +19,9 @@ League of Legends unofficial installer/manager for linux
 
 - "I dont trust your builds for whatever reason, can i build myself?", sure, here is the [Packaging repository](https://github.com/kassindornelles/lol-for-linux-installer-packages)
 
+### GPU's and Drivers suppported:
+Check for it in the [DXVK Driver support wiki page](https://github.com/doitsujin/dxvk/wiki/Driver-support)
+
 ### Features:
 - Choose where to install the game (as long as its not outside the Home directory)
 - wine-ge-lol with ESYNC/FSYNC/FUTEX2 support enabled by default for better CPU performance
