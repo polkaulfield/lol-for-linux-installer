@@ -15,9 +15,9 @@ League of Legends unofficial installer/manager for linux
   
 - For <b>Arch Linux/Manjaro/EndeavourOS</b> users we have a PKGBUILD, just run "makepkg -si" in a terminal or get the package from the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases), grab the file that ends with `pkg.tar.zst` and install it using `sudo pacman -U package_name_here.pkg.tar.zst`
   
-- For <b>Fedora 38</b> download the .rpm file in the release page and double click it.
+- For <b>Fedora 38</b> download the .rpm file in the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases) and double click it.
 
-- "I dont trust your builds for whatever reason, can i build myself?", sure, here is the [Packaging repository](https://github.com/kassindornelles/lol-for-linux-installer-packages)
+- If you want to build the packages yourself or contribute to improve the packaging system check the [Packaging repository](https://github.com/kassindornelles/lol-for-linux-installer-packages)
 
 ### GPU's and Drivers suppported:
 Check for it in the [DXVK Driver support wiki page](https://github.com/doitsujin/dxvk/wiki/Driver-support)
@@ -31,7 +31,7 @@ Check for it in the [DXVK Driver support wiki page](https://github.com/doitsujin
 - obs-gamecapture support
 - vkBasalt CAS (Sharpening filter) support with a slider for sharpness strength
 - Update system for WINE builds
-- DXVK installation, 1.10.3 is used by default for better compatibility with older GPU's that don't support recent vulkan, 2.1/2.2 are available
+- DXVK installation, 1.10.3 is used by default for better compatibility with older GPU's that don't support recent vulkan, DXVL 2.1 and 2.2 are available
 - Feral Gamemode support
 
 ## <a name="dependencies"></a> Dependencies:
@@ -49,7 +49,6 @@ Check for it in the [DXVK Driver support wiki page](https://github.com/doitsujin
  ** Different distributions have different names for packages
    
 - WINE and its [Dependency hell](https://www.gloriouseggroll.tv/how-to-get-out-of-wine-dependency-hell/)
-- A GPU that is not 20 years old that is capable of running the Vulkan API.
 
 ## Contributions needed for:
 - Flatpak package
