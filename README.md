@@ -31,7 +31,7 @@ Check for it in the [DXVK Driver support wiki page](https://github.com/doitsujin
 - obs-gamecapture support
 - vkBasalt CAS (Sharpening filter) support with a slider for sharpness strength
 - Update system for WINE builds
-- DXVK installation, 1.10.3 is used by default for better compatibility with older GPU's that don't support recent vulkan, DXVL 2.1 and 2.2 are available
+- DXVK installation, 1.10.3 is used by default for better compatibility with older GPU's that don't support recent vulkan, DXVK 2.1 and 2.2 are available
 - Feral Gamemode support
 
 ## <a name="dependencies"></a> Dependencies:
