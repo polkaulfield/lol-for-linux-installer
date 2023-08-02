@@ -1,45 +1,61 @@
 #!/usr/bin/env python3
-import os, shutil, requests, tarfile, subprocess, json, logging, urllib.request
+import os, shutil, requests, subprocess, json, logging, urllib.request, tarfile
 from PyQt5.QtCore import pyqtSignal, QObject
 
 def install_dxvk_code(game_main_dir):
-        dst_path = os.path.join(game_main_dir, 'wine', 'prefix', 'drive_c', 'windows')
-        tmp_path = 'dxvk-tmp'
-        url = 'https://github.com/doitsujin/dxvk/releases/download/v1.10.3/dxvk-1.10.3.tar.gz'
-        filename = os.path.basename(url)
-        urllib.request.urlretrieve(url, filename)
+    dst_path = os.path.join(game_main_dir, 'wine', 'prefix', 'drive_c', 'windows')
+    tmp_path = 'dxvk-tmp'
+    url = 'https://github.com/doitsujin/dxvk/releases/download/v1.10.3/dxvk-1.10.3.tar.gz'
+    filename = os.path.basename(url)
+    urllib.request.urlretrieve(url, filename)
 
-        with tarfile.open(filename, 'r:gz') as tar:
-            tar.extractall(tmp_path)
+    with tarfile.open(filename, 'r:gz') as tar:
+        tar.extractall(tmp_path)
 
-        for arch in ['x64', 'x32']:
-            src_path = os.path.join(tmp_path, 'dxvk-1.10.3', arch)
-            dst_path_arch = os.path.join(dst_path, 'system32' if arch == 'x64' else 'syswow64')
+    for arch in ['x64', 'x32']:
+        src_path = os.path.join(tmp_path, 'dxvk-1.10.3', arch)
+        dst_path_arch = os.path.join(dst_path, 'system32' if arch == 'x64' else 'syswow64')
 
-            if not os.path.exists(dst_path_arch):
-                os.makedirs(dst_path_arch)
+        if not os.path.exists(dst_path_arch):
+            os.makedirs(dst_path_arch)
 
-            for file_name in os.listdir(src_path):
-                if file_name.endswith('.dll'):
-                    src_file = os.path.join(src_path, file_name)
-                    dst_file = os.path.join(dst_path_arch, file_name)
-                    shutil.copy2(src_file, dst_file)
+        for file_name in os.listdir(src_path):
+            if file_name.endswith('.dll'):
+                src_file = os.path.join(src_path, file_name)
+                dst_file = os.path.join(dst_path_arch, file_name)
+                shutil.copy2(src_file, dst_file)
 
-        os.remove(filename)
-        shutil.rmtree(tmp_path)
+    os.remove(filename)
+    shutil.rmtree(tmp_path)
 
 def league_install_code(game_main_dir, game_region_link):
+    container_env = 'FLATPAK_ID' in os.environ
+
+    if container_env:
+        logging.info("Running inside a Flatpak container. Adjusting paths...")
+        # Common variables
+        wine_version = "wine-build"
+        home_dir = os.environ.get('HOME')
+        game_downloads_dir = os.path.join(game_main_dir, 'downloads')
+        game_main_wine_dir = os.path.join(game_main_dir, 'wine')
+        game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')
+        user_local_share = os.path.join(home_dir, ".local/share")
+        game_launch_file_path = os.path.join(game_main_dir, ".local/share/lol-for-linux-installer/launch-league-of-legends.py")
+        user_config_folder = os.path.join(home_dir, ".config")
+        wine_loader_path = os.path.join(game_main_wine_dir, 'wine-build', 'bin', 'wine')
+    else:
+        logging.info("Setting all variables")  # Cheap logging
+        wine_version = "wine-build"
+        home_dir = os.environ.get('XDG_CONFIG_HOME') or os.path.expanduser('~/')
+        game_downloads_dir = os.path.join(game_main_dir, 'downloads')
+        game_main_wine_dir = os.path.join(game_main_dir, 'wine')
+        game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')
+        user_local_share = os.path.join(home_dir, ".local/share")
+        game_launch_file_path = os.path.join(game_main_dir, "launch-league-of-legends.py")
+        user_config_folder = os.path.join(home_dir, ".config")
+        wine_loader_path = os.path.join(game_main_wine_dir, 'wine-build', 'bin', 'wine')
 
     logging.info("Setting all variables")  # Cheap logging
-    wine_version = "wine-build"
-    home_dir = os.environ.get('XDG_CONFIG_HOME') or os.path.expanduser('~/')
-    game_downloads_dir = os.path.join(game_main_dir, 'downloads')
-    game_main_wine_dir = os.path.join(game_main_dir, 'wine')
-    game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')
-    user_local_share = os.path.join(home_dir, ".local/share")
-    game_launch_file_path = os.path.join(game_main_dir, "launch-league-of-legends.py")
-    user_config_folder= os.path.join(home_dir, ".config")
-    wine_loader_path = os.path.join(game_main_wine_dir, 'wine-build', 'bin', 'wine')
     folder_paths = [game_main_dir, game_downloads_dir, game_main_wine_dir, game_prefix_dir, user_config_folder]
     logging.info("Creating folders")  # Cheap logging
     for folder_path in folder_paths:
