@@ -38,16 +38,15 @@ def league_install_code(game_main_dir, game_region_link):
         game_launch_file_path = os.path.join(game_main_dir, ".local/share/lol-for-linux-installer/launch-league-of-legends.py")
     else:
         home_dir = os.environ.get('XDG_CONFIG_HOME') or os.path.expanduser('~/')
-        game_main_wine_dir = os.path.join(game_main_dir, 'wine')
         game_launch_file_path = os.path.join(game_main_dir, "launch-league-of-legends.py")
 
+    game_main_wine_dir = os.path.join(game_main_dir, 'wine')
     wine_version = "wine-build"
     game_downloads_dir = os.path.join(game_main_dir, 'downloads')
     game_prefix_dir = os.path.join(game_main_wine_dir, 'prefix')
     user_local_share = os.path.join(home_dir, ".local/share")
     wine_loader_path = os.path.join(game_main_wine_dir, 'wine-build', 'bin', 'wine')
     user_config_folder = os.path.join(home_dir, ".config")
-
 
     folder_paths = [game_main_dir, game_downloads_dir, game_main_wine_dir, game_prefix_dir, user_config_folder]
     logging.info("Creating folders")  # Cheap logging
