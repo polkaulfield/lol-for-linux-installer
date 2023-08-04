@@ -85,7 +85,6 @@ class Installer(QMainWindow):
 
     def read_installed_folder(self):
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
-
         try:
             with open(json_file_path, "r") as json_file:
                 data = json.load(json_file)
