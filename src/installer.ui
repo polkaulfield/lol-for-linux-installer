@@ -1596,7 +1596,7 @@
                   </font>
                  </property>
                  <property name="text">
-                  <string>Start League of Legends</string>
+                  <string>Play game</string>
                  </property>
                  <property name="icon">
                   <iconset theme="media-playback-start">

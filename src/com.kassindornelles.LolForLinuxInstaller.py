@@ -58,7 +58,7 @@ class Installer(QMainWindow):
         self.gamemode_value = None
         self.skiplauncher_value = None
         self.vkbasaltslider = self.findChild(QSlider, "vkbasaltslider")
-        self.setWindowTitle('League of Legends Manager')
+        self.setWindowTitle('LolForLinuxInstaller')
         self.install_button.clicked.connect(self.installer_code)
         self.cancelButton.clicked.connect(self.cancel_installation)
         self.install_button.setEnabled(True)
