@@ -9,12 +9,12 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>676</width>
-    <height>358</height>
+    <width>615</width>
+    <height>361</height>
    </rect>
   </property>
   <property name="sizePolicy">
-   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
     <horstretch>0</horstretch>
     <verstretch>0</verstretch>
    </sizepolicy>
@@ -281,7 +281,7 @@
              <item>
               <widget class="QTabWidget" name="tabWidget">
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <property name="tabsClosable">
                 <bool>false</bool>
@@ -294,8 +294,7 @@
                </property>
                <widget class="QWidget" name="tab">
                 <attribute name="icon">
-                 <iconset theme="home">
-                  <normaloff>.</normaloff>.</iconset>
+                 <iconset theme="user-home-symbolic"/>
                 </attribute>
                 <attribute name="title">
                  <string>Home</string>
@@ -361,6 +360,22 @@
                     </widget>
                    </item>
                    <item>
+                    <spacer name="verticalSpacer_20">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>5</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
                     <widget class="QCheckBox" name="skiplaunchercheck">
                      <property name="enabled">
                       <bool>true</bool>
@@ -394,22 +409,6 @@
                    </item>
                   </layout>
                  </item>
-                 <item row="11" column="0">
-                  <spacer name="horizontalSpacer_7">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Expanding</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>30</width>
-                     <height>10</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
                  <item row="13" column="1" rowspan="2">
                   <spacer name="verticalSpacer">
                    <property name="orientation">
@@ -426,114 +425,167 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="11" column="2">
-                  <spacer name="horizontalSpacer_8">
+                 <item row="15" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_8">
+                   <item>
+                    <widget class="QPushButton" name="donatebutton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <weight>50</weight>
+                       <bold>false</bold>
+                      </font>
+                     </property>
+                     <property name="toolTip">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you found this software useful consider making a donation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="text">
+                      <string>Donate...</string>
+                     </property>
+                     <property name="icon">
+                      <iconset theme="emblem-favorite">
+                       <normaloff>.</normaloff>.</iconset>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="githubButton2">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="maximumSize">
+                      <size>
+                       <width>16777215</width>
+                       <height>16777215</height>
+                      </size>
+                     </property>
+                     <property name="font">
+                      <font>
+                       <weight>50</weight>
+                       <italic>false</italic>
+                       <bold>false</bold>
+                       <underline>false</underline>
+                      </font>
+                     </property>
+                     <property name="toolTip">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Report bugs on GitHub&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="text">
+                      <string>Report Bug...</string>
+                     </property>
+                     <property name="icon">
+                      <iconset theme="tools-report-bug">
+                       <normaloff>.</normaloff>.</iconset>
+                     </property>
+                     <property name="checkable">
+                      <bool>false</bool>
+                     </property>
+                     <property name="default">
+                      <bool>false</bool>
+                     </property>
+                     <property name="flat">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
+                 </item>
+                 <item row="15" column="2">
+                  <spacer name="horizontalSpacer_9">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
                    <property name="sizeType">
-                    <enum>QSizePolicy::Expanding</enum>
+                    <enum>QSizePolicy::Fixed</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>40</width>
-                     <height>20</height>
+                     <width>1</width>
+                     <height>1</height>
                     </size>
                    </property>
                   </spacer>
                  </item>
-                 <item row="15" column="2">
-                  <widget class="QPushButton" name="donatebutton">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="font">
-                    <font>
-                     <weight>50</weight>
-                     <bold>false</bold>
-                    </font>
-                   </property>
-                   <property name="toolTip">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;If you found this software useful consider making a donation.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                   <property name="text">
-                    <string>Donate...</string>
-                   </property>
-                   <property name="icon">
-                    <iconset theme="emblem-favorite">
-                     <normaloff>.</normaloff>.</iconset>
-                   </property>
-                  </widget>
-                 </item>
                  <item row="15" column="0">
-                  <widget class="QPushButton" name="githubButton2">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
+                  <spacer name="horizontalSpacer_10">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
                    </property>
-                   <property name="maximumSize">
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
                     <size>
-                     <width>16777215</width>
-                     <height>16777215</height>
+                     <width>1</width>
+                     <height>1</height>
                     </size>
                    </property>
-                   <property name="font">
-                    <font>
-                     <weight>50</weight>
-                     <italic>false</italic>
-                     <bold>false</bold>
-                     <underline>false</underline>
-                    </font>
-                   </property>
-                   <property name="toolTip">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Report bugs on GitHub&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                   </property>
-                   <property name="text">
-                    <string>Report Bug...</string>
-                   </property>
-                   <property name="icon">
-                    <iconset theme="tools-report-bug">
-                     <normaloff>.</normaloff>.</iconset>
-                   </property>
-                   <property name="checkable">
-                    <bool>false</bool>
-                   </property>
-                   <property name="default">
-                    <bool>false</bool>
-                   </property>
-                   <property name="flat">
-                    <bool>false</bool>
-                   </property>
-                  </widget>
+                  </spacer>
                  </item>
                 </layout>
                </widget>
                <widget class="QWidget" name="tab_2">
                 <attribute name="icon">
-                 <iconset theme="preferences-system">
-                  <normaloff>.</normaloff>.</iconset>
+                 <iconset theme="preferences-system-symbolic"/>
                 </attribute>
                 <attribute name="title">
                  <string>Management</string>
                 </attribute>
                 <layout class="QGridLayout" name="gridLayout_3">
-                 <item row="5" column="1">
-                  <spacer name="verticalSpacer_2">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
+                 <item row="7" column="1">
+                  <layout class="QHBoxLayout" name="horizontalLayout_7">
+                   <item>
+                    <widget class="QPushButton" name="uninstallLeaguebutton">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="toolTip">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This removes the game completely.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;WARNING:&lt;/p&gt;&lt;p&gt;No window asking for confirmation will appear&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                     </property>
+                     <property name="autoFillBackground">
+                      <bool>false</bool>
+                     </property>
+                     <property name="text">
+                      <string>Uninstall the game</string>
+                     </property>
+                     <property name="icon">
+                      <iconset theme="edit-delete">
+                       <normaloff>.</normaloff>.</iconset>
+                     </property>
+                     <property name="checkable">
+                      <bool>false</bool>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QPushButton" name="checkWineupdates">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="Preferred">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Check for WINE updates...</string>
+                     </property>
+                     <property name="icon">
+                      <iconset theme="view-refresh">
+                       <normaloff>.</normaloff>.</iconset>
+                     </property>
+                    </widget>
+                   </item>
+                  </layout>
                  </item>
                  <item row="7" column="3">
                   <widget class="QComboBox" name="rendererCombobox">
@@ -571,8 +623,8 @@
                    </item>
                   </widget>
                  </item>
-                 <item row="4" column="0">
-                  <spacer name="horizontalSpacer_9">
+                 <item row="7" column="0">
+                  <spacer name="horizontalSpacer_20">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
@@ -581,41 +633,11 @@
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>0</width>
-                     <height>0</height>
+                     <width>1</width>
+                     <height>20</height>
                     </size>
                    </property>
                   </spacer>
-                 </item>
-                 <item row="0" column="1">
-                  <spacer name="verticalSpacer_4">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="9" column="2" colspan="2">
-                  <widget class="QPushButton" name="checkWineupdates">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>Check for WINE updates...</string>
-                   </property>
-                   <property name="icon">
-                    <iconset theme="view-refresh">
-                     <normaloff>.</normaloff>.</iconset>
-                   </property>
-                  </widget>
                  </item>
                  <item row="7" column="2">
                   <widget class="QLabel" name="labelrenderer">
@@ -630,33 +652,23 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="9" column="0">
-                  <widget class="QPushButton" name="uninstallLeaguebutton">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
+                 <item row="7" column="4">
+                  <spacer name="horizontalSpacer_21">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
                    </property>
-                   <property name="toolTip">
-                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;This removes the game completely.&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;p&gt;WARNING:&lt;/p&gt;&lt;p&gt;No window asking for confirmation will appear&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Minimum</enum>
                    </property>
-                   <property name="autoFillBackground">
-                    <bool>false</bool>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>1</width>
+                     <height>20</height>
+                    </size>
                    </property>
-                   <property name="text">
-                    <string>Uninstall the game</string>
-                   </property>
-                   <property name="icon">
-                    <iconset theme="edit-delete">
-                     <normaloff>.</normaloff>.</iconset>
-                   </property>
-                   <property name="checkable">
-                    <bool>false</bool>
-                   </property>
-                  </widget>
+                  </spacer>
                  </item>
-                 <item row="4" column="1">
+                 <item row="1" column="1">
                   <layout class="QVBoxLayout" name="verticalLayout_9">
                    <property name="topMargin">
                     <number>10</number>
@@ -694,6 +706,22 @@
                     </widget>
                    </item>
                    <item>
+                    <spacer name="verticalSpacer_17">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
                     <widget class="QCheckBox" name="Usemangohud">
                      <property name="enabled">
                       <bool>true</bool>
@@ -723,6 +751,22 @@
                     </widget>
                    </item>
                    <item>
+                    <spacer name="verticalSpacer_18">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
                     <widget class="QCheckBox" name="Usedriprime">
                      <property name="enabled">
                       <bool>true</bool>
@@ -747,6 +791,22 @@
                        <normaloff>.</normaloff>.</iconset>
                      </property>
                     </widget>
+                   </item>
+                   <item>
+                    <spacer name="verticalSpacer_19">
+                     <property name="orientation">
+                      <enum>Qt::Vertical</enum>
+                     </property>
+                     <property name="sizeType">
+                      <enum>QSizePolicy::Fixed</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>20</width>
+                       <height>10</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                    <item>
                     <widget class="QCheckBox" name="Usenvidiahybrid">
@@ -779,18 +839,28 @@
                    </item>
                   </layout>
                  </item>
-                 <item row="4" column="3">
-                  <spacer name="horizontalSpacer_10">
+                 <item row="2" column="1">
+                  <spacer name="verticalSpacer_2">
                    <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Minimum</enum>
+                    <enum>Qt::Vertical</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>40</width>
-                     <height>20</height>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="0" column="1">
+                  <spacer name="verticalSpacer_4">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
                     </size>
                    </property>
                   </spacer>
@@ -806,20 +876,53 @@
                  <string>vkBasalt</string>
                 </attribute>
                 <layout class="QGridLayout" name="gridLayout">
-                 <item row="5" column="2">
-                  <spacer name="horizontalSpacer_5">
+                 <item row="6" column="1">
+                  <widget class="QSlider" name="vkbasaltslider">
+                   <property name="enabled">
+                    <bool>false</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="mouseTracking">
+                    <bool>false</bool>
+                   </property>
+                   <property name="minimum">
+                    <number>1</number>
+                   </property>
+                   <property name="maximum">
+                    <number>10</number>
+                   </property>
+                   <property name="singleStep">
+                    <number>1</number>
+                   </property>
+                   <property name="value">
+                    <number>1</number>
+                   </property>
+                   <property name="tracking">
+                    <bool>true</bool>
+                   </property>
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
+                   <property name="invertedAppearance">
+                    <bool>false</bool>
                    </property>
-                  </spacer>
+                   <property name="invertedControls">
+                    <bool>false</bool>
+                   </property>
+                   <property name="tickPosition">
+                    <enum>QSlider::TicksBelow</enum>
+                   </property>
+                   <property name="tickInterval">
+                    <number>1</number>
+                   </property>
+                  </widget>
                  </item>
-                 <item row="4" column="1">
+                 <item row="5" column="1">
                   <layout class="QHBoxLayout" name="horizontalLayout_6">
                    <property name="spacing">
                     <number>1</number>
@@ -837,6 +940,19 @@
                     <number>0</number>
                    </property>
                    <item>
+                    <spacer name="horizontalSpacer_7">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
                     <widget class="QLabel" name="vkbasaltlabel">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -850,19 +966,22 @@
                     </widget>
                    </item>
                    <item>
-                    <widget class="QLabel" name="sharpeningtext_level">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
+                    <spacer name="horizontalSpacer_8">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
                      </property>
-                    </widget>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
                    </item>
                   </layout>
                  </item>
-                 <item row="6" column="1">
-                  <spacer name="verticalSpacer_8">
+                 <item row="0" column="1">
+                  <spacer name="verticalSpacer_7">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
                    </property>
@@ -957,24 +1076,40 @@
                    </item>
                   </layout>
                  </item>
-                 <item row="5" column="0">
+                 <item row="6" column="0">
                   <spacer name="horizontalSpacer_11">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
                    <property name="sizeType">
-                    <enum>QSizePolicy::Expanding</enum>
+                    <enum>QSizePolicy::Fixed</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>15</width>
+                     <width>50</width>
                      <height>0</height>
                     </size>
                    </property>
                   </spacer>
                  </item>
-                 <item row="0" column="1">
-                  <spacer name="verticalSpacer_7">
+                 <item row="6" column="3">
+                  <spacer name="horizontalSpacer_5">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>50</width>
+                     <height>20</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="7" column="1">
+                  <spacer name="verticalSpacer_8">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
                    </property>
@@ -989,51 +1124,31 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="5" column="1">
-                  <widget class="QSlider" name="vkbasaltslider">
-                   <property name="enabled">
-                    <bool>false</bool>
-                   </property>
+                 <item row="6" column="2">
+                  <widget class="QLabel" name="sharpeningtext_level">
                    <property name="sizePolicy">
-                    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
                      <horstretch>0</horstretch>
                      <verstretch>0</verstretch>
                     </sizepolicy>
                    </property>
-                   <property name="mouseTracking">
-                    <bool>false</bool>
-                   </property>
-                   <property name="minimum">
-                    <number>1</number>
-                   </property>
-                   <property name="maximum">
-                    <number>10</number>
-                   </property>
-                   <property name="singleStep">
-                    <number>1</number>
-                   </property>
-                   <property name="value">
-                    <number>1</number>
-                   </property>
-                   <property name="tracking">
-                    <bool>true</bool>
-                   </property>
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="invertedAppearance">
-                    <bool>false</bool>
-                   </property>
-                   <property name="invertedControls">
-                    <bool>false</bool>
-                   </property>
-                   <property name="tickPosition">
-                    <enum>QSlider::TicksBelow</enum>
-                   </property>
-                   <property name="tickInterval">
-                    <number>1</number>
-                   </property>
                   </widget>
+                 </item>
+                 <item row="4" column="1">
+                  <spacer name="verticalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>10</width>
+                     <height>10</height>
+                    </size>
+                   </property>
+                  </spacer>
                  </item>
                 </layout>
                </widget>
