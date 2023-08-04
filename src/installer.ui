@@ -9,7 +9,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>709</width>
+    <width>676</width>
     <height>358</height>
    </rect>
   </property>
@@ -281,7 +281,7 @@
              <item>
               <widget class="QTabWidget" name="tabWidget">
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <property name="tabsClosable">
                 <bool>false</bool>
@@ -535,6 +535,71 @@
                    </property>
                   </spacer>
                  </item>
+                 <item row="7" column="3">
+                  <widget class="QComboBox" name="rendererCombobox">
+                   <property name="enabled">
+                    <bool>true</bool>
+                   </property>
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
+                   </property>
+                   <property name="toolTip">
+                    <string>You dont need to reinstall every time.</string>
+                   </property>
+                   <item>
+                    <property name="text">
+                     <string>...</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>DXVK 2.2</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>DXVK 2.1</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
+                     <string>DXVK 1.10.3</string>
+                    </property>
+                   </item>
+                  </widget>
+                 </item>
+                 <item row="4" column="0">
+                  <spacer name="horizontalSpacer_9">
+                   <property name="orientation">
+                    <enum>Qt::Horizontal</enum>
+                   </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Minimum</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>0</width>
+                     <height>0</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
+                 <item row="0" column="1">
+                  <spacer name="verticalSpacer_4">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
+                   </property>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
+                   </property>
+                  </spacer>
+                 </item>
                  <item row="9" column="2" colspan="2">
                   <widget class="QPushButton" name="checkWineupdates">
                    <property name="sizePolicy">
@@ -552,18 +617,18 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="0" column="1">
-                  <spacer name="verticalSpacer_4">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                 <item row="7" column="2">
+                  <widget class="QLabel" name="labelrenderer">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
+                   <property name="text">
+                    <string>Renderer (DXVK):</string>
                    </property>
-                  </spacer>
+                  </widget>
                  </item>
                  <item row="9" column="0">
                   <widget class="QPushButton" name="uninstallLeaguebutton">
@@ -714,22 +779,6 @@
                    </item>
                   </layout>
                  </item>
-                 <item row="4" column="0">
-                  <spacer name="horizontalSpacer_9">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Minimum</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>0</width>
-                     <height>0</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
                  <item row="4" column="3">
                   <spacer name="horizontalSpacer_10">
                    <property name="orientation">
@@ -746,55 +795,6 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="7" column="2">
-                  <widget class="QLabel" name="labelrenderer">
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="text">
-                    <string>Renderer (DXVK):</string>
-                   </property>
-                  </widget>
-                 </item>
-                 <item row="7" column="3">
-                  <widget class="QComboBox" name="rendererCombobox">
-                   <property name="enabled">
-                    <bool>true</bool>
-                   </property>
-                   <property name="sizePolicy">
-                    <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
-                     <horstretch>0</horstretch>
-                     <verstretch>0</verstretch>
-                    </sizepolicy>
-                   </property>
-                   <property name="toolTip">
-                    <string>You dont need to reinstall every time.</string>
-                   </property>
-                   <item>
-                    <property name="text">
-                     <string>...</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>DXVK 2.2</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>DXVK 2.1</string>
-                    </property>
-                   </item>
-                   <item>
-                    <property name="text">
-                     <string>DXVK 1.10.3</string>
-                    </property>
-                   </item>
-                  </widget>
-                 </item>
                 </layout>
                </widget>
                <widget class="QWidget" name="tab_3">
@@ -806,21 +806,8 @@
                  <string>vkBasalt</string>
                 </attribute>
                 <layout class="QGridLayout" name="gridLayout">
-                 <item row="4" column="2">
-                  <spacer name="horizontalSpacer_5">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="3" column="1">
-                  <spacer name="verticalSpacer_6">
+                 <item row="8" column="1">
+                  <spacer name="verticalSpacer_8">
                    <property name="orientation">
                     <enum>Qt::Vertical</enum>
                    </property>
@@ -835,31 +822,21 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="4" column="1">
-                  <layout class="QHBoxLayout" name="horizontalLayout_6">
-                   <property name="spacing">
-                    <number>3</number>
+                 <item row="5" column="1">
+                  <spacer name="verticalSpacer_6">
+                   <property name="orientation">
+                    <enum>Qt::Vertical</enum>
                    </property>
-                   <property name="sizeConstraint">
-                    <enum>QLayout::SetMaximumSize</enum>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::MinimumExpanding</enum>
                    </property>
-                   <property name="topMargin">
-                    <number>0</number>
+                   <property name="sizeHint" stdset="0">
+                    <size>
+                     <width>20</width>
+                     <height>40</height>
+                    </size>
                    </property>
-                   <property name="rightMargin">
-                    <number>0</number>
-                   </property>
-                   <item>
-                    <widget class="QLabel" name="vkbasaltlabel">
-                     <property name="text">
-                      <string>Contrast Adaptive Sharpening (CAS) strength:</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item>
-                    <widget class="QLabel" name="sharpeningtext_level"/>
-                   </item>
-                  </layout>
+                  </spacer>
                  </item>
                  <item row="0" column="1">
                   <spacer name="verticalSpacer_7">
@@ -877,88 +854,107 @@
                    </property>
                   </spacer>
                  </item>
-                 <item row="4" column="0">
-                  <spacer name="horizontalSpacer_6">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="2" column="2">
+                 <item row="5" column="2">
                   <spacer name="horizontalSpacer_12">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
+                   <property name="sizeType">
+                    <enum>QSizePolicy::Fixed</enum>
+                   </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>40</width>
-                     <height>20</height>
+                     <width>20</width>
+                     <height>0</height>
                     </size>
                    </property>
                   </spacer>
                  </item>
                  <item row="6" column="1">
-                  <spacer name="verticalSpacer_8">
-                   <property name="orientation">
-                    <enum>Qt::Vertical</enum>
+                  <layout class="QHBoxLayout" name="horizontalLayout_6">
+                   <property name="spacing">
+                    <number>1</number>
                    </property>
-                   <property name="sizeType">
-                    <enum>QSizePolicy::Preferred</enum>
+                   <property name="sizeConstraint">
+                    <enum>QLayout::SetDefaultConstraint</enum>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>20</width>
-                     <height>40</height>
-                    </size>
+                   <property name="leftMargin">
+                    <number>0</number>
                    </property>
-                  </spacer>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
+                    <number>0</number>
+                   </property>
+                   <item>
+                    <spacer name="horizontalSpacer_6">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="vkbasaltlabel">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                     <property name="text">
+                      <string>Contrast Adaptive Sharpening (CAS) strength:</string>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <widget class="QLabel" name="sharpeningtext_level">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
+                     </property>
+                    </widget>
+                   </item>
+                   <item>
+                    <spacer name="horizontalSpacer_5">
+                     <property name="orientation">
+                      <enum>Qt::Horizontal</enum>
+                     </property>
+                     <property name="sizeHint" stdset="0">
+                      <size>
+                       <width>40</width>
+                       <height>20</height>
+                      </size>
+                     </property>
+                    </spacer>
+                   </item>
+                  </layout>
                  </item>
-                 <item row="2" column="0">
-                  <spacer name="horizontalSpacer_11">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
-                   </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
-                   </property>
-                  </spacer>
-                 </item>
-                 <item row="2" column="1">
+                 <item row="3" column="1">
                   <layout class="QVBoxLayout" name="verticalLayout_7">
                    <property name="spacing">
+                    <number>0</number>
+                   </property>
+                   <property name="leftMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="topMargin">
+                    <number>0</number>
+                   </property>
+                   <property name="rightMargin">
                     <number>0</number>
                    </property>
                    <property name="bottomMargin">
                     <number>0</number>
                    </property>
-                   <item>
-                    <widget class="QCheckBox" name="vkbasaltcheckbox">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="MinimumExpanding" vsizetype="MinimumExpanding">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                     <property name="toolTip">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;vkBasalt is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;p&gt;In this tab you can configure the &amp;quot;Contrast Adaptive Sharpening&amp;quot; filter.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/DadSchoorse/vkBasalt&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/DadSchoorse/vkBasalt&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                     <property name="layoutDirection">
-                      <enum>Qt::LeftToRight</enum>
-                     </property>
-                     <property name="text">
-                      <string>Enable vkBasalt</string>
-                     </property>
-                    </widget>
-                   </item>
                    <item>
                     <spacer name="verticalSpacer_15">
                      <property name="orientation">
@@ -976,36 +972,27 @@
                     </spacer>
                    </item>
                    <item>
-                    <widget class="QLabel" name="label">
-                     <property name="autoFillBackground">
-                      <bool>false</bool>
+                    <widget class="QCheckBox" name="vkbasaltcheckbox">
+                     <property name="sizePolicy">
+                      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                       <horstretch>0</horstretch>
+                       <verstretch>0</verstretch>
+                      </sizepolicy>
                      </property>
-                     <property name="frameShape">
-                      <enum>QFrame::NoFrame</enum>
+                     <property name="toolTip">
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&amp;quot;vkBasalt is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;p&gt;In this tab you can configure the &amp;quot;Contrast Adaptive Sharpening&amp;quot; filter.&lt;/p&gt;&lt;p&gt;&lt;a href=&quot;https://github.com/DadSchoorse/vkBasalt&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;https://github.com/DadSchoorse/vkBasalt&lt;/span&gt;&lt;/a&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
-                     <property name="frameShadow">
-                      <enum>QFrame::Plain</enum>
+                     <property name="layoutDirection">
+                      <enum>Qt::LeftToRight</enum>
                      </property>
                      <property name="text">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&amp;quot;&lt;a href=&quot;https://github.com/DadSchoorse/vkBasalt&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;vkBasalt&lt;/span&gt;&lt;/a&gt; is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-                     </property>
-                     <property name="textFormat">
-                      <enum>Qt::AutoText</enum>
-                     </property>
-                     <property name="scaledContents">
-                      <bool>false</bool>
-                     </property>
-                     <property name="wordWrap">
-                      <bool>true</bool>
-                     </property>
-                     <property name="openExternalLinks">
-                      <bool>true</bool>
+                      <string>Enable vkBasalt</string>
                      </property>
                     </widget>
                    </item>
                   </layout>
                  </item>
-                 <item row="5" column="1">
+                 <item row="7" column="1">
                   <widget class="QSlider" name="vkbasaltslider">
                    <property name="enabled">
                     <bool>false</bool>
@@ -1051,31 +1038,58 @@
                    </property>
                   </widget>
                  </item>
-                 <item row="5" column="0">
-                  <spacer name="horizontalSpacer_20">
-                   <property name="orientation">
-                    <enum>Qt::Horizontal</enum>
+                 <item row="4" column="1">
+                  <widget class="QLabel" name="label">
+                   <property name="sizePolicy">
+                    <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
+                     <horstretch>0</horstretch>
+                     <verstretch>0</verstretch>
+                    </sizepolicy>
                    </property>
-                   <property name="sizeHint" stdset="0">
-                    <size>
-                     <width>40</width>
-                     <height>20</height>
-                    </size>
+                   <property name="autoFillBackground">
+                    <bool>false</bool>
                    </property>
-                  </spacer>
+                   <property name="frameShape">
+                    <enum>QFrame::NoFrame</enum>
+                   </property>
+                   <property name="frameShadow">
+                    <enum>QFrame::Plain</enum>
+                   </property>
+                   <property name="text">
+                    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p align=&quot;center&quot;&gt;&amp;quot;&lt;a href=&quot;https://github.com/DadSchoorse/vkBasalt&quot;&gt;&lt;span style=&quot; text-decoration: underline; color:#007af4;&quot;&gt;vkBasalt&lt;/span&gt;&lt;/a&gt; is a Vulkan post processing layer to enhance the visual graphics of games.&amp;quot;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                   </property>
+                   <property name="textFormat">
+                    <enum>Qt::AutoText</enum>
+                   </property>
+                   <property name="scaledContents">
+                    <bool>false</bool>
+                   </property>
+                   <property name="alignment">
+                    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+                   </property>
+                   <property name="wordWrap">
+                    <bool>true</bool>
+                   </property>
+                   <property name="indent">
+                    <number>0</number>
+                   </property>
+                   <property name="openExternalLinks">
+                    <bool>true</bool>
+                   </property>
+                  </widget>
                  </item>
-                 <item row="5" column="2">
-                  <spacer name="horizontalSpacer_21">
+                 <item row="5" column="0">
+                  <spacer name="horizontalSpacer_11">
                    <property name="orientation">
                     <enum>Qt::Horizontal</enum>
                    </property>
                    <property name="sizeType">
-                    <enum>QSizePolicy::Expanding</enum>
+                    <enum>QSizePolicy::Fixed</enum>
                    </property>
                    <property name="sizeHint" stdset="0">
                     <size>
-                     <width>10</width>
-                     <height>10</height>
+                     <width>15</width>
+                     <height>0</height>
                     </size>
                    </property>
                   </spacer>
