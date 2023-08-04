@@ -5,10 +5,11 @@ League of Legends unofficial installer/manager for linux
 <b>This software is not affiliated with nor supported by Riot Games.</b>
 
 ## Interface and options:
-![Screenshot_20230803_191607](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/50d7e20c-6d42-428d-be8a-74513890aa24)
-![Screenshot_20230803_191433](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/c629b491-56cd-4f22-b936-2e595695afc0)
-![Screenshot_20230803_191441](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/7d3aa8b1-3fe1-4d3c-944b-d63defcdbba0)
-![Screenshot_20230803_191444](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/e0d465c0-8372-4f75-b49b-0477cabe097a)
+![Screenshot_20230804_115827](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/69a5e8eb-1f0c-4304-9fe6-8d2c1591e4f9)
+![Screenshot_20230804_115743](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/75bf9c32-174f-459b-aa2c-514f63d4b326)
+![Screenshot_20230804_115755](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/3f750d5c-d77c-48ea-8cb0-d1de892be56b)
+![Screenshot_20230804_115757](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/80b94003-b58c-47e5-9c96-2923d81b5cef)
+
 
 
 ## Easy installation
@@ -65,6 +66,8 @@ Check for it in the [DXVK Driver support wiki page](https://github.com/doitsujin
 - This project is both a installer and a launcher, i know, the name of the project is bad but it is what it is.
 
 - <b> Don't demand features in the bug tracker, open a pull request instead and contribute with code</b>, depending of the amount of work i might be able to pull it off but if things get super complex or are super niche i won't be able to do it.
+
+- The .svg icon that this application uses is provided by the [papirus-icon-theme project](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
 
 ## Buy me a coffee
 If you believe this software saved you some time or solved issues you had playing LoL on Linux then please consider a donation.
