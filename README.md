@@ -5,10 +5,12 @@ League of Legends unofficial installer/manager for linux
 <b>This software is not affiliated with nor supported by Riot Games.</b>
 
 ## Interface and options:
-![Screenshot_20230804_115827](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/69a5e8eb-1f0c-4304-9fe6-8d2c1591e4f9)
-![Screenshot_20230804_115743](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/75bf9c32-174f-459b-aa2c-514f63d4b326)
-![Screenshot_20230804_115755](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/3f750d5c-d77c-48ea-8cb0-d1de892be56b)
-![Screenshot_20230804_115757](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/80b94003-b58c-47e5-9c96-2923d81b5cef)
+![Screenshot_20230804_160227](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/f3730fd6-7e1c-4d7e-a090-01e270ecebf4)
+![Screenshot_20230804_160159](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/9f8acfe2-bb92-4f10-9bf1-5e510c353cf4)
+![Screenshot_20230804_160207](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/7b7a16b5-5a20-4ce2-957f-81cd5a98d1af)
+![Screenshot_20230804_160209](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/5145c89e-1650-4e51-9078-3faaa769da36)
+
+
 
 
 
