@@ -612,7 +612,7 @@ class QTextEditLogger(logging.Handler, QObject):
 if __name__ == '__main__':
     QCoreApplication.setApplicationName("com.kassindornelles.LolForLinuxInstaller")
     app = QApplication(sys.argv)
-    icon = QIcon('lol-for-linux-installer.png')
+    icon = QIcon('lol-for-linux-installer.svg')
     app.setDesktopFileName("com.kassindornelles.LolForLinuxInstaller")
     if os.getuid() == 0:
         msg_box = QMessageBox()
