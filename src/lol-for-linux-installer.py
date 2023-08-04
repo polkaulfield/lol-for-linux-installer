@@ -2,8 +2,8 @@
 import sys, os, signal, psutil, logging, json, urllib.request, shutil, tarfile, subprocess
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QComboBox, QCheckBox, QSlider
 from PyQt5.uic import loadUi
-from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal, Qt
-from PyQt5.QtGui import QDesktopServices
+from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal, Qt, QCoreApplication
+from PyQt5.QtGui import QDesktopServices, QIcon
 
 if 'container' in os.environ:
     module_folder = "/app/usr/share/lol-for-linux-installer"
@@ -52,6 +52,9 @@ class Installer(QMainWindow):
                 loadUi("installer.ui", self)
             except:
                 loadUi("/usr/share/lol-for-linux-installer/installer.ui", self)
+
+        icon = QIcon('/usr/share/lol-for-linux-installer/lol-for-linux-installer.png')
+        self.setWindowIcon(icon)
         self.slider_value_changed = False
         self.game_installed_folder = None
         self.gamemode_value = None
@@ -610,8 +613,9 @@ class QTextEditLogger(logging.Handler, QObject):
     appendPlainText = pyqtSignal(str)
 
 if __name__ == '__main__':
+    QCoreApplication.setApplicationName("com.kassindornelles.LolForLinuxInstaller")
     app = QApplication(sys.argv)
-
+    icon = QIcon('lol-for-linux-installer.png')
     if os.getuid() == 0:
         msg_box = QMessageBox()
         msg_box.setText("Don't run this as sudo user")
