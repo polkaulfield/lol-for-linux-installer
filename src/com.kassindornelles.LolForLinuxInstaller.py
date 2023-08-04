@@ -53,8 +53,6 @@ class Installer(QMainWindow):
             except:
                 loadUi("/usr/share/lol-for-linux-installer/installer.ui", self)
 
-        icon = QIcon('/usr/share/lol-for-linux-installer/lol-for-linux-installer.png')
-        self.setWindowIcon(icon)
         self.slider_value_changed = False
         self.game_installed_folder = None
         self.gamemode_value = None
