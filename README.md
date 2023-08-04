@@ -4,11 +4,12 @@ League of Legends unofficial installer/manager for linux
 
 <b>This software is not affiliated with nor supported by Riot Games.</b>
 
-## Installation welcome screen:
-![Screenshot_20230528_203841](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/dc0d48b9-a1fc-440c-9bbc-28ba47966011)
+## Interface and options:
+![Screenshot_20230803_191607](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/50d7e20c-6d42-428d-be8a-74513890aa24)
+![Screenshot_20230803_191433](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/c629b491-56cd-4f22-b936-2e595695afc0)
+![Screenshot_20230803_191441](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/7d3aa8b1-3fe1-4d3c-944b-d63defcdbba0)
+![Screenshot_20230803_191444](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/e0d465c0-8372-4f75-b49b-0477cabe097a)
 
-## After install game management:
-![Screenshot_20230605_105826](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/3fa04d33-c1a5-490d-987b-00babb179268)
 
 ## Easy installation
 - For <b>Ubuntu/Mint/Pop_OS!</b> users we provide .deb packages, those are basically double-click and install, they are available in the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases)
