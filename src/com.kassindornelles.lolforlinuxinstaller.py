@@ -611,7 +611,7 @@ class QTextEditLogger(logging.Handler, QObject):
 
 if __name__ == '__main__':
     app = QApplication(sys.argv)
-    app.setDesktopFileName("com.kassindornelles.LolForLinuxInstaller")
+    app.setDesktopFileName("com.kassindornelles.lolforlinuxinstaller")
     if os.getuid() == 0:
         msg_box = QMessageBox()
         msg_box.setText("Don't run this as sudo user")
