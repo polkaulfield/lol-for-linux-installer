@@ -163,7 +163,7 @@ class Installer(QMainWindow):
             self.skiplaunchercheck.setChecked(False)
             self.stackedWidget.setCurrentWidget(self.gamemanager)
         else:
-            self.skiplaunchercheck.setChecked(False)
+            self.skiplaunchercheck.setChecked(True)
             self.launchleague(installer)
 
     def read_cas_sharpness_from_config(self, config_file):
