@@ -123,7 +123,7 @@
             </sizepolicy>
            </property>
            <property name="currentIndex">
-            <number>0</number>
+            <number>1</number>
            </property>
            <widget class="QWidget" name="welcome">
             <layout class="QGridLayout" name="gridLayout_2">
@@ -281,7 +281,7 @@
              <item>
               <widget class="QTabWidget" name="tabWidget">
                <property name="currentIndex">
-                <number>2</number>
+                <number>0</number>
                </property>
                <property name="tabsClosable">
                 <bool>false</bool>
@@ -477,7 +477,7 @@
                       </sizepolicy>
                      </property>
                      <property name="toolTip">
-                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Always skip this launcher and start the game directly.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Always skip this launcher and start the game directly.&lt;/p&gt;&lt;p&gt;Important to notice that this launcher will re-open once you close the game and the Riot Client.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
                      </property>
                      <property name="toolTipDuration">
                       <number>-1</number>
