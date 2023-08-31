@@ -22,7 +22,7 @@ class GuiLogHandler(QObject, logging.Handler):
 
     def emit(self, record):
         msg = self.format(record)
-        self.new_record.emit(msg) # <---- emit signal here
+        self.new_record.emit(msg)
 
 class Formatter(logging.Formatter):
     def formatException(self, ei):
@@ -55,14 +55,12 @@ class Installer(QMainWindow):
         self.githubButton2.clicked.connect(self.open_github)
         self.cancelButton.setEnabled(False)
         self.uninstallLeaguebutton.clicked.connect(self.uninstall_game)
-        self.checkWineupdates.clicked.connect(self.update_wine_build)
         self.applyButton.setEnabled(False)
         self.applyButton.clicked.connect(self.applynewsettings)
         self.tabWidget.setCurrentIndex(0)
         self.Usedriprime.stateChanged.connect(self.toggleapplybutton)
         self.Usenvidiahybrid.stateChanged.connect(self.toggleapplybutton)
         self.obsvkcapturecheck.stateChanged.connect(self.toggleapplybutton)
-        self.rendererCombobox.currentIndexChanged.connect(self.toggleapplybutton)
         self.Usegamemode.clicked.connect(self.toggleapplybutton)
         self.nextWelcome.clicked.connect(self.regionWidget)
         self.nextRegion.clicked.connect(self.optionsWidget)
@@ -71,20 +69,25 @@ class Installer(QMainWindow):
         self.donatebutton.clicked.connect(self.donatebuttonaction)
         self.skiplaunchercheck.clicked.connect(self.toggleapplybutton)
         self.read_installed_folder()
+        if self.winebuildcombobox.currentText != "...":
+            self.winebuildcombobox.currentIndexChanged.connect(self.toggleapplybutton)
+        if self.rendererCombobox.currentText != "...":
+            self.rendererCombobox.currentIndexChanged.connect(self.toggleapplybutton)
 
     def read_installed_folder(self):
         json_file_path = os.path.expanduser("~/.config/league_install_path.json")
         try:
             with open(json_file_path, "r") as json_file:
                 data = json.load(json_file)
-
                 self.game_installed_folder = data["game_main_dir"]
                 os.chdir(self.game_installed_folder)
+                wine_build_dir = "wine/wine-build"
 
                 with open('env_vars.json', 'r') as f:
                     env_vars = json.load(f)
 
                 self.load_env_vars(env_vars, self)
+                self.download_winebuild_json()
 
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
@@ -114,12 +117,12 @@ class Installer(QMainWindow):
             self.obsvkcapturecheck.setEnabled(False)
 
     def enablevkbasalt_settings(self):
-            if self.vkbasaltcheckbox.isChecked():
-                self.vkbasaltslider.setEnabled(True)
-                self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
-            else:
-                self.vkbasaltslider.setEnabled(False)
-                self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
+        if self.vkbasaltcheckbox.isChecked():
+            self.vkbasaltslider.setEnabled(True)
+            self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
+        else:
+            self.vkbasaltslider.setEnabled(False)
+            self.vkbasaltslider.valueChanged.connect(self.vkbasaltslidercontrol)
 
     def load_env_vars(self, env_vars, installer):
         game_launcher_options = env_vars.get("game_launcher_options", {})
@@ -273,7 +276,60 @@ class Installer(QMainWindow):
         with open('env_vars.json', 'w') as f:
             json.dump(env_vars, f, indent=4)
 
+        if self.winebuildcombobox.currentText != "...":
+            selected_item = self.winebuildcombobox.currentText()
+
+            json_filename = os.path.join(self.game_installed_folder, "wine_builds_available.json")
+            with open(json_filename, "r") as file:
+                data = json.load(file)
+                url = data['winebuilds'].get(selected_item)
+
+            if url:
+                file_name = os.path.basename(url)
+                file_path = os.path.join(self.game_installed_folder, file_name)
+                urllib.request.urlretrieve(url, file_path)
+
+                wine_build_dir = "wine/wine-build"
+                self.extract_and_replace_wine_build(file_path, wine_build_dir, wine_build_dir)
+
         self.applyButton.setEnabled(False)
+
+    def download_winebuild_json(self):
+        json_url = "https://raw.githubusercontent.com/kassindornelles/lol-for-linux-installer-wine-builds/main/wine_builds_available.json"
+        json_filename = os.path.join(self.game_installed_folder, "wine_builds_available.json")
+
+        if os.path.exists(json_filename):
+            os.remove(json_filename)
+
+        with urllib.request.urlopen(json_url) as response, open(json_filename, 'wb') as json_file:
+            json_file.write(response.read())
+
+        with open(json_filename, "r") as file:
+            data = json.load(file)
+            self.winebuildcombobox.addItems(data['winebuilds'].keys())
+
+    def extract_and_replace_wine_build(self, archive_path_wine, extraction_dir_wine, target_dir_wine):
+        with tarfile.open(archive_path_wine, 'r:xz') as tar:
+            tar.extractall(path=extraction_dir_wine)
+
+        extracted_subfolder = os.path.join(extraction_dir_wine, os.listdir(extraction_dir_wine)[0])
+
+        for item in os.listdir(extracted_subfolder):
+            target_item_path = os.path.join(target_dir_wine, item)
+
+            if os.path.isdir(target_item_path):
+                shutil.rmtree(target_item_path)
+
+        for item in os.listdir(extracted_subfolder):
+            item_path = os.path.join(extracted_subfolder, item)
+            target_item_path = os.path.join(target_dir_wine, item)
+
+            if os.path.isdir(item_path):
+                shutil.copytree(item_path, target_item_path)
+            else:
+                shutil.copy2(item_path, target_item_path)
+
+        shutil.rmtree(extracted_subfolder)
 
     def install_dxvk_code(self, dxvk_version, game_installed_folder):
         dst_path = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows')
@@ -346,65 +402,6 @@ class Installer(QMainWindow):
         url = "https://github.com/kassindornelles/lol-for-linux-installer/issues"
         QDesktopServices.openUrl(QUrl(url))
 
-    def update_wine_build(self):
-        self.checkWineupdates.setEnabled(False)
-        self.checkWineupdates.setText("Updating...")
-        self.uninstallLeaguebutton.setEnabled(False)
-        self.launchLeagueinstalled.setEnabled(False)
-        json_url = "https://raw.githubusercontent.com/kassindornelles/lol-for-linux-installer/main/wine_build.json"
-        filename = "wine_build.json"
-        os.chdir(self.game_installed_folder)
-        urllib.request.urlretrieve(json_url, filename)
-
-        with open(filename, "r") as f:
-            data = json.load(f)
-
-        with open("buildversion.json", "r") as f:
-            existing_data = json.load(f)
-
-        print("Value of wine_build.json:", data["current_build_name"])
-        print("Value of buildversion.json:", existing_data["current_build_name"])
-
-        if data["current_build_name"].split("/")[-1] > existing_data["current_build_name"].split("/")[-1]:
-            print("Update needed")
-
-            build_url = data["current_build_name"]
-            build_filename = build_url.split("/")[-1]
-            urllib.request.urlretrieve(build_url, build_filename)
-
-            temp_dir = "tmp"
-            os.makedirs(temp_dir, exist_ok=True)
-            with tarfile.open(build_filename, "r:xz") as tar:
-                tar.extractall(path=temp_dir)
-
-            wine_build_dir = "wine/wine-build"
-            if os.path.exists(wine_build_dir):
-                shutil.rmtree(wine_build_dir)
-
-            extract_path = os.path.join(temp_dir, os.listdir(temp_dir)[0])
-            shutil.move(extract_path, wine_build_dir)
-
-            existing_data["current_build_name"] = data["current_build_name"]
-            with open("buildversion.json", "w") as f:
-                json.dump(existing_data, f)
-
-            os.remove(filename)
-            if os.path.exists(build_filename):
-                os.remove(build_filename)
-            if os.path.exists(temp_dir):
-                shutil.rmtree(temp_dir)
-
-            self.checkWineupdates.setEnabled(True)
-            self.checkWineupdates.setText("Update completed!")
-            self.uninstallLeaguebutton.setEnabled(True)
-            self.launchLeagueinstalled.setEnabled(True)
-
-        else:
-            print("No need to update")
-            self.checkWineupdates.setEnabled(False)
-            self.checkWineupdates.setText("WINE is up-to-date!")
-            self.uninstallLeaguebutton.setEnabled(True)
-            self.launchLeagueinstalled.setEnabled(True)
 
     def uninstall_game(self):
         home_dir = os.path.expanduser("~")
@@ -418,7 +415,6 @@ class Installer(QMainWindow):
                 data = json.load(infile)
                 game_main_dir = data["game_main_dir"]
         except (FileNotFoundError, json.JSONDecodeError) as e:
-            # Handle the exception by printing an error message
             print(f"Failed to read JSON file: {e}")
 
         try:
@@ -465,7 +461,7 @@ class Installer(QMainWindow):
             if msg_box.exec_() == QMessageBox.Ok:
                 self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
             else:
-                self.game_main_dir = None
+                self.game_main_dir = os.path.expanduser("~")
 
         if not os.path.abspath(self.game_main_dir).startswith(os.path.expanduser("~")):
             msg_box = QMessageBox(self)

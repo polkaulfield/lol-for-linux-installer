@@ -28,7 +28,7 @@ def install_dxvk_code(game_main_dir):
     shutil.rmtree(tmp_path)
 
 def league_install_code(game_main_dir, game_region_link):
-    logging.info("Setting all variables")  # Cheap logging
+    logging.info("Setting all variables")
     wine_version = "wine-build"
     home_dir = os.environ.get('XDG_CONFIG_HOME') or os.path.expanduser('~/')
     game_downloads_dir = os.path.join(game_main_dir, 'downloads')
@@ -39,13 +39,13 @@ def league_install_code(game_main_dir, game_region_link):
     user_config_folder= os.path.join(home_dir, ".config")
     wine_loader_path = os.path.join(game_main_wine_dir, 'wine-build', 'bin', 'wine')
     folder_paths = [game_main_dir, game_downloads_dir, game_main_wine_dir, game_prefix_dir, user_config_folder]
-    logging.info("Creating folders")  # Cheap logging
+    logging.info("Creating folders")
     for folder_path in folder_paths:
         if not os.path.exists(folder_path):
             os.makedirs(folder_path)
             os.chmod(folder_path, 0o700)
 
-    logging.info("Downloading WINE build")  # Cheap logging
+    logging.info("Downloading WINE build")
     wine_lutris_build_url = "https://github.com/kassindornelles/lol-for-linux-installer-wine-builds/releases/download/8.7-4/wine-lutris-ge-lol-8.7-4-x86_64.tar.xz"
     tar_file_name = wine_version + ".tar.xz"
     wine_lutris_build_file = os.path.join(game_downloads_dir, tar_file_name)
@@ -53,14 +53,14 @@ def league_install_code(game_main_dir, game_region_link):
     with open(wine_lutris_build_file, "wb") as f:
         f.write(response.content)
 
-    logging.info("Downloading League of Legends installer from " + game_region_link)  # Cheap logging
+    logging.info("Downloading League of Legends installer from " + game_region_link)
     exe_file_name = "lolinstaller.exe"
     league_installer_file = os.path.join(game_downloads_dir, exe_file_name)
     response = requests.get(game_region_link)
     with open(league_installer_file, "wb") as f:
         f.write(response.content)
 
-    logging.info("All files Downloaded")  # Cheap logging
+    logging.info("All files Downloaded")
 
     logging.info("Extracting the WINE build file")
     with tarfile.open(os.path.join(game_downloads_dir, tar_file_name)) as file:
