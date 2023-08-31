@@ -7,11 +7,8 @@ League of Legends unofficial installer/manager for linux
 ## Interface and options:
 ![Screenshot_20230804_160227](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/f3730fd6-7e1c-4d7e-a090-01e270ecebf4)
 ![Screenshot_20230804_160159](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/9f8acfe2-bb92-4f10-9bf1-5e510c353cf4)
-![Screenshot_20230804_160207](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/7b7a16b5-5a20-4ce2-957f-81cd5a98d1af)
+![Screenshot_20230831_183108](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/d8a78a9a-3af1-4dce-86dc-275a2a97580b)
 ![Screenshot_20230804_160209](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/5145c89e-1650-4e51-9078-3faaa769da36)
-
-
-
 
 
 ## Easy installation
