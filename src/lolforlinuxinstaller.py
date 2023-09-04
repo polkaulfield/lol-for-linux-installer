@@ -262,6 +262,8 @@ class Installer(QMainWindow):
             with open(filename, "w") as file:
                 file.write("effects = cas\n")
                 file.write("casSharpness = {}\n".format(casSharpness))
+                file.write("toggleKey = Home\n")
+                file.write("enableOnLaunch = True\n")
             env_vars['game_launcher_options']['VKBASALT_CONFIG_FILE'] = filepath
         else:
             env_vars['game_launcher_options'].pop('ENABLE_VKBASALT', None)
