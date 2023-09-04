@@ -859,6 +859,11 @@
                    </item>
                    <item>
                     <property name="text">
+                     <string>DXVK 2.3</string>
+                    </property>
+                   </item>
+                   <item>
+                    <property name="text">
                      <string>DXVK 2.2</string>
                     </property>
                    </item>
