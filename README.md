@@ -29,19 +29,19 @@ Check for it in the [DXVK Driver support wiki page](https://github.com/doitsujin
 - Choose where to install the game (as long as its not outside the Home directory)
 - wine-ge-lol with ESYNC/FSYNC/FUTEX2 support enabled by default for better CPU performance
 - Desktop file in the system menu
-- Option to uninstall the game to reinstall in case you get problems
 - Options for the use of dGPU/APU/SecondaryGPU
 - obs-gamecapture support
 - vkBasalt CAS (Sharpening filter) support with a slider for sharpness strength
-- Update system for WINE builds
-- DXVK installation, 1.10.3 is used by default for better compatibility with older GPU's that don't support recent vulkan, DXVK 2.1 and 2.2 are available
+- You can change between the Wine builds supported
+- DXVK version management
 - Feral Gamemode support
+- Discord Rich Presence support (Thanks to @JocarLixo)
 
 ## <a name="dependencies"></a> Dependencies:
 
 ### Necessary Dependencies:
 
-`python` `python-psutil` `python-pyqt5` `python-cffi` `wine` `python-requests` `qt5-base` `tar` `lib32-gnutls` `gnutls` `lib32-libldap` `libldap` `libpng` `lib32-libpng` `mesa` `lib32-mesa` `libgphoto2` `libpulse` `lib32-libpulse`
+`python` `python-psutil` `python-pyqt5` `python-cffi` `wine` `python-requests` `qt5-base` `tar` `lib32-gnutls` `gnutls` `lib32-libldap` `libldap` `libpng` `lib32-libpng` `mesa` `lib32-mesa` `libgphoto2` `libpulse` `lib32-libpulse` `python-pip`
 
 ### Optional dependencies:
 
