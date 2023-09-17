@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys, os, signal, psutil, logging, json, urllib.request, shutil, tarfile, subprocess
+import sys, os, signal, psutil, logging, json, urllib.request, shutil, zipfile, tarfile, subprocess
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QSlider
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal
@@ -44,7 +44,9 @@ class Installer(QMainWindow):
             loadUi("/usr/share/lol-for-linux-installer/installer.ui", self)
         self.slider_value_changed = False
         self.game_installed_folder = None
+        self.game_rpc_folder = None
         self.gamemode_value = None
+        self.richpresence_value = None
         self.skiplauncher_value = None
         self.vkbasaltslider = self.findChild(QSlider, "vkbasaltslider")
         self.setWindowTitle('LolForLinuxInstaller')
@@ -61,6 +63,7 @@ class Installer(QMainWindow):
         self.Usedriprime.stateChanged.connect(self.toggleapplybutton)
         self.Usenvidiahybrid.stateChanged.connect(self.toggleapplybutton)
         self.obsvkcapturecheck.stateChanged.connect(self.toggleapplybutton)
+        self.Richpresence.clicked.connect(self.toggleapplybutton)
         self.Usegamemode.clicked.connect(self.toggleapplybutton)
         self.nextWelcome.clicked.connect(self.regionWidget)
         self.nextRegion.clicked.connect(self.optionsWidget)
@@ -88,6 +91,10 @@ class Installer(QMainWindow):
 
                 self.load_env_vars(env_vars, self)
                 self.download_winebuild_json()
+                self.game_rpc_folder = os.path.join(self.game_installed_folder, 'league-rpc-linux-main')
+                
+                if os.path.isdir(self.game_rpc_folder) == False and self.Richpresence.isChecked():
+                    self.Richpresence.setChecked(False)
 
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
@@ -162,6 +169,12 @@ class Installer(QMainWindow):
         else:
             self.Usegamemode.setChecked(False)
 
+        if game_settings.get("Richpresence") == "1":
+            self.Richpresence.setChecked(True)
+        else:
+            self.Richpresence.setChecked(False)
+
+
         if game_settings.get("Skiplauncher") == "0":
             self.skiplaunchercheck.setChecked(False)
             self.stackedWidget.setCurrentWidget(self.gamemanager)
@@ -224,6 +237,12 @@ class Installer(QMainWindow):
         else:
             env_vars['game_launcher_options'].pop('DRI_PRIME', None)
 
+        if self.Richpresence.isChecked() and os.path.isdir(self.game_rpc_folder) == False:
+            self.install_richpresence_code(self.game_installed_folder)
+        elif self.Richpresence.isChecked() == False and os.path.isdir(self.game_rpc_folder):
+            shutil.rmtree(self.game_rpc_folder)
+
+
         if self.Usenvidiahybrid.isChecked():
             new_vars = {
                 'NV_PRIME_RENDER_OFFLOAD': '1',
@@ -271,6 +290,9 @@ class Installer(QMainWindow):
 
         env_vars['game_settings']['Gamemode'] = '1' if self.Usegamemode.isChecked() else '0'
         self.gamemode_value = int(env_vars['game_settings']['Gamemode'])
+
+        env_vars['game_settings']['Richpresence'] = '1' if self.Richpresence.isChecked() else '0'
+        self.richpresence_value = int(env_vars['game_settings']['Richpresence'])
 
         env_vars['game_settings']['Skiplauncher'] = '1' if self.skiplaunchercheck.isChecked() else '0'
         self.skiplauncher_value = int(env_vars['game_settings']['Skiplauncher'])
@@ -360,6 +382,18 @@ class Installer(QMainWindow):
         shutil.rmtree(tmp_path)
         self.rendererCombobox.setEnabled(False)
 
+    def install_richpresence_code(self, game_installed_folder):
+        rpcUrl = 'https://github.com/daglaroglou/league-rpc-linux/archive/refs/heads/main.zip'
+        rpcFilename = os.path.basename(rpcUrl)
+        urllib.request.urlretrieve(rpcUrl, rpcFilename)
+
+        with zipfile.ZipFile(rpcFilename) as rpcZip:
+            rpcZip.extractall()
+
+        os.remove(rpcFilename)
+        subprocess.run(['python3', '-m', 'venv', os.path.join(self.game_rpc_folder, 'venv')])
+        subprocess.run([os.path.join(self.game_rpc_folder, 'venv', 'bin', 'pip'), 'install', '-r', os.path.join(self.game_rpc_folder, 'requirements.txt')])
+
     def launchleague(self, installer):
         self.launchLeagueinstalled.setEnabled(False)
         self.uninstallLeaguebutton.setEnabled(False)
@@ -371,6 +405,13 @@ class Installer(QMainWindow):
             env_vars = json.load(env_vars_file)
             game_settings = env_vars.get('game_settings', {})
             gamemode_value = int(game_settings.get('Gamemode', '0'))
+            richpresence_value = int(game_settings.get('Richpresence', '0'))
+            
+        if richpresence_value == 1:
+            richPresenceLaunch = subprocess.Popen([os.path.join(self.game_rpc_folder, 'venv', 'bin', 'python3'), os.path.join(self.game_rpc_folder, "main.py")])
+            print("Using Rich Presence.")
+        else:
+            print("Not using Rich Presence.")
 
         if gamemode_value == 1:
             process = subprocess.Popen(['gamemoderun', 'python3', '/usr/share/lol-for-linux-installer/launch-script.py'])

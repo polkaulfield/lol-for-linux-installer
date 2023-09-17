@@ -40,4 +40,3 @@ wine_process = [
 subprocess.run(wine_process, env=start_game_vars, check=True)
 
 
-

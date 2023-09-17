@@ -105,7 +105,6 @@ def league_install_code(game_main_dir, game_region_link):
     except FileNotFoundError:
         logging.warning(f"Directory {game_downloads_dir} does not exist")
     logging.info("Delete temp folders")
-
     logging.info("Installing DXVK 1.10.3...")
     install_dxvk_code(game_main_dir)
     logging.info("Finishing...")
