@@ -35,7 +35,7 @@ Check for it in the [DXVK Driver support wiki page](https://github.com/doitsujin
 - You can change between the Wine builds supported
 - DXVK version management
 - Feral Gamemode support
-- Discord Rich Presence support (Thanks to @JocarLixo)
+- Discord Rich Presence support (Thanks to @JocarLixo and @daglaroglou)
 
 ## <a name="dependencies"></a> Dependencies:
 
