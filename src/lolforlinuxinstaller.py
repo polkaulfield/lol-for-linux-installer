@@ -212,7 +212,7 @@ class Installer(QMainWindow):
             self.vkbasaltslider.setEnabled(False)
 
     def donatebuttonaction(self):
-        urlgit = QUrl("https://www.paypal.com/donate/?hosted_button_id=UMJWYGDH2RC7E")
+        urlgit = QUrl("https://liberapay.com/kassindornelles/donate")
         QDesktopServices.openUrl(urlgit)
 
     def vkbasaltslidercontrol(self, value):
