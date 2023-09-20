@@ -4,6 +4,10 @@ League of Legends unofficial installer/manager for linux
 
 <b>This software is not affiliated with nor supported by Riot Games.</b>
 
+<noscript><a href="https://liberapay.com/kassindornelles/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript>
+
+<a href="https://www.paypal.com/donate/?hosted_button_id=UMJWYGDH2RC7E"><img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/grey.svg" alt="Donate with PayPal" width="150" height="40"></a>
+
 ## Interface and options:
 ![Screenshot_20230804_160227](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/f3730fd6-7e1c-4d7e-a090-01e270ecebf4)
 ![lililil](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/9191c32f-f3f5-420c-833f-2922a21bb58e)
@@ -69,9 +73,4 @@ Check for it in the [DXVK Driver support wiki page](https://github.com/doitsujin
 - <b> Don't demand features in the bug tracker, open a pull request instead and contribute with code</b>, depending of the amount of work i might be able to pull it off but if things get super complex or are super niche i won't be able to do it.
 
 - The .svg icon that this application uses is provided by the [papirus-icon-theme project](https://github.com/PapirusDevelopmentTeam/papirus-icon-theme)
-
-## Buy me a coffee
-If you believe this software saved you some time or solved issues you had playing LoL on Linux then please consider a donation.
-
-<a href="https://www.paypal.com/donate/?hosted_button_id=UMJWYGDH2RC7E"><img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/grey.svg" alt="Donate with PayPal" width="150" height="40"></a>
 
