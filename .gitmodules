@@ -1,0 +1,3 @@
+[submodule "league-rpc-linux"]
+	path = league-rpc-linux
+	url = https://github.com/kassindornelles/league-rpc-linux.git
