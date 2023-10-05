@@ -333,6 +333,9 @@ class Installer(QMainWindow):
             self.winebuildcombobox.addItems(data['winebuilds'].keys())
 
     def extract_and_replace_wine_build(self, archive_path_wine, extraction_dir_wine, target_dir_wine):
+        if os.path.exists(extraction_dir_wine):
+            shutil.rmtree(extraction_dir_wine)
+
         with tarfile.open(archive_path_wine, 'r:xz') as tar:
             tar.extractall(path=extraction_dir_wine)
 
