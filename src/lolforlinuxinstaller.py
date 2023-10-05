@@ -225,10 +225,6 @@ class Installer(QMainWindow):
         os.chdir(self.game_installed_folder)
         current_renderer = self.rendererCombobox.currentText()
 
-        if 'DXVK' in current_renderer:
-            dxvk_version = current_renderer.replace('DXVK ', '')
-            self.install_dxvk_code(dxvk_version, self.game_installed_folder)
-
         with open('env_vars.json', 'r') as f:
             env_vars = json.load(f)
 
@@ -315,6 +311,10 @@ class Installer(QMainWindow):
 
                 wine_build_dir = "wine/wine-build"
                 self.extract_and_replace_wine_build(file_path, wine_build_dir, wine_build_dir)
+
+        if 'DXVK' in current_renderer:
+            dxvk_version = current_renderer.replace('DXVK ', '')
+            self.install_dxvk_code(dxvk_version, self.game_installed_folder)
 
         self.applyButton.setEnabled(False)
 
