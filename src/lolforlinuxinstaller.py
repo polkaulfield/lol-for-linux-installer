@@ -42,6 +42,7 @@ class Installer(QMainWindow):
             loadUi("installer.ui", self)
         except:
             loadUi("/usr/share/lol-for-linux-installer/installer.ui", self)
+        self.currentversion = "2.6"
         self.slider_value_changed = False
         self.game_installed_folder = None
         self.game_rpc_folder = None
@@ -49,7 +50,7 @@ class Installer(QMainWindow):
         self.richpresence_value = None
         self.skiplauncher_value = None
         self.vkbasaltslider = self.findChild(QSlider, "vkbasaltslider")
-        self.setWindowTitle('LolForLinuxInstaller')
+        self.setWindowTitle('LolForLinuxInstaller ' + self.currentversion)
         self.install_button.clicked.connect(self.installer_code)
         self.cancelButton.clicked.connect(self.cancel_installation)
         self.install_button.setEnabled(True)
