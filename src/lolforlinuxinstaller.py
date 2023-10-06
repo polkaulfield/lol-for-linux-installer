@@ -386,7 +386,7 @@ class Installer(QMainWindow):
         self.rendererCombobox.setEnabled(False)
 
     def install_richpresence_code(self, game_installed_folder):
-        rpcUrl = 'https://github.com/daglaroglou/league-rpc-linux/archive/refs/heads/main.zip'
+        rpcUrl = 'https://github.com/kassindornelles/league-rpc-linux/archive/refs/heads/main.zip'
         rpcFilename = os.path.basename(rpcUrl)
         urllib.request.urlretrieve(rpcUrl, rpcFilename)
 
