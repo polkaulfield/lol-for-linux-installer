@@ -2,7 +2,8 @@ import cffi
 
 _ffi = cffi.FFI()
 
-_ffi.cdef("""
+_ffi.cdef(
+    """
 typedef unsigned int uint32_t;
 
 typedef uint32_t VkResult;
@@ -15,7 +16,8 @@ typedef struct VkLayerProperties {
 } VkLayerProperties;
 
 VkResult vkEnumerateInstanceLayerProperties(uint32_t *pPropertyCount, VkLayerProperties *pProperties);
-""")
+"""
+)
 
 _libvulkan = _ffi.dlopen("libvulkan.so.1")
 
@@ -25,4 +27,6 @@ _libvulkan.vkEnumerateInstanceLayerProperties(_cLayerCount, _ffi.NULL)
 _cLayers = _ffi.new(f"VkLayerProperties[{_cLayerCount[0]}]")
 _libvulkan.vkEnumerateInstanceLayerProperties(_cLayerCount, _cLayers)
 
-LAYERS = [_ffi.string(_cLayers[i].layerName).decode('utf-8') for i in range(_cLayerCount[0])]
+LAYERS = [
+    _ffi.string(_cLayers[i].layerName).decode("utf-8") for i in range(_cLayerCount[0])
+]

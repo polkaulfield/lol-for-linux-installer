@@ -1,15 +1,25 @@
 #!/usr/bin/env python3
-import sys, os, signal, psutil, logging, json, urllib.request, shutil, zipfile, tarfile, subprocess
+import sys
+import os
+import signal
+import psutil
+import logging
+import json
+import urllib.request
+import shutil
+import zipfile
+import tarfile
+import subprocess
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QSlider
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal
 from PyQt5.QtGui import QDesktopServices
+import leagueinstaller_code
+import vulkan_layers
 
 module_folder = "/usr/share/lol-for-linux-installer"
 sys.path.append(module_folder)
 
-import leagueinstaller_code
-import vulkan_layers
 
 class GuiLogHandler(QObject, logging.Handler):
     new_record = pyqtSignal(object)
@@ -17,12 +27,13 @@ class GuiLogHandler(QObject, logging.Handler):
     def __init__(self, parent):
         super().__init__(parent)
         super(logging.Handler).__init__()
-        formatter = Formatter('%(levelname)s: %(message)s', '%d/%m/%Y %H:%M:%S')
+        formatter = Formatter("%(levelname)s: %(message)s", "%d/%m/%Y %H:%M:%S")
         self.setFormatter(formatter)
 
     def emit(self, record):
         msg = self.format(record)
         self.new_record.emit(msg)
+
 
 class Formatter(logging.Formatter):
     def formatException(self, ei):
@@ -32,8 +43,9 @@ class Formatter(logging.Formatter):
     def format(self, record):
         s = super(Formatter, self).format(record)
         if record.exc_text:
-            s = s.replace('\n', '')
+            s = s.replace("\n", "")
         return s
+
 
 class Installer(QMainWindow):
     def __init__(self):
@@ -50,7 +62,7 @@ class Installer(QMainWindow):
         self.richpresence_value = None
         self.skiplauncher_value = None
         self.vkbasaltslider = self.findChild(QSlider, "vkbasaltslider")
-        self.setWindowTitle('LolForLinuxInstaller ' + self.currentversion)
+        self.setWindowTitle("LolForLinuxInstaller " + self.currentversion)
         self.install_button.clicked.connect(self.installer_code)
         self.cancelButton.clicked.connect(self.cancel_installation)
         self.install_button.setEnabled(True)
@@ -75,6 +87,7 @@ class Installer(QMainWindow):
         self.read_installed_folder()
         if self.winebuildcombobox.currentText != "...":
             self.winebuildcombobox.currentIndexChanged.connect(self.toggleapplybutton)
+
         if self.rendererCombobox.currentText != "...":
             self.rendererCombobox.currentIndexChanged.connect(self.toggleapplybutton)
 
@@ -86,41 +99,39 @@ class Installer(QMainWindow):
                 self.game_installed_folder = data["game_main_dir"]
                 os.chdir(self.game_installed_folder)
                 wine_build_dir = "wine/wine-build"
-
-                with open('env_vars.json', 'r') as f:
+                with open("env_vars.json", "r") as f:
                     env_vars = json.load(f)
-
                 self.load_env_vars(env_vars, self)
                 self.download_winebuild_json()
-                self.game_rpc_folder = os.path.join(self.game_installed_folder, 'league-rpc-linux-main')
-                
-                if os.path.isdir(self.game_rpc_folder) == False and self.Richpresence.isChecked():
+                self.game_rpc_folder = os.path.join(
+                    self.game_installed_folder, "league-rpc-linux-main"
+                )
+                if (
+                    os.path.isdir(self.game_rpc_folder) == False
+                    and self.Richpresence.isChecked()
+                ):
                     self.Richpresence.setChecked(False)
-
         except FileNotFoundError:
             self.stackedWidget.setCurrentWidget(self.welcome)
 
-        if shutil.which('gamemoderun') is not None:
+        if shutil.which("gamemoderun") is not None:
             try:
                 self.Usegamemode.setEnabled(True)
-            except:
+            except subprocess.CalledProcessError:
                 print("Error while getting Gamemode info.")
         else:
             self.Usegamemode.setChecked(False)
             self.Usegamemode.setEnabled(False)
-
-        if 'VK_LAYER_VKBASALT_post_processing' not in vulkan_layers.LAYERS:
+        if "VK_LAYER_VKBASALT_post_processing" not in vulkan_layers.LAYERS:
             self.vkbasaltcheckbox.setChecked(False)
             self.vkbasaltcheckbox.setEnabled(False)
             self.vkbasaltslider.setEnabled(False)
         else:
             self.enablevkbasalt_settings()
-
-        if 'VK_LAYER_MANGOHUD_overlay' not in vulkan_layers.LAYERS:
+        if "VK_LAYER_MANGOHUD_overlay" not in vulkan_layers.LAYERS:
             self.Usemangohud.setChecked(False)
             self.Usemangohud.setEnabled(False)
-
-        if 'VK_LAYER_OBS_vkcapture_64' not in vulkan_layers.LAYERS:
+        if "VK_LAYER_OBS_vkcapture_64" not in vulkan_layers.LAYERS:
             self.obsvkcapturecheck.setChecked(False)
             self.obsvkcapturecheck.setEnabled(False)
 
@@ -135,30 +146,37 @@ class Installer(QMainWindow):
     def load_env_vars(self, env_vars, installer):
         game_launcher_options = env_vars.get("game_launcher_options", {})
 
-        if all(key in game_launcher_options for key in ['NV_PRIME_RENDER_OFFLOAD', '__GLX_VENDOR_LIBRARY_NAME', 'VK_ICD_FILENAMES', 'VK_LAYER_NV_optimus']):
+        if all(
+            key in game_launcher_options
+            for key in [
+                "NV_PRIME_RENDER_OFFLOAD",
+                "__GLX_VENDOR_LIBRARY_NAME",
+                "VK_ICD_FILENAMES",
+                "VK_LAYER_NV_optimus",
+            ]
+        ):
             self.Usenvidiahybrid.setChecked(True)
         else:
             self.Usenvidiahybrid.setChecked(False)
 
-        if all(key in game_launcher_options for key in ['DRI_PRIME']):
+        if all(key in game_launcher_options for key in ["DRI_PRIME"]):
             self.Usedriprime.setChecked(True)
         else:
             self.Usedriprime.setChecked(False)
 
-        if all(key in game_launcher_options for key in ['MANGOHUD']):
+        if all(key in game_launcher_options for key in ["MANGOHUD"]):
             self.Usemangohud.setChecked(True)
         else:
             self.Usemangohud.setChecked(False)
         self.Usemangohud.stateChanged.connect(self.toggleapplybutton)
 
-
-        if all(key in game_launcher_options for key in ['OBS_VKCAPTURE']):
+        if all(key in game_launcher_options for key in ["OBS_VKCAPTURE"]):
             self.obsvkcapturecheck.setChecked(True)
         else:
             self.obsvkcapturecheck.setChecked(False)
 
-        if all(key in game_launcher_options for key in ['ENABLE_VKBASALT']):
-            config_file = game_launcher_options.get('VKBASALT_CONFIG_FILE')
+        if all(key in game_launcher_options for key in ["ENABLE_VKBASALT"]):
+            config_file = game_launcher_options.get("VKBASALT_CONFIG_FILE")
             casSharpness = self.read_cas_sharpness_from_config(config_file)
             slider_value = self.convert_cas_sharpness_to_slider_value(casSharpness)
             self.vkbasaltcheckbox.setChecked(True)
@@ -174,8 +192,6 @@ class Installer(QMainWindow):
             self.Richpresence.setChecked(True)
         else:
             self.Richpresence.setChecked(False)
-
-
         if game_settings.get("Skiplauncher") == "0":
             self.skiplaunchercheck.setChecked(False)
             self.stackedWidget.setCurrentWidget(self.gamemanager)
@@ -187,10 +203,10 @@ class Installer(QMainWindow):
         casSharpness = 0.5  # Default value if the file or key doesn't exist
 
         try:
-            with open(config_file, 'r') as file:
+            with open(config_file, "r") as file:
                 for line in file:
-                    if line.startswith('casSharpness'):
-                        casSharpness = float(line.split('=')[1].strip())
+                    if line.startswith("casSharpness"):
+                        casSharpness = float(line.split("=")[1].strip())
                         break
         except (FileNotFoundError, IOError):
             pass
@@ -226,51 +242,51 @@ class Installer(QMainWindow):
         os.chdir(self.game_installed_folder)
         current_renderer = self.rendererCombobox.currentText()
 
-        with open('env_vars.json', 'r') as f:
+        with open("env_vars.json", "r") as f:
             env_vars = json.load(f)
 
         if self.Usedriprime.isChecked():
-            env_vars['game_launcher_options']['DRI_PRIME'] = '1'
+            env_vars["game_launcher_options"]["DRI_PRIME"] = "1"
         else:
-            env_vars['game_launcher_options'].pop('DRI_PRIME', None)
+            env_vars["game_launcher_options"].pop("DRI_PRIME", None)
 
-        if self.Richpresence.isChecked() and os.path.isdir(self.game_rpc_folder) == False:
+        if self.Richpresence.isChecked() and not os.path.isdir(self.game_rpc_folder):
             self.install_richpresence_code(self.game_installed_folder)
-        elif self.Richpresence.isChecked() == False and os.path.isdir(self.game_rpc_folder):
-            shutil.rmtree(self.game_rpc_folder)
 
+        elif not self.Richpresence.isChecked() and os.path.isdir(self.game_rpc_folder):
+            shutil.rmtree(self.game_rpc_folder)
 
         if self.Usenvidiahybrid.isChecked():
             new_vars = {
-                'NV_PRIME_RENDER_OFFLOAD': '1',
-                '__GLX_VENDOR_LIBRARY_NAME': 'nvidia',
-                'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/nvidia_icd.json',
-                'VK_LAYER_NV_optimus': 'NVIDIA_only'
+                "NV_PRIME_RENDER_OFFLOAD": "1",
+                "__GLX_VENDOR_LIBRARY_NAME": "nvidia",
+                "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/nvidia_icd.json",
+                "VK_LAYER_NV_optimus": "NVIDIA_only",
             }
-            env_vars['game_launcher_options'].update(new_vars)
+            env_vars["game_launcher_options"].update(new_vars)
         else:
             vars_to_remove = [
-                'NV_PRIME_RENDER_OFFLOAD',
-                '__GLX_VENDOR_LIBRARY_NAME',
-                'VK_ICD_FILENAMES',
-                'VK_LAYER_NV_optimus'
+                "NV_PRIME_RENDER_OFFLOAD",
+                "__GLX_VENDOR_LIBRARY_NAME",
+                "VK_ICD_FILENAMES",
+                "VK_LAYER_NV_optimus",
             ]
             for var_name in vars_to_remove:
-                env_vars['game_launcher_options'].pop(var_name, None)
+                env_vars["game_launcher_options"].pop(var_name, None)
 
         if self.Usemangohud.isChecked():
-            env_vars['game_launcher_options']['MANGOHUD'] = '1'
+            env_vars["game_launcher_options"]["MANGOHUD"] = "1"
         else:
-            env_vars['game_launcher_options'].pop('MANGOHUD', None)
+            env_vars["game_launcher_options"].pop("MANGOHUD", None)
 
         if self.obsvkcapturecheck.isChecked():
-            env_vars['game_launcher_options']['OBS_VKCAPTURE'] = '1'
+            env_vars["game_launcher_options"]["OBS_VKCAPTURE"] = "1"
         else:
-            env_vars['game_launcher_options'].pop('OBS_VKCAPTURE', None)
+            env_vars["game_launcher_options"].pop("OBS_VKCAPTURE", None)
 
         if self.vkbasaltcheckbox.isChecked():
-            env_vars['game_launcher_options']['ENABLE_VKBASALT'] = '1'
-            env_vars['game_launcher_options']['VKBASALT_CONFIG_FILE'] = 'vkBasalt.conf'
+            env_vars["game_launcher_options"]["ENABLE_VKBASALT"] = "1"
+            env_vars["game_launcher_options"]["VKBASALT_CONFIG_FILE"] = "vkBasalt.conf"
             filename = "vkBasalt.conf"
             slider_value = self.vkbasaltslider.value()
             casSharpness = (slider_value - 1) / 9.0 * 0.9 + 0.1
@@ -280,30 +296,37 @@ class Installer(QMainWindow):
                 file.write("casSharpness = {}\n".format(casSharpness))
                 file.write("toggleKey = Home\n")
                 file.write("enableOnLaunch = True\n")
-            env_vars['game_launcher_options']['VKBASALT_CONFIG_FILE'] = filepath
+            env_vars["game_launcher_options"]["VKBASALT_CONFIG_FILE"] = filepath
         else:
-            env_vars['game_launcher_options'].pop('ENABLE_VKBASALT', None)
-            env_vars['game_launcher_options'].pop('VKBASALT_CONFIG_FILE', None)
+            env_vars["game_launcher_options"].pop("ENABLE_VKBASALT", None)
+            env_vars["game_launcher_options"].pop("VKBASALT_CONFIG_FILE", None)
 
-        env_vars['game_settings']['Gamemode'] = '1' if self.Usegamemode.isChecked() else '0'
-        self.gamemode_value = int(env_vars['game_settings']['Gamemode'])
+        env_vars["game_settings"]["Gamemode"] = (
+            "1" if self.Usegamemode.isChecked() else "0"
+        )
+        self.gamemode_value = int(env_vars["game_settings"]["Gamemode"])
+        env_vars["game_settings"]["Richpresence"] = (
+            "1" if self.Richpresence.isChecked() else "0"
+        )
 
-        env_vars['game_settings']['Richpresence'] = '1' if self.Richpresence.isChecked() else '0'
-        self.richpresence_value = int(env_vars['game_settings']['Richpresence'])
+        self.richpresence_value = int(env_vars["game_settings"]["Richpresence"])
+        env_vars["game_settings"]["Skiplauncher"] = (
+            "1" if self.skiplaunchercheck.isChecked() else "0"
+        )
+        self.skiplauncher_value = int(env_vars["game_settings"]["Skiplauncher"])
 
-        env_vars['game_settings']['Skiplauncher'] = '1' if self.skiplaunchercheck.isChecked() else '0'
-        self.skiplauncher_value = int(env_vars['game_settings']['Skiplauncher'])
-
-        with open('env_vars.json', 'w') as f:
+        with open("env_vars.json", "w") as f:
             json.dump(env_vars, f, indent=4)
 
         if self.winebuildcombobox.currentText != "...":
             selected_item = self.winebuildcombobox.currentText()
 
-            json_filename = os.path.join(self.game_installed_folder, "wine_builds_available.json")
+            json_filename = os.path.join(
+                self.game_installed_folder, "wine_builds_available.json"
+            )
             with open(json_filename, "r") as file:
                 data = json.load(file)
-                url = data['winebuilds'].get(selected_item)
+                url = data["winebuilds"].get(selected_item)
 
             if url:
                 file_name = os.path.basename(url)
@@ -311,36 +334,46 @@ class Installer(QMainWindow):
                 urllib.request.urlretrieve(url, file_path)
 
                 wine_build_dir = "wine/wine-build"
-                self.extract_and_replace_wine_build(file_path, wine_build_dir, wine_build_dir)
+                self.extract_and_replace_wine_build(
+                    file_path, wine_build_dir, wine_build_dir
+                )
 
-        if 'DXVK' in current_renderer:
-            dxvk_version = current_renderer.replace('DXVK ', '')
+        if "DXVK" in current_renderer:
+            dxvk_version = current_renderer.replace("DXVK ", "")
             self.install_dxvk_code(dxvk_version, self.game_installed_folder)
 
         self.applyButton.setEnabled(False)
 
     def download_winebuild_json(self):
         json_url = "https://raw.githubusercontent.com/kassindornelles/lol-for-linux-installer-wine-builds/main/wine_builds_available.json"
-        json_filename = os.path.join(self.game_installed_folder, "wine_builds_available.json")
+        json_filename = os.path.join(
+            self.game_installed_folder, "wine_builds_available.json"
+        )
 
         if os.path.exists(json_filename):
             os.remove(json_filename)
 
-        with urllib.request.urlopen(json_url) as response, open(json_filename, 'wb') as json_file:
+        with urllib.request.urlopen(json_url) as response, open(
+            json_filename, "wb"
+        ) as json_file:
             json_file.write(response.read())
 
         with open(json_filename, "r") as file:
             data = json.load(file)
-            self.winebuildcombobox.addItems(data['winebuilds'].keys())
+            self.winebuildcombobox.addItems(data["winebuilds"].keys())
 
-    def extract_and_replace_wine_build(self, archive_path_wine, extraction_dir_wine, target_dir_wine):
+    def extract_and_replace_wine_build(
+        self, archive_path_wine, extraction_dir_wine, target_dir_wine
+    ):
         if os.path.exists(extraction_dir_wine):
             shutil.rmtree(extraction_dir_wine)
 
-        with tarfile.open(archive_path_wine, 'r:xz') as tar:
+        with tarfile.open(archive_path_wine, "r:xz") as tar:
             tar.extractall(path=extraction_dir_wine)
 
-        extracted_subfolder = os.path.join(extraction_dir_wine, os.listdir(extraction_dir_wine)[0])
+        extracted_subfolder = os.path.join(
+            extraction_dir_wine, os.listdir(extraction_dir_wine)[0]
+        )
 
         for item in os.listdir(extracted_subfolder):
             target_item_path = os.path.join(target_dir_wine, item)
@@ -360,24 +393,30 @@ class Installer(QMainWindow):
         shutil.rmtree(extracted_subfolder)
 
     def install_dxvk_code(self, dxvk_version, game_installed_folder):
-        dst_path = os.path.join(game_installed_folder, 'wine', 'prefix', 'drive_c', 'windows')
-        tmp_path = 'dxvk-tmp'
-        url = 'https://github.com/doitsujin/dxvk/releases/download/v{0}/dxvk-{0}.tar.gz'.format(dxvk_version)
+        dst_path = os.path.join(
+            game_installed_folder, "wine", "prefix", "drive_c", "windows"
+        )
+        tmp_path = "dxvk-tmp"
+        url = "https://github.com/doitsujin/dxvk/releases/download/v{0}/dxvk-{0}.tar.gz".format(
+            dxvk_version
+        )
         filename = os.path.basename(url)
         urllib.request.urlretrieve(url, filename)
 
-        with tarfile.open(filename, 'r:gz') as tar:
+        with tarfile.open(filename, "r:gz") as tar:
             tar.extractall(tmp_path)
 
-        for arch in ['x64', 'x32']:
-            src_path = os.path.join(tmp_path, 'dxvk-{0}'.format(dxvk_version), arch)
-            dst_path_arch = os.path.join(dst_path, 'system32' if arch == 'x64' else 'syswow64')
+        for arch in ["x64", "x32"]:
+            src_path = os.path.join(tmp_path, "dxvk-{0}".format(dxvk_version), arch)
+            dst_path_arch = os.path.join(
+                dst_path, "system32" if arch == "x64" else "syswow64"
+            )
 
             if not os.path.exists(dst_path_arch):
                 os.makedirs(dst_path_arch)
 
             for file_name in os.listdir(src_path):
-                if file_name.endswith('.dll'):
+                if file_name.endswith(".dll"):
                     src_file = os.path.join(src_path, file_name)
                     dst_file = os.path.join(dst_path_arch, file_name)
                     shutil.copy2(src_file, dst_file)
@@ -387,7 +426,7 @@ class Installer(QMainWindow):
         self.rendererCombobox.setEnabled(False)
 
     def install_richpresence_code(self, game_installed_folder):
-        rpcUrl = 'https://github.com/kassindornelles/league-rpc-linux/archive/refs/heads/main.zip'
+        rpcUrl = "https://github.com/kassindornelles/league-rpc-linux/archive/refs/heads/main.zip"
         rpcFilename = os.path.basename(rpcUrl)
         urllib.request.urlretrieve(rpcUrl, rpcFilename)
 
@@ -395,8 +434,17 @@ class Installer(QMainWindow):
             rpcZip.extractall()
 
         os.remove(rpcFilename)
-        subprocess.run(['python3', '-m', 'venv', os.path.join(self.game_rpc_folder, 'venv')])
-        subprocess.run([os.path.join(self.game_rpc_folder, 'venv', 'bin', 'pip'), 'install', '-r', os.path.join(self.game_rpc_folder, 'requirements.txt')])
+        subprocess.run(
+            ["python3", "-m", "venv", os.path.join(self.game_rpc_folder, "venv")]
+        )
+        subprocess.run(
+            [
+                os.path.join(self.game_rpc_folder, "venv", "bin", "pip"),
+                "install",
+                "-r",
+                os.path.join(self.game_rpc_folder, "requirements.txt"),
+            ]
+        )
 
     def launchleague(self, installer):
         self.launchLeagueinstalled.setEnabled(False)
@@ -404,24 +452,37 @@ class Installer(QMainWindow):
         self.stackedWidget.setCurrentWidget(self.gamemanager)
         os.chdir(self.game_installed_folder)
 
-        env_vars_file_path = os.path.join(self.game_installed_folder, 'env_vars.json')
-        with open(env_vars_file_path, 'r') as env_vars_file:
+        env_vars_file_path = os.path.join(self.game_installed_folder, "env_vars.json")
+        with open(env_vars_file_path, "r") as env_vars_file:
             env_vars = json.load(env_vars_file)
-            game_settings = env_vars.get('game_settings', {})
-            gamemode_value = int(game_settings.get('Gamemode', '0'))
-            richpresence_value = int(game_settings.get('Richpresence', '0'))
-            
+            game_settings = env_vars.get("game_settings", {})
+            gamemode_value = int(game_settings.get("Gamemode", "0"))
+            richpresence_value = int(game_settings.get("Richpresence", "0"))
+
         if richpresence_value == 1:
-            richPresenceLaunch = subprocess.Popen([os.path.join(self.game_rpc_folder, 'venv', 'bin', 'python3'), os.path.join(self.game_rpc_folder, "main.py")])
+            richPresenceLaunch = subprocess.Popen(
+                [
+                    os.path.join(self.game_rpc_folder, "venv", "bin", "python3"),
+                    os.path.join(self.game_rpc_folder, "main.py"),
+                ]
+            )
             print("Using Rich Presence.")
         else:
             print("Not using Rich Presence.")
 
         if gamemode_value == 1:
-            process = subprocess.Popen(['gamemoderun', 'python3', '/usr/share/lol-for-linux-installer/launch-script.py'])
+            process = subprocess.Popen(
+                [
+                    "gamemoderun",
+                    "python3",
+                    "/usr/share/lol-for-linux-installer/launch-script.py",
+                ]
+            )
             print("Using gamemode.")
         else:
-            process = subprocess.Popen(['python3', '/usr/share/lol-for-linux-installer/launch-script.py'])
+            process = subprocess.Popen(
+                ["python3", "/usr/share/lol-for-linux-installer/launch-script.py"]
+            )
             print("Not using gamemode.")
 
         self.hide()
@@ -434,8 +495,8 @@ class Installer(QMainWindow):
             pass
 
     def is_process_running(self, process_name):
-        for proc in psutil.process_iter(['name']):
-            if proc.info['name'] == process_name:
+        for proc in psutil.process_iter(["name"]):
+            if proc.info["name"] == process_name:
                 return True
         return False
 
@@ -448,7 +509,6 @@ class Installer(QMainWindow):
     def open_github(self):
         url = "https://github.com/kassindornelles/lol-for-linux-installer/issues"
         QDesktopServices.openUrl(QUrl(url))
-
 
     def uninstall_game(self):
         home_dir = os.path.expanduser("~")
@@ -492,21 +552,31 @@ class Installer(QMainWindow):
         logging.getLogger().setLevel(logging.INFO)
         handler.new_record.connect(self.textOutput.append)
         stream_handler = logging.StreamHandler()
-        stream_handler.setFormatter(Formatter('%(levelname)s: %(message)s\n', '%d/%m/%Y %H:%M:%S'))
+        stream_handler.setFormatter(
+            Formatter("%(levelname)s: %(message)s\n", "%d/%m/%Y %H:%M:%S")
+        )
         stream_handler.setLevel(logging.DEBUG)
         logging.getLogger().addHandler(stream_handler)
 
     def installer_code(self):
-        self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
-        while self.game_main_dir and os.path.abspath(self.game_main_dir) == os.path.expanduser("~"):
+        self.game_main_dir = QFileDialog.getExistingDirectory(
+            self, "Where do you want to install the game?"
+        )
+        while self.game_main_dir and os.path.abspath(
+            self.game_main_dir
+        ) == os.path.expanduser("~"):
             msg_box = QMessageBox(self)
             msg_box.setIcon(QMessageBox.Critical)
             msg_box.setText("Cannot install the game directly in the home directory.")
-            msg_box.setInformativeText("Please create a folder in your home directory instead so we can use it")
+            msg_box.setInformativeText(
+                "Please create a folder in your home directory instead so we can use it"
+            )
             msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
             msg_box.setDefaultButton(QMessageBox.Ok)
             if msg_box.exec_() == QMessageBox.Ok:
-                self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
+                self.game_main_dir = QFileDialog.getExistingDirectory(
+                    self, "Where do you want to install the game?"
+                )
             else:
                 self.game_main_dir = os.path.expanduser("~")
 
@@ -514,11 +584,15 @@ class Installer(QMainWindow):
             msg_box = QMessageBox(self)
             msg_box.setIcon(QMessageBox.Critical)
             msg_box.setText("Invalid directory selected.")
-            msg_box.setInformativeText("Please select a directory within your home directory.")
+            msg_box.setInformativeText(
+                "Please select a directory within your home directory."
+            )
             msg_box.setStandardButtons(QMessageBox.Ok)
             msg_box.setDefaultButton(QMessageBox.Ok)
             msg_box.exec_()
-            self.game_main_dir = QFileDialog.getExistingDirectory(self, 'Where do you want to install the game?')
+            self.game_main_dir = QFileDialog.getExistingDirectory(
+                self, "Where do you want to install the game?"
+            )
 
         self.game_main_dir = os.path.join(self.game_main_dir, "league-of-legends")
         os.makedirs(self.game_main_dir)
@@ -557,53 +631,57 @@ class Installer(QMainWindow):
             scrollbar.setValue(scrollbar.maximum())
 
             try:
-                shutil.copy("env_vars.json", os.path.join(self.game_main_dir, "env_vars.json"))
+                shutil.copy(
+                    "env_vars.json", os.path.join(self.game_main_dir, "env_vars.json")
+                )
                 os.chdir(self.game_main_dir)
             except:
-                shutil.copy("/usr/share/lol-for-linux-installer/env_vars.json", os.path.join(self.game_main_dir, "env_vars.json"))
+                shutil.copy(
+                    "/usr/share/lol-for-linux-installer/env_vars.json",
+                    os.path.join(self.game_main_dir, "env_vars.json"),
+                )
                 os.chdir(self.game_main_dir)
 
-            with open('env_vars.json', 'r') as f:
+            with open("env_vars.json", "r") as f:
                 env_vars = json.load(f)
 
             if self.checkPrime.isChecked():
-                if 'DRI_PRIME' not in env_vars:
-                    env_vars['DRI_PRIME'] = '1'
-                with open('env_vars.json', 'w') as f:
+                if "DRI_PRIME" not in env_vars:
+                    env_vars["DRI_PRIME"] = "1"
+                with open("env_vars.json", "w") as f:
                     json.dump(env_vars, f, indent=4)
             else:
-                if 'DRI_PRIME' in env_vars:
-                    del env_vars['DRI_PRIME']
-                with open('env_vars.json', 'w') as f:
+                if "DRI_PRIME" in env_vars:
+                    del env_vars["DRI_PRIME"]
+                with open("env_vars.json", "w") as f:
                     json.dump(env_vars, f, indent=4)
-
 
             if self.Checknvidiahybrid.isChecked():
                 new_vars = {
-                    'NV_PRIME_RENDER_OFFLOAD': '1',
-                    '__GLX_VENDOR_LIBRARY_NAME': 'nvidia',
-                    'VK_ICD_FILENAMES': '/usr/share/vulkan/icd.d/nvidia_icd.json',
-                    'VK_LAYER_NV_optimus': 'NVIDIA_only'
+                    "NV_PRIME_RENDER_OFFLOAD": "1",
+                    "__GLX_VENDOR_LIBRARY_NAME": "nvidia",
+                    "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/nvidia_icd.json",
+                    "VK_LAYER_NV_optimus": "NVIDIA_only",
                 }
 
                 for var_name, var_value in new_vars.items():
                     if var_name not in env_vars:
                         env_vars[var_name] = var_value
 
-                with open('env_vars.json', 'w') as f:
+                with open("env_vars.json", "w") as f:
                     json.dump(env_vars, f, indent=4)
             else:
                 vars_to_remove = [
-                    'NV_PRIME_RENDER_OFFLOAD',
-                    '__GLX_VENDOR_LIBRARY_NAME',
-                    'VK_ICD_FILENAMES',
-                    'VK_LAYER_NV_optimus'
+                    "NV_PRIME_RENDER_OFFLOAD",
+                    "__GLX_VENDOR_LIBRARY_NAME",
+                    "VK_ICD_FILENAMES",
+                    "VK_LAYER_NV_optimus",
                 ]
 
                 for var_name in vars_to_remove:
                     if var_name in env_vars:
                         del env_vars[var_name]
-                with open('env_vars.json', 'w') as f:
+                with open("env_vars.json", "w") as f:
                     json.dump(env_vars, f, indent=4)
 
             self.thread = QThread()
@@ -621,18 +699,24 @@ class Installer(QMainWindow):
         self.stackedWidget.setCurrentWidget(self.gamemanager)
         installer.hide()
 
+
 class Worker(QObject):
     def __init__(self, game_main_dir, game_region_link):
         super().__init__()
         self.game_main_dir = game_main_dir
         self.game_region_link = game_region_link
+
     def run(self):
-        leagueinstaller_code.league_install_code(self.game_main_dir, self.game_region_link)
+        leagueinstaller_code.league_install_code(
+            self.game_main_dir, self.game_region_link
+        )
+
 
 class QTextEditLogger(logging.Handler, QObject):
     appendPlainText = pyqtSignal(str)
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     app = QApplication(sys.argv)
     app.setDesktopFileName("lolforlinuxinstaller")
     if os.getuid() == 0:

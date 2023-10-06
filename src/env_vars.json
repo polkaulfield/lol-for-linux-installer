@@ -11,6 +11,9 @@
     "game_settings": {
         "Gamemode": "0",
         "Skiplauncher": "0"
-    }
+    },
+    "NV_PRIME_RENDER_OFFLOAD": "1",
+    "__GLX_VENDOR_LIBRARY_NAME": "nvidia",
+    "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/nvidia_icd.json",
+    "VK_LAYER_NV_optimus": "NVIDIA_only"
 }
-
