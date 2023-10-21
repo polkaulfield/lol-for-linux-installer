@@ -559,27 +559,15 @@ class Installer(QMainWindow):
         logging.getLogger().addHandler(stream_handler)
 
     def installer_code(self):
-        while True:
-            self.game_main_dir = QFileDialog.getExistingDirectory(
-                self, "Where do you want to install the game?"
-            )
+        self.game_main_dir = QFileDialog.getExistingDirectory(
+            self, "Where do you want to install the game?"
+        )
 
-            if not self.game_main_dir:
-                return False
+        if not self.game_main_dir:
+            return
 
-            self.game_main_dir = os.path.join(self.game_main_dir, "league-of-legends")
-
-            if os.access(self.game_main_dir, os.R_OK) and os.access(self.game_main_dir, os.W_OK):
-                break
-            else:
-                msg = QMessageBox()
-                msg.setIcon(QMessageBox.Critical)
-                msg.setText("Error: You don't have permission to read and write in this directory.")
-                msg.setWindowTitle("Permission Error")
-                msg.exec_()
-
+        self.game_main_dir = os.path.join(self.game_main_dir, "league-of-legends")
         os.makedirs(self.game_main_dir)
-        return True
 
         if self.game_main_dir:
             self.cancelButton.show()
@@ -705,7 +693,7 @@ if __name__ == "__main__":
     app.setDesktopFileName("lolforlinuxinstaller")
     if os.getuid() == 0:
         msg_box = QMessageBox()
-        msg_box.setText("Running as sudo is not recommended.")
+        msg_box.setText("Don't run this as sudo user")
         msg_box.exec_()
         sys.exit(1)
 
