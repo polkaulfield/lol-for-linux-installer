@@ -558,35 +558,44 @@ class Installer(QMainWindow):
         stream_handler.setLevel(logging.DEBUG)
         logging.getLogger().addHandler(stream_handler)
 
-    def installer_code(self):
-        self.game_main_dir = QFileDialog.getExistingDirectory(
+
+    def get_installation_directory(self):
+        game_main_dir = QFileDialog.getExistingDirectory(
             self, "Where do you want to install the game?"
         )
 
-        if not self.game_main_dir:
-            return
+        if not game_main_dir:
+            return None
 
-        self.game_main_dir = os.path.join(self.game_main_dir, "league-of-legends")
+        game_main_dir = os.path.join(game_main_dir, "league-of-legends")
 
-        if os.path.exists(self.game_main_dir):
+        if os.path.exists(game_main_dir):
             try:
-                shutil.rmtree(self.game_main_dir)
+                shutil.rmtree(game_main_dir)
             except Exception as e:
                 msg = QMessageBox()
                 msg.setIcon(QMessageBox.Critical)
                 msg.setText(f"Error: {e}")
                 msg.setWindowTitle("Error")
                 msg.exec_()
-                return
+                return None
 
         try:
-            os.makedirs(self.game_main_dir)
+            os.makedirs(game_main_dir)
         except PermissionError as e:
             msg = QMessageBox()
             msg.setIcon(QMessageBox.Critical)
             msg.setText(f"Permission Error: {e}")
             msg.setWindowTitle("Permission Error")
             msg.exec_()
+            return None
+
+        return game_main_dir
+
+    def installer_code(self):
+        self.game_main_dir = self.get_installation_directory()
+
+        if not self.game_main_dir:
             return
 
         if self.game_main_dir:
