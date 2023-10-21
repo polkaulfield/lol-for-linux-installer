@@ -562,37 +562,9 @@ class Installer(QMainWindow):
         self.game_main_dir = QFileDialog.getExistingDirectory(
             self, "Where do you want to install the game?"
         )
-        while self.game_main_dir and os.path.abspath(
-            self.game_main_dir
-        ) == os.path.expanduser("~"):
-            msg_box = QMessageBox(self)
-            msg_box.setIcon(QMessageBox.Critical)
-            msg_box.setText("Cannot install the game directly in the home directory.")
-            msg_box.setInformativeText(
-                "Please create a folder in your home directory instead so we can use it"
-            )
-            msg_box.setStandardButtons(QMessageBox.Ok | QMessageBox.Cancel)
-            msg_box.setDefaultButton(QMessageBox.Ok)
-            if msg_box.exec_() == QMessageBox.Ok:
-                self.game_main_dir = QFileDialog.getExistingDirectory(
-                    self, "Where do you want to install the game?"
-                )
-            else:
-                self.game_main_dir = os.path.expanduser("~")
 
-        if not os.path.abspath(self.game_main_dir).startswith(os.path.expanduser("~")):
-            msg_box = QMessageBox(self)
-            msg_box.setIcon(QMessageBox.Critical)
-            msg_box.setText("Invalid directory selected.")
-            msg_box.setInformativeText(
-                "Please select a directory within your home directory."
-            )
-            msg_box.setStandardButtons(QMessageBox.Ok)
-            msg_box.setDefaultButton(QMessageBox.Ok)
-            msg_box.exec_()
-            self.game_main_dir = QFileDialog.getExistingDirectory(
-                self, "Where do you want to install the game?"
-            )
+        if not self.game_main_dir:
+            return
 
         self.game_main_dir = os.path.join(self.game_main_dir, "league-of-legends")
         os.makedirs(self.game_main_dir)
