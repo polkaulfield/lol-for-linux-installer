@@ -567,7 +567,27 @@ class Installer(QMainWindow):
             return
 
         self.game_main_dir = os.path.join(self.game_main_dir, "league-of-legends")
-        os.makedirs(self.game_main_dir)
+
+        if os.path.exists(self.game_main_dir):
+            try:
+                shutil.rmtree(self.game_main_dir)
+            except Exception as e:
+                msg = QMessageBox()
+                msg.setIcon(QMessageBox.Critical)
+                msg.setText(f"Error: {e}")
+                msg.setWindowTitle("Error")
+                msg.exec_()
+                return
+
+        try:
+            os.makedirs(self.game_main_dir)
+        except PermissionError as e:
+            msg = QMessageBox()
+            msg.setIcon(QMessageBox.Critical)
+            msg.setText(f"Permission Error: {e}")
+            msg.setWindowTitle("Permission Error")
+            msg.exec_()
+            return
 
         if self.game_main_dir:
             self.cancelButton.show()
