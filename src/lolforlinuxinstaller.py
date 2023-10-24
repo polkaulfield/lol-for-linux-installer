@@ -54,7 +54,7 @@ class Installer(QMainWindow):
             loadUi("installer.ui", self)
         except:
             loadUi("/usr/share/lol-for-linux-installer/installer.ui", self)
-        self.currentversion = "2.6"
+        self.currentversion = "2.6.1"
         self.slider_value_changed = False
         self.game_installed_folder = None
         self.game_rpc_folder = None
