@@ -14,11 +14,12 @@ from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox,
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal
 from PyQt5.QtGui import QDesktopServices
-import leagueinstaller_code
-import vulkan_layers
 
 module_folder = "/usr/share/lol-for-linux-installer"
 sys.path.append(module_folder)
+
+import leagueinstaller_code
+import vulkan_layers
 
 
 class GuiLogHandler(QObject, logging.Handler):
