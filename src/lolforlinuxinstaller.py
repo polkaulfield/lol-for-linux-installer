@@ -67,7 +67,7 @@ class Installer(QMainWindow):
         self.richpresence_value = None
         self.skiplauncher_value = None
         self.vkbasaltslider = self.findChild(QSlider, "vkbasaltslider")
-        self.setWindowTitle("LolForLinuxInstaller " + self.currentversion)
+        self.setWindowTitle("lol-for-linux-installer")
         self.install_button.clicked.connect(self.installer_code)
         self.cancelButton.clicked.connect(self.cancel_installation)
         self.install_button.setEnabled(True)
