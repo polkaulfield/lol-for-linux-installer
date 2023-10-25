@@ -13,6 +13,7 @@ import subprocess
 from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QSlider
 from PyQt5.uic import loadUi
 from PyQt5.QtCore import QThread, QObject, QUrl, pyqtSignal
+from PyQt5 import QtCore
 from PyQt5.QtGui import QDesktopServices
 
 module_folder = "/usr/share/lol-for-linux-installer"
@@ -56,6 +57,9 @@ class Installer(QMainWindow):
         except:
             loadUi("/usr/share/lol-for-linux-installer/installer.ui", self)
         self.currentversion = "2.6.3"
+        self.aboutversiontext = f"Version: {self.currentversion}"
+        self.versionlabelabout.setText(self.aboutversiontext)
+        self.versionlabelabout.setAlignment(QtCore.Qt.AlignCenter)
         self.slider_value_changed = False
         self.game_installed_folder = None
         self.game_rpc_folder = None
