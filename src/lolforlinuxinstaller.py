@@ -342,10 +342,13 @@ class Installer(QMainWindow):
                 self.extract_and_replace_wine_build(
                     file_path, wine_build_dir, wine_build_dir
                 )
+            self.winebuildcombobox.setCurrentIndex(0)
+            self.winebuildcombobox.setEnabled(False)
 
         if "DXVK" in current_renderer:
             dxvk_version = current_renderer.replace("DXVK ", "")
             self.install_dxvk_code(dxvk_version, self.game_installed_folder)
+            self.rendererCombobox.setCurrentIndex(0)
 
         self.applyButton.setEnabled(False)
 
