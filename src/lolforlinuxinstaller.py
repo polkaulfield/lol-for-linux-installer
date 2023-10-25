@@ -603,107 +603,124 @@ class Installer(QMainWindow):
         if not self.game_main_dir:
             return
 
-        if self.game_main_dir:
-            self.cancelButton.show()
-            self.cancelButton.setEnabled(True)
-            self.welcomelabel.setText("We are installing the game for you...")
-            self.install_button.setEnabled(False)
-            self.languageComboBox.setEnabled(False)
-            self.regionLabel.setEnabled(False)
-            self.checkPrime.setEnabled(False)
-            self.stackedWidget.setCurrentWidget(self.installing)
+        self.setup_ui_for_installation()
 
-            region_map = {
-                "BR (BR1) - Brazil": "br",
-                "LAN (LA1) - Latin America North": "la1",
-                "LAS (LA2) - Latin America South": "la2",
-                "NA (NA1) - North America": "na",
-                "OCE (OCE/OC1) - Oceania": "oc1",
-                "RU (RU1) - Russia": "ru",
-                "EUW (EUW1) - Europe West": "euw",
-                "EUNE (EUN1) - Europe Nordic & East": "eune",
-                "TW (TW2) - Taiwan": "tw2",
-                "TR (TR1) - Turkey": "tr",
-                "JP (JP1) - Japan": "jp",
-                "KR (KR) - Republic of Korea": "kr",
+        region_map = {
+            "BR (BR1) - Brazil": "br",
+            "LAN (LA1) - Latin America North": "la1",
+            "LAS (LA2) - Latin America South": "la2",
+            "NA (NA1) - North America": "na",
+            "OCE (OCE/OC1) - Oceania": "oc1",
+            "RU (RU1) - Russia": "ru",
+            "EUW (EUW1) - Europe West": "euw",
+            "EUNE (EUN1) - Europe Nordic & East": "eune",
+            "TW (TW2) - Taiwan": "tw2",
+            "TR (TR1) - Turkey": "tr",
+            "JP (JP1) - Japan": "jp",
+            "KR (KR) - Republic of Korea": "kr",
+        }
+
+        selected_lang = self.languageComboBox.currentText()
+        game_link = "https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.{}.exe"
+        region = region_map.get(selected_lang, "na")
+        game_region_link = game_link.format(region)
+
+        self.setup_logger()
+        self.update_text_output_scrollbar()
+
+        self.copy_env_vars_file()
+        self.update_dri_prime_setting()
+        self.update_nvidia_hybrid_setting()
+        self.start_installation_thread(game_region_link)
+
+    def setup_ui_for_installation(self):
+        self.cancelButton.show()
+        self.cancelButton.setEnabled(True)
+        self.welcomelabel.setText("We are installing the game for you...")
+        self.install_button.setEnabled(False)
+        self.languageComboBox.setEnabled(False)
+        self.regionLabel.setEnabled(False)
+        self.checkPrime.setEnabled(False)
+        self.stackedWidget.setCurrentWidget(self.installing)
+
+    def update_text_output_scrollbar(self):
+        scrollbar = self.textOutput.verticalScrollBar()
+        scrollbar.setValue(scrollbar.maximum())
+
+    def copy_env_vars_file(self):
+        try:
+            shutil.copy(
+                "env_vars.json", os.path.join(self.game_main_dir, "env_vars.json")
+            )
+            os.chdir(self.game_main_dir)
+        except:
+            shutil.copy(
+                "/usr/share/lol-for-linux-installer/env_vars.json",
+                os.path.join(self.game_main_dir, "env_vars.json"),
+            )
+            os.chdir(self.game_main_dir)
+
+    def update_dri_prime_setting(self):
+        with open("env_vars.json", "r") as f:
+            data = json.load(f)
+
+        game_launcher_options = data.get("game_launcher_options", {})
+
+        if self.checkPrime.isChecked():
+            game_launcher_options["DRI_PRIME"] = "1"
+        else:
+            game_launcher_options.pop("DRI_PRIME", None)
+
+        data["game_launcher_options"] = game_launcher_options
+
+        with open("env_vars.json", "w") as f:
+            json.dump(data, f, indent=4)
+
+    def update_nvidia_hybrid_setting(self):
+        with open("env_vars.json", "r") as f:
+            data = json.load(f)
+
+        game_launcher_options = data.get("game_launcher_options", {})
+
+        if self.Checknvidiahybrid.isChecked():
+            new_vars = {
+                "NV_PRIME_RENDER_OFFLOAD": "1",
+                "__GLX_VENDOR_LIBRARY_NAME": "nvidia",
+                "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/nvidia_icd.json",
+                "VK_LAYER_NV_optimus": "NVIDIA_only",
             }
 
-            selected_lang = self.languageComboBox.currentText()
-            game_link = "https://lol.secure.dyn.riotcdn.net/channels/public/x/installer/current/live.{}.exe"
-            region = region_map.get(selected_lang, "na")
-            game_region_link = game_link.format(region)
-            self.setup_logger()
-            scrollbar = self.textOutput.verticalScrollBar()
-            scrollbar.setValue(scrollbar.maximum())
-
-            try:
-                shutil.copy(
-                    "env_vars.json", os.path.join(self.game_main_dir, "env_vars.json")
-                )
-                os.chdir(self.game_main_dir)
-            except:
-                shutil.copy(
-                    "/usr/share/lol-for-linux-installer/env_vars.json",
-                    os.path.join(self.game_main_dir, "env_vars.json"),
-                )
-                os.chdir(self.game_main_dir)
-
-            with open("env_vars.json", "r") as f:
-                env_vars = json.load(f)
-
-            if self.checkPrime.isChecked():
-                if "DRI_PRIME" not in env_vars:
-                    env_vars["DRI_PRIME"] = "1"
-                with open("env_vars.json", "w") as f:
-                    json.dump(env_vars, f, indent=4)
-            else:
-                if "DRI_PRIME" in env_vars:
-                    del env_vars["DRI_PRIME"]
-                with open("env_vars.json", "w") as f:
-                    json.dump(env_vars, f, indent=4)
-
-            if self.Checknvidiahybrid.isChecked():
-                new_vars = {
-                    "NV_PRIME_RENDER_OFFLOAD": "1",
-                    "__GLX_VENDOR_LIBRARY_NAME": "nvidia",
-                    "VK_ICD_FILENAMES": "/usr/share/vulkan/icd.d/nvidia_icd.json",
-                    "VK_LAYER_NV_optimus": "NVIDIA_only",
-                }
-
-                for var_name, var_value in new_vars.items():
-                    if var_name not in env_vars:
-                        env_vars[var_name] = var_value
-
-                with open("env_vars.json", "w") as f:
-                    json.dump(env_vars, f, indent=4)
-            else:
-                vars_to_remove = [
-                    "NV_PRIME_RENDER_OFFLOAD",
-                    "__GLX_VENDOR_LIBRARY_NAME",
-                    "VK_ICD_FILENAMES",
-                    "VK_LAYER_NV_optimus",
-                ]
-
-                for var_name in vars_to_remove:
-                    if var_name in env_vars:
-                        del env_vars[var_name]
-                with open("env_vars.json", "w") as f:
-                    json.dump(env_vars, f, indent=4)
-
-            self.thread = QThread()
-            self.worker = Worker(self.game_main_dir, game_region_link)
-            self.worker.moveToThread(self.thread)
-            self.thread.started.connect(self.worker.run)
-            self.thread.finished.connect(self.finish_installation)
-            self.thread.start()
-            self.thread.quit()
+            game_launcher_options.update(new_vars)
         else:
-            print("User pressed cancel")
+            vars_to_remove = [
+                "NV_PRIME_RENDER_OFFLOAD",
+                "__GLX_VENDOR_LIBRARY_NAME",
+                "VK_ICD_FILENAMES",
+                "VK_LAYER_NV_optimus",
+            ]
+
+            for var_name in vars_to_remove:
+                game_launcher_options.pop(var_name, None)
+
+        data["game_launcher_options"] = game_launcher_options
+
+        with open("env_vars.json", "w") as f:
+            json.dump(data, f, indent=4)
+
+    def start_installation_thread(self, game_region_link):
+        self.thread = QThread()
+        self.worker = Worker(self.game_main_dir, game_region_link)
+        self.worker.moveToThread(self.thread)
+        self.thread.started.connect(self.worker.run)
+        self.thread.finished.connect(self.finish_installation)
+        self.thread.start()
+        self.thread.quit()
 
     def finish_installation(self):
         self.read_installed_folder()
         self.stackedWidget.setCurrentWidget(self.gamemanager)
         installer.hide()
+
 
 
 class Worker(QObject):
