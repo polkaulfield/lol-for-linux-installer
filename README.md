@@ -58,9 +58,11 @@ Important to notice that Ubuntu 23.04 is broken and we don't currently support i
 
 ## Interface and options:
 ![Screenshot_20230804_160227](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/f3730fd6-7e1c-4d7e-a090-01e270ecebf4)
-![lililil](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/9191c32f-f3f5-420c-833f-2922a21bb58e)
-![Screenshot_20230831_183108](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/d8a78a9a-3af1-4dce-86dc-275a2a97580b)
-![Screenshot_20230804_160209](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/5145c89e-1650-4e51-9078-3faaa769da36)
+![Screenshot_20231024_232300](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/00ba2c8e-9809-457f-8f4e-7c15163c291a)
+![Screenshot_20231024_232341](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/181526ed-92a3-4814-bf43-1d70c906ce44)
+![Screenshot_20231024_232343](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/4cc9eb47-b97a-4371-aaa0-3cf534abe4b4)
+![Screenshot_20231024_232346](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/e24358a9-bda5-42f0-a0d3-5a406b6b0269)
+
 
 ## FAQ:
 
