@@ -57,12 +57,9 @@ Important to notice that Ubuntu 23.04 is broken and we don't currently support i
 - Arch Linux AUR inclusion
 
 ## Interface and options:
-![Screenshot_20230804_160227](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/f3730fd6-7e1c-4d7e-a090-01e270ecebf4)
-![Screenshot_20231024_232300](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/00ba2c8e-9809-457f-8f4e-7c15163c291a)
-![Screenshot_20231024_232341](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/181526ed-92a3-4814-bf43-1d70c906ce44)
-![Screenshot_20231024_232343](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/4cc9eb47-b97a-4371-aaa0-3cf534abe4b4)
-![Screenshot_20231024_232346](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/e24358a9-bda5-42f0-a0d3-5a406b6b0269)
-
+![Screenshot_20231025_052337](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/e0166d1a-33d7-4840-98c7-dd6bebaad7d2)
+![Screenshot_20231025_052342](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/85af2e29-3258-4d88-b174-a52b9ef47cb7)
+![Screenshot_20231025_052345](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/a79f7992-442a-41ed-8e22-a8bca3e736a5)
 
 ## FAQ:
 
