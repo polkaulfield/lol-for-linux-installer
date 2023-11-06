@@ -281,7 +281,7 @@
              <item>
               <widget class="QTabWidget" name="tabWidget">
                <property name="currentIndex">
-                <number>0</number>
+                <number>1</number>
                </property>
                <property name="tabsClosable">
                 <bool>false</bool>
@@ -689,7 +689,7 @@
                       <bool>false</bool>
                      </property>
                      <property name="text">
-                      <string>Use secondary GPU (DRI_PRIME=1)</string>
+                      <string>Force toggle secondary GPU (DRI_PRIME=1)</string>
                      </property>
                      <property name="icon">
                       <iconset theme="video-display">
@@ -734,7 +734,7 @@
                       <bool>false</bool>
                      </property>
                      <property name="text">
-                      <string>NVIDIA Hybrid Graphics support</string>
+                      <string>Force toggle NVIDIA Hybrid Graphics support</string>
                      </property>
                      <property name="icon">
                       <iconset theme="video-display">
@@ -2950,7 +2950,7 @@
                 <bool>false</bool>
                </property>
                <property name="text">
-                <string>NVIDIA Hybrid Graphics support</string>
+                <string>Force toggle NVIDIA Hybrid Graphics support</string>
                </property>
                <property name="icon">
                 <iconset theme="video-display">
@@ -2977,7 +2977,7 @@
                 <bool>true</bool>
                </property>
                <property name="text">
-                <string>Use secondary GPU (DRI_PRIME=1)</string>
+                <string>Force toggle secondary GPU (DRI_PRIME=1)</string>
                </property>
                <property name="icon">
                 <iconset theme="video-display">
