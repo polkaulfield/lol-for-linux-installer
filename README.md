@@ -40,21 +40,11 @@ Check for it in the [DXVK Driver support wiki page](https://github.com/doitsujin
 
 
 ## Easy installation
-- For <b>Ubuntu/Mint/Pop_OS!</b> users we provide .deb packages, those are basically double-click and install, they are available in the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases)
+- Packages are made for Fedora, Ubuntu 22.04 LTS and Arch Linux, they are available in the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases)
 
-Important to notice that Ubuntu 23.04 is broken and we don't currently support it.
-  
-- For <b>Arch Linux/Manjaro/EndeavourOS</b> users we have a PKGBUILD, just run "makepkg -si" in a terminal or get the package from the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases), grab the file that ends with `pkg.tar.zst` and install it using `sudo pacman -U package_name_here.pkg.tar.zst`
-  
-- For <b>Fedora 38</b> download the .rpm file in the [release page](https://github.com/kassindornelles/lol-for-linux-installer/releases) and double click it.
-
-- If you want to build the packages yourself or contribute to improve the packaging system check the [Packaging repository](https://github.com/kassindornelles/lol-for-linux-installer-packages)
+- If you want to build the packages yourself check the [Packaging repository](https://github.com/kassindornelles/lol-for-linux-installer-packages)
 
 
-
-## Contributions needed for:
-- Flatpak package
-- Arch Linux AUR inclusion
 
 ## Interface and options:
 ![Screenshot_20231025_052337](https://github.com/kassindornelles/lol-for-linux-installer/assets/40970965/e0166d1a-33d7-4840-98c7-dd6bebaad7d2)
