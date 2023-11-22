@@ -6,6 +6,10 @@ League of Legends unofficial installer/manager for linux
 
 <noscript><a href="https://liberapay.com/kassindornelles/donate"><img alt="Donate using Liberapay" src="https://liberapay.com/assets/widgets/donate.svg"></a></noscript> <a href="https://www.paypal.com/donate/?hosted_button_id=UMJWYGDH2RC7E"><img src="https://github.com/andreostrovsky/donate-with-paypal/blob/master/grey.svg" alt="Donate with PayPal" width="150" height="40"></a>
 
+# WARNING: 
+
+### Patch 13.23 broke League of Legends on Wine/Linux, see https://github.com/kassindornelles/lol-for-linux-installer/issues/70
+
 ### Features:
 - Choose where to install the game (as long as the directory is writable by current user)
 - wine-ge-lol with ESYNC/FSYNC/FUTEX2 support enabled by default for better CPU performance
