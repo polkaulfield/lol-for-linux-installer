@@ -1,0 +1,69 @@
+version: 1
+script:
+  # Remove any previous build
+  - rm -rf $TARGET_APPDIR  | true
+  # Make usr and icons dirs
+  - mkdir -p $TARGET_APPDIR/usr/src
+  - mkdir -p $TARGET_APPDIR/usr/share/icons/hicolor/256x256/apps/
+  - mkdir -p $TARGET_APPDIR/usr/share/lol-for-linux-installer/
+  # Copy the python application code into the AppDir
+  - cp -r src/* $TARGET_APPDIR/usr/share/lol-for-linux-installer/
+  - cp src/lolforlinuxinstaller.svg $TARGET_APPDIR/usr/share/icons/hicolor/256x256/apps/
+  # Install application dependencies
+  #- python3 -m pip install --ignore-installed --prefix=/usr --root=$TARGET_APPDIR -r ./requirements.txt
+
+
+AppDir:
+  path: ./AppDir 
+
+  app_info:
+    id: com.polkaulfield.lolforlinux
+    name: lol-for-linux-installer
+    icon: lolforlinuxinstaller
+    version: 2.6.4
+    # Set the python executable as entry point
+    exec: usr/bin/python3
+    # Set the application main script path as argument. Use '$@' to forward CLI parameters
+    exec_args: "$APPDIR/usr/share/lol-for-linux-installer/lolforlinuxinstaller.py $@"
+
+  apt:
+    arch: amd64
+    sources:
+      - sourceline: 'deb [arch=amd64] http://archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse'
+        key_url: 'http://keyserver.ubuntu.com/pks/lookup?op=get&search=0x3b4fe6acc0b21f32'
+
+    include:
+      - python3
+      - python3-pkg-resources
+      - python3-pyqt5
+      - python3-requests
+      - python3-psutil
+      - python3-cffi
+      - ca-certificates
+      - python3-certifi
+      - gtk-update-icon-cache
+      - libfreetype6
+      - libfontconfig1
+    exclude: []
+
+  runtime:
+    path_mappings:
+      - /usr/share/lol-for-linux-installer:$APPDIR/usr/share/lol-for-linux-installer
+    version: "continuous"
+    env:
+      PATH: '${APPDIR}/usr/bin:${PATH}'
+      # Set python home
+      # See https://docs.python.org/3/using/cmdline.html#envvar-PYTHONHOME
+      PYTHONHOME: '${APPDIR}/usr'
+      # Path to the site-packages dir or other modules dirs
+      # See https://docs.python.org/3/using/cmdline.html#envvar-PYTHONPATH
+      PYTHONPATH: '${APPDIR}/usr/lib/python3.8/site-packages'
+
+      # SSL CERTIFICATE_VERIFY_FAILED
+      SSL_CERT_DIR: "/etc/ssl/certs:/etc/pki/ca-trust/extracted/pem:/etc/pki/ca-trust/extracted/openssl:/etc/ssl:/etc/pki/tls:/etc/pki:/etc/pki/ca-trust:/usr/local/share/certs:/usr/share/pki/ca-trust-source:/etc/openssl/certs:/var/ssl/certs"
+      SSL_CERT_FILE: "$APPDIR/usr/lib/python3/dist-packages/certifi/cacert.pem"
+
+AppImage:
+  update-information: 'lol-for-linux-installer|latest|lol-for-linux-installer-*x86_64.AppImage.zsync'
+  sign-key: None
+  arch: x86_64
