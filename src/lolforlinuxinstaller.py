@@ -723,6 +723,7 @@ class Installer(QMainWindow):
         self.read_installed_folder()
         self.stackedWidget.setCurrentWidget(self.gamemanager)
         installer.hide()
+        QApplication.quit()
 
 
 
