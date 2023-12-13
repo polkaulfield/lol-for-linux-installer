@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import os, shutil, requests, tarfile, subprocess, json, logging, urllib.request
+import os, psutil, time, shutil, requests, tarfile, subprocess, json, logging, urllib.request
 
 
 def install_dxvk_code(game_main_dir):
@@ -31,6 +31,18 @@ def install_dxvk_code(game_main_dir):
 
     os.remove(filename)
     shutil.rmtree(tmp_path)
+
+def is_process_running(procname):
+    for process in psutil.process_iter():
+        if process.name() in procname:
+            return True
+    return False
+
+def wait_for_process(procname):
+    while True:
+        if is_process_running(procname):
+            break
+        time.sleep(1)
 
 
 def league_install_code(game_main_dir, game_region_link):
@@ -122,4 +134,22 @@ def league_install_code(game_main_dir, game_region_link):
     logging.info("Delete temp folders")
     logging.info("Installing DXVK 1.10.3...")
     install_dxvk_code(game_main_dir)
-    logging.info("Finishing...")
+
+    logging.info("Waiting for RiotClientServices.exe")
+
+    wait_for_process("RiotClientServices.exe")
+
+    logging.info("RiotClientService.exe detected!")
+
+    logging.info("Waiting for LeagueClient.exe to start...")
+
+    wait_for_process("LeagueClient.exe")
+
+    logging.info("Now we wait for LeagueClient.exe to close to do a clean exit")
+
+    while True:
+        if not is_process_running("LeagueClient.exe"):
+            logging.info("Killing wine!")
+            subprocess.run(["wineserver", "-k"], env=first_boot_envs, check=True)
+            return
+        time.sleep(1)
