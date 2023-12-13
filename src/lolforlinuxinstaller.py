@@ -353,7 +353,7 @@ class Installer(QMainWindow):
         self.applyButton.setEnabled(False)
 
     def download_winebuild_json(self):
-        json_url = "https://raw.githubusercontent.com/kassindornelles/lol-for-linux-installer-wine-builds/main/wine_builds_available.json"
+        json_url = "https://raw.githubusercontent.com/polkaulfield/lol-for-linux-installer-wine-builds/main/wine_builds_available.json"
         json_filename = os.path.join(
             self.game_installed_folder, "wine_builds_available.json"
         )
