@@ -70,7 +70,7 @@ def league_install_code(game_main_dir, game_region_link):
             os.chmod(folder_path, 0o700)
 
     logging.info("Downloading WINE build")
-    wine_lutris_build_url = "https://github.com/GloriousEggroll/wine-ge-custom/releases/download/GE-Proton8-25-LoL/wine-lutris-GE-Proton8-25-LoL-x86_64.tar.xz"
+    wine_lutris_build_url = "https://github.com/NelloKudo/WineBuilder/releases/download/wine-lol-9.0-rc1/wine-LoL-9.0-rc1-staging-amd64.tar.xz"
     tar_file_name = wine_version + ".tar.xz"
     wine_lutris_build_file = os.path.join(game_downloads_dir, tar_file_name)
     response = requests.get(wine_lutris_build_url)
